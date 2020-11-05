@@ -5,7 +5,7 @@ Thanks to [this](https://harfangk.github.io/2016/09/18/manage-dotfiles-with-a-gi
 ## Restoring
 ```  
 alias -s dotfiles="/usr/bin/git --git-dir $HOME/.dotfiles/ --work-tree=$HOME"  
-git clone --bare https://www.github.com/etrnal70/ditsdots.git $HOME/.dotfiles  
+git clone --bare https://www.github.com/GeminorumB/dotfiles.git $HOME/.dotfiles  
 dotfiles checkout  
 dotfiles config --local status.showUntrackedFiles no
 ```
