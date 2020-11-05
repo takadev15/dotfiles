@@ -10,11 +10,11 @@ dotfiles checkout
 dotfiles config --local status.showUntrackedFiles no
 ```
 ## My Setup
-**Distro** : Pop OS
-**DE** : Gnome 3.38 + pop_shell tiling
-**Theme** : [dracula](https://draculatheme.com/)
-**Shell** : zsh 
-**Terminal** : alacritty + tmux 
-**Editor** : neovim 
+* **Distro** : Pop OS
+* **DE** : Gnome 3.38 + pop_shell tiling
+* **Theme** : [dracula](https://draculatheme.com/)
+* **Shell** : zsh 
+* **Terminal** : alacritty + tmux 
+* **Editor** : neovim 
 
 
