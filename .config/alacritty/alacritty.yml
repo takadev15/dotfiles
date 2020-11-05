@@ -1,0 +1,67 @@
+# Colors (Dracula)
+colors:
+  # Default colors
+  primary:
+    background: '0x282a36'
+    foreground: '0xf8f8f2'
+ 
+  # Normal colors
+  normal:
+    black:   '0x000000'
+    red:     '0xff5555'
+    green:   '0x50fa7b'
+    yellow:  '0xf1fa8c'
+    blue:    '0xbd93f9'
+    magenta: '0xff79c6'
+    cyan:    '0x8be9fd'
+    white:   '0xbbbbbb'
+ 
+  # Bright colors
+  bright:
+    black:   '0x555555'
+    red:     '0xff5555'
+    green:   '0x50fa7b'
+    yellow:  '0xf1fa8c'
+    blue:    '0xcaa9fa'
+    magenta: '0xff79c6'
+    cyan:    '0x8be9fd'
+    white:   '0xffffff'
+
+
+# Backgound
+background_opacity: 0.90
+
+# Font
+font:
+  size: 10
+
+  # normal font
+  normal:
+    family: JetBrainsMono Nerd Font
+    style: Medium
+
+  #bold style
+  bold:
+    family: JetBrainsMono NF
+    style: Extra Bold
+
+  #italic style
+  italic:
+    family: JetBrainsMono NF
+    style: Medium Italic
+  
+
+# Padding Config
+window:
+     #padding
+     padding:
+        x: 25
+        y: 20
+
+# Shell config
+shell: 
+  /usr/bin/zsh
+
+# enable 24 bit color 
+env:
+  TERM: xterm-256color
