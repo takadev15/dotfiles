@@ -17,4 +17,4 @@ dotfiles config --local status.showUntrackedFiles no
 * **Terminal** : alacritty + tmux 
 * **Editor** : neovim 
 
-
+## TODO List
