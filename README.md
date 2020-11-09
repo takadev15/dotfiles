@@ -18,7 +18,13 @@ dotfiles config --local status.showUntrackedFiles no
 * **DE** : Gnome 3.38 + pop_shell tiling
 * **Theme** : [dracula](https://draculatheme.com/)
 * **Shell** : zsh 
+* **File Manager** : Vifm + Uberzurg
 * **Terminal** : alacritty + tmux 
 * **Editor** : neovim 
 
 ## TODO List
+- [  ] Add jupyter plugin to vim
+- [  ] make install script for dotfiles
+- [  ] use zathura (maybe LoL)
+- [  ] switch to arch (important)
+- [  ] vim debugging script 
