@@ -58,6 +58,7 @@ eval "$(jenv init -)"
 
 # Custom Script path
 export PATH="$HOME/.config/script:$PATH"
+export PATH="$HOME/.config/vifm/scripts:$PATH"
 
 # Set Nvim as default text editor
 export EDITOR="/usr/bin/nvim"
@@ -74,6 +75,12 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
+# Fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Dotfiles recovery
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
+
+# fnm
+export PATH=/home/taka15/.fnm:$PATH
+eval "`fnm env`"
