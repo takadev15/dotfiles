@@ -5,7 +5,6 @@ call plug#begin()
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
-Plug 'stsewd/fzf-checkout.vim'
 
 " Fuzzy finder
 Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
@@ -21,6 +20,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 " Dadbod for database plugin
 Plug 'tpope/vim-dadbod'
 Plug 'kristijanhusak/vim-dadbod-ui'
+Plug 'kristijanhusak/vim-dadbod-completion'
 
 " Intellisense 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -39,15 +39,18 @@ Plug 'yuttie/comfortable-motion.vim'
 Plug 'matze/vim-move'
 Plug 'jiangmiao/auto-pairs'
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'godlygeek/tabular'
 Plug 'https://github.com/plasticboy/vim-markdown'
 Plug 'Chiel92/vim-autoformat'
 Plug 'tyru/open-browser.vim'
 Plug 'https://github.com/ap/vim-css-color'
+Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
 
 " Language-specific plugin
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'previm/previm'
+Plug 'https://github.com/kiteco/vim-plugin'
 
 call plug#end()
 
@@ -75,7 +78,10 @@ nnoremap <A-l> :vertical resize +2<CR>
 inoremap <A-l> <esc>la
 inoremap <A-h> <esc>i
 
-"---------------GENERAL SETTINGS--------------------
+" Version control
+map <leader>gs :G<CR>
+
+" ---------------GENERAL SETTINGS--------------------
 
 set encoding=utf-8
 set wildmenu
@@ -98,7 +104,7 @@ set laststatus=2
 set relativenumber
 set updatetime=300
 set pumheight=5
-set completeopt=longest,menuone
+set completeopt=noinsert,menuone
 set hidden
 set backspace=indent,eol,start
 set nofoldenable

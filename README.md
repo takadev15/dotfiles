@@ -23,8 +23,8 @@ dotfiles config --local status.showUntrackedFiles no
 * **Editor** : neovim 
 
 ## TODO List
-- [  ] Add jupyter plugin to vim
-- [  ] make install script for dotfiles
-- [  ] use zathura (maybe LoL)
-- [  ] switch to arch (important)
-- [  ] vim debugging script 
+- [ ] Add jupyter plugin to vim
+- [ ] make install script for dotfiles
+- [ ] use zathura (maybe LoL)
+- [ ] switch to arch (important)
+- [ ] vim debugging script 
