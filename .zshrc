@@ -84,3 +84,9 @@ alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 # fnm
 export PATH=/home/taka15/.fnm:$PATH
 eval "`fnm env`"
+
+# LazyDOck
+alias lzd='lazydocker'
+
+# Flutter SDK
+export PATH="/home/development/flutter/bin:$PATH"

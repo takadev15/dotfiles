@@ -71,7 +71,7 @@ endif
 
 let g:lightline = { 'colorscheme' : 'dracula' }
 let g:lightline.active = { 
-      \ 'left': [ ['mode', 'readonly'], ['filename_with_icon', 'modified']],
+      \ 'left': [ ['mode', 'readonly'], ['filename_with_icon', 'modified'], ['kite']],
       \ 'right': [['lineinfo'], ['testing_status', 'status_diagnostic'] ]
       \ }
 let g:lightline.separator = { 'left': "", 'right': "" }
@@ -100,6 +100,7 @@ let g:lightline.tab_component_function = {
 
 let g:lightline.component = {
         \ 'filename_with_icon': '%{FileNameWithIcon()}',
+        \ 'kite': '%{kite#statusline()}',
         \ 'vim_logo': "\ue7c5 ",
         \ 'git_branch': '%{Git_branch()}',
         \ 'filename_with_parent': '%t',

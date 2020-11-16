@@ -153,3 +153,12 @@ let g:lua_tree_icons = {
     \   'open': ""
     \   }
     \ }
+
+"=====================kite====================
+"enable auto complete
+let g:kite_auto_complete=1
+let g:kite_tab_complete=1
+
+"============previm===================
+"enable previm to preview in browser
+let g:previm_open_cmd = 'firefox'
