@@ -22,6 +22,9 @@ dotfiles config --local status.showUntrackedFiles no
 * **Terminal** : alacritty + tmux 
 * **Editor** : neovim 
 
+## Screenshot
+![Screenshot](./assets/screenshoot.png)
+
 ## TODO List
 - [ ] Add jupyter plugin to vim
 - [ ] make install script for dotfiles
