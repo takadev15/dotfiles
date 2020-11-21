@@ -10,6 +10,7 @@ let g:coc_global_extensions = [
  \ 'coc-vimlsp',
  \ 'coc-sql',
  \ 'coc-sh',
+ \ 'coc-pyright',
  \ 'coc-texlab',
  \ 'coc-gitignore',
  \ 'coc-html',

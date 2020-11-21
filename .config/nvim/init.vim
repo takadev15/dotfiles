@@ -15,7 +15,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'bluz71/vim-nightfly-guicolors'
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'ghifarit53/tokyonight-vim'
+"Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Dadbod for database plugin
 Plug 'tpope/vim-dadbod'
@@ -50,7 +51,7 @@ Plug 'mhinz/vim-startify'
 " Language-specific plugin
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'previm/previm'
-Plug 'https://github.com/kiteco/vim-plugin'
+"Plug 'https://github.com/kiteco/vim-plugin'
 
 call plug#end()
 
@@ -104,7 +105,7 @@ set laststatus=2
 set relativenumber
 set updatetime=300
 set pumheight=5
-set completeopt=noinsert,menuone
+set completeopt=longest,menuone
 set hidden
 set backspace=indent,eol,start
 set nofoldenable
@@ -117,7 +118,10 @@ let $FZF_DEFAULT_COMMAND = 'rg'
 "--------------------THEME-----------------------
 
 set termguicolors
-colorscheme dracula
+let g:tokyonight_style = "night"
+let g:tokyonight_enable_italic = 1
+let g:tokyonight_transparent_background = 1
+colorscheme tokyonight
 
 "Make vim respect terminal color 
 highlight Normal guibg=none

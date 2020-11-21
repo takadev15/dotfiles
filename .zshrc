@@ -90,3 +90,6 @@ alias lzd='lazydocker'
 
 # Flutter SDK
 export PATH="/home/development/flutter/bin:$PATH"
+
+# yarn command
+export PATH="/home/taka15/.yarn/bin:$PATH"

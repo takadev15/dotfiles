@@ -32,46 +32,11 @@ function! StatusDiagnostic() abort
   return "" 
 endfunction
 
-" TESTING " 
+" Theme " 
 
-let s:black    = g:dracula#palette.bg
-let s:gray     = g:dracula#palette.selection
-let s:white    = g:dracula#palette.fg
-let s:darkblue = g:dracula#palette.comment
-let s:cyan     = g:dracula#palette.cyan
-let s:green    = g:dracula#palette.green
-let s:orange   = g:dracula#palette.orange
-let s:purple   = g:dracula#palette.purple
-let s:red      = g:dracula#palette.red
-let s:yellow   = g:dracula#palette.yellow
-
-if exists('g:lightline')
-
-  let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
-  let s:p.normal.left = [ [ s:black, s:purple ], [ s:cyan, s:gray ] ]
-  let s:p.normal.right = [ [ s:black, s:purple ], [ s:white, s:darkblue ] ]
-  let s:p.inactive.right = [ [ s:black, s:gray ], [ s:white, s:black ] ]
-  let s:p.inactive.left =  [ [ s:cyan, s:black ], [ s:white, s:black ] ]
-  let s:p.insert.left = [ [ s:black, s:green ], [ s:cyan, s:gray ] ]
-  let s:p.replace.left = [ [ s:black, s:red ], [ s:cyan, s:gray ] ]
-  let s:p.visual.left = [ [ s:black, s:orange ], [ s:cyan, s:gray ] ]
-  let s:p.normal.middle = [ [ s:white, s:gray ] ]
-  let s:p.inactive.middle = [ [ s:white, s:gray ] ]
-  let s:p.tabline.left = [ [ s:darkblue, s:gray ] ]
-  let s:p.tabline.tabsel = [ [ s:cyan, s:black ] ]
-  let s:p.tabline.middle = [ [ s:darkblue, s:gray ] ]
-  let s:p.tabline.right = copy(s:p.normal.right)
-  let s:p.normal.error = [ [ s:red, s:black ] ]
-  let s:p.normal.warning = [ [ s:yellow, s:black ] ]
-
-  let g:lightline#colorscheme#dracula#palette = lightline#colorscheme#flatten(s:p)
-
-endif
-
-
-let g:lightline = { 'colorscheme' : 'dracula' }
+let g:lightline = {'colorscheme' : 'tokyonight'}
 let g:lightline.active = { 
-      \ 'left': [ ['mode', 'readonly'], ['filename_with_icon', 'modified'], ['kite']],
+      \ 'left': [ ['mode', 'readonly'], ['filename_with_icon', 'modified'] ],
       \ 'right': [['lineinfo'], ['testing_status', 'status_diagnostic'] ]
       \ }
 let g:lightline.separator = { 'left': "", 'right': "" }
@@ -100,7 +65,6 @@ let g:lightline.tab_component_function = {
 
 let g:lightline.component = {
         \ 'filename_with_icon': '%{FileNameWithIcon()}',
-        \ 'kite': '%{kite#statusline()}',
         \ 'vim_logo': "\ue7c5 ",
         \ 'git_branch': '%{Git_branch()}',
         \ 'filename_with_parent': '%t',
