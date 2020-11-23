@@ -48,6 +48,9 @@ Plug 'https://github.com/ap/vim-css-color'
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
 
+" Vimwiki
+Plug 'vimwiki/vimwiki'
+
 " Language-specific plugin
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'previm/previm'

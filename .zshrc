@@ -93,3 +93,7 @@ export PATH="/home/development/flutter/bin:$PATH"
 
 # yarn command
 export PATH="/home/taka15/.yarn/bin:$PATH"
+export PATH="~/.npm-global/bin:$PATH"
+
+# DOOM emacs
+export PATH="~/.emacs.d/bin:$PATH"
