@@ -10,6 +10,11 @@ Plug 'junegunn/gv.vim'
 Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
 
+"telescope (fzf replacement)
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
 " Looks and feel
 Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
@@ -54,6 +59,7 @@ Plug 'vimwiki/vimwiki'
 " Language-specific plugin
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'previm/previm'
+Plug 'glench/Vim-Jinja2-Syntax'
 "Plug 'https://github.com/kiteco/vim-plugin'
 
 call plug#end()
@@ -85,6 +91,13 @@ inoremap <A-h> <esc>i
 " Version control
 map <leader>gs :G<CR>
 
+" telescope.nvim`
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+
 " ---------------GENERAL SETTINGS--------------------
 
 set encoding=utf-8
@@ -113,8 +126,10 @@ set hidden
 set backspace=indent,eol,start
 set nofoldenable
 set shell=/bin/bash
+set nocompatible
 let $SHELL="/bin/bash"
 filetype plugin indent on
+syntax on
 
 
 let $FZF_DEFAULT_COMMAND = 'rg'

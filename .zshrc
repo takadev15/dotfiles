@@ -88,6 +88,9 @@ eval "`fnm env`"
 # LazyDOck
 alias lzd='lazydocker'
 
+# fd 
+alias fd='fdfind'
+
 # Flutter SDK
 export PATH="/home/development/flutter/bin:$PATH"
 

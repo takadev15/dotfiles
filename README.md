@@ -2,6 +2,8 @@
 
 Thanks to [this](https://harfangk.github.io/2016/09/18/manage-dotfiles-with-a-git-bare-repository.html) i finally fix my dots.
 
+ **Prepared to switch distro** 
+
 ## Restoring
 ```  
 alias -s dotfiles="/usr/bin/git --git-dir $HOME/.dotfiles/ --work-tree=$HOME"  
@@ -14,7 +16,7 @@ dotfiles config --local status.showUntrackedFiles no
 * [Jetbrains Mono Nerd font](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip)
 
 ## My Setup
-* **Distro** : Pop OS
+* **Distro** : Arch
 * **DE** : Gnome 3.38 + pop_shell tiling
 * **Theme** : [dracula](https://draculatheme.com/)
 * **Shell** : zsh 
