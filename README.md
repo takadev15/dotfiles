@@ -26,7 +26,8 @@ dotfiles config --local status.showUntrackedFiles no
 
 ## Screenshot
 ![Screenshot](./screenshot.png)
-![Screenshot2](./screenshot2.png)
+
+![Screenshot2](./screenshoot2.png)
 
 ## TODO List
 - [ ] Add jupyter plugin to vim
