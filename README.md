@@ -2,7 +2,7 @@
 
 Thanks to [this](https://harfangk.github.io/2016/09/18/manage-dotfiles-with-a-git-bare-repository.html) i finally fix my dots.
 
- **Prepared to switch distro** 
+ **switch to arch**
 
 ## Restoring
 ```  
@@ -25,7 +25,7 @@ dotfiles config --local status.showUntrackedFiles no
 * **Editor** : neovim 
 
 ## Screenshot
-![Screenshot](./assets/screenshoot.png)
+![Screenshot](./screenshot.png)
 
 ## TODO List
 - [ ] Add jupyter plugin to vim
