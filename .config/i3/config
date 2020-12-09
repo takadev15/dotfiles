@@ -30,6 +30,10 @@ smart_gaps on
 
 smart_borders on
 
+# set gaps realtime
+#bindsym $mod+shift+= gaps inner current plus 5 
+#bindsym $mod+- gaps inner current minus 5
+
 #do not show titlebar on windows: 
 new_window 1pixel
 
@@ -80,10 +84,10 @@ bindsym $mod+F1 exec "xed ~/.config/i3/keybindings"
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus:
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+u focus up
-bindsym $mod+ntilde focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -92,10 +96,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window:
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+ntilde move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -104,10 +108,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation:
-bindsym $mod+h split h
+bindsym $mod+y split h
 
 # split in vertical orientation:
-bindsym $mod+v split v
+bindsym $mod+x split v
 
 # enter fullscreen mode for the focused container:
 bindsym $mod+f fullscreen toggle
@@ -131,13 +135,14 @@ bindsym $mod+a focus parent
 
 # workspace-edit:
 set $ws1 ""
-set $ws2 ""
+set $ws2 ""
 set $ws3 "3"
-set $ws4 "4"
+set $ws4 "z"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
+set $ws9 "9"
 
 bindsym $mod+s exec --no-startup-id ~/.config/i3/scripts/empty_workspace.sh
 
@@ -146,6 +151,10 @@ assign [class="kitty"] $ws1
 for_window [class=kity] focus
 assign [class="chrome"] $ws2
 for_window [class=chrome] focus
+assign [class="zoom"] $ws4
+for_window [class=zoom] focus
+assign [class="steam"] $ws5
+for_window [class=steam] focus
 
 # Autostart apps:
 #exec --no-startup-id sleep 2 && xfce4-terminal
@@ -232,10 +241,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym ntilde resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -269,8 +278,9 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # App shortcuts
-bindsym $mod+w exec "/usr/bin/firefox"
+bindsym $mod+w exec "/usr/bin/google-chrome-stable"
 bindsym $mod+n exec "/usr/bin/thunar"
+bindsym $mod+z exec "/usr/bin/zoom"
 bindsym Print exec "scrot ~/Pictures/%Y-%m-%d-%T-screenshot.png"
 
 # Redirect sound to headphones
@@ -295,7 +305,7 @@ bar {
 
 
 # Lock the system
-bindsym $mod+l exec i3lock -i ~/.config/i3/i3-lock-screen.png -t -f
+bindsym $mod+0 exec i3lock -i ~/.config/i3/i3-lock-screen.png -t -f
 
 set $bg-color            #2f343f
 set $inactive-bg-color   #2f343f

@@ -77,6 +77,7 @@ map sj <C-w>j
 map sl <C-w>l
 
 " Tab
+nmap <leader>t :tabnew<return>
 nmap <S-Tab> :tabprev<return>
 nmap <Tab> :tabnext<return>
 " resizing vim pane

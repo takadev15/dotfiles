@@ -27,11 +27,11 @@ dotfiles config --local status.showUntrackedFiles no
 ## Screenshot
 ![Screenshot](./screenshot.png)
 
-![Screenshot2](./screenshoot2.png)
+![screenshot2](./screenshot-2.png)
 
 ## TODO List
 - [ ] Add jupyter plugin to vim
-- [ ] make install script for dotfiles
-- [ ] use zathura (maybe LoL)
+- [x] make install script for dotfiles
+- [x] use zathura (maybe LoL)
 - [x] switch to arch (important)
 - [ ] vim debugging script 

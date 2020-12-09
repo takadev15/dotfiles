@@ -46,6 +46,15 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 
+# Set npm Globlal in home dir
+NPM_PACKAGES="${HOME}/.npm-packages"
+export PATH="$PATH:$NPM_PACKAGES/bin"
+
+# Preserve MANPATH if you already defined it somewhere in your config.
+# Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
+export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
+
+
 # Custom Script path
 export PATH="$HOME/script:$PATH"
 export PATH="$HOME/.config/vifm/scripts:$PATH"
