@@ -48,5 +48,10 @@
     "html",
     "markdown",
     "json"
-  ]
+  ],
+ "snippets.extends": {
+  "cpp": ["c"],
+  "html": ["htmldjango"]
 }
+}
+

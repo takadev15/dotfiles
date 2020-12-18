@@ -5,7 +5,7 @@ general {
         interval = 5
         color_good = '#2f343f'
 		color_degraded = '#ebcb8b'
-		color_bad = '#ba5e57'
+		color_bad = '#a5d96f'
 }
 
 order += "battery 1"
@@ -16,7 +16,7 @@ order += "tztime local"
 
 battery 1 {
 	last_full_capacity = true
-        format = "<span background='#a3be8c'> %status %percentage </span>"
+        format = "<span background='#00ffd2'> %status %percentage </span>"
         format_down = "  No Battery"
         status_chr = "  Charging"
         status_bat = "  Battery"
@@ -28,18 +28,18 @@ battery 1 {
 
 
 disk "/" {
-        format = "<span background='#fec7cd'>  %free Free </span>"
+        format = "<span background='#ff4499'>  %free Free </span>"
 }
 
 
 wireless wlan0 {
-        format_up = "<span background='#b48ead'>  %essid </span>"
-        format_down = "<span background='#b48ead'>  Disconnected </span>"
+        format_up = "<span background='#4abaaf'>  %essid </span>"
+        format_down = "<span background='#9a7ecc'>  Disconnected </span>"
 }
 
 volume master {
-        format = "<span background='#ebcb8b'>  %volume </span>"
-        format_muted = "<span background='#ebcb8b'>  Muted </span>"
+        format = "<span background='#E0AF68'>  %volume </span>"
+        format_muted = "<span background='#E0AF68'>  Muted </span>"
         device = "default"
         mixer = "Master"
         mixer_idx = 0
@@ -47,6 +47,6 @@ volume master {
 
 
 tztime local {
-		format = "<span background='#81a1c1'> %time </span>"
+		format = "<span background='#7AA2F7'> %time </span>"
 		format_time = " %A %-d %B %Y %R"
 }

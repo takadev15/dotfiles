@@ -42,6 +42,10 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# NNN
+export NNN_BMS='p:/mnt/dir/project/;c:~/.config/'
+export LC_COLLATE="C"
+
 # JenV path
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
@@ -91,7 +95,7 @@ alias lzd='lazydocker'
 alias fd='fdfind'
 
 # Flutter SDK
-export PATH="/home/development/flutter/bin:$PATH"
+export PATH="/home/taka15/dev/flutter/bin:$PATH"
 
 # yarn command
 export PATH="/home/taka15/.yarn/bin:$PATH"
@@ -105,3 +109,7 @@ export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
 
 eval "$(starship init zsh)"
+
+# fnm
+export PATH=/home/taka15/.fnm:$PATH
+eval "`fnm env`"

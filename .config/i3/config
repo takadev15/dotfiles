@@ -25,10 +25,9 @@ workspace_layout default
 for_window [class="^.*"] border pixel 5
 gaps inner 8
 gaps outer 5
-
 smart_gaps on
-
 smart_borders on
+
 
 # set gaps realtime
 #bindsym $mod+shift+= gaps inner current plus 5 
@@ -296,10 +295,10 @@ bar {
 	statusline #2f343f
 	separator #4b5262
          #colour of border, background, and text
-        focused_workspace       #2f343f #bf616a #d8dee8
+        focused_workspace       #2f343f #00ffd2 #2f343f
         active_workspace        #2f343f #2f343f #d8dee8
         inactive_workspace      #2f343f #2f343f #d8dee8
-        urgent_workspace       #2f343f #ebcb8b #2f343f
+        urgent_workspace       #2f343f #ff4499 #2f343f
     }
 }
 
@@ -350,5 +349,8 @@ bindsym XF86MonBrightnessDown exec sh ~/.config/i3/scripts/backlight.sh -dec 20
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
+
+# Japanese imput
+exec --no-startup-id fcitx -d
 
 exec_always feh --bg-scale /home/taka15/Pictures/wallpaper/ayame1.jpg

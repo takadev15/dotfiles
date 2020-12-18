@@ -2,8 +2,6 @@
 
 Thanks to [this](https://harfangk.github.io/2016/09/18/manage-dotfiles-with-a-git-bare-repository.html) i finally fix my dots.
 
- **switch to arch**
-
 ## Restoring
 ```  
 alias -s dotfiles="/usr/bin/git --git-dir $HOME/.dotfiles/ --work-tree=$HOME"  
@@ -18,20 +16,34 @@ dotfiles config --local status.showUntrackedFiles no
 ## My Setup
 * **Distro** : Arch
 * **WM** : i3wm 
-* **Theme** : [dracula](https://draculatheme.com/)
-* **Shell** : zsh 
-* **File Manager** : Vifm + Uberzurg
-* **Terminal** : kitty + tmux 
-* **Editor** : neovim 
+* **Theme** : tokyo-night vim
+* **Shell** : zsh with starship prompt
+* **File Manager** : nnn
+* **Terminal** : kitty/alacritty + tmux 
+* **Editor** : neovim nightly 
+
+``````
+i use two terminal emulator because kitty seemingly doesn't support fcitx input method that i use
+so i use alacritty specifically only for fcitx-mozc input (for my japanese study) 
+for why i don't use ibus (that seemingly supported by kitty) because compare to ibus, fcitx is better
+``````
 
 ## Screenshot
-![Screenshot](./screenshot.png)
+* ricing
+![Screenshot](./screenshot-2.png)
 
-![screenshot2](./screenshot-2.png)
+* heavy workload
+
 
 ## TODO List
-- [ ] Add jupyter plugin to vim
 - [x] make install script for dotfiles
 - [x] use zathura (maybe LoL)
 - [x] switch to arch (important)
-- [ ] vim debugging script 
+- [ ] find a way to integrate fcitx-mozc into kitty input
+- [ ] make vim debugging script 
+- [ ] Add jupyter plugin to vim
+- [ ] perfect my dotfiles management
+- [ ] enable org-mode (or something similiar?) in vim
+
+## ATTENTION ##
+ **if you want to copy my dotfiles please consider the software i use and plugis so the config can run smoothly**

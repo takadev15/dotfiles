@@ -4,7 +4,9 @@ let g:coc_global_extensions = [
  \ 'coc-json',
  \ 'coc-java',
  \ 'coc-rust-analyzer',
+ \ 'coc-snippets',
  \ 'coc-tsserver',
+ \ 'coc-tailwindcss',
  \ 'coc-emmet',
  \ 'coc-json',
  \ 'coc-vimlsp',
@@ -23,6 +25,7 @@ let g:coc_global_extensions = [
  \ 'coc-actions',
  \ 'coc-db',
  \ 'coc-eslint'] 
+
 
 "---------------------CoC Keymap---------------------
 " Use tab for trigger completion with characters ahead and navigate.
@@ -145,6 +148,7 @@ nnoremap <silent> <Leader>b :CocCommand fzf-preview.Buffers<CR>
 nnoremap <silent> <Leader>fv :CocCommand fzf-preview.VistaCtags<CR>
 nnoremap <silent> <Leader>g :CocCommand fzf-preview.GitActions<CR>
 nnoremap <silent> <Leader>gs :CocCommand fzf-preview.GitStatus<CR>
+
 
 " Use vim-devicons
 let g:fzf_preview_use_dev_icons = 1

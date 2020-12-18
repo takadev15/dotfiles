@@ -101,6 +101,11 @@ nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 
 " ---------------GENERAL SETTINGS--------------------
 
+set nobackup
+set nowritebackup
+set noswapfile
+set undofile
+set undodir=path/to/undodir
 set encoding=utf-8
 set wildmenu
 set wildoptions=pum
