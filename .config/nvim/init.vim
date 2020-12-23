@@ -44,7 +44,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'matze/vim-move'
 Plug 'jiangmiao/auto-pairs'
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'godlygeek/tabular'
 Plug 'https://github.com/plasticboy/vim-markdown'
 Plug 'Chiel92/vim-autoformat'
@@ -58,18 +58,20 @@ Plug 'vimwiki/vimwiki'
 
 " Language-specific plugin
 Plug 'dart-lang/dart-vim-plugin'
+Plug 'rodrigore/coc-tailwind-intellisense', {'do': 'npm install'}
+Plug 'lervag/vimtex'
 Plug 'previm/previm'
 Plug 'glench/Vim-Jinja2-Syntax'
 "Plug 'https://github.com/kiteco/vim-plugin'
 
 call plug#end()
 
+let mapleader = ","
 
 "---------------KEYBOARD MAPPING---------------------
-map <F2> :LuaTreeToggle<CR>
+map <leader>fl :LuaTreeToggle<CR>
 map <F1> :Vista!!<CR>
 
-let mapleader = ","
 " Move window
 map sh <C-w>h
 map sk <C-w>k
@@ -105,7 +107,7 @@ set nobackup
 set nowritebackup
 set noswapfile
 set undofile
-set undodir=path/to/undodir
+set undodir= ~/.nvim/undo-file/
 set encoding=utf-8
 set wildmenu
 set wildoptions=pum
