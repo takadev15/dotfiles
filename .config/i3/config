@@ -24,8 +24,7 @@ workspace_layout default
 # Set inner/outer gaps
 for_window [class="^.*"] border pixel 5
 gaps inner 8
-gaps outer 5
-smart_gaps on
+gaps outer 6
 smart_borders on
 
 

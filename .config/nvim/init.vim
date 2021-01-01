@@ -107,7 +107,7 @@ set nobackup
 set nowritebackup
 set noswapfile
 set undofile
-set undodir= ~/.nvim/undo-file/
+set undodir=~/.nvim/undo-file/
 set encoding=utf-8
 set wildmenu
 set wildoptions=pum
