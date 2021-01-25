@@ -19,7 +19,7 @@ let g:coc_global_extensions = [
  \ 'coc-css',
  \ 'coc-git',
  \ 'coc-highlight',
- \ 'coc-cord',
+ \ 'coc-discord-rpc',
  \ 'coc-flutter',
  \ 'coc-fzf-preview',
  \ 'coc-actions',
@@ -159,3 +159,5 @@ let g:fzf_preview_dev_icon_prefix_string_length = 3
 " Devicons can make fzf-preview slow when the number of results is high
 " By default icons are disable when number of results is higher that 5000
 let g:fzf_preview_dev_icons_limit = 3000
+
+"-------coc-discord---------

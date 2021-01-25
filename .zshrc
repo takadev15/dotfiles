@@ -96,8 +96,21 @@ alias lzd='lazydocker'
 # fd 
 alias fd='fdfind'
 
+# Python venv 
+alias activate="source env/bin/activate"
+
+# project's directory
+alias pdir="cd /mnt/dir/project"
+
 # Flutter SDK
 export PATH="/home/taka15/dev/flutter/bin:$PATH"
+
+# Android SDK
+export ANDROID_HOME="/home/taka15/dev/android"
+export PATH="$ANDROID_HOME/tools:$PATH" 
+export PATH="$ANDROID_HOME/emulator:$PATH"
+export PATH="$ANDROID_HOME/platform-tools/:$PATH"
+export PATH="$ANDROID_HOME/tools/bin/:$PATH"
 
 # yarn command
 export PATH="/home/taka15/.yarn/bin:$PATH"
@@ -113,5 +126,5 @@ export GDK_DPI_SCALE=0.5
 eval "$(starship init zsh)"
 
 # fnm
-export PATH=/home/taka15/.fnm:$PATH
+export PATH="/home/taka15/.fnm:$PATH"
 eval "`fnm env`"

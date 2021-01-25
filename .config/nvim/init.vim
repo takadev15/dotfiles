@@ -69,7 +69,7 @@ call plug#end()
 let mapleader = ","
 
 "---------------KEYBOARD MAPPING---------------------
-map <leader>fl :LuaTreeToggle<CR>
+map <leader>fl :NvimTreeToggle<CR>
 map <F1> :Vista!!<CR>
 
 " Move window
