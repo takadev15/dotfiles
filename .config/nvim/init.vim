@@ -5,6 +5,7 @@ call plug#begin()
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
+Plug 'rhysd/git-messenger.vim'
 
 " Fuzzy finder
 Plug 'junegunn/fzf', {'do': { -> fzf#install() }}

@@ -3,6 +3,7 @@ let g:coc_global_extensions = [
  \ 'coc-pairs',
  \ 'coc-json',
  \ 'coc-java',
+ \ 'coc-docker',
  \ 'coc-rust-analyzer',
  \ 'coc-snippets',
  \ 'coc-tsserver',

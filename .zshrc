@@ -83,6 +83,7 @@ fi
 # Fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+
 # Dotfiles recovery
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
@@ -100,7 +101,10 @@ alias fd='fdfind'
 alias activate="source env/bin/activate"
 
 # project's directory
-alias pdir="cd /mnt/dir/project"
+alias pdir="cd ~/dir/data/project"
+
+# zource zshrc
+alias reload="source .zshrc"
 
 # Flutter SDK
 export PATH="/home/taka15/dev/flutter/bin:$PATH"

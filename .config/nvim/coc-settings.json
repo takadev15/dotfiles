@@ -49,9 +49,22 @@
     "markdown",
     "json"
   ],
- "snippets.extends": {
-  "cpp": ["c"],
-  "html": ["htmldjango"]
+  "snippets.extends": {
+    "cpp": [
+      "c"
+    ],
+    "html": [
+      "htmldjango"
+    ],
+    "python": [
+      "django"
+    ]
+  },
+  "rpc.largeImage": "Editing a {Lang} file",
+  "rpc.largeImageIdle": "Procastinating",
+  "rpc.detailsEditing": "Working on {workspace}",
+  "rpc.detailsViewing": "Working on {workspace}",
+  "rpc.lowerDetailsEditing": "In {filename}",
+  "rpc.detailsIdle": "Procastinating",
+  "rpc.lowerDetailsIdle": "Kinda lazy at the moment"
 }
-}
-
