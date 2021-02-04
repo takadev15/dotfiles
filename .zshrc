@@ -128,11 +128,14 @@ export PATH="~/.emacs.d/bin:$PATH"
 export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
 
-eval "$(starship init zsh)"
 
 # fnm
 export PATH="/home/taka15/.fnm:$PATH"
 eval "`fnm env`"
+
+
+eval "$(starship init zsh)"
+
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then

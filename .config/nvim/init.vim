@@ -1,4 +1,15 @@
-"-------------------Vim-Plug--------------------------
+"
+			"' _________  ________  ___  __    ________    _____  ________  
+			"'|\___   ___\\   __  \|\  \|\  \ |\   __  \  / __  \|\   ____\   
+			"'\|___ \  \_\ \  \|\  \ \  \/  /|\ \  \|\  \|\/_|\  \ \  \___|_  
+			"'     \ \  \ \ \   __  \ \   ___  \ \   __  \|/ \ \  \ \_____  \  
+			"'      \ \  \ \ \  \ \  \ \  \\ \  \ \  \ \  \   \ \  \|____|\  \  
+			"'       \ \__\ \ \__\ \__\ \__\\ \__\ \__\ \__\   \ \__\____\_\  \ 
+			"'        \|__|  \|__|\|__|\|__| \|__|\|__|\|__|    \|__|\_________\ 
+			"'                                                      \|_________|
+			"'
+                        "
+                        "-------------------Vim-Plug--------------------------
 call plug#begin()
 
 " Git related plugin
@@ -21,6 +32,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'bluz71/vim-nightfly-guicolors'
+Plug 'jsit/toast.vim'
 Plug 'ghifarit53/tokyonight-vim'
 "Plug 'dracula/vim', { 'as': 'dracula' }
 
@@ -38,21 +50,14 @@ Plug 'puremourning/vimspector'
 " Documentation
 Plug 'kkoomen/vim-doge'
 
-" Misc plugins
-Plug 'liuchengxu/vista.vim'
-Plug 'pacha/vem-tabline'
-Plug 'itchyny/lightline.vim'
-Plug 'yuttie/comfortable-motion.vim'
-Plug 'matze/vim-move'
-Plug 'jiangmiao/auto-pairs'
+" Status line and Tab
+"Plug 'pacha/vem-tabline'
+"Plug 'itchyny/lightline.vim'
+Plug 'akinsho/nvim-bufferline.lua'
+Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+
+" Syntax Highliting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'godlygeek/tabular'
-Plug 'https://github.com/plasticboy/vim-markdown'
-Plug 'Chiel92/vim-autoformat'
-Plug 'tyru/open-browser.vim'
-Plug 'https://github.com/ap/vim-css-color'
-Plug 'mattn/emmet-vim'
-Plug 'mhinz/vim-startify'
 
 " Vimwiki
 Plug 'vimwiki/vimwiki'
@@ -63,7 +68,21 @@ Plug 'rodrigore/coc-tailwind-intellisense', {'do': 'npm install'}
 Plug 'lervag/vimtex'
 Plug 'previm/previm'
 Plug 'glench/Vim-Jinja2-Syntax'
+Plug 'https://github.com/plasticboy/vim-markdown'
+Plug 'https://github.com/ap/vim-css-color'
 "Plug 'https://github.com/kiteco/vim-plugin'
+
+" Misc plugins
+Plug 'liuchengxu/vista.vim'
+Plug 'yuttie/comfortable-motion.vim'
+Plug 'matze/vim-move'
+Plug 'jiangmiao/auto-pairs'
+Plug 'godlygeek/tabular'
+Plug 'Chiel92/vim-autoformat'
+Plug 'tyru/open-browser.vim'
+Plug 'mattn/emmet-vim'
+Plug 'mhinz/vim-startify'
+
 
 call plug#end()
 
@@ -80,9 +99,9 @@ map sj <C-w>j
 map sl <C-w>l
 
 " Tab
-nmap <leader>t :tabnew<return>
-nmap <S-Tab> :tabprev<return>
-nmap <Tab> :tabnext<return>
+nmap <leader>t :enew<CR>
+nmap <S-Tab> :BufferLineCyclePrev<CR>
+nmap <Tab> :BufferLineCycleNext<CR>
 " resizing vim pane
 nnoremap <A-k> :resize +2<CR>
 nnoremap <A-j> :resize -2<CR>
@@ -149,6 +168,7 @@ let g:tokyonight_style = "night"
 let g:tokyonight_enable_italic = 1
 let g:tokyonight_transparent_background = 1
 colorscheme tokyonight
+lua require'bufferline'.setup{}
 
 "Make vim respect terminal color 
 highlight Normal guibg=none
@@ -163,23 +183,28 @@ hi VertSplit ctermbg=NONE guibg=NONE
 "-------------Startify--------------------------
 
 let g:ascii = [
-			\' _________  ________  ___  __    ________    _____  ________  ',
-			\'|\___   ___\\   __  \|\  \|\  \ |\   __  \  / __  \|\   ____\   ',
-			\'\|___ \  \_\ \  \|\  \ \  \/  /|\ \  \|\  \|\/_|\  \ \  \___|_  ',
-			\'     \ \  \ \ \   __  \ \   ___  \ \   __  \|/ \ \  \ \_____  \  ',
-			\'      \ \  \ \ \  \ \  \ \  \\ \  \ \  \ \  \   \ \  \|____|\  \  ',
-			\'       \ \__\ \ \__\ \__\ \__\\ \__\ \__\ \__\   \ \__\____\_\  \ ',
-			\'        \|__|  \|__|\|__|\|__| \|__|\|__|\|__|    \|__|\_________\ ',
-			\'                                                      \|_________|',
-			\'
-            \']
+\'',
+\'       ▄▄        ▄▄ ',
+\'     ▄████       ███▄                                            ▄▄ ',
+\'   ▄ ▀█████▄     █████                                           ▀▀ ',
+\'   ▌ ▀▄██████    █████     ▌ ▄▀▀▄▄   ▄▄▀▀ ▄    ▄ ▀▀▄▄ ▓█▄    ▄█▌▐██ ▐██▄███▄▄▓███▄ ',
+\'   ▌    ▀█████▄  █████     ▌     ▐  ▓      █ ▄▀     ▐▌ ██▄  ▄█▌ ▐██ ▐██   ▐██   ▓██ ',
+\'   ▌   ▐  ██████ █████     ▌     ▐▌ █▀▀▀▀▀▀▀ █       █  ██ ▐██  ▐██ ▐██   ▐██   ▐██ ',
+\'   ▌   ▐   ▀█████▄████     ▌     ▐▌ █        ▀▄      █   ████   ▐██ ▐██   ▐██   ▐██ ',
+\'   ▌   ▐    ▀█████▄▀██     ▌     ▐   ▀▀▄▄▄▀▀   ▀▄▄▄▀▀    ▐▀▀    ▐▀▀ ▐▀▀   ▐▀▀   ▐▀▀ ',
+\'   ▀   ▐      ▀█████ █ ',
+\'     ▀▄▐       ▀████ ',
+\'       ▀         ▀ ',
+\'',
+            \]
 
 let g:startify_custom_header =
             \'startify#center(g:ascii +startify#fortune#quote())'
 
 
 "============= Load File ===================
-source ~/.config/nvim/statusline.vim
+"source ~/.config/nvim/statusline.lua
 source ~/.config/nvim/treesitter.vim
 source ~/.config/nvim/coc.vim
 source ~/.config/nvim/plugins.vim
+luafile $HOME/.config/nvim/statusline.lua
