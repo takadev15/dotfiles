@@ -12,6 +12,7 @@ dotfiles config --local status.showUntrackedFiles no
 
 ## Requirements
 * [Jetbrains Mono Nerd font](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip)
+* SF Mono font
 
 ## My Setup
 * **Distro** : Arch (endevouros)
@@ -41,8 +42,8 @@ for why i don't use ibus (that seemingly supported by kitty) because compare to 
 - [x] use zathura (maybe LoL)
 - [x] switch to arch (important)
 - [x] find a way to integrate fcitx-mozc into kitty input
-- [ ] perfected my new polybar ricing
-- [ ] change vim statusline rice
+- [x] perfected my new polybar ricing
+- [x] change vim statusline rice
 - [ ] make vim debugging script 
 - [ ] Add jupyter plugin to vim
 - [ ] perfect my dotfiles management
