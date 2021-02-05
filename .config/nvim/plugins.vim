@@ -146,11 +146,12 @@ let g:lua_tree_icons = {
     \   'staged': "✓",
     \   'unmerged': "",
     \   'renamed': "➜",
-    \   'untracked': "★"
+    \   'untracked': ""
     \   },
     \ 'folder': {
     \   'default': "",
-    \   'open': ""
+    \   'open': "",
+    \   'symlink': "",
     \   }
     \ }
 

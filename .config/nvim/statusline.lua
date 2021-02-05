@@ -1,3 +1,5 @@
+vim.g.one_nvim_transparent_bg = true
+
 local gl = require('galaxyline')
 local gls = gl.section
 local extension = require('galaxyline.provider_extensions')
@@ -17,20 +19,20 @@ gl.short_line_list = {
 -- VistaPlugin = extension.vista_nearest
 
 local colors = {
-    bg = '#1a1b26',
+    bg = '#282c34',
     line_bg = '#353644',
-    fg = '#8FBCBB',
+    fg = '#979eab',
     fg_green = '#65a380',
 
-    yellow = '#fabd2f',
-    cyan = '#008080',
+    yellow = '#e5c07b',
+    cyan = '#56b6c2',
     darkblue = '#081633',
-    green = '#afd700',
+    green = '#98c379',
     orange = '#FF8800',
     purple = '#5d4d7a',
     magenta = '#c678dd',
-    blue = '#51afef';
-    red = '#ec5f67'
+    blue = '#61afef';
+    red = '#e06c75'
 }
 
 local function lsp_status(status)
@@ -146,7 +148,7 @@ gls.left[2] = {
       }
       local vim_mode = vim.fn.mode()
       vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim_mode])
-      return alias[vim_mode] .. '   '
+      return '   ' .. alias [vim_mode] .. ' '
     end,
     highlight = {colors.red,colors.line_bg,'bold'},
   },
@@ -160,7 +162,7 @@ gls.left[3] ={
 }
 gls.left[4] = {
   FileName = {
-    provider = {'FileName','FileSize'},
+    provider = {'FileName'},
     condition = buffer_not_empty,
     highlight = {colors.fg,colors.line_bg,'bold'}
   }
@@ -168,7 +170,7 @@ gls.left[4] = {
 
 gls.left[5] = {
   GitIcon = {
-    provider = function() return '  ' end,
+    provider = function() return 'on   ' end,
     condition = require('galaxyline.provider_vcs').check_git_workspace,
     highlight = {colors.orange,colors.line_bg},
   }
@@ -181,39 +183,7 @@ gls.left[6] = {
   }
 }
 
-local checkwidth = function()
-  local squeeze_width  = vim.fn.winwidth(0) / 2
-  if squeeze_width > 40 then
-    return true
-  end
-  return false
-end
-
 gls.left[7] = {
-  DiffAdd = {
-    provider = 'DiffAdd',
-    condition = checkwidth,
-    icon = ' ',
-    highlight = {colors.green,colors.line_bg},
-  }
-}
-gls.left[8] = {
-  DiffModified = {
-    provider = 'DiffModified',
-    condition = checkwidth,
-    icon = ' ',
-    highlight = {colors.orange,colors.line_bg},
-  }
-}
-gls.left[9] = {
-  DiffRemove = {
-    provider = 'DiffRemove',
-    condition = checkwidth,
-    icon = ' ',
-    highlight = {colors.red,colors.line_bg},
-  }
-}
-gls.left[10] = {
   LeftEnd = {
     provider = function() return '' end,
     separator = '',
@@ -222,7 +192,48 @@ gls.left[10] = {
   }
 }
 
-gls.left[11] = {
+gls.left[8] = {
+  Space = {
+    provider = function () return ' ' end
+  }
+}
+
+
+
+local checkwidth = function()
+  local squeeze_width  = vim.fn.winwidth(0) / 2
+  if squeeze_width > 40 then
+    return true
+  end
+  return false
+end
+
+gls.right[1] = {
+  DiffAdd = {
+    provider = 'DiffAdd',
+    condition = checkwidth,
+    icon = ' ',
+    highlight = {colors.green},
+  }
+}
+gls.right[2] = {
+  DiffModified = {
+    provider = 'DiffModified',
+    condition = checkwidth,
+    icon = ' ',
+    highlight = {colors.orange},
+  }
+}
+gls.right[3] = {
+  DiffRemove = {
+    provider = 'DiffRemove',
+    condition = checkwidth,
+    icon = ' ',
+    highlight = {colors.red},
+  }
+}
+
+gls.right[4] = {
     TrailingWhiteSpace = {
      provider = TrailingWhiteSpace,
      icon = '  ',
@@ -230,19 +241,14 @@ gls.left[11] = {
     }
 }
 
-gls.left[12] = {
+gls.right[5] = {
   DiagnosticError = {
     provider = 'DiagnosticError',
     icon = '  ',
     highlight = {colors.red,colors.bg}
   }
 }
-gls.left[13] = {
-  Space = {
-    provider = function () return ' ' end
-  }
-}
-gls.left[14] = {
+gls.right[6] = {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
     icon = '  ',
@@ -250,8 +256,7 @@ gls.left[14] = {
   }
 }
 
-
-gls.left[15] = {
+gls.right[7] = {
     CocStatus = {
      provider = CocStatus,
      highlight = {colors.green,colors.bg},
@@ -259,7 +264,7 @@ gls.left[15] = {
     }
 }
 
-gls.left[16] = {
+gls.right[8] = {
   CocFunc = {
     provider = CocFunc,
     icon = '  λ ',
@@ -267,29 +272,13 @@ gls.left[16] = {
   }
 }
 
-gls.right[1]= {
-  FileFormat = {
-    provider = 'FileFormat',
-    separator = ' ',
-    separator_highlight = {colors.bg,colors.line_bg},
-    highlight = {colors.fg,colors.line_bg,'bold'},
-  }
-}
-gls.right[4] = {
+gls.right[9] = {
   LineInfo = {
     provider = 'LineColumn',
     separator = ' | ',
-    separator_highlight = {colors.blue,colors.line_bg},
-    highlight = {colors.fg,colors.line_bg},
+    separator_highlight = {colors.blue},
+    highlight = {colors.fg},
   },
-}
-gls.right[5] = {
-  PerCent = {
-    provider = 'LinePercent',
-    separator = ' ',
-    separator_highlight = {colors.line_bg,colors.line_bg},
-    highlight = {colors.cyan,colors.darkblue,'bold'},
-  }
 }
 
 -- gls.right[4] = {

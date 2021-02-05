@@ -22,6 +22,9 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
 
+" Tree explorer
+Plug 'kyazdani42/nvim-tree.lua'
+
 "telescope (fzf replacement)
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -29,11 +32,11 @@ Plug 'nvim-telescope/telescope.nvim'
 
 " Looks and feel
 Plug 'ryanoasis/vim-devicons'
-Plug 'kyazdani42/nvim-tree.lua'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'bluz71/vim-nightfly-guicolors'
-Plug 'jsit/toast.vim'
-Plug 'ghifarit53/tokyonight-vim'
+"Plug 'jsit/toast.vim'
+Plug 'Th3Whit3Wolf/one-nvim'
+"Plug 'bluz71/vim-moonfly-colors'
+Plug 'christianchiarulli/nvcode-color-schemes.vim'
 "Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Dadbod for database plugin
@@ -69,7 +72,7 @@ Plug 'lervag/vimtex'
 Plug 'previm/previm'
 Plug 'glench/Vim-Jinja2-Syntax'
 Plug 'https://github.com/plasticboy/vim-markdown'
-Plug 'https://github.com/ap/vim-css-color'
+"Plug 'https://github.com/ap/vim-css-color'
 "Plug 'https://github.com/kiteco/vim-plugin'
 
 " Misc plugins
@@ -161,13 +164,15 @@ syntax on
 
 
 let $FZF_DEFAULT_COMMAND = 'rg'
-"--------------------THEME-----------------------
-
+"--------------------THEME----------------------- 
 set termguicolors
-let g:tokyonight_style = "night"
-let g:tokyonight_enable_italic = 1
-let g:tokyonight_transparent_background = 1
-colorscheme tokyonight
+colorscheme one-nvim
+highlight Normal guibg=NONE
+highlight NonText guibg=NONE
+highlight SignColumn ctermbg=NONE guibg=NONE
+highlight VertSplit ctermbg=NONE guibg=NONE
+highlight Pmenu ctermbg=NONE guibg=#292927
+"set background=dark
 lua require'bufferline'.setup{}
 
 "Make vim respect terminal color 

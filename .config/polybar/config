@@ -96,7 +96,7 @@ label-mode-background = ${colors.primary}
 ; focused = Active workspace on focused monitor
 label-focused = %index%
 label-focused-background = ${colors.background-alt}
-label-focused-underline= #D08770
+label-focused-underline= #be5046
 label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
@@ -276,7 +276,7 @@ date-alt =
 time = %H:%M
 time-alt = 
 
-format-underline = #5E81AC
+format-underline = #61afef
 format-prefix-foreground = ${colors.foreground-alt}
 
 label =   %time% | %date%
@@ -340,7 +340,7 @@ format-charging-prefix = " "
 format-charging-prefix-font = 3
 
 format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-underline = #A3BE8C
+format-discharging-underline = #98c379
 
 format-full-prefix = "  "
 format-full-prefix-font = 3
@@ -399,7 +399,7 @@ format-prefix-font = 3
 format-prefix = "ﮮ "
 format = <label>
 exec = /home/taka15/script/updates-polybar.sh
-format-underline = #8FBCBB
+format-underline = #56b6c2
 interval = 600
 
 [module/github]

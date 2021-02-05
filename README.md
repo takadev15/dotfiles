@@ -31,7 +31,7 @@ for why i don't use ibus (that seemingly supported by kitty) because compare to 
 
 ## Screenshot
 * ricing
-![Screenshot](./screenshot-2.png)
+![Screenshot](./assets/screenshot-ricing.png)
 
 * heavy workload
 
