@@ -57,7 +57,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # clear in small sizes. However, its unicode glyph coverage is limited, the old
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
-font pango:Noto Sans Regular 10
+font pango:Noto Sans Regular 12
 
 # thin borders:
 hide_edge_borders both
@@ -132,10 +132,10 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # workspace-edit:
-set $ws1 ""
-set $ws2 ""
+set $ws1 "1"
+set $ws2 "2"
 set $ws3 "3"
-set $ws4 "z"
+set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
@@ -145,14 +145,14 @@ set $ws9 "9"
 bindsym $mod+s exec --no-startup-id ~/.config/i3/scripts/empty_workspace.sh
 
 # autostart start applications + bind program to workspace:
-assign [class="kitty"] $ws1
-for_window [class=kity] focus
-assign [class="chrome"] $ws2
-for_window [class=chrome] focus
-assign [class="zoom"] $ws4
-for_window [class=zoom] focus
-assign [class="steam"] $ws5
-for_window [class=steam] focus
+#assign [class="kitty"] $ws1
+#for_window [class=kity] focus
+#assign [class="chrome"] $ws2
+#for_window [class=chrome] focus
+#assign [class="zoom"] $ws4
+#for_window [class=zoom] focus
+#assign [class="steam"] $ws5
+#for_window [class=steam] focus
 
 # Autostart apps:
 #exec --no-startup-id sleep 2 && xfce4-terminal
@@ -279,33 +279,33 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+w exec "/usr/bin/google-chrome-stable"
 bindsym $mod+n exec "/usr/bin/thunar"
 bindsym $mod+z exec "/usr/bin/zoom"
-bindsym Print exec "scrot ~/Pictures/%Y-%m-%d-%T-screenshot.png"
+bindsym Print exec "scrot ~/Pictures/screenshot/%Y-%m-%d-%T-screenshot.png"
 
 # Redirect sound to headphones
 bindsym $mod+m exec "/usr/local/bin/switch-audio-port"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-      status_command i3status
-	position top
-        colors {
-	background #2f343f
-	statusline #2f343f
-	separator #4b5262
-        #colour of border, background, and text 
-        focused_workspace       #2f343f #00ffd2 #2f343f
-        active_workspace        #2f343f #2f343f #d8dee8
-        inactive_workspace      #2f343f #2f343f #d8dee8
-        urgent_workspace       #2f343f #ff4499 #2f343f
-    }
-}
+#bar {
+#      status_command i3status
+#	position top
+#        colors {
+#	background #2f343f
+#	statusline #2f343f
+#	separator #4b5262
+#       #colour of border, background, and text 
+#        focused_workspace       #2f343f #00ffd2 #2f343f
+#        active_workspace        #2f343f #2f343f #d8dee8
+#        inactive_workspace      #2f343f #2f343f #d8dee8
+#        urgent_workspace       #2f343f #ff4499 #2f343f
+#    }
+#}
 
-#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 
 # Lock the system
-bindsym $mod+0 exec i3lock -i ~/.config/i3/i3-lock-screen.png -t -f
+bindsym $mod+0 exec i3lock -i ~/Pictures/wallpaper/unsplash-jp2.png -t -f
 
 set $bg-color            #2f343f
 set $inactive-bg-color   #2f343f
