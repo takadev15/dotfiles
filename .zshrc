@@ -97,14 +97,24 @@ alias lzd='lazydocker'
 # fd 
 alias fd='fdfind'
 
+# exa
+alias ls="exa --icons"
+alias la="exa --all --icons"
+alias lt="exa --tree --icons --level=3"
+
 # Python venv 
 alias activate="source env/bin/activate"
 
 # project's directory
 alias pdir="cd ~/dir/data/project"
+alias rsdir="cd ~/dir/data/project/os/test-1"
+alias mobdir="cd ~/dir/data/project/mobile/testapp"
 
 # zource zshrc
-alias reload="source .zshrc"
+alias reload="source ~/.zshrc"
+
+# clear
+alias cls="clear"
 
 # Flutter SDK
 export PATH="/home/taka15/dev/flutter/flutter/bin/:$PATH"
@@ -132,6 +142,8 @@ export GDK_DPI_SCALE=0.5
 # fnm
 export PATH="/home/taka15/.fnm:$PATH"
 eval "`fnm env`"
+
+export PATH="/home/taka15/.config/vifm/scripts/:$PATH"
 
 
 eval "$(starship init zsh)"

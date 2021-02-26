@@ -305,7 +305,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 
 # Lock the system
-bindsym $mod+0 exec i3lock -i ~/Pictures/wallpaper/unsplash-jp2.png -t -f
+bindsym $mod+0 exec i3lock -i ~/Pictures/wallpaper/tokyo-night.png -t -f
 
 set $bg-color            #2f343f
 set $inactive-bg-color   #2f343f
