@@ -19,8 +19,8 @@ Plug 'junegunn/gv.vim'
 Plug 'rhysd/git-messenger.vim'
 
 " Fuzzy finder
-Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
-Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
+"Plug 'junegunn/fzf.vim'
 
 " Tree explorer
 Plug 'kyazdani42/nvim-tree.lua'
@@ -31,7 +31,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
 " Looks and feel
-Plug 'ryanoasis/vim-devicons'
+"Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 "Plug 'jsit/toast.vim'
 Plug 'Th3Whit3Wolf/one-nvim'
@@ -75,6 +75,9 @@ Plug 'https://github.com/plasticboy/vim-markdown'
 "Plug 'https://github.com/ap/vim-css-color'
 "Plug 'https://github.com/kiteco/vim-plugin'
 
+" Discord rpc
+Plug 'andweeb/presence.nvim'
+
 " Misc plugins
 Plug 'liuchengxu/vista.vim'
 Plug 'yuttie/comfortable-motion.vim'
@@ -85,14 +88,16 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'tyru/open-browser.vim'
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
-
+Plug 'b3nj5m1n/kommentary'
 
 call plug#end()
 
 let mapleader = ","
 
+
 "---------------KEYBOARD MAPPING---------------------
-map <leader>fl :NvimTreeToggle<CR>
+
+map <leader>fd :NvimTreeToggle<CR>
 map <F1> :Vista!!<CR>
 
 " Move window
@@ -105,6 +110,8 @@ map sl <C-w>l
 nmap <leader>t :enew<CR>
 nmap <S-Tab> :BufferLineCyclePrev<CR>
 nmap <Tab> :BufferLineCycleNext<CR>
+nmap <leader>q :bd<CR>
+
 " resizing vim pane
 nnoremap <A-k> :resize +2<CR>
 nnoremap <A-j> :resize -2<CR>
@@ -123,6 +130,7 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+
 
 " ---------------GENERAL SETTINGS--------------------
 
@@ -178,6 +186,9 @@ lua require'bufferline'.setup{}
 "Make vim respect terminal color 
 highlight Normal guibg=none
 highlight NonText guibg=none
+highlight LineNr guifg=#3f3f3f
+"highlight LineNr guifg=Red
+"highlight CursorLineNr ctermbg=NONE ctermfg=Red guibg=NONE guifg=Red
 
 "Hide tilde sign for empty line
 set fcs=eob:\  
@@ -185,7 +196,10 @@ set fcs=eob:\
 " Disable vertical split
 hi VertSplit ctermbg=NONE guibg=NONE
 
+set shell=/usr/bin/zsh
+
 "-------------Startify--------------------------
+
 
 let g:ascii = [
 \'',
@@ -201,7 +215,14 @@ let g:ascii = [
 \'     ▀▄▐       ▀████ ',
 \'       ▀         ▀ ',
 \'',
-            \]
+\' by ',
+\'',
+\'  _____     _        _ ___ ',                            
+\'|_   _|_ _| |____ _/ | __|',
+\'  | |/ _` | / / _` | |__ \',
+\'  |_|\__,_|_\_\__,_|_|___/',
+\'',
+\]
 
 let g:startify_custom_header =
             \'startify#center(g:ascii +startify#fortune#quote())'
@@ -213,3 +234,4 @@ source ~/.config/nvim/treesitter.vim
 source ~/.config/nvim/coc.vim
 source ~/.config/nvim/plugins.vim
 luafile $HOME/.config/nvim/statusline.lua
+luafile $HOME/.config/nvim/plug.lua
