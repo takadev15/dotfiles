@@ -18,7 +18,8 @@
 
 [colors]
 foreground = ${xrdb:foreground:#fff}
-background = ${xrdb:background:#0000}
+background = ${xrdb:background:#dd282c34}
+;background = ${xrdb:background:#000}
 ;background = #fff
 ;foreground = #000
 
@@ -35,10 +36,13 @@ background = ${xrdb:background:#0000}
 enable-ipc=true
 height = 40
 width = 100%
-offset-x = 1%
+offset-x = 0
+offset-y = -1
+;offset-x = 1%
+;offset-y = 0
 padding = 5
+;radius-bottom = 15
 ;bottom = true
-radius-bottom = 15
 
 background = ${colors.background}
 ;background = ${colors.primary}
@@ -49,6 +53,7 @@ border-bottom-size = 0
 border-color = #0000
 
 line-size = 2
+underline-size = 2
 module-margin-left = 3
 module-margin-right = 3
 
@@ -60,7 +65,7 @@ font-4 = IPAGothic,IPAゴシック:style=Regular;4
 font-5 = FontAwesome:style=Regular;5
 
 modules-left = Logo i3 spotify
-modules-right = pulseaudio wlan updates battery date
+modules-right = pulseaudio wlan github updates battery date
 
 tray-position = center
 tray-padding = 2
@@ -90,7 +95,8 @@ wrapping-scroll = false
 ;pin-workspaces = true
 
 label-mode-padding = 2
-label-mode-foreground = #000
+label-mode-foreground = #fff
+label-mode-underline= #be5046
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
@@ -111,6 +117,7 @@ label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint se#D08770
 label-urgent-background = ${colors.alert}
+;label-urgent-underline = #ff0f0f
 label-urgent-padding = 2
 
 ; Separator in between workspaces
@@ -332,7 +339,7 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 type = internal/battery
 battery = BAT0
 adapter = ADP0
-full-at = 98
+full-at = 100
 
 format-charging = <label-charging>
 format-charging-underline = #EBCB8B 
@@ -345,7 +352,7 @@ format-discharging-underline = #98c379
 format-full-prefix = "  "
 format-full-prefix-font = 3
 format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
+format-full-underline = #98c379
 
 ramp-capacity-0 = " "
 ramp-capacity-1 = " "
@@ -390,7 +397,7 @@ interval = 1
 format-prefix-font = 5
 format-prefix = "阮  "
 format = <label>
-exec = python /home/taka15/script/spotify_status.py -f '{song} - {artist}' -t 30
+exec = python /home/taka15/.config/polybar/script/spotify_status.py -f '{song} - {artist}' -t 30
 format-underline = #1db954
 
 [module/updates]
@@ -398,20 +405,16 @@ type = custom/script
 format-prefix-font = 3 
 format-prefix = "ﮮ "
 format = <label>
-exec = /home/taka15/script/updates-polybar.sh
+exec = /home/taka15/.config/polybar/script/updates-polybar.sh
 format-underline = #56b6c2
 interval = 600
 
 [module/github]
 type = custom/script
-format-prefix = " "
-exec = polybar-github $HOME/.config/polybar/.env/github $TOKEN 60 all true
-click-left = echo left >> $HOME/.config/polybar/.env/github
-click-middle = echo middle >> $HOME/.config/polybar/.env/github
-click-right = echo right >> $HOME/.config/polybar/.env/github
-scroll-up = echo scrollUp >> $HOME/.config/polybar/.env/github
-scroll-down = echo scrollDown >> $HOME/.config/polybar/.env/github
-tail = true
+format-prefix = "  "
+format = <label>
+exec = /home/taka15/.config/polybar/script/github.sh
+format-underline = #fff
 
 [module/powermenu]
 type = custom/menu

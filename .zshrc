@@ -47,12 +47,20 @@ export NNN_BMS='p:/mnt/dir/project/;c:~/.config/'
 export LC_COLLATE="C"
 
 # JenV path
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+export JENV_ROOT="${JENV_ROOT:=${HOME}/.jenv}"
+if ! type jenv > /dev/null && [ -f "${JENV_ROOT}/bin/jenv" ]; then
+    export PATH="${JENV_ROOT}/bin:${PATH}"
+    export JAVA_OPTS=""
+fi
 
-# Set npm Globlal in home dir
-NPM_PACKAGES="${HOME}/.npm-packages"
-export PATH="$PATH:$NPM_PACKAGES/bin"
+if type jenv > /dev/null; then
+    export PATH="${JENV_ROOT}/bin:${JENV_ROOT}/shims:${PATH}"
+    function jenv() {
+        unset -f jenv
+        eval "$(jenv init -)"
+        jenv $@
+    }
+fi
 
 # Preserve MANPATH if you already defined it somewhere in your config.
 # Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
@@ -107,8 +115,12 @@ alias activate="source env/bin/activate"
 
 # project's directory
 alias pdir="cd ~/dir/data/project"
-alias rsdir="cd ~/dir/data/project/os/test-1"
+alias osdir="cd ~/dir/data/project/os"
 alias mobdir="cd ~/dir/data/project/mobile/testapp"
+alias mdir="cd ~/dir/data/Documents/materi"
+
+# Try zoxide 
+eval "$(zoxide init zsh)"
 
 # zource zshrc
 alias reload="source ~/.zshrc"
@@ -131,9 +143,6 @@ export PATH="$ANDROID_HOME/tools/bin/:$PATH"
 export PATH="/home/taka15/.yarn/bin:$PATH"
 export PATH="~/.npm-global/bin:$PATH"
 
-# DOOM emacs
-export PATH="~/.emacs.d/bin:$PATH"
-
 # fix screen
 export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
@@ -142,7 +151,6 @@ export GDK_DPI_SCALE=0.5
 # fnm
 export PATH="/home/taka15/.fnm:$PATH"
 eval "`fnm env`"
-
 export PATH="/home/taka15/.config/vifm/scripts/:$PATH"
 
 

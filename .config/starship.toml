@@ -1,6 +1,6 @@
-# Replace the "❯" symbol in the prompt with "➜"
+
 [character]      
-symbol = "[➜](bold green)"     
+success_symbol = "[➜](bold green)"     
 error_symbol = "[✗](bold red)"
 
 [git_status]

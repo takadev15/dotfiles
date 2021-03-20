@@ -22,11 +22,16 @@ workspace_layout default
 
 
 # Set inner/outer gaps
+#for_window [class="^.*"] border pixel 4
+#gaps inner 30
+#gaps outer 10
+#smart_borders on
+
+# Set inner/outer gaps
 for_window [class="^.*"] border pixel 5
 gaps inner 8
 gaps outer 6
 smart_borders on
-
 
 # set gaps realtime
 #bindsym $mod+shift+= gaps inner current plus 5 
@@ -276,7 +281,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # App shortcuts
-bindsym $mod+w exec "/usr/bin/google-chrome-stable"
+bindsym $mod+w exec "/usr/bin/brave"
 bindsym $mod+n exec "/usr/bin/thunar"
 bindsym $mod+z exec "/usr/bin/zoom"
 bindsym Print exec "scrot ~/Pictures/screenshot/%Y-%m-%d-%T-screenshot.png"
@@ -354,4 +359,3 @@ bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
 # Japanese imput
 exec --no-startup-id fcitx -d
 
-exec_always feh --bg-scale /home/taka15/Pictures/wallpaper/ayame1.jpg

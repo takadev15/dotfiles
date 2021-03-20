@@ -3,15 +3,17 @@ let g:coc_global_extensions = [
  \ 'coc-pairs',
  \ 'coc-json',
  \ 'coc-java',
+ \ 'coc-lua',
  \ 'coc-docker',
- \ 'coc-rust-analyzer',
  \ 'coc-snippets',
  \ 'coc-tsserver',
  \ 'coc-tailwindcss',
+ \ 'coc-rust-analyzer',
  \ 'coc-emmet',
  \ 'coc-json',
  \ 'coc-vimlsp',
  \ 'coc-sql',
+ \ 'coc-clangd',
  \ 'coc-sh',
  \ 'coc-pyright',
  \ 'coc-texlab',
@@ -20,9 +22,7 @@ let g:coc_global_extensions = [
  \ 'coc-css',
  \ 'coc-git',
  \ 'coc-highlight',
- \ 'coc-discord-rpc',
  \ 'coc-flutter',
- \ 'coc-fzf-preview',
  \ 'coc-actions',
  \ 'coc-db',
  \ 'coc-eslint'] 
@@ -143,12 +143,12 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 "---------------------Coc-Fzf------------------------------------
-nnoremap <silent> <C-p> :CocCommand fzf-preview.DirectoryFiles<CR>
-nnoremap <silent> <Leader>fg :CocCommand fzf-preview.GitFiles<CR>
-nnoremap <silent> <Leader>b :CocCommand fzf-preview.Buffers<CR>
-nnoremap <silent> <Leader>fv :CocCommand fzf-preview.VistaCtags<CR>
-nnoremap <silent> <Leader>g :CocCommand fzf-preview.GitActions<CR>
-nnoremap <silent> <Leader>gs :CocCommand fzf-preview.GitStatus<CR>
+"nnoremap <silent> <C-p> :CocCommand fzf-preview.DirectoryFiles<CR>
+"nnoremap <silent> <Leader>fg :CocCommand fzf-preview.GitFiles<CR>
+"nnoremap <silent> <Leader>b :CocCommand fzf-preview.Buffers<CR>
+"nnoremap <silent> <Leader>fv :CocCommand fzf-preview.VistaCtags<CR>
+"nnoremap <silent> <Leader>g :CocCommand fzf-preview.GitActions<CR>
+"nnoremap <silent> <Leader>gs :CocCommand fzf-preview.GitStatus<CR>
 
 
 " Use vim-devicons
