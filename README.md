@@ -1,8 +1,6 @@
-# Switching bar into polybar
+# My Arch setup
 
-Thanks to [this](https://harfangk.github.io/2016/09/18/manage-dotfiles-with-a-git-bare-repository.html) i finally fix my dots.
-
-## Restoring
+## How to Download
 ```  
 alias dotfiles="/usr/bin/git --git-dir $HOME/.dotfiles/ --work-tree=$HOME"  
 git clone --bare https://www.github.com/Takachii15/dotfiles.git $HOME/.dotfiles  
@@ -52,4 +50,4 @@ for why i don't use ibus (that seemingly supported by kitty) because compare to 
 - [ ] enable org-mode (or something similiar?) in vim
 
 ## ATTENTION ##
- **if you want to copy my dotfiles please consider the software i use and plugis so the config can run smoothly**
+**if you want to copy my dotfiles please consider the software i use and plugis so the config can run smoothly**
