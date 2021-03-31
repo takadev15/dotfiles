@@ -1,5 +1,29 @@
-vim.g.one_nvim_transparent_bg = true
+local cmd = vim.api.nvim_command
 
+
+-- Colorscheme
+vim.g.one_nvim_transparent_bg = true
+cmd('set termguicolors')
+cmd('colorscheme one-nvim')
+cmd('autocmd ColorScheme * highlight Normal guibg=NONE') -- Make background transparent
+cmd('autocmd ColorScheme * highlight NonText guibg=NONE')
+cmd('autocmd ColorScheme * highlight SignColumn ctermbg=NONE guibg=NONE')
+cmd('autocmd ColorScheme * highlight VertSplit ctermbg=NONE guibg=NONE')
+cmd('autocmd ColorScheme * highlight Pmenu ctermbg=NONE guibg=#292927')
+
+-- One-nvim specific 
+
+
+-- Line number color
+cmd('autocmd ColorScheme * highlight CursorLineNr guibg=NONE guifg=White')
+cmd('autocmd ColorScheme * highlight LineNr guifg=#3F3F3F')
+
+-- disable vertical split
+cmd('autocmd ColorScheme * highlight VertSplit ctermbg=NONE guibg=NONE')
+
+-- set fcs=eob:\  
+
+-- Statusline
 local gl = require('galaxyline')
 local gls = gl.section
 local extension = require('galaxyline.provider_extensions')
@@ -16,9 +40,7 @@ gl.short_line_list = {
     'plug'
 }
 
--- VistaPlugin = extension.vista_nearest
-
-local colors = {
+local colors = {  
     bg = '#282c34',
     line_bg = '#353644',
     fg = '#979eab',
@@ -103,6 +125,8 @@ local buffer_not_empty = function()
   return false
 end
 
+local condition = require('galaxyline.condition')
+
 gls.left[1] = {
   FirstElement = {
     provider = function() return ' ' end,
@@ -148,7 +172,7 @@ gls.left[2] = {
       }
       local vim_mode = vim.fn.mode()
       vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim_mode])
-      return '   ' .. alias [vim_mode] .. ' '
+      return '   '
     end,
     highlight = {colors.red,colors.line_bg,'bold'},
   },
@@ -170,15 +194,15 @@ gls.left[4] = {
 
 gls.left[5] = {
   GitIcon = {
-   provider = function() return '  ' end,
-    condition = require('galaxyline.provider_vcs').check_git_workspace,
-    highlight = {colors.orange,colors.line_bg},
+   provider = function() return '  ' end,
+   condition = condition.check_git_workspace,
+   highlight = {colors.orange,colors.line_bg},
   }
 }
 gls.left[6] = {
   GitBranch = {
     provider = 'GitBranch',
-    condition = require('galaxyline.provider_vcs').check_git_workspace,
+    condition = condition.check_git_workspace,
     highlight = {'#8FBCBB',colors.line_bg,'bold'},
   }
 }
@@ -303,8 +327,8 @@ gls.short_line_left[1] = {
     provider = 'FileTypeName',
     separator = '',
     condition = has_file_type,
-    separator_highlight = {colors.purple,colors.bg},
-    highlight = {colors.fg,colors.purple}
+    separator_highlight = {colors.bg,colors.bg},
+    highlight = {colors.fg,colors.line_bg}
   }
 }
 
@@ -314,7 +338,10 @@ gls.short_line_right[1] = {
     provider= 'BufferIcon',
     separator = '',
     condition = has_file_type,
-    separator_highlight = {colors.purple,colors.bg},
-    highlight = {colors.fg,colors.purple}
+    separator_highlight = {colors.bg,colors.bg},
+    highlight = {colors.fg,colors.line_bg}
   }
 }
+
+
+-- Bufferline
