@@ -30,10 +30,8 @@ for why i don't use ibus (that seemingly supported by kitty) because compare to 
 
 ## Screenshot
 * ricing
-![Screenshot](./assets/screenshot-ricing.png)
+![Screenshot](./assets/ricing.png)
 
-* heavy workload
-![Screenshot](./assets/screenshot-workload.png)
 
 
 ## TODO List
