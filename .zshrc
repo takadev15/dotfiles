@@ -38,13 +38,16 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-source /usr/share/zsh/plugins/zsh-autosuggestions-git/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # NNN
 export NNN_BMS='p:/mnt/dir/project/;c:~/.config/'
 export LC_COLLATE="C"
+
+# Cscope
+export CSCOPE_EDITOR=`which nvim`
 
 # JenV path
 export JENV_ROOT="${JENV_ROOT:=${HOME}/.jenv}"
@@ -74,15 +77,15 @@ export PATH="$HOME/script:$PATH"
 export PATH="$HOME/.config/vifm/scripts:$PATH"
 
 # Set Nvim as default text editor
-export EDITOR="/usr/bin/nvim"
-export VISUAL="/usr/bin/nvim"
+export EDITOR="/usr/local/bin/nvim"
+export VISUAL="/usr/local/bin/nvim"
 
 # Set spicetify path
 export SPICETIFY_INSTALL="/home/taka15/spicetify-cli"
 export PATH="$SPICETIFY_INSTALL:$PATH"
 
 #Pyenv
-export PYENV_ROOT="$HOME/.pyenv"
+export PYENV_ROOT="$HOME/build/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
@@ -106,27 +109,32 @@ alias lzd='lazydocker'
 alias fd='fdfind'
 
 # exa
-alias ls="exa --icons"
-alias la="exa --all --icons"
+alias ls="exa -l --icons"
+alias la="exa -l --all --icons"
 alias lt="exa --tree --icons --level=3"
 
 # Python venv 
 alias activate="source env/bin/activate"
 
 # project's directory
-alias pdir="cd ~/dir/data/project"
-alias osdir="cd ~/dir/data/project/os"
-alias mobdir="cd ~/dir/data/project/mobile/testapp"
-alias mdir="cd ~/dir/data/Documents/materi"
+alias pdir="z ~/dir/data/project"
+alias osdir="z ~/dir/data/project/os"
+# alias mobdir="z ~/dir/data/project/mobile/testapp"
+alias mdir="z ~/dir/data/Documents/materi"
+alias note="z ~/dir/data/note/"
+alias zz="z .."
 
 # Try zoxide 
 eval "$(zoxide init zsh)"
 
-# zource zshrc
+# source zshrc
 alias reload="source ~/.zshrc"
 
 # clear
 alias cls="clear"
+
+# for brightness
+alias brght="sudo chmod 577 /sys/class/backlight/amdgpu_bl0/brightness"
 
 # Flutter SDK
 export PATH="/home/taka15/dev/flutter/flutter/bin/:$PATH"
@@ -179,3 +187,4 @@ zinit light-mode for \
     zinit-zsh/z-a-bin-gem-node
 
 ### End of Zinit's installer chunk
+if [ -e /home/taka15/.nix-profile/etc/profile.d/nix.sh ]; then . /home/taka15/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

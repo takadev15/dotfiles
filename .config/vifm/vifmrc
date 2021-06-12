@@ -14,7 +14,7 @@ set smartcase
 set nohlsearch
 set incsearch
 set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
-colorscheme Default
+colorscheme gruvbox
 
 map <C-h> <C-w>h
 map <C-j> <C-w>j
@@ -70,6 +70,8 @@ fileview *.zip,*.cbz    atool -l --format=zip %f 2>/dev/null | tail +4 | awk '{$
 fileview *.rar,*.cbr    atool -l --format=rar %f 2>/dev/null | tail +9 | awk '{$1=$2=$3=$4=""; print $0}'
 fileview *.7z,*.cb7     atool -l --format=7z %f 2>/dev/null | tail +20 | awk '{$1=$2=$3=$4=$5=""; print $0}'
 filetype *.zip,*.7z,*.rar,*.tar.gz,*.tar.xz ext %f
+
+fileviewer *.[ch],*.[ch]pp,*.[ch]xx bat --color always --wrap never --pager never %c -p
 
 fileviewer *.[1-8] man ./%c | col -b
 filetype *.[1-8] man ./%c
