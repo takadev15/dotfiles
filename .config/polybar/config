@@ -17,11 +17,11 @@
 ;==========================================================
 
 [colors]
-foreground = ${xrdb:foreground:#fff}
-background = ${xrdb:background:#dd282c34}
+; foreground = ${xrdb:foreground}
+background = ${xrdb:background:#ee262626}
 ;background = ${xrdb:background:#000}
 ;background = #fff
-;foreground = #000
+foreground = #bdae93
 
 
 
@@ -33,6 +33,7 @@ background = ${xrdb:background:#dd282c34}
 
 
 [bar/mybar]
+monitor = ${env:MONITOR:}
 enable-ipc=true
 height = 40
 width = 100%
@@ -61,7 +62,7 @@ font-0 = fixed:pixelsize=12;1
 font-1 = SF Mono:style=Regular:size=13;0
 font-2 = siji:pixelsize=13;1
 font-3 = JetBrainsMono Nerd Font:style=Extra Bold,Regular:size=12;3 
-font-4 = IPAGothic,IPAゴシック:style=Regular;4
+font-4 = Source Han Sans JP,源ノ角ゴシック JP,Source Han Sans JP Medium,源ノ角ゴシック JP Medium:style=Medium,Regular;4
 font-5 = FontAwesome:style=Regular;5
 
 modules-left = Logo i3 spotify
@@ -73,8 +74,7 @@ tray-padding = 2
 
 ;wm-restack = bspwm
 ;wm-restack = i3
-
-;override-redirect = true
+override-redirect = true
 
 ;scroll-up = bspwm-desknext
 ;scroll-down = bspwm-deskprev
@@ -92,22 +92,25 @@ index-sort = true
 wrapping-scroll = false
 
 ; Only show workspaces on the same output as the bar
-;pin-workspaces = true
+pin-workspaces = true
 
 label-mode-padding = 2
-label-mode-foreground = #fff
-label-mode-underline= #be5046
-label-mode-background = ${colors.primary}
+label-mode-foreground =#bdae93 
+; label-mode-underline= #be5046
+label-mode-background = #4e4e4e
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= #be5046
+label-focused-background = #4e4e4e
+; label-focused-underline= 
+label-focused-foreground = #bdae93
+label-focused-underline = #fff
 label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
 label-unfocused-padding = 2
+label-unfocused-foreground = #bdae93
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
@@ -116,13 +119,13 @@ label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint se#D08770
-label-urgent-background = ${colors.alert}
+label-urgent-background = #4e4e4e
 ;label-urgent-underline = #ff0f0f
+label-urgernt-foreground = #ff0f0f
 label-urgent-padding = 2
 
 ; Separator in between workspaces
 ; label-separator = |
-
 
 
 ;                      _       _           
@@ -141,6 +144,7 @@ content-margin = 2
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:30:...%
+
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -301,7 +305,9 @@ ramp-volume-font = 3
 ramp-volume-0 = "奔"
 ramp-volume-1 = "墳"
 ramp-volume-2 = " "
+ramp-volume-foreground = #bdae93
 
+label-volume-foreground = #bdae93
 
 label-muted =   muted
 label-muted-font = 3
@@ -343,20 +349,20 @@ full-at = 100
 
 format-charging = <label-charging>
 format-charging-underline = #EBCB8B 
-format-charging-prefix = " "
+format-charging-prefix = "  "
 format-charging-prefix-font = 3
 
 format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = #98c379
 
-format-full-prefix = "  "
+format-full-prefix = "   "
 format-full-prefix-font = 3
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = #98c379
 
-ramp-capacity-0 = " "
-ramp-capacity-1 = " "
-ramp-capacity-2 = " "
+ramp-capacity-0 = "  "
+ramp-capacity-1 = "  "
+ramp-capacity-2 = "  "
 ramp-capacity-font = 3
 ramp-capacity-foreground = ${colors.foreground-alt}
 
