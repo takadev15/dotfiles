@@ -1,18 +1,15 @@
 local cmd = vim.api.nvim_command
 
-
 -- Colorscheme
-vim.g.one_nvim_transparent_bg = true
-cmd('set termguicolors')
-cmd('colorscheme one-nvim')
+vim.g.gruvbox_transparent = true
+vim.g.gruvbox_italic_functions = true
+vim.cmd('colorscheme gruvbox-flat')
+
 cmd('autocmd ColorScheme * highlight Normal guibg=NONE') -- Make background transparent
 cmd('autocmd ColorScheme * highlight NonText guibg=NONE')
 cmd('autocmd ColorScheme * highlight SignColumn ctermbg=NONE guibg=NONE')
 cmd('autocmd ColorScheme * highlight VertSplit ctermbg=NONE guibg=NONE')
 cmd('autocmd ColorScheme * highlight Pmenu ctermbg=NONE guibg=#292927')
-
--- One-nvim specific 
-
 
 -- Line number color
 cmd('autocmd ColorScheme * highlight CursorLineNr guibg=NONE guifg=White')
@@ -21,327 +18,28 @@ cmd('autocmd ColorScheme * highlight LineNr guifg=#3F3F3F')
 -- disable vertical split
 cmd('autocmd ColorScheme * highlight VertSplit ctermbg=NONE guibg=NONE')
 
--- set fcs=eob:\  
+local opts = {
+    -- whether to highlight the currently hovered symbol
+    -- disable if your cpu usage is higher than you want it
+    -- or you just hate the highlight
+    -- default: true
+    highlight_hovered_item = true,
 
--- Statusline
-local gl = require('galaxyline')
-local gls = gl.section
-local extension = require('galaxyline.provider_extensions')
-
-gl.short_line_list = {
-    'LuaTree',
-    'vista',
-    'dbui',
-    'startify',
-    'term',
-    'nerdtree',
-    'fugitive',
-    'fugitiveblame',
-    'plug'
-}
-
-local colors = {  
-    bg = '#282c34',
-    line_bg = '#353644',
-    fg = '#979eab',
-    fg_green = '#65a380',
-
-    yellow = '#e5c07b',
-    cyan = '#56b6c2',
-    darkblue = '#081633',
-    green = '#98c379',
-    orange = '#FF8800',
-    purple = '#5d4d7a',
-    magenta = '#c678dd',
-    blue = '#61afef';
-    red = '#e06c75'
-}
-
-local function lsp_status(status)
-    shorter_stat = ''
-    for match in string.gmatch(status, "[^%s]+")  do
-        err_warn = string.find(match, "^[WE]%d+", 0)
-        if not err_warn then
-            shorter_stat = shorter_stat .. ' ' .. match
-        end
-    end
-    return shorter_stat
-end
-
-
-local function get_coc_lsp()
-  local status = vim.fn['coc#status']()
-  if not status or status == '' then
-      return ''
-  end
-  return lsp_status(status)
-end
-
-function get_diagnostic_info()
-  if vim.fn.exists('*coc#rpc#start_server') == 1 then
-    return get_coc_lsp()
-    end
-  return ''
-end
-
-local function get_current_func()
-  local has_func, func_name = pcall(vim.fn.nvim_buf_get_var,0,'coc_current_function')
-  if not has_func then return end
-      return func_name
-  end
-
-function get_function_info()
-  if vim.fn.exists('*coc#rpc#start_server') == 1 then
-    return get_current_func()
-    end
-  return ''
-end
-
-local function trailing_whitespace()
-    local trail = vim.fn.search("\\s$", "nw")
-    if trail ~= 0 then
-        return ' '
-    else
-        return nil
-    end
-end
-
-CocStatus = get_diagnostic_info
-CocFunc = get_current_func
-TrailingWhiteSpace = trailing_whitespace
-
-function has_file_type()
-    local f_type = vim.bo.filetype
-    if not f_type or f_type == '' then
-        return false
-    end
-    return true
-end
-
-local buffer_not_empty = function()
-  if vim.fn.empty(vim.fn.expand('%:t')) ~= 1 then
-    return true
-  end
-  return false
-end
-
-local condition = require('galaxyline.condition')
-
-gls.left[1] = {
-  FirstElement = {
-    provider = function() return ' ' end,
-    highlight = {colors.blue,colors.line_bg}
-  },
-}
-gls.left[2] = {
-  ViMode = {
-    provider = function()
-      -- auto change color according the vim mode
-      local alias = {
-          n = 'NORMAL',
-          i = 'INSERT',
-          c= 'COMMAND',
-          V= 'VISUAL',
-          [''] = 'VISUAL',
-          v ='VISUAL',
-          c  = 'COMMAND-LINE',
-          ['r?'] = ':CONFIRM',
-          rm = '--MORE',
-          R  = 'REPLACE',
-          Rv = 'VIRTUAL',
-          s  = 'SELECT',
-          S  = 'SELECT',
-          ['r']  = 'HIT-ENTER',
-          [''] = 'SELECT',
-          t  = 'TERMINAL',
-          ['!']  = 'SHELL',
-      }
-      local mode_color = {
-          n = colors.green,
-          i = colors.blue,v=colors.magenta,[''] = colors.blue,V=colors.blue,
-          c = colors.red,no = colors.magenta,s = colors.orange,S=colors.orange,
-          [''] = colors.orange,ic = colors.yellow,R = colors.purple,Rv = colors.purple,
-          cv = colors.red,ce=colors.red, r = colors.cyan,rm = colors.cyan, ['r?'] = colors.cyan,
-          ['!']  = colors.green,t = colors.green,
-          c  = colors.purple,
-          ['r?'] = colors.red,
-          ['r']  = colors.red,
-          rm = colors.red,
-          R  = colors.yellow,
-          Rv = colors.magenta,
-      }
-      local vim_mode = vim.fn.mode()
-      vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim_mode])
-      return '   '
-    end,
-    highlight = {colors.red,colors.line_bg,'bold'},
-  },
-}
-gls.left[3] ={
-  FileIcon = {
-    provider = 'FileIcon',
-    condition = buffer_not_empty,
-    highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.line_bg},
-  },
-}
-gls.left[4] = {
-  FileName = {
-    provider = {'FileName'},
-    condition = buffer_not_empty,
-    highlight = {colors.fg,colors.line_bg,'bold'}
-  }
-}
-
-gls.left[5] = {
-  GitIcon = {
-   provider = function() return '  ' end,
-   condition = condition.check_git_workspace,
-   highlight = {colors.orange,colors.line_bg},
-  }
-}
-gls.left[6] = {
-  GitBranch = {
-    provider = 'GitBranch',
-    condition = condition.check_git_workspace,
-    highlight = {'#8FBCBB',colors.line_bg,'bold'},
-  }
-}
-
-gls.left[7] = {
-  LeftEnd = {
-    provider = function() return '' end,
-    separator = '',
-    separator_highlight = {colors.bg,colors.line_bg},
-    highlight = {colors.line_bg,colors.line_bg}
-  }
-}
-
- gls.left[8] = {
-  Space = {
-    provider = function () return ' ' end,
-    highlight = {colors.bg, colors.bg}
-  }
- }
-
-
-
-local checkwidth = function()
-  local squeeze_width  = vim.fn.winwidth(0) / 2
-  if squeeze_width > 40 then
-    return true
-  end
-  return false
-end
-
-gls.right[1] = {
-  DiffAdd = {
-    provider = 'DiffAdd',
-    condition = checkwidth,
-    icon = ' ',
-    highlight = {colors.green},
-  }
-}
-gls.right[2] = {
-  DiffModified = {
-    provider = 'DiffModified',
-    condition = checkwidth,
-    icon = ' ',
-    highlight = {colors.orange},
-  }
-}
-gls.right[3] = {
-  DiffRemove = {
-    provider = 'DiffRemove',
-    condition = checkwidth,
-    icon = ' ',
-    highlight = {colors.red},
-  }
-}
-
-gls.right[4] = {
-    TrailingWhiteSpace = {
-     provider = TrailingWhiteSpace,
-     icon = '  ',
-     highlight = {colors.yellow,colors.bg},
-    }
-}
-
-gls.right[5] = {
-  DiagnosticError = {
-    provider = 'DiagnosticError',
-    icon = '  ',
-    highlight = {colors.red,colors.bg}
-  }
-}
-gls.right[6] = {
-  DiagnosticWarn = {
-    provider = 'DiagnosticWarn',
-    icon = '  ',
-    highlight = {colors.yellow,colors.bg},
-  }
-}
-
-gls.right[7] = {
-    CocStatus = {
-     provider = CocStatus,
-     highlight = {colors.green,colors.bg},
-     icon = '  🗱'
-    }
-}
-
-gls.right[8] = {
-  CocFunc = {
-    provider = CocFunc,
-    icon = '  λ ',
-    highlight = {colors.yellow,colors.bg},
-  }
-}
-
-gls.right[9] = {
-  LineInfo = {
-    provider = 'LineColumn',
-    separator = ' | ',
-    separator_highlight = {colors.blue},
-    highlight = {colors.fg},
-  },
-}
-
--- gls.right[4] = {
---   ScrollBar = {
---     provider = 'ScrollBar',
---     highlight = {colors.blue,colors.purple},
---   }
--- }
---
--- gls.right[3] = {
---   Vista = {
---     provider = VistaPlugin,
---     separator = ' ',
---     separator_highlight = {colors.bg,colors.line_bg},
---     highlight = {colors.fg,colors.line_bg,'bold'},
---   }
--- }
-
-gls.short_line_left[1] = {
-  BufferType = {
-    provider = 'FileTypeName',
-    separator = '',
-    condition = has_file_type,
-    separator_highlight = {colors.bg,colors.bg},
-    highlight = {colors.fg,colors.line_bg}
-  }
-}
-
-
-gls.short_line_right[1] = {
-  BufferIcon = {
-    provider= 'BufferIcon',
-    separator = '',
-    condition = has_file_type,
-    separator_highlight = {colors.bg,colors.bg},
-    highlight = {colors.fg,colors.line_bg}
-  }
+    -- whether to show outline guides 
+    -- default: true
+    show_guides = true,
 }
 
 
 -- Bufferline
+require("bufferline").setup{}
+
+
+-- these are all the default values
+require'neuron'.setup {
+    virtual_titles = true,
+    mappings = true,
+    run = nil, -- function to run when in neuron dir
+    neuron_dir = "~/neuron", -- the directory of all of your notes, expanded by default (currently supports only one directory for notes, find a way to detect neuron.dhall to use any directory)
+    leader = "gz", -- the leader key to for all mappings, remember with 'go zettel'
+}

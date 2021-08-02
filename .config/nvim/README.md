@@ -13,7 +13,6 @@
 
 
 ## [todo](#todo)
-- [ ] Set up debugging env for rust 
-- [ ] switch from vimscript to lua
-- [ ] Reorganize structure to match lua 
-- [ ] Switch to native lsp for speed (wait until css lsp)
+- [x] Switch to lua
+- [ ] Refactor config
+- [ ] switch statusline diagnostic 

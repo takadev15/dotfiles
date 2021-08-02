@@ -1,8 +1,8 @@
 local vim = vim
-vim.g.mapleader = ','
+vim.g.mapleader = " "
 
 require('settings')
 require('plugins')
 require('keymaps')
-require('lsp')
-require('treesitter')
+require('git_config')
+require('theme')

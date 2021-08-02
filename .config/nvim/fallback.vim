@@ -19,6 +19,7 @@ Plug 'junegunn/gv.vim'
 Plug 'rhysd/git-messenger.vim'
 Plug 'TimUntersberger/neogit'
 Plug 'lewis6991/gitsigns.nvim'
+Plug 'rhysd/committia.vim'
 
 " Fuzzy finder
 "Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
@@ -32,16 +33,15 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-media-files.nvim'
 
 " Looks and feel
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'Th3Whit3Wolf/one-nvim'
+Plug 'eddyekofo94/gruvbox-flat.nvim'
+Plug 'Shatur95/neovim-ayu'
+"Plug 'theniceboy/nvim-deus'
 "Plug 'glepnir/zephyr-nvim'
-"Plug 'ryanoasis/vim-devicons'
-"Plug 'jsit/toast.vim'
-"Plug 'bluz71/vim-moonfly-colors'
-"Plug 'christianchiarulli/nvcode-color-schemes.vim'
-"Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Dadbod for database plugin
 Plug 'tpope/vim-dadbod'
@@ -67,7 +67,7 @@ Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Vimwiki
-Plug 'vimwiki/vimwiki'
+"Plug 'vimwiki/vimwiki'
 
 " Language-specific plugin
 Plug 'dart-lang/dart-vim-plugin'
@@ -83,23 +83,27 @@ Plug 'gyim/vim-boxdraw'
 " Discord rpc
 Plug 'andweeb/presence.nvim'
 
+" Orgmode
+Plug 'kristijanhusak/orgmode.nvim'
+
 " Misc plugins
 Plug 'liuchengxu/vista.vim'
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'matze/vim-move'
 Plug 'jiangmiao/auto-pairs'
 Plug 'godlygeek/tabular'
-Plug 'Chiel92/vim-autoformat'
 Plug 'tyru/open-browser.vim'
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
 Plug 'b3nj5m1n/kommentary'
+Plug 'tpope/vim-eunuch'
+Plug 'oberblastmeister/neuron.nvim'
+Plug 'simrat39/symbols-outline.nvim'
+Plug 'ishchow/nvim-deardiary'
 
 call plug#end()
 
-let mapleader = ","
-
-
+let mapleader = ' ' 
 "---------------KEYBOARD MAPPING---------------------
 
 map <leader>fd :NvimTreeToggle<CR>
@@ -130,11 +134,10 @@ inoremap <A-h> <esc>i
 map <leader>gs :G<CR>
 
 " telescope.nvim`
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>lf <cmd>Telescope find_files<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>lg <cmd>lua require('telescope.builtin').live_grep()<cr>
 
 
 " ---------------GENERAL SETTINGS--------------------
@@ -179,7 +182,6 @@ syntax on
 let $FZF_DEFAULT_COMMAND = 'rg'
 "--------------------THEME----------------------- 
 set termguicolors
-colorscheme one-nvim
 highlight Normal guibg=NONE
 highlight NonText guibg=NONE
 highlight SignColumn ctermbg=NONE guibg=NONE
@@ -263,6 +265,9 @@ let g:db_ui_save_location = '~/Queries'
 
 "================Vimspector====================
 let g:vimspector_enable_mappings = 'HUMAN'
+
+"================Nvim-presence=================
+let g:presence_main_image        = "file"
 
 "================Vim-Move======================
 let g:move_key_modifier = 'A-S'
@@ -397,7 +402,6 @@ let g:coc_global_extensions = [
  \ 'coc-json',
  \ 'coc-vimlsp',
  \ 'coc-sql',
- \ 'coc-clangd',
  \ 'coc-sh',
  \ 'coc-pyright',
  \ 'coc-texlab',
@@ -510,7 +514,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <space>d  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
 nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.
@@ -554,13 +558,31 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   highlight = {
     enable = true,              -- false will disable the whole extension
-    disable = { "c" },  -- list of language that will be disabled
+    disable = {  },  -- list of language that will be disabled
   },
+require('telescope').load_extension('media_files')
 }
 EOF
+
+let g:committia_hooks = {}
+function! g:committia_hooks.edit_open(info)
+    " Additional settings
+    setlocal spell
+
+    " If no commit message, start with insert mode
+    if a:info.vcs ==# 'git' && getline(1) ==# ''
+        startinsert
+    endif
+
+    " Scroll the diff window from insert mode
+    " Map <C-n> and <C-p>
+    imap <buffer><C-n> <Plug>(committia-scroll-diff-down-half)
+    imap <buffer><C-p> <Plug>(committia-scroll-diff-up-half)
+endfunction
+
 
 
 "============= Load File ===================
 "source ~/.config/nvim/statusline.lua
 luafile $HOME/.config/nvim/lua/theme.lua
-luafile $HOME/.config/nvim/lua/plug.lua
+luafile $HOME/.config/nvim/lua/temp.lua
