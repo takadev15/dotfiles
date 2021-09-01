@@ -41,6 +41,7 @@ return require('packer').startup(function(use)
   use {"ray-x/lsp_signature.nvim"}
   use {"nvim-lua/lsp_extensions.nvim"}
   use {'simrat39/symbols-outline.nvim'}
+  use {'nvim-lua/lsp-status.nvim'}
   use {'neovim/nvim-lspconfig',
         config = function()
           require("lsp")
@@ -49,11 +50,15 @@ return require('packer').startup(function(use)
 
 
   -- Completion
-  use{ "onsails/lspkind-nvim"}
-  use{ "windwp/nvim-autopairs"}
-  use{ "hrsh7th/vim-vsnip", requires = "hrsh7th/vim-vsnip-integ", after = "nvim-compe" }
+  use{"onsails/lspkind-nvim"}
+  use{"windwp/nvim-autopairs"}
+  use{"hrsh7th/vim-vsnip"}
+  use{"hrsh7th/vim-vsnip-integ"}
+  use{"hrsh7th/cmp-nvim-lsp" }
+  use{"hrsh7th/cmp-path" }
+  use{"hrsh7th/cmp-vsnip" }
   use{
-    "hrsh7th/nvim-compe",
+    "hrsh7th/nvim-cmp",
     config = function()
       require("lsp.comp")
     end,
@@ -72,6 +77,15 @@ return require('packer').startup(function(use)
        require("treesitter")
      end,
   }
+  use {
+      "danymat/neogen",
+      requires = "nvim-treesitter/nvim-treesitter",
+      config = function()
+          require('neogen').setup {
+              enabled = true
+          }
+      end,
+  }
 
   -- Fuzzy finder
   use {'nvim-telescope/telescope.nvim',
@@ -81,6 +95,7 @@ return require('packer').startup(function(use)
       'nvim-telescope/telescope-fzy-native.nvim'
     }
   }
+  use {'nvim-telescope/telescope-media-files.nvim'}
 
   -- Theme and feel
   use {'eddyekofo94/gruvbox-flat.nvim'}
@@ -114,8 +129,18 @@ return require('packer').startup(function(use)
   use {'previm/previm'}
   use {'gyim/vim-boxdraw'}
 
+  -- Startup Improvement
+  use {
+    'lewis6991/impatient.nvim',
+  }
+  use {
+    'glepnir/dashboard-nvim',
+    config = function()
+      require("looks.dashboard")
+    end,
+  }
+
   -- Miscellaneous
-  use {'andweeb/presence.nvim'}
   use {'yuttie/comfortable-motion.vim'}
   use {'matze/vim-move'}
   use {'jiangmiao/auto-pairs'}
@@ -123,10 +148,26 @@ return require('packer').startup(function(use)
   use {'Chiel92/vim-autoformat'}
   use {'tyru/open-browser.vim'}
   use {'mattn/emmet-vim'}
-  use {'mhinz/vim-startify'}
   use {'b3nj5m1n/kommentary'}
   use {'machakann/vim-sandwich'}
   use {'oberblastmeister/neuron.nvim'}
+  use {
+    'andweeb/presence.nvim',
+    config = function()
+      require("looks.rpc")
+    end,
+  }
+  use {"elianiva/telescope-npm.nvim"}
+  use {'lukas-reineke/indent-blankline.nvim'}
+  use{
+    'vhyrro/neorg',
+    branch = "unstable",
+    requires = 'vhyrro/neorg-telescope',
+    config = function()
+      require("norg")
+    end,
+  }
+
 
   -- Debugging
   use {'mfussenegger/nvim-dap',

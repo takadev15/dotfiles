@@ -13,7 +13,6 @@ gmap("n", "<leader>gcl", "<cmd>:diffget //3<CR>")
 
 -- gitsigns
 require("gitsigns").setup({
-  ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   signs = {
     add = { hl = "DiffAdd", text = "│" },
     change = { hl = "DiffChange", text = "│" },

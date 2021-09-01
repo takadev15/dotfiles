@@ -1,4 +1,3 @@
-
 -- Statusline
 local gl = require('galaxyline')
 local gls = gl.section
@@ -44,33 +43,11 @@ local function lsp_status(status)
     return shorter_stat
 end
 
-
-local function get_coc_lsp()
-  local status = vim.fn['coc#status']()
-  if not status or status == '' then
-      return ''
-  end
-  return lsp_status(status)
-end
-
-function get_diagnostic_info()
-  if vim.fn.exists('*coc#rpc#start_server') == 1 then
-    return get_coc_lsp()
+local LspStatus = function()
+    if #vim.lsp.get_active_clients() > 0 then
+        return require('lsp-status').status()
     end
-  return ''
-end
-
-local function get_current_func()
-  local has_func, func_name = pcall(vim.fn.nvim_buf_get_var,0,'coc_current_function')
-  if not has_func then return end
-      return func_name
-  end
-
-function get_function_info()
-  if vim.fn.exists('*coc#rpc#start_server') == 1 then
-    return get_current_func()
-    end
-  return ''
+    return ''
 end
 
 local function trailing_whitespace()
@@ -82,8 +59,6 @@ local function trailing_whitespace()
     end
 end
 
-CocStatus = get_diagnostic_info
-CocFunc = get_current_func
 TrailingWhiteSpace = trailing_whitespace
 
 function has_file_type()
@@ -249,6 +224,7 @@ gls.right[5] = {
     highlight = {colors.red,colors.bg}
   }
 }
+
 gls.right[6] = {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
@@ -258,20 +234,20 @@ gls.right[6] = {
 }
 
 gls.right[7] = {
-    CocStatus = {
-     provider = CocStatus,
+    LspStatus = {
+     provider = LspStatus,
      highlight = {colors.green,colors.bg},
      icon = '  🗱'
     }
 }
 
-gls.right[8] = {
+--[[ gls.right[8] = {
   CocFunc = {
     provider = CocFunc,
     icon = '  λ ',
     highlight = {colors.yellow,colors.bg},
   }
-}
+} ]]
 
 gls.right[9] = {
   LineInfo = {

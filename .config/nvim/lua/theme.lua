@@ -34,6 +34,14 @@ local opts = {
 -- Bufferline
 require("bufferline").setup{}
 
+-- Indentation
+vim.opt.listchars = {
+}
+require("indent_blankline").setup {
+    show_end_of_line = true,
+    filetype_exclude = { "help", "terminal", "dashboard", "packer" },
+    buftype_exclude = {"terminal", " "}
+}
 
 -- these are all the default values
 require'neuron'.setup {

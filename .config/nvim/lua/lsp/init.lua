@@ -1,11 +1,11 @@
 local lsp = vim.lsp
 local protocol = require("vim.lsp.protocol")
 local nvim_lsp = require("lspconfig")
+local lsp_status = require("lsp-status")
 
 local bmap = function(type, key, value)
   vim.api.nvim_buf_set_keymap(0, type, key, value, { noremap = true, silent = true })
 end
-
 
 
 -- LSP default override
@@ -22,6 +22,13 @@ lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_pub
   update_in_insert = true,
   underline = true,
 })
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  require('lsp_extensions.workspace.diagnostic').handler, {
+    signs = {
+      severity_limit = "Warning",
+    }
+  }
+)
 
 -- Custom Capabilities
 local custom_capabilities = protocol.make_client_capabilities()
@@ -60,8 +67,33 @@ local custom_attach = function(client)
     bmap("n", "<leader>sf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>")
   end
 
-  -- LSP Custom Label using lspkind.nvim
-  require("lspkind").init()
+  -- Register the process handler
+  lsp_status.register_progress()
+
+  -- Cmp-lsp init
+  require("cmp_nvim_lsp").setup()
+
+  -- LSP Signature
+
+  -- LSP Outline Symbols
+  bmap("n", "<leader>ss", "<cmd>SymbolsOutline<CR>")
+  vim.g.symbols_outline = {
+    highlight_hovered_item = true,
+    show_guides = true,
+    position = "right",
+    keymaps = {
+      close = "<Esc>",
+      goto_location = "<Cr>",
+      focus_location = "o",
+      hover_symbol = "<K>",
+      rename_symbol = "r",
+      code_actions = "a",
+    },
+    lsp_blacklist = { "texlab", "dartls" },
+  }
+
+  -- set omnifunc
+  vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
 
 end
 
@@ -77,6 +109,8 @@ for _, server in ipairs(default_servers) do
   })
 end
 
+
+-- Language Specific config
 -- Flutter
 require("flutter-tools").setup({
   experimental = {
@@ -103,7 +137,7 @@ require("flutter-tools").setup({
     on_attach = function(client)
       custom_attach(client)
       require("telescope").load_extension("flutter")
-      bmap("n", "<leader>ss", "<cmd>FlutterOutline<CR>")
+      bmap("n", "<leader>ss", "<cmd>FlutterOutlineToggle<CR>")
     end,
     capabilities = custom_capabilities,
     settings = {
@@ -113,8 +147,35 @@ require("flutter-tools").setup({
   },
 })
 
+-- Gopls
+nvim_lsp.gopls.setup{
+  on_attach = function(client)
+    custom_attach(client)
+    require("go").setup({
+      goimport = "gofumports",
+      gofmt = "gofumpt",
+      max_len = 120,
+      transform = false,
+      test_template = "",
+      test_template_dir = "",
+      comment_placeholder = "",
+      verbose = false,
+    })
+    bmap("n", "<leader>Gd", "<cmd>GoCmt<CR>")
+    bmap("n", "<leader>Gl", "<cmd>GoLint<CR>")
+    bmap("n", "<leader>Gf", '<cmd>lua require"go.format".gofmt()<CR>')
+    bmap("n", "<leader>Gat", "<cmd>GoAddTag<CR>")
+    bmap("n", "<leader>Grt", "<cmd>GoRmTag<CR>")
+    require "lsp_signature".on_attach()
+  end,
+  capabilities = custom_capabilities,
+  }
+
+-- Tailwindcss lsp
+nvim_lsp.tailwindcss.setup{}
+
 -- Sumneko-Lua
-local luadev = require("lua-dev").setup({
+local luadev = require("lua-dev").setup{
   library = {
     vimruntime = true,
     types = true,
@@ -125,5 +186,7 @@ local luadev = require("lua-dev").setup({
     on_attach = custom_attach,
     capabilities = custom_capabilities,
   },
-})
+}
 nvim_lsp.sumneko_lua.setup(luadev)
+
+

@@ -1,3 +1,9 @@
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zsh_history
+# Use vim keybinding
+bindkey -v
 
 # Set up the prompt
 
@@ -7,19 +13,35 @@ prompt adam1
 
 setopt histignorealldups sharehistory
 
-# Use emacs keybindings even if our EDITOR is set to vi
-bindkey -e
-
-# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-HISTSIZE=1000
-SAVEHIST=1000
-HISTFILE=~/.zsh_history
-
 # Use modern completion system
 autoload -Uz compinit
 compinit
 
+### Added by Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+fi
 
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zinit-zsh/z-a-rust \
+    zinit-zsh/z-a-as-monitor \
+    zinit-zsh/z-a-patch-dl \
+    zinit-zsh/z-a-bin-gem-node
+
+### End of Zinit's installer chunk
+
+
+## zinit plugin config
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle ':completion:*' format 'Completing %d'
@@ -34,12 +56,12 @@ zstyle ':completion:*' menu select=long
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
-
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+## syntax highliting and auto-suggestion
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # NNN
@@ -49,21 +71,6 @@ export LC_COLLATE="C"
 # Cscope
 export CSCOPE_EDITOR=`which nvim`
 
-# JenV path
-export JENV_ROOT="${JENV_ROOT:=${HOME}/.jenv}"
-if ! type jenv > /dev/null && [ -f "${JENV_ROOT}/bin/jenv" ]; then
-    export PATH="${JENV_ROOT}/bin:${PATH}"
-    export JAVA_OPTS=""
-fi
-
-if type jenv > /dev/null; then
-    export PATH="${JENV_ROOT}/bin:${JENV_ROOT}/shims:${PATH}"
-    function jenv() {
-        unset -f jenv
-        eval "$(jenv init -)"
-        jenv $@
-    }
-fi
 
 # Preserve MANPATH if you already defined it somewhere in your config.
 # Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
@@ -116,19 +123,20 @@ alias lt="exa --tree --icons --level=3"
 # Python venv 
 alias activate="source env/bin/activate"
 
-# project's directory
+
+# change directory
 alias pdir="z ~/dir/data/project"
 alias osdir="z ~/dir/data/project/os"
 # alias mobdir="z ~/dir/data/project/mobile/testapp"
 alias mdir="z ~/dir/data/Documents/materi"
 alias note="z ~/dir/data/note/"
 alias zz="z .."
-
 # Try zoxide 
 eval "$(zoxide init zsh)"
 
+
 # source zshrc
-alias reload="source ~/.zshrc"
+alias reload="source ~/.zshrc \ zsh"
 
 # clear
 alias cls="clear"
@@ -137,15 +145,15 @@ alias cls="clear"
 alias brght="sudo chmod 577 /sys/class/backlight/amdgpu_bl0/brightness"
 
 # Flutter SDK
-export PATH="/home/taka15/dev/flutter/flutter/bin/:$PATH"
+export PATH=$PATH:$HOME/.sdk_dir/flutter/bin
+export CHROME_EXECUTABLE=/usr/bin/brave
 
 # Android SDK
-export ANDROID_SDK_ROOT="/home/taka15/dev/sdk/cmdline-tools"
-export ANDROID_HOME="/home/taka15/dev/"
-export PATH="$ANDROID_HOME/tools:$PATH" 
-export PATH="$ANDROID_HOME/emulator:$PATH"
-export PATH="$ANDROID_HOME/platform-tools/:$PATH"
-export PATH="$ANDROID_HOME/tools/bin/:$PATH"
+export ANDROID_HOME=$HOME/.sdk_dir/android
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools/
+export PATH=$PATH:$ANDROID_HOME/build-tools/
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 
 # yarn command
 export PATH="/home/taka15/.yarn/bin:$PATH"
@@ -155,36 +163,41 @@ export PATH="~/.npm-global/bin:$PATH"
 export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
 
+# Golang
+export GOPATH=$HOME/go
+export PATH="$GOPATH/bin:$PATH"
+
+# Rust
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # fnm
 export PATH="/home/taka15/.fnm:$PATH"
-eval "`fnm env`"
+eval "$(fnm env)"
+
 export PATH="/home/taka15/.config/vifm/scripts/:$PATH"
 
-
+# starship
 eval "$(starship init zsh)"
 
 
-### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+# Nix 
+if [ -e /home/taka15/.nix-profile/etc/profile.d/nix.sh ]; then . /home/taka15/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+# JenV path
+export JENV_ROOT="${JENV_ROOT:=${HOME}/.jenv}"
+if ! type jenv > /dev/null && [ -f "${JENV_ROOT}/bin/jenv" ]; then
+  export PATH="${JENV_ROOT}/bin:${PATH}"
+  export JAVA_OPTS=""
 fi
 
-source "$HOME/.zinit/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
+if type jenv > /dev/null; then
+  export PATH="${JENV_ROOT}/bin:${JENV_ROOT}/shims:${PATH}"
+  function jenv() {
+    unset -f jenv
+    eval "$(jenv init -)"
+    jenv $@
+  }
+fi
 
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zinit-zsh/z-a-rust \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-bin-gem-node
-
-### End of Zinit's installer chunk
-if [ -e /home/taka15/.nix-profile/etc/profile.d/nix.sh ]; then . /home/taka15/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+# export PATH="$HOME/.jenv/bin:$PATH"
+# eval "$(jenv init -)"

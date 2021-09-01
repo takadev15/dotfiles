@@ -2,8 +2,27 @@
 -- #####        Treesitter         #####
 -- #####################################
 
+local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
+
+parser_configs.norg = {
+  install_info ={
+    url = "https://github.com/vhyrro/tree-sitter-norg",
+    files = {"src/parser.c"},
+    branch = "main",
+  },
+}
+
+parser_configs.http = {
+  install_info = {
+    url = "https://github.com/NTBBloodbath/tree-sitter-http",
+    files = { "src/parser.c" },
+    branch = "main",
+  },
+}
+
 require("nvim-treesitter.configs").setup {
-  ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = {"norg", "http"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+
   highlight = {
     enable = true,              -- false will disable the whole extension   
     use_languagetree = true,

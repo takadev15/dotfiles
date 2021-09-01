@@ -1,31 +1,10 @@
 local set = vim.g
-local cmd = vim.cmd
-
---Vsnip Keymap
-cmd([[imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>']])
-cmd([[smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>']])
-
-cmd([[imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])
-cmd([[smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])
-
-cmd([[imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>']])
-cmd([[smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>']])
-cmd([[imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>']])
-cmd([[smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>']])
-
-cmd([[nmap s <Plug>(vsnip-select-text)]])
-cmd([[xmap s <Plug>(vsnip-select-text)]])
-cmd([[nmap S <Plug>(vsnip-cut-text)]])
-cmd([[xmap S <Plug>(vsnip-cut-text)]])
+local cmp = require("cmp")
+local neogen = require("neogen")
+local npairs = require("nvim-autopairs")
 
 -- Snippets location
 set.vsnip_snippet_dir = "~/.config/nvim/snippets"
-
--- Remove <CR> keybinds
-set.completion_confirm_key = ""
-
-cmd([[inoremap <silent><expr> <C-j>     compe#scroll({ 'delta': +2 })]])
-cmd([[inoremap <silent><expr> <C-k>     compe#scroll({ 'delta': -2 })]])
 
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -36,58 +15,105 @@ local check_back_space = function()
   return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
 end
 
--- Use (s-)tab to:
---- move to prev/next item in completion menuone
---- jump to prev/next snippet's placeholder
-_G.tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t("<C-n>")
-  elseif vim.fn.call("vsnip#available", { 1 }) == 1 then
-    return t("<Plug>(vsnip-expand-or-jump)")
-  elseif check_back_space() then
-    return t("<Tab>")
-  else
-    return vim.fn["compe#complete"]()
-  end
-end
-_G.s_tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t("<C-p>")
-  elseif vim.fn.call("vsnip#jumpable", { -1 }) == 1 then
-    return t("<Plug>(vsnip-jump-prev)")
-  else
-    return t("<S-Tab>")
-  end
-end
-
-vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", { expr = true })
-vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", { expr = true })
-vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
-vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
-
+local item_kinds = {
+  Text = "",
+  Method = "",
+  Function = "ƒ",
+  Constructor = "",
+  Field = "識",
+  Variable = "",
+  Class = "",
+  Interface = "ﰮ",
+  Module = "",
+  Property = "",
+  Unit = "",
+  Value = "",
+  Enum = "了",
+  Keyword = "",
+  Snippet = "",
+  Color = "",
+  File = "",
+  Reference = "渚",
+  Folder = "",
+  Constant = "",
+  Struct = "",
+  Event = "鬒",
+  Operator = "\u{03a8}",
+  TypeParameter = "",
+}
 
 -- compe setup
-require'compe'.setup ({
-  enabled = true,
-  autocomplete = true,
-  debug = false,
-  min_length = 1,
-  preselect = 'enable',
-  throttle_time = 80,
-  source_timeout = 200,
-  resolve_timeout = 800,
-  incomplete_delay = 400,
-  max_abbr_width = 100,
-  max_kind_width = 100,
-  max_menu_width = 100,
-  source = {
-    path = true,
-    buffer = true,
-    calc = true,
-    nvim_lsp = true,
-    nvim_lua = true,
-    vsnip = true,
-    ultisnips = true,
-    luasnip = true,
+cmp.setup{
+  completion = {
+    keyword_length = 1,
   },
-})
+  formatting = {
+    format = function(_, vim_item)
+      vim_item.kind = item_kinds[vim_item.kind]
+      return vim_item
+    end,
+  },
+  mapping = {
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(t("<C-n>"), "n")
+      elseif neogen.jumpable() then
+        vim.fn.feedkeys(t("<cmd>lua require('neogen').jump_next()<CR>"), "")
+      elseif vim.fn.call("vsnip#available", { 1 }) == 1 then
+        return vim.fn.feedkeys(t("<Plug>(vsnip-expand-or-jump)"), "")
+      elseif check_back_space() then
+        vim.fn.feedkeys(t("<Tab>"), "n")
+      else
+        fallback()
+      end
+    end, {
+      "i",
+      "s",
+    }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(t("<C-p>"), "n")
+      elseif vim.fn.call("vsnip#jumpable", { -1 }) == 1 then
+        vim.fn.feedkeys(t("<Plug>(vsnip-jump-prev)"), "")
+      else
+        fallback()
+      end
+    end, {
+      "i",
+      "s",
+    }),
+    ["<C-k>"] = cmp.mapping.scroll_docs(2),
+    ["<C-j>"] = cmp.mapping.scroll_docs(-2),
+    ["<CR>"] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = false,
+    }),
+  },
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  sources = {
+    { name = "vsnip" },
+    { name = "nvim_lsp" },
+    { name = "neorg" },
+    { name = "path" },
+  },
+}
+
+npairs.setup{
+  disable_filetype = { "TelescopePrompt" },
+  enable_moveright = true,
+  enable_afterquota = true,
+  enable_check_bracket_line = true,
+  check_ts = true,
+}
+
+-- you need setup cmp first put this after cmp.setup()
+require("nvim-autopairs.completion.cmp").setup{
+  map_cr = true, --  map <CR> on insert mode
+  map_complete = true, -- it will auto insert `(` after select function or method item
+  auto_select = true -- automatically select the first item
+}
+
