@@ -12,6 +12,7 @@ end
 lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = "rounded",
 })
+
 lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
   signs = {
     severity_limit = "Warning",
@@ -109,6 +110,8 @@ for _, server in ipairs(default_servers) do
   })
 end
 
+
+-- TODO: refactor language specific plugins
 
 -- Language Specific config
 -- Flutter

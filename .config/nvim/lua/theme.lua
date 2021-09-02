@@ -31,8 +31,6 @@ local opts = {
 }
 
 
--- Bufferline
-require("bufferline").setup{}
 
 -- Indentation
 vim.opt.listchars = {

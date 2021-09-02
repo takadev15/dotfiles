@@ -90,16 +90,21 @@ return require('packer').startup(function(use)
   -- Fuzzy finder
   use {'nvim-telescope/telescope.nvim',
     requires = {
-      'nvim-lua/popup.nvim',
       'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope-fzy-native.nvim'
+      'nvim-telescope/telescope-bibtex.nvim',
+      {'nvim-telescope/telescope-fzf-native.nvim', run = "make"},
     }
   }
   use {'nvim-telescope/telescope-media-files.nvim'}
 
   -- Theme and feel
   use {'eddyekofo94/gruvbox-flat.nvim'}
-  use {'akinsho/nvim-bufferline.lua'}
+  use {
+    'akinsho/nvim-bufferline.lua',
+    config = function ()
+      require("looks.bufferline")
+    end,
+  }
   use {"kyazdani42/nvim-web-devicons"}
   use {
     'glepnir/galaxyline.nvim',
@@ -151,12 +156,6 @@ return require('packer').startup(function(use)
   use {'b3nj5m1n/kommentary'}
   use {'machakann/vim-sandwich'}
   use {'oberblastmeister/neuron.nvim'}
-  use {
-    'andweeb/presence.nvim',
-    config = function()
-      require("looks.rpc")
-    end,
-  }
   use {"elianiva/telescope-npm.nvim"}
   use {'lukas-reineke/indent-blankline.nvim'}
   use{
@@ -166,6 +165,19 @@ return require('packer').startup(function(use)
     config = function()
       require("norg")
     end,
+    after = "nvim-treesitter",
+  }
+  use {
+    'andweeb/presence.nvim',
+    config = function()
+      require("looks.rpc")
+    end,
+  }
+  use {
+    "folke/todo-comments.nvim",
+    config = function ()
+      require("looks.todo-comments")
+    end
   }
 
 
