@@ -4,6 +4,8 @@ local action = require("telescope.actions")
 telescope.load_extension("media_files")
 telescope.load_extension("bibtex")
 telescope.load_extension("fzf")
+telescope.load_extension("project")
+-- telescope.load_extension("dotfiles")
 
 telescope.setup{
   defaults = {
@@ -62,6 +64,7 @@ telescope.setup{
         ["<esc>"] = action.close,
       },
     },
+  },
     pickers = {
       find_files = {
         layout_strategy = "flex",
@@ -91,5 +94,4 @@ telescope.setup{
         layout_config = { height = 13 },
       },
     },
-  },
-}
+  }

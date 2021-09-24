@@ -19,8 +19,7 @@ cmd[[map sl <C-w>l]]
 map('n','<leader>t',[[<cmd>enew<CR>]])
 map('n','<S-Tab>',[[<cmd>BufferLineCyclePrev<CR>]])
 map('n','<Tab>',[[<cmd>BufferLineCycleNext<CR>]])
-map('n','<leader>q',[[<cmd>bd<CR>]])
-map("n", "bd", "<cmd>bdelete! %<CR>")
+map("n", '<leader>q', "<cmd>bdelete! %<CR>")
 
 -- resizing vim windows
 map('n','<A-k>',[[<cmd>resize +2<CR>]])
@@ -37,13 +36,9 @@ map ('i','<A-h>',[[<esc>li]])
 -- #####      Plugins keymap     #####
 -- ###################################
 
-
--- vista
-map ('n','<F1>',[[<cmd>Vista!!<CR>]])
-
 -- Version control
-map('n','<leader>gs','<cmd>lua require("neogit").status.create("split")<CR>')
--- map('n', '<leader>gs', [[G<CR>]])
+map('n','<leader>g','<cmd>lua require("neogit").status.create("split")<CR>')
+map('n', '<leader>gs', [[G<CR>]])
 
 -- Telescope
 map("n", "<leader>lf", "<cmd>Telescope find_files<CR>")
@@ -54,4 +49,6 @@ map("n", "<leader>lH", "<cmd>Telescope help_tags<CR>")
 map("n", "<leader>la", "<cmd>Telescope media_files<CR>")
 
 
+vim.cmd("nmap <leader>rr <Plug>RestNvim")
+vim.cmd("nmap <leader>rp <Plug>RestNvimPreview")
 

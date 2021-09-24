@@ -1,18 +1,4 @@
-local vim = vim
-local set = vim.g
-local cmd = vim.cmd
-local gmap = function(type, key, value)
-  vim.api.nvim_set_keymap(type, key, value, { noremap = true, silent = true })
-end
-
--- Fugitives!!
-gmap("n", "<leader>gs", "<cmd>:Git<CR>")
-gmap("n", "<leader>gl", "<cmd>:Git log<CR>")
-gmap("n", "<leader>gch", "<cmd>:diffget //2<CR>")
-gmap("n", "<leader>gcl", "<cmd>:diffget //3<CR>")
-
--- gitsigns
-require("gitsigns").setup({
+require("gitsigns").setup{
   signs = {
     add = { hl = "DiffAdd", text = "│" },
     change = { hl = "DiffChange", text = "│" },
@@ -33,16 +19,13 @@ require("gitsigns").setup({
     ["o ih"] = ':<C-U>lua require"gitsigns".select_hunk()<CR>',
     ["x ih"] = ':<C-U>lua require"gitsigns".select_hunk()<CR>',
   },
-  watch_index = {
+  watch_gitdir = {
     interval = 1000,
   },
   sign_priority = 6,
   update_debounce = 250,
   status_formatter = nil,
-  use_decoration_api = true,
-  use_internal_diff = true,
-})
-
--- Neogit
-local neogit = require('neogit')
-neogit.setup {}
+  diff_opts = {
+    internal = true,
+  },
+}

@@ -1,6 +1,5 @@
 local config = require("deardiary.config")
 
-require('symbols-outline').setup(opts)
 
 
 config.journals = {

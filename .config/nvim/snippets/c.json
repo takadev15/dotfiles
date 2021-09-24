@@ -1,0 +1,20 @@
+{
+  "include": {
+    "prefix": ["#inc<"],
+    "body": [
+      "#include <${1:text}>${0}"
+    ],
+    "description": "Code snippet for #include < >"
+  },
+  "Main function template": {
+    "prefix": ["main"],
+    "body": [
+      "int main (int argc, char *argv[])",
+      "{",
+      "\t${0}",
+      "\treturn 0;",
+      "}"
+    ],
+    "description": "A standard main function for a C program"
+  },
+}

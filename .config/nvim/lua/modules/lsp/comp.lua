@@ -54,7 +54,7 @@ cmp.setup{
     end,
   },
   mapping = {
-    ["<Tab>"] = cmp.mapping(function(fallback)
+    ["<TAB>"] = cmp.mapping(function(fallback)
       if vim.fn.pumvisible() == 1 then
         vim.fn.feedkeys(t("<C-n>"), "n")
       elseif neogen.jumpable() then
@@ -70,7 +70,7 @@ cmp.setup{
       "i",
       "s",
     }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
+    ["<S-TAB>"] = cmp.mapping(function(fallback)
       if vim.fn.pumvisible() == 1 then
         vim.fn.feedkeys(t("<C-p>"), "n")
       elseif vim.fn.call("vsnip#jumpable", { -1 }) == 1 then

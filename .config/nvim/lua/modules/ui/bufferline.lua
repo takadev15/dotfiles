@@ -43,10 +43,10 @@ require("bufferline").setup{
           local lsp_error = require("lsp_extensions.workspace.diagnostic").get_count(0, "Error")
           local lsp_warning = require("lsp_extensions.workspace.diagnostic").get_count(0, "Warning")
           if lsp_error ~= 0 then
-            table.insert(result, { text = "  " .. lsp_error .. " ", guifg = "#222222", guibg = "#EC5F67" })
+            table.insert(result, { text = "  " .. lsp_error .. " ", guifg = "#FF4151", guibg = "#090B10" })
           end
           if lsp_warning ~= 0 then
-            table.insert(result, { text = "  " .. lsp_warning .. " ", guifg = "#222222", guibg = "#FABD2F" })
+            table.insert(result, { text = "  " .. lsp_warning .. " ", guifg = "#F2F27A", guibg = "#090B10" })
           end
   
           -- LSP-specific options
@@ -55,8 +55,8 @@ require("bufferline").setup{
               if vim.g.flutter_tools_decorations.app_version ~= nil then
                 table.insert(result, {
                   text = " " .. vim.g.flutter_tools_decorations.app_version .. " ",
-                  guifg = "#222222",
-                  guibg = " #59B3EF",
+                  guifg = "#87D3F8",
+                  guibg = "#090B10",
                 })
               end
             end
@@ -66,7 +66,7 @@ require("bufferline").setup{
           local git_status = vim.fn["fugitive#statusline"]()
           if git_status ~= "" then
             git_status = git_status:match("%((.*)%)")
-            table.insert(result, { text = "  " .. git_status .. " ", guifg = "#222222", guibg = "#FF8800" })
+            table.insert(result, { text = "  " .. git_status .. " ", guifg = "#f39c12", guibg = "#090B10" })
           end
   
           return result

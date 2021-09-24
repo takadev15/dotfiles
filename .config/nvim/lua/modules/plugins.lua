@@ -1,5 +1,5 @@
 -- #############################################
--- ########## To load the plugins ##############
+-- ########## load all the plugins ##############
 -- #############################################
 
 local vim = vim
@@ -31,10 +31,14 @@ if not packer_exists then
 end
 
 -- Plugins list
+-- TODO: Refactor the positioning of plugins
 return require('packer').startup(function(use)
 
   -- Plugin Manager
   use {'wbthomason/packer.nvim'}
+
+  -- stdlib
+  use {'nvim-lua/plenary.nvim'}
 
   -- LSP Plugins
   use {'glepnir/lspsaga.nvim'}
@@ -44,14 +48,14 @@ return require('packer').startup(function(use)
   use {'nvim-lua/lsp-status.nvim'}
   use {'neovim/nvim-lspconfig',
         config = function()
-          require("lsp")
+          require("modules.lsp")
         end,
       }
 
 
   -- Completion
-  use{"onsails/lspkind-nvim"}
   use{"windwp/nvim-autopairs"}
+  use{"windwp/nvim-ts-autotag"}
   use{"hrsh7th/vim-vsnip"}
   use{"hrsh7th/vim-vsnip-integ"}
   use{"hrsh7th/cmp-nvim-lsp" }
@@ -60,7 +64,7 @@ return require('packer').startup(function(use)
   use{
     "hrsh7th/nvim-cmp",
     config = function()
-      require("lsp.comp")
+      require("modules.lsp.comp")
     end,
   }
 
@@ -74,9 +78,10 @@ return require('packer').startup(function(use)
     },
      run = ":TSUpdate",
      config = function()
-       require("treesitter")
+       require("modules.treesitter")
      end,
   }
+  use {"SmiteshP/nvim-gps"}
   use {
       "danymat/neogen",
       requires = "nvim-treesitter/nvim-treesitter",
@@ -96,53 +101,125 @@ return require('packer').startup(function(use)
     }
   }
   use {'nvim-telescope/telescope-media-files.nvim'}
+  use {'nvim-telescope/telescope-project.nvim'}
 
-  -- Theme and feel
-  use {'eddyekofo94/gruvbox-flat.nvim'}
+  -- User Interface
+  -- TODO: Complete feline config and switch
+  use {'marko-cerovac/material.nvim'}
+  use {'CantoroMC/ayu-nvim'}
+  use {"kyazdani42/nvim-web-devicons"}
+  --[[ use {
+    'GustavoKatel/sidebar.nvim',
+    config = function ()
+      require("ui.sidebar")
+    end,
+  } ]]
+  use {
+    'glepnir/dashboard-nvim',
+    config = function()
+      require("modules.ui.dashboard")
+    end,
+  }
   use {
     'akinsho/nvim-bufferline.lua',
     config = function ()
-      require("looks.bufferline")
+      require("modules.ui.bufferline")
     end,
   }
-  use {"kyazdani42/nvim-web-devicons"}
+  use{
+    "famiu/feline.nvim",
+    requires = { "SmiteshP/nvim-gps" },
+    --[[ config = function()
+      vim.cmd("PackerLoad lsp-status.nvim")
+      require("ui.feline")
+    end, ]]
+  }
   use {
     'glepnir/galaxyline.nvim',
     config = function()
-      require("looks.galaxyline")
+      require("modules.ui.galaxyline")
     end,
   }
   use {
     "kyazdani42/nvim-tree.lua",
     config = function()
-      require("looks.nvim-tree")
+      require("modules.ui.nvim-tree")
     end,
   }
 
   -- Git
   use {'tpope/vim-fugitive'}
   use {'rhysd/git-messenger.vim'}
-  use {'TimUntersberger/neogit'}
   use {'rhysd/committia.vim'}
   use {'ThePrimeagen/git-worktree.nvim'}
-  use {'lewis6991/gitsigns.nvim'}
-
-  -- Languages specific Plugin
-  use {'akinsho/flutter-tools.nvim'}
-  use {'ray-x/go.nvim'}
-  use {"folke/lua-dev.nvim"}
-  use {'previm/previm'}
-  use {'gyim/vim-boxdraw'}
-
-  -- Startup Improvement
   use {
-    'lewis6991/impatient.nvim',
+    'TimUntersberger/neogit',
+    requires = {"sindrets/diffview.nvim"}
   }
   use {
-    'glepnir/dashboard-nvim',
+    'lewis6991/gitsigns.nvim',
+    config = function ()
+      require("modules.git.gitsigns")
+    end
+  }
+
+  -- Debugger
+  use {'mfussenegger/nvim-dap',
+  requires = {
+    'rcarriga/nvim-dap-ui'
+    }
+  }
+  
+  -- Testing and Running code
+  use{
+    "rcarriga/vim-ultest",
+    requires = "vim-test/vim-test",
+    run = ":UpdateRemotePlugins",
+  }
+  use{
+    "skywind3000/asyncrun.vim",
+    requires = { "skywind3000/asynctasks.vim" },
     config = function()
-      require("looks.dashboard")
+      require("modules.misc.async_conf")
     end,
+  }
+
+  -- Languages specific Plugin
+  use {'previm/previm'}
+  use {'akinsho/flutter-tools.nvim'}
+  use {'ray-x/go.nvim'}
+  use {'simrat39/rust-tools.nvim'}
+  use {'folke/lua-dev.nvim'}
+  use {'jose-elias-alvarez/null-ls.nvim'}
+  use {'jose-elias-alvarez/nvim-lsp-ts-utils'}
+  use {
+    'dccsillag/magma-nvim',
+    run = ':UpdateRemotePlugins'
+  }
+  use {
+    'NTBBloodbath/rest.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require("rest-nvim").setup({
+        -- Open request results in a horizontal split
+        result_split_horizontal = false,
+        -- Skip SSL verification, useful for unknown certificates
+        skip_ssl_verification = false,
+        -- Highlight request on run
+        highlight = {
+            enabled = true,
+            timeout = 150,
+        },
+        -- Jump to request line on run
+        jump_to_request = false,
+        })
+        end
+  }
+
+  -- Startup Improvement
+  -- TODO: Remove impatent after neovim/pull/15436 merged
+  use {
+    'lewis6991/impatient.nvim',
   }
 
   -- Miscellaneous
@@ -158,34 +235,45 @@ return require('packer').startup(function(use)
   use {'oberblastmeister/neuron.nvim'}
   use {"elianiva/telescope-npm.nvim"}
   use {'lukas-reineke/indent-blankline.nvim'}
+  use {'tpope/vim-dadbod', requires = { 'kristijanhusak/vim-dadbod-ui' }, ft = "sql"}
+  -- use {'aserowy/tmux.nvim'}
+  use {
+    'norcalli/nvim-colorizer.lua',
+    config = function ()
+      require("colorizer").setup()
+    end,
+  }
   use{
     'vhyrro/neorg',
     branch = "unstable",
     requires = 'vhyrro/neorg-telescope',
     config = function()
-      require("norg")
+      require("modules.misc.neorg")
     end,
     after = "nvim-treesitter",
   }
   use {
     'andweeb/presence.nvim',
     config = function()
-      require("looks.rpc")
+      require("modules.misc.rpc")
     end,
   }
   use {
     "folke/todo-comments.nvim",
     config = function ()
-      require("looks.todo-comments")
+      require("modules.ui.todo-comments")
     end
   }
-
-
-  -- Debugging
-  use {'mfussenegger/nvim-dap',
-  requires = {
-    'rcarriga/nvim-dap-ui'
+  use{
+    "pwntester/octo.nvim",
+    cmd = "Octo",
+    config = function()
+      require("octo").setup{
+        default_remote = {"upsteam", "origin", "main"},
+      }
+    end,
   }
-}
+
+
 
 end)

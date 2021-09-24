@@ -1,3 +1,4 @@
+
 require("neorg").setup{
   load = {
     ["core.defaults"] = {},
@@ -5,6 +6,7 @@ require("neorg").setup{
     ["core.norg.dirman"] = {
       config = {
         workspaces = {
+          default = "~/dir/data",
           personal = "~/dir/data/note/neorg/journal",
           uni = "~/dir/data/note/neorg/class",
         },

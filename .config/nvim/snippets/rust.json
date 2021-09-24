@@ -1,0 +1,12 @@
+{
+  "allow": {
+    "prefix": "allow",
+    "body": ["#![allow(${1})]"],
+    "description": "#![allow(…)]"
+  },
+  "deny": {
+    "prefix": "deny",
+    "body": ["#![deny(${1})]"],
+    "description": "#![deny(…)]"
+  },
+}
