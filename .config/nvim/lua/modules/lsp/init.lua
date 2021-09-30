@@ -30,14 +30,7 @@ lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_pub
 
 -- Custom Capabilities
 local custom_capabilities = protocol.make_client_capabilities()
-custom_capabilities.textDocument.completion.completionItem.snippetSupport = true
-custom_capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    "documentation",
-    "detail",
-    "additionalTextEdits",
-  },
-}
+custom_capabilities = require("cmp_nvim_lsp").update_capabilities(custom_capabilities)
 
 -- Custom attach
 local custom_attach = function(client, bufnr)
@@ -62,20 +55,16 @@ local custom_attach = function(client, bufnr)
   bmap("n", "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>")
   bmap("n", "<leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>")
   bmap("n", "<leader>lq", "<cmd>Telescope lsp_workspace_diagnostics<CR>")
+  bmap("n", "<leader>sf", "<cmd>lua vim.lsp.buf.formatting_sync()<CR>")
 
   if client.name ~= "null_ls" then
     client.resolved_capabilities.document_formatting = false
   end
 
-  --[[ if client.resolved_capabilities.document_formatting then
-    bmap("n", "<leader>sf", "<cmd>lua vim.lsp.buf.formatting()<CR>")
-  elseif client.resolved_capabilities.document_range_formatting then
-    bmap("n", "<leader>sf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>")
-  end ]]
-
   -- Cmp-lsp init
   require("cmp_nvim_lsp").setup()
 
+  -- Until gleipnir back online
   -- LSP Saga
   --[[ require("lspsaga").init_lsp_saga{
     use_saga_diagnostic_sign = false,
@@ -141,6 +130,8 @@ local custom_attach = function(client, bufnr)
 
   -- set omnifunc
   vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
+
+  vim.notify("[" .. client.name .. "] " .. "Language Server Protocol started")
 
 end
 

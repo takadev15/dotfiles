@@ -129,6 +129,9 @@ components.mid.active[1] = {
 }
 
 
+--[[ components.right.active[1] = {
+  provider = 
+} ]]
 
 --[[ feline.setup{
   default_bg = colors.bg,

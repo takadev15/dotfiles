@@ -246,7 +246,16 @@ gls.right[4] = {
     }
 }
 
-gls.right[5] = {
+ gls.right[5] = {
+  Space = {
+    provider = function ()
+     return ' '
+    end,
+    highlight = {colors.bg, colors.bg}
+  }
+ }
+
+gls.right[6] = {
     DiagnosticError = {
      provider = 'DiagnosticError',
      icon = ' ',
@@ -254,7 +263,7 @@ gls.right[5] = {
     }
 }
 
-gls.right[6] = {
+gls.right[7] = {
     DiagnosticWarning = {
      provider = 'DiagnosticWarn',
      icon = ' ',
@@ -262,7 +271,7 @@ gls.right[6] = {
     }
 }
 
-gls.right[7] = {
+gls.right[8] = {
     DiagnosticInfo = {
      provider = 'DiagnosticInfo',
      icon = ' ',
@@ -270,7 +279,7 @@ gls.right[7] = {
     }
 }
 
-gls.right[8] = {
+gls.right[9] = {
   LineInfo = {
     provider = 'LineColumn',
     separator = ' | ',

@@ -33,13 +33,13 @@ require("neorg").setup{
               icon = "◉",
             },
             level_2 = {
-              icon = "◎",
+              icon = " ◎",
             },
             level_3 = {
-              icon = "○",
+              icon = "  ○",
             },
             level_4 = {
-              icon = "∙",
+              icon = "   ∙",
             },
           },
         },

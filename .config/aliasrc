@@ -1,0 +1,43 @@
+# LazyDOck
+alias lzd='lazydocker'
+
+# neovim alias
+# alias nv ="nvim"
+
+# fd 
+alias fd='fdfind'
+
+# exa
+alias ls="exa -l --icons"
+alias la="exa -l --all --icons"
+alias lt="exa --tree --icons --level=3"
+
+# Python venv 
+alias activate="source env/bin/activate"
+
+
+# change directory
+alias pdir="z ~/dir/data/project"
+alias osdir="z ~/dir/data/project/os"
+# alias mobdir="z ~/dir/data/project/mobile/testapp"
+alias mdir="z ~/dir/data/Documents/materi"
+alias note="z ~/dir/data/note/"
+alias zz="z .."
+
+# Try zoxide 
+eval "$(zoxide init zsh)"
+
+# source zshrc
+alias reload="source ~/.zshrc \ zsh"
+
+# clear
+alias cls="clear"
+
+# for brightness
+alias brght="sudo chmod 577 /sys/class/backlight/amdgpu_bl0/brightness"
+
+# Dotfiles management
+alias dots="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+
+# nvim config management
+alias nvcnf="z ~/.config/nvim && nvim"

@@ -2,18 +2,18 @@
 
 > Always WIP
 
+![Screenshot](./screenshot.png)
+
 ## Table Of Content
 
 <!-- vim-markdown-toc GFM -->
 * [list of Plugins](#list-plugins)
 * [What I'm Planning to do in the Future](#todo)
 
-![Screenshot](./screenshot.png)
-
-## [Plugin's List]
+## [Plugin's List](#list-plugins)
 
 * Plugin Manager
-  * Packer.nvim
+  * wbthomason/packer.nvim
 
 * Stdlib
   * nvim-lua/plenary.nvim
@@ -40,17 +40,17 @@
 
 ## [TODO](#todo)
 
-- [x] Switch to lua
-- [ ] Refactor config (80%)
-  - [x] Config wide refactor
-  - [x] Refactor LSP languange specific config
-  - [ ] Refactor plugins.lua
-  - [x] Refactor module (Plugin) specific config
-- [ ] switch statusline to feline
-- [x] add workspace wide diagnostic
-- [ ] snippets
-  - [x] Markdown
-  - [ ] C
-  - [ ] dart
-  - [x] tex
-  - [ ] Golang
+* [x] Switch to lua
+* [ ] Refactor config (95%)
+  * [x] Config wide refactor
+  * [x] Refactor LSP languange specific config
+  * [ ] Refactor plugins.lua
+  * [x] Refactor module (Plugin) specific config
+* [ ] switch statusline to feline
+* [x] add workspace wide diagnostic
+* [ ] snippets
+  * [x] Markdown
+  * [ ] C
+  * [ ] dart
+  * [x] tex
+  * [ ] Golang

@@ -1,0 +1,37 @@
+[user]
+	email = daffa.hp.dh@gmail.com
+	name = Taka
+
+[core]
+  editor = nvim
+  pager = delta
+
+[merge]
+  tool = fugitive
+
+[mergetoool]
+  prompt = true
+
+[mergetool "fugitive"]
+  cmd = nvim -f -c "Gvdiffsplit!" "$MERGED"
+
+[difftool]
+  prompt = false
+
+[diff]
+  tool = vimdiff
+
+[push]
+  default = current
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  features = side-by-side line-numbers decoration
+  whitespace-error-style = 22 reverse
+
+[delta "decorations"]
+  commit-decoration-style = bold yellow box ul
+  file-style = bold yellow ul
+  file-decoration-style = none

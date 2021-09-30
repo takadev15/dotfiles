@@ -1,10 +1,9 @@
-local set = vim.g
 local cmp = require("cmp")
 local neogen = require("neogen")
 local npairs = require("nvim-autopairs")
 
 -- Snippets location
-set.vsnip_snippet_dir = "~/.config/nvim/snippets"
+vim.g.vsnip_snippet_dir = "~/.config/nvim/snippets"
 
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)

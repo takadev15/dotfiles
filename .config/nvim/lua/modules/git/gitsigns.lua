@@ -3,7 +3,7 @@ require("gitsigns").setup{
     add = { hl = "DiffAdd", text = "│" },
     change = { hl = "DiffChange", text = "│" },
     delete = { hl = "DiffDelete", text = "│" },
-    topdelete = { hl = "DiffDelete", text = "│" },
+    topdelete = { hl = "DiffDelete", text = "x" },
     changedelete = { hl = "DiffChange", text = "│" },
   },
   keymaps = {

@@ -5,8 +5,8 @@ HISTFILE=~/.zsh_history
 # Use vim keybinding
 bindkey -v
 
-# Set up the prompt
 
+# Set up the prompt
 autoload -Uz promptinit
 promptinit
 prompt adam1
@@ -92,64 +92,26 @@ export SPICETIFY_INSTALL="/home/taka15/spicetify-cli"
 export PATH="$SPICETIFY_INSTALL:$PATH"
 
 #Pyenv
-export PYENV_ROOT="$HOME/build/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
+# export PYENV_ROOT="$HOME/build/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# if command -v pyenv 1>/dev/null 2>&1; then
+#   eval "$(pyenv init -)"
+# fi
 
 # Fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
-# Dotfiles recovery
-alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-
 # fnm
 export PATH=/home/taka15/.fnm:$PATH
 eval "`fnm env`"
-
-# LazyDOck
-alias lzd='lazydocker'
-
-# fd 
-alias fd='fdfind'
-
-# exa
-alias ls="exa -l --icons"
-alias la="exa -l --all --icons"
-alias lt="exa --tree --icons --level=3"
-
-# Python venv 
-alias activate="source env/bin/activate"
-
-
-# change directory
-alias pdir="z ~/dir/data/project"
-alias osdir="z ~/dir/data/project/os"
-# alias mobdir="z ~/dir/data/project/mobile/testapp"
-alias mdir="z ~/dir/data/Documents/materi"
-alias note="z ~/dir/data/note/"
-alias zz="z .."
-# Try zoxide 
-eval "$(zoxide init zsh)"
-
-
-# source zshrc
-alias reload="source ~/.zshrc \ zsh"
-
-# clear
-alias cls="clear"
-
-# for brightness
-alias brght="sudo chmod 577 /sys/class/backlight/amdgpu_bl0/brightness"
 
 # Flutter SDK
 export PATH=$PATH:$HOME/.sdk_dir/flutter/bin
 export CHROME_EXECUTABLE=/usr/bin/brave
 
 # Android SDK
-export ANDROID_HOME=$HOME/.sdk_dir/android
+export ANDROID_HOME=$HOME/Android/Sdk
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools/
 export PATH=$PATH:$ANDROID_HOME/build-tools/
@@ -201,3 +163,7 @@ fi
 
 # export PATH="$HOME/.jenv/bin:$PATH"
 # eval "$(jenv init -)"
+
+# aliasrc
+source $HOME/.config/aliasrc
+
