@@ -7,11 +7,17 @@ require("neorg").setup{
       config = {
         workspaces = {
           default = "~/dir/data",
-          personal = "~/dir/data/note/neorg/journal",
-          uni = "~/dir/data/note/neorg/class",
+          personal = "~/dir/data/note/journal",
+          uni = "~/dir/data/class",
+          gtd = "~/dir/data/note/todo"
         },
         autodetect = true,
         autochdir = true,
+      },
+    },
+    ["core.gtd.base"] = {
+      config = {
+        workspace = "gtd"
       },
     },
     ["core.norg.completion"] = {

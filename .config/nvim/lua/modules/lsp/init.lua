@@ -1,6 +1,7 @@
 local lsp = vim.lsp
 local protocol = require("vim.lsp.protocol")
 local lsp_status = require("lsp-status")
+vim.notify = require("notify")
 
 
 -- LSP default override

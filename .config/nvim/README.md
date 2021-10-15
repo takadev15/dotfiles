@@ -36,18 +36,19 @@
   * hrsh7th/cmp-path
   * hrsh7th/cmp-vsnip
 
-* Treesitter
+* Treesitter Related
+  * nvim-treesitter/nvim-treesitter
+  * nvim-treesitter/nvim-treesitter-refactor
+  * nvim-treesitter/nvim-treesitter-textobjects
 
 ## [TODO](#todo)
 
-* [x] Switch to lua
 * [ ] Refactor config (95%)
   * [x] Config wide refactor
   * [x] Refactor LSP languange specific config
   * [ ] Refactor plugins.lua
   * [x] Refactor module (Plugin) specific config
 * [ ] switch statusline to feline
-* [x] add workspace wide diagnostic
 * [ ] snippets
   * [x] Markdown
   * [ ] C

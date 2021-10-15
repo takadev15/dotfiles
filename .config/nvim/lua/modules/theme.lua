@@ -1,5 +1,6 @@
 local cmd = vim.api.nvim_command
 local material = require("material")
+local fox = require("nightfox")
 
 
 vim.g.material_style = 'deep ocean'
@@ -9,8 +10,8 @@ material.setup({
     functions = true,
     comments = true,
   },
-	contrast_windows = { -- Specify which windows get the contrasted (darker) background
-		"packer", -- Darker packer background
+contrast_windows = { -- Specify which windows get the contrasted (darker) background
+  "packer", -- Darker packer background
 	},
 })
 vim.cmd[[colorscheme material]]
@@ -55,7 +56,10 @@ vim.opt.listchars = {
 
 require("indent_blankline").setup {
     show_end_of_line = true,
-    filetype_exclude = { "help", "terminal", "dashboard", "packer", "norg", },
+    filetype_exclude = { "help", "terminal", "alpha", "packer", "norg", },
     buftype_exclude = {"terminal", " "}
 }
+
+vim.g.markdown_folding_disabled = 1
+vim.g.markdown_conceal = 1
 

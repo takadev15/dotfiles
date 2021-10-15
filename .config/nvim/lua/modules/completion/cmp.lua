@@ -54,8 +54,10 @@ cmp.setup{
   },
   mapping = {
     ["<TAB>"] = cmp.mapping(function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(t("<C-n>"), "n")
+      --[[ if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(t("<C-n>"), "n") ]]
+      if cmp.visible() then
+        cmp.select_next_item()
       elseif neogen.jumpable() then
         vim.fn.feedkeys(t("<cmd>lua require('neogen').jump_next()<CR>"), "")
       elseif vim.fn.call("vsnip#available", { 1 }) == 1 then
@@ -70,8 +72,10 @@ cmp.setup{
       "s",
     }),
     ["<S-TAB>"] = cmp.mapping(function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(t("<C-p>"), "n")
+      --[[ if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(t("<C-p>"), "n") ]]
+      if cmp.visible() then
+        cmp.select_prev_item()
       elseif vim.fn.call("vsnip#jumpable", { -1 }) == 1 then
         vim.fn.feedkeys(t("<Plug>(vsnip-jump-prev)"), "")
       else

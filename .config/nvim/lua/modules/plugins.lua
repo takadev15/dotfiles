@@ -40,7 +40,7 @@ return require('packer').startup({
     -- stdlib
     use {'nvim-lua/plenary.nvim'}
 
-    -- LSP Plugins
+    -- LSP things
     use {'glepnir/lspsaga.nvim'}
     use {"ray-x/lsp_signature.nvim"}
     use {"nvim-lua/lsp_extensions.nvim"}
@@ -64,23 +64,22 @@ return require('packer').startup({
     use{
       "hrsh7th/nvim-cmp",
       config = function()
-        require("modules.lsp.comp")
+        require("modules.completion.cmp")
       end,
     }
 
     -- Treesitter
-    use{
+    use {
       "nvim-treesitter/nvim-treesitter",
-      requires = {
-        "nvim-treesitter/nvim-treesitter-refactor",
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        "p00f/nvim-ts-rainbow",
-      },
        run = ":TSUpdate",
        config = function()
          require("modules.treesitter")
        end,
     }
+    use {"nvim-treesitter/nvim-treesitter-refactor", requires = "nvim-treesitter"}
+    use {"nvim-treesitter/nvim-treesitter-textobjects", requires = "nvim-treesitter"}
+    use {"p00f/nvim-ts-rainbow", requires = "nvim-treesitter"}
+    use {"nvim-treesitter/playground", requires = "nvim-treesitter"}
     use {"SmiteshP/nvim-gps"}
     use {
         "danymat/neogen",
@@ -102,11 +101,19 @@ return require('packer').startup({
     }
     use {'nvim-telescope/telescope-media-files.nvim'}
     use {'nvim-telescope/telescope-project.nvim'}
+    use {'GustavoKatel/telescope-asynctasks.nvim'}
+    use {
+      'crispgm/telescope-heading.nvim',
+      ft = 'markdown',
+      config = function ()
+        require("telescope").load_extension("heading")
+      end,
+    }
 
     -- User Interface
     -- TODO: Complete feline config and switch
     use {'marko-cerovac/material.nvim'}
-    use {'CantoroMC/ayu-nvim'}
+    use {'EdenEast/nightfox.nvim'}
     use {"kyazdani42/nvim-web-devicons"}
     --[[ use {
       'GustavoKatel/sidebar.nvim',
@@ -115,8 +122,8 @@ return require('packer').startup({
       end,
     } ]]
     use {
-      'glepnir/dashboard-nvim',
-      config = function()
+      'goolord/alpha-nvim',
+      config = function ()
         require("modules.ui.dashboard")
       end,
     }
@@ -126,20 +133,23 @@ return require('packer').startup({
         require("modules.ui.bufferline")
       end,
     }
-    use{
+    --[[ use{
       "famiu/feline.nvim",
       requires = { "SmiteshP/nvim-gps" },
-      --[[ config = function()
-        vim.cmd("PackerLoad lsp-status.nvim")
-        require("ui.feline")
-      end, ]]
-    }
-    use {
-      'glepnir/galaxyline.nvim',
       config = function()
-        require("modules.ui.galaxyline")
+        vim.cmd("PackerLoad lsp-status.nvim")
+        require("modules.ui.line")
+        -- require("feline").setup()
+      end,
+    } ]]
+    
+    use {
+      "NTBBloodbath/galaxyline.nvim",
+      config = function()
+        require("modules.ui.line")
       end,
     }
+
     use {
       "kyazdani42/nvim-tree.lua",
       config = function()
@@ -202,7 +212,6 @@ return require('packer').startup({
     }
 
     -- Languages specific Plugin
-    use {'previm/previm'}
     use {'akinsho/flutter-tools.nvim'}
     use {'ray-x/go.nvim'}
     use {'simrat39/rust-tools.nvim'}
@@ -210,6 +219,14 @@ return require('packer').startup({
     use {'jose-elias-alvarez/null-ls.nvim'}
     use {'jose-elias-alvarez/nvim-lsp-ts-utils'}
     use {'plasticboy/vim-markdown', ft = "markdown" }
+    use {
+      'iamcco/markdown-preview.nvim',
+      run = "cd app && npm install",
+      config = function()
+        -- vim.g.mkdp_browser = 'brave'
+      end,
+      ft = { "markdown" },
+    }
     use {
       'dccsillag/magma-nvim',
       run = ':UpdateRemotePlugins'
@@ -240,6 +257,20 @@ return require('packer').startup({
       'lewis6991/impatient.nvim',
     }
 
+    -- Commenting
+    use {
+      'numToStr/Comment.nvim',
+      config = function ()
+        require("Comment").setup()
+      end
+    }
+    use {
+      "folke/todo-comments.nvim",
+      config = function ()
+        require("modules.ui.todo-comments")
+      end
+    }
+
     -- Miscellaneous
     use {'yuttie/comfortable-motion.vim'}
     use {'matze/vim-move'}
@@ -248,13 +279,20 @@ return require('packer').startup({
     use {'Chiel92/vim-autoformat'}
     use {'tyru/open-browser.vim'}
     use {'mattn/emmet-vim'}
-    use {'b3nj5m1n/kommentary'}
     use {'machakann/vim-sandwich'}
     use {'oberblastmeister/neuron.nvim'}
     use {"elianiva/telescope-npm.nvim"}
     use {'lukas-reineke/indent-blankline.nvim'}
     use {'tpope/vim-dadbod', requires = { 'kristijanhusak/vim-dadbod-ui' }, ft = "sql"}
     -- use {'aserowy/tmux.nvim'}
+    use {
+      'chentau/marks.nvim',
+      config = function ()
+        require("marks").setup{
+          default_mappings = true,
+        }
+      end
+    }
     use {
       'norcalli/nvim-colorizer.lua',
       config = function ()
@@ -276,12 +314,6 @@ return require('packer').startup({
         require("modules.misc.discordo")
       end,
     }
-    use {
-      "folke/todo-comments.nvim",
-      config = function ()
-        require("modules.ui.todo-comments")
-      end
-    }
     use{
       "pwntester/octo.nvim",
       cmd = "Octo",
@@ -302,10 +334,10 @@ return require('packer').startup({
     }
   end,
 
-  config = {
+  --[[ config = {
     -- Move to lua dir so impatient.nvim can cache it
     compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
-  },
+  }, ]]
 
 })
 

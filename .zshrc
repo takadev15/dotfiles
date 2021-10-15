@@ -2,6 +2,7 @@
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
+setopt beep notify
 # Use vim keybinding
 bindkey -v
 
@@ -17,7 +18,7 @@ setopt histignorealldups sharehistory
 autoload -Uz compinit
 compinit
 
-### Added by Zinit's installer
+### Zinit
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
     command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
@@ -30,15 +31,12 @@ source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
+# Zinit Plugin
 zinit light-mode for \
     zinit-zsh/z-a-rust \
     zinit-zsh/z-a-as-monitor \
     zinit-zsh/z-a-patch-dl \
     zinit-zsh/z-a-bin-gem-node
-
-### End of Zinit's installer chunk
 
 
 ## zinit plugin config
@@ -60,9 +58,9 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 
-## syntax highliting and auto-suggestion
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Custom Script path
+export PATH="$HOME/.script:$PATH"
+export PATH="$HOME/.config/vifm/scripts:$PATH"
 
 # NNN
 export NNN_BMS='p:/mnt/dir/project/;c:~/.config/'
@@ -71,17 +69,12 @@ export LC_COLLATE="C"
 # Cscope
 export CSCOPE_EDITOR=`which nvim`
 
-
 # Preserve MANPATH if you already defined it somewhere in your config.
 # Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
 # pfetch
 export PF_ASCII="arch linux"
-
-# Custom Script path
-export PATH="$HOME/script:$PATH"
-export PATH="$HOME/.config/vifm/scripts:$PATH"
 
 # Set Nvim as default text editor
 export EDITOR="/usr/local/bin/nvim"
@@ -91,12 +84,17 @@ export VISUAL="/usr/local/bin/nvim"
 export SPICETIFY_INSTALL="/home/taka15/spicetify-cli"
 export PATH="$SPICETIFY_INSTALL:$PATH"
 
-#Pyenv
-# export PYENV_ROOT="$HOME/build/.pyenv"
-# export PATH="$PYENV_ROOT/bin:$PATH"
-# if command -v pyenv 1>/dev/null 2>&1; then
-#   eval "$(pyenv init -)"
-# fi
+# Pyenv
+# export PATH="$HOME/.pyenv/bin:$PATH"
+# eval "$(pyenv init --path)"
+# eval "$(pyenv virtualenv-init -)"
+
+# Golang
+export GOPATH=$HOME/go
+export PATH="$GOPATH/bin:$PATH"
+
+# Rust
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # Fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -124,13 +122,6 @@ export PATH="~/.npm-global/bin:$PATH"
 # fix screen
 export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
-
-# Golang
-export GOPATH=$HOME/go
-export PATH="$GOPATH/bin:$PATH"
-
-# Rust
-export PATH="$HOME/.cargo/bin:$PATH"
 
 # fnm
 export PATH="/home/taka15/.fnm:$PATH"
@@ -167,3 +158,10 @@ fi
 # aliasrc
 source $HOME/.config/aliasrc
 
+## syntax highliting and auto-suggestion
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# BEGIN_KITTY_SHELL_INTEGRATION
+if test -e "/usr/lib/kitty/shell-integration/kitty.zsh"; then source "/usr/lib/kitty/shell-integration/kitty.zsh"; fi
+# END_KITTY_SHELL_INTEGRATION

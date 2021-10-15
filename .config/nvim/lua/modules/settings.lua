@@ -115,3 +115,4 @@ opt.autowriteall = true
 opt.backspace = { "indent", "eol", "start" }
 
 opt.emoji = false
+opt.conceallevel = 2

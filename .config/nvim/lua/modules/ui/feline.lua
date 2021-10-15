@@ -1,9 +1,12 @@
 local feline = require("feline")
 local lsp = require("feline.providers.lsp")
 local status = require("lsp-status")
-local devicons = require("nvim-web-devicons")
 local vi_mode_utils = require('feline.providers.vi_mode')
 
+
+require("nvim-gps").setup{
+  separator = ' > ',
+}
 
 local colors = {
     bg = '#0F111A',
@@ -20,8 +23,6 @@ local colors = {
     blue = '#3A75C4';
     red = '#FF4151'
 }
-
-local icon_list = devicons.get_icons()
 
 local properties = {
   force_inactive = {
@@ -43,12 +44,13 @@ local properties = {
 local components = {
   left ={ active ={}, inactive = {} },
   mid ={ active ={}, inactive = {} },
+  right = { active ={}, inactive = {} }
 }
 
 components.left.active[1] = {
   provider = '█ ',
   hl = {
-    fg = colors.cyan,
+    fg = vi_mode_utils.get_mode_color(),
   }
 }
 
@@ -69,24 +71,35 @@ components.left.active[1] = {
 } ]]
 
 components.left.active[2] = {
+  provider = "file_info",
+  type = "relative_short",
+  hl = {
+    fg = colors.fg,
+    bg = colors.line_bg,
+  },
+  sep = {
+    str = " "
+  }
+}
+
+components.left.active[3] = {
   provider = function()
-     local filename = vim.fn.expand("%:t")
-     local extension = vim.fn.expand("%:e")
-     local res = devicons.get_icon(filename, extension, { default = true })
-     return res
-   end,
-   hl = function()
-     local var = {}
-     local ext = tostring(vim.fn.expand("%:e"))
-     local res = icon_list[ext]
-     if res ~= nil then
-       var.fg = res.color
-     else
-       var.fg = "#FFFFFF"
-     end
-     return var
-   end,
-   icon = "",
+    return require("nvim-gps").get_location()
+  end,
+  enabled = function()
+    return require("nvim-gps").is_available()
+  end,
+  hl = {
+    fg = colors.white,
+    bg = colors.line_bg,
+  },
+  right_sep = {
+    hl = {
+      fg = colors.fg,
+      bg = colors.line_bg,
+    },
+    str = ">",
+  },
 }
 
 components.mid.active[1] = {
@@ -129,14 +142,109 @@ components.mid.active[1] = {
 }
 
 
---[[ components.right.active[1] = {
-  provider = 
-} ]]
+components.right.active[1] = {
+  provider = "git_diff_added",
+  hl = {
+    fg = colors.green,
+  },
+  icon = "+"
+}
 
---[[ feline.setup{
+components.right.active[2] = {
+  provider = "git_diff_changed",
+  hl = {
+    fg = colors.orange,
+  },
+  icon = "~"
+}
+
+components.right.active[3] = {
+  provider = "git_diff_removed",
+  hl = {
+    fg = colors.red,
+  },
+  icon = "-"
+}
+
+components.right.active[4] = {
+  provider = 'diagnostic_errors',
+  enabled = function()
+      return lsp.diagnostics_exist('Error')
+  end,
+  hl = {
+      fg = colors.red
+  },
+  icon = " "
+}
+
+components.right.active[5] = {
+  provider = 'diagnostic_warnings',
+  enabled = function()
+      return lsp.diagnostics_exist('Warning')
+  end,
+  hl = {
+      fg = colors.yellow
+  },
+  icon = " "
+}
+
+components.right.active[6] = {
+  provider = 'diagnostic_hints',
+  enabled = function()
+      return lsp.diagnostics_exist('Hint')
+  end,
+  hl = {
+      fg = colors.cyan
+  },
+  icon = " "
+}
+
+components.right.active[7] = {
+  provider = "position",
+  hl = {
+    fg = colors.fg,
+    bg = colors.bg
+  },
+  left_sep = {
+  hl = {
+    fg = colors.blue,
+    },
+  str = "|"
+  },
+  right_sep = {
+  str = " "
+  },
+}
+
+-- Inactive components
+components.mid.inactive[1] = {
+  provider = "file_info",
+  type = "relative_short",
+  colored_icon = "false",
+  hl = {
+    fg = colors.fg
+  },
+  left_sep = {
+    str = " ",
+  },
+}
+
+components.right.inactive[1] = {
+  provider = "position",
+  hl = {
+    fg = colors.fg,
+    bg = colors.bg
+  },
+  sep = {
+    str = " "
+  },
+}
+
+feline.setup{
   default_bg = colors.bg,
   default_fg = colors.fg,
   colors = colors,
   components = components,
   properties = properties,
-} ]]
+}
+

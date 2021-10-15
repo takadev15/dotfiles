@@ -9,7 +9,7 @@ M.setup = function (on_attach,capabilities)
       require("go").setup({
         goimport = "gofumports",
         gofmt = "gofumpt",
-        max_len = 120,
+        max_line_len = 120,
         transform = false,
         test_template = "",
         test_template_dir = "",

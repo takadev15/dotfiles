@@ -47,6 +47,7 @@ map("n", "<leader>lb", "<cmd>Telescope buffers<CR>")
 map("n", "<leader>lo", "<cmd>Telescope oldfiles<CR>")
 map("n", "<leader>lH", "<cmd>Telescope help_tags<CR>")
 map("n", "<leader>la", "<cmd>Telescope media_files<CR>")
+map("n", "<leader>lr", "<cmd>lua require('telescope').extensions.asynctasks.all{}<CR>")
 
 
 vim.cmd("nmap <leader>rr <Plug>RestNvim")

@@ -6,6 +6,7 @@ telescope.load_extension("bibtex")
 telescope.load_extension("fzf")
 telescope.load_extension("project")
 -- telescope.load_extension("dotfiles")
+telescope.load_extension("asynctasks")
 
 telescope.setup{
   defaults = {
