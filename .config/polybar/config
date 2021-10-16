@@ -18,10 +18,10 @@
 
 [colors]
 ; foreground = ${xrdb:foreground}
-background = ${xrdb:background:#ee262626}
+background = ${xrdb:background:#0F111A}
 ;background = ${xrdb:background:#000}
 ;background = #fff
-foreground = #bdae93
+foreground = #8F93A2
 
 
 
@@ -42,7 +42,7 @@ offset-y = -1
 ;offset-x = 1%
 ;offset-y = 0
 padding = 5
-;radius-bottom = 15
+radius-bottom = 0
 ;bottom = true
 
 background = ${colors.background}
@@ -73,7 +73,7 @@ tray-padding = 2
 ;tray-background = #0063ff
 
 ;wm-restack = bspwm
-;wm-restack = i3
+wm-restack = i3
 override-redirect = true
 
 ;scroll-up = bspwm-desknext
@@ -101,16 +101,16 @@ label-mode-background = #4e4e4e
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%
-label-focused-background = #4e4e4e
+label-focused-background = #1B1E2B
 ; label-focused-underline= 
-label-focused-foreground = #bdae93
+label-focused-foreground = #8F93A2
 label-focused-underline = #fff
 label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
 label-unfocused-padding = 2
-label-unfocused-foreground = #bdae93
+label-unfocused-foreground = #8F93A2
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
@@ -305,13 +305,13 @@ ramp-volume-font = 3
 ramp-volume-0 = "奔"
 ramp-volume-1 = "墳"
 ramp-volume-2 = " "
-ramp-volume-foreground = #bdae93
+ramp-volume-foreground = #8F93A2
 
-label-volume-foreground = #bdae93
+label-volume-foreground = #8F93A2
 
 label-muted =   muted
 label-muted-font = 3
-label-muted-foreground = #666
+label-muted-foreground = #fff
 
 [module/alsa]
 type = internal/alsa

@@ -12,10 +12,10 @@
 # ------------------------------------------------------------------------------
 # ROFI Color theme 2
 # ------------------------------------------------------------------------------
-rofi.color-enabled: true
+/* rofi.color-enabled: true
 rofi.color-normal: #262626, #ebdbb2, #262626, #ebdbb2, #262626
 rofi.color-urgent: #262626, #ebdbb2, #262626, #ebdbb2, #262626
 rofi.color-active: #262626, #ebdbb2, #262626, #ebdbb2, #262626
-rofi.color-window: #262626, #ebdbb2, #ebdbb2
+rofi.color-window: #262626, #ebdbb2, #ebdbb2 */
 
 Xft.dpi: 100

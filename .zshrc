@@ -124,6 +124,8 @@ export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
 
 # fnm
+export YARN_GLOBAL_FOLDER="$FNM_MULTISHELL_PATH/yarn-global"
+export YARN_PREFIX="$FNM_MULTISHELL_PATH"
 export PATH="/home/taka15/.fnm:$PATH"
 eval "$(fnm env)"
 
@@ -161,6 +163,7 @@ source $HOME/.config/aliasrc
 ## syntax highliting and auto-suggestion
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 
 # BEGIN_KITTY_SHELL_INTEGRATION
 if test -e "/usr/lib/kitty/shell-integration/kitty.zsh"; then source "/usr/lib/kitty/shell-integration/kitty.zsh"; fi

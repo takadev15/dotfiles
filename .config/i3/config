@@ -174,7 +174,7 @@ exec --no-startup-id dex -a -s /etc/xdg/autostart/:~/.config/autostart
 exec --no-startup-id picom -cC
 
 #set wallpaper:
-exec --no-startup-id nitrogen --restore
+# exec --no-startup-id nitrogen --restore
 
 #set powersavings for display:
 exec --no-startup-id xset s 480 dpms 600 600 600
@@ -348,9 +348,7 @@ client.urgent           $urgent-bg-color   $urgent-bg-color   $text-color       
 # finds out, if available):
 
 # rofi bindings fancy application menu
-bindsym $mod+i exec rofi -modi drun -show drun -line-padding 4 \
-                -columns 2 -padding 50 -hide-scrollbar \
-                -show-icons -drun-icon-theme "Arc-X-D" -font "Droid Sans Regular 10"
+bindsym $mod+i exec rofi -show drun -config "/home/taka15/.config/rofi/config.rasi"
                 
 bindsym F9 exec rofi -modi drun -show drun -line-padding 4 \
                 -columns 2 -padding 50 -hide-scrollbar \
@@ -368,6 +366,9 @@ bindsym F10 exec rofi -show window -line-padding 4 \
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec sh ~/.config/i3/scripts/backlight.sh -inc 20
 bindsym XF86MonBrightnessDown exec sh ~/.config/i3/scripts/backlight.sh -dec 20
+
+#  Notification
+bindsym $mod+backslash exec dunstctl set-paused toggle
 
 
 # Touchpad controls
