@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function(on_attach, capabilities)
-  require("lspconfig").pyright.setup{
+  require("lspconfig").pyright.setup({
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
@@ -13,7 +13,7 @@ M.setup = function(on_attach, capabilities)
         },
       },
     },
-  }
+  })
 end
 
 return M

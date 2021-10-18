@@ -1,4 +1,4 @@
-require("todo-comments").setup {
+require("todo-comments").setup({
   signs = true, -- show icons in the signs column
   sign_priority = 8, -- sign priority
   -- keywords recognized as todo comments
@@ -52,5 +52,4 @@ require("todo-comments").setup {
     pattern = [[\b(KEYWORDS):]], -- ripgrep regex
     -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
   },
-}
-
+})

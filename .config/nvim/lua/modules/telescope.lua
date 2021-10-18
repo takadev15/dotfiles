@@ -8,28 +8,28 @@ telescope.load_extension("project")
 -- telescope.load_extension("dotfiles")
 telescope.load_extension("asynctasks")
 
-telescope.setup{
+telescope.setup({
   defaults = {
     extensions = {
       fzf = {
-        fuzzy = true,                    -- false will only do exact matching
+        fuzzy = true, -- false will only do exact matching
         override_generic_sorter = false, -- override the generic sorter
-        override_file_sorter = true,     -- override the file sorter
+        override_file_sorter = true, -- override the file sorter
         case_mode = "smart_case",
       },
       media_files = {
-        filetypes = {"png", "webp", "jpg", "jpeg"},
-        find_cmd = "rg" -- find command (defaults to `fd`)
+        filetypes = { "png", "webp", "jpg", "jpeg" },
+        find_cmd = "rg", -- find command (defaults to `fd`)
       },
     },
     vimgrep_arguments = {
-      'rg',
-      '--color=never',
-      '--no-heading',
-      '--with-filename',
-      '--line-number',
-      '--column',
-      '--smart-case'
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
     },
     prompt_prefix = " ➤ ",
     selection_caret = " • ",
@@ -66,34 +66,33 @@ telescope.setup{
       },
     },
   },
-    pickers = {
-      find_files = {
-        layout_strategy = "flex",
-        layout_config = {
-          flex = {
-            flip_columns = 130,
-          },
-          horizontal = {
-            mirror = false,
-            width = 0.8,
-          },
-          vertical = {
-            mirror = false,
-          },
+  pickers = {
+    find_files = {
+      layout_strategy = "flex",
+      layout_config = {
+        flex = {
+          flip_columns = 130,
+        },
+        horizontal = {
+          mirror = false,
+          width = 0.8,
+        },
+        vertical = {
+          mirror = false,
         },
       },
-      lsp_definitions = {
-        theme = "ivy",
-        layout_config = { height = 13 },
-      },
-      lsp_references = {
-        theme = "ivy",
-        layout_config = { height = 13 },
-      },
-      lsp_workspace_diagnostics = {
-        theme = "ivy",
-        layout_config = { height = 13 },
-      },
     },
-  }
-
+    lsp_definitions = {
+      theme = "ivy",
+      layout_config = { height = 13 },
+    },
+    lsp_references = {
+      theme = "ivy",
+      layout_config = { height = 13 },
+    },
+    lsp_workspace_diagnostics = {
+      theme = "ivy",
+      layout_config = { height = 13 },
+    },
+  },
+})

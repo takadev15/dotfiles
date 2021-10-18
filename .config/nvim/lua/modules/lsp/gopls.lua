@@ -1,9 +1,8 @@
 local M = {}
 local opts = { noremap = true, silent = true }
 
-
-M.setup = function (on_attach,capabilities)
-  require("lspconfig").gopls.setup{
+M.setup = function(on_attach, capabilities)
+  require("lspconfig").gopls.setup({
     on_attach = function(client, bufnr)
       on_attach(client, bufnr)
       require("go").setup({
@@ -22,13 +21,13 @@ M.setup = function (on_attach,capabilities)
       vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>Gat", "<cmd>GoAddTag<CR>", opts)
       vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>Grt", "<cmd>GoRmTag<CR>", opts)
 
-      require "lsp_signature".on_attach()
+      require("lsp_signature").on_attach()
     end,
-  capabilities = capabilities,
-  flags = {
-    debounce_text_changes = 500,
+    capabilities = capabilities,
+    flags = {
+      debounce_text_changes = 500,
     },
-  }
+  })
 end
 
 return M

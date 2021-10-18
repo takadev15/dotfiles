@@ -1,57 +1,56 @@
 local feline = require("feline")
 local lsp = require("feline.providers.lsp")
 local status = require("lsp-status")
-local vi_mode_utils = require('feline.providers.vi_mode')
+local vi_mode_utils = require("feline.providers.vi_mode")
 
-
-require("nvim-gps").setup{
-  separator = ' > ',
-}
+require("nvim-gps").setup({
+  separator = " > ",
+})
 
 local colors = {
-    bg = '#0F111A',
-    line_bg = '#1B1E2B',
-    fg = '#FFFFFF',
-    fg_green = '#14B37D',
-    yellow = '#F2F27A',
-    cyan = '#87D3F8',
-    darkblue = '#0B0D14',
-    green = '#14B37D',
-    orange = '#f39c12',
-    purple = '#c74de',
-    magenta = '#703FAF',
-    blue = '#3A75C4';
-    red = '#FF4151'
+  bg = "#0F111A",
+  line_bg = "#1B1E2B",
+  fg = "#FFFFFF",
+  fg_green = "#14B37D",
+  yellow = "#F2F27A",
+  cyan = "#87D3F8",
+  darkblue = "#0B0D14",
+  green = "#14B37D",
+  orange = "#f39c12",
+  purple = "#c74de",
+  magenta = "#703FAF",
+  blue = "#3A75C4",
+  red = "#FF4151",
 }
 
 local properties = {
   force_inactive = {
     filetypes = {
-      'NvimTree',
-      'dbui',
-      'startify',
-      'fugitive',
-      'fugitiveblame',
-      'packer',
+      "NvimTree",
+      "dbui",
+      "startify",
+      "fugitive",
+      "fugitiveblame",
+      "packer",
     },
     buftypes = {
-      'terminal',
+      "terminal",
     },
     bufnames = {},
-  }
+  },
 }
 
 local components = {
-  left ={ active ={}, inactive = {} },
-  mid ={ active ={}, inactive = {} },
-  right = { active ={}, inactive = {} }
+  left = { active = {}, inactive = {} },
+  mid = { active = {}, inactive = {} },
+  right = { active = {}, inactive = {} },
 }
 
 components.left.active[1] = {
-  provider = '█ ',
+  provider = "█ ",
   hl = {
     fg = vi_mode_utils.get_mode_color(),
-  }
+  },
 }
 
 --[[ components.left.active[2] = {
@@ -78,8 +77,8 @@ components.left.active[2] = {
     bg = colors.line_bg,
   },
   sep = {
-    str = " "
-  }
+    str = " ",
+  },
 }
 
 components.left.active[3] = {
@@ -138,16 +137,15 @@ components.mid.active[1] = {
   end,
   hl = {
     fg = colors.grey,
-  }
+  },
 }
-
 
 components.right.active[1] = {
   provider = "git_diff_added",
   hl = {
     fg = colors.green,
   },
-  icon = "+"
+  icon = "+",
 }
 
 components.right.active[2] = {
@@ -155,7 +153,7 @@ components.right.active[2] = {
   hl = {
     fg = colors.orange,
   },
-  icon = "~"
+  icon = "~",
 }
 
 components.right.active[3] = {
@@ -163,56 +161,56 @@ components.right.active[3] = {
   hl = {
     fg = colors.red,
   },
-  icon = "-"
+  icon = "-",
 }
 
 components.right.active[4] = {
-  provider = 'diagnostic_errors',
+  provider = "diagnostic_errors",
   enabled = function()
-      return lsp.diagnostics_exist('Error')
+    return lsp.diagnostics_exist("Error")
   end,
   hl = {
-      fg = colors.red
+    fg = colors.red,
   },
-  icon = " "
+  icon = " ",
 }
 
 components.right.active[5] = {
-  provider = 'diagnostic_warnings',
+  provider = "diagnostic_warnings",
   enabled = function()
-      return lsp.diagnostics_exist('Warning')
+    return lsp.diagnostics_exist("Warning")
   end,
   hl = {
-      fg = colors.yellow
+    fg = colors.yellow,
   },
-  icon = " "
+  icon = " ",
 }
 
 components.right.active[6] = {
-  provider = 'diagnostic_hints',
+  provider = "diagnostic_hints",
   enabled = function()
-      return lsp.diagnostics_exist('Hint')
+    return lsp.diagnostics_exist("Hint")
   end,
   hl = {
-      fg = colors.cyan
+    fg = colors.cyan,
   },
-  icon = " "
+  icon = " ",
 }
 
 components.right.active[7] = {
   provider = "position",
   hl = {
     fg = colors.fg,
-    bg = colors.bg
+    bg = colors.bg,
   },
   left_sep = {
-  hl = {
-    fg = colors.blue,
+    hl = {
+      fg = colors.blue,
     },
-  str = "|"
+    str = "|",
   },
   right_sep = {
-  str = " "
+    str = " ",
   },
 }
 
@@ -222,7 +220,7 @@ components.mid.inactive[1] = {
   type = "relative_short",
   colored_icon = "false",
   hl = {
-    fg = colors.fg
+    fg = colors.fg,
   },
   left_sep = {
     str = " ",
@@ -233,18 +231,17 @@ components.right.inactive[1] = {
   provider = "position",
   hl = {
     fg = colors.fg,
-    bg = colors.bg
+    bg = colors.bg,
   },
   sep = {
-    str = " "
+    str = " ",
   },
 }
 
-feline.setup{
+feline.setup({
   default_bg = colors.bg,
   default_fg = colors.fg,
   colors = colors,
   components = components,
   properties = properties,
-}
-
+})

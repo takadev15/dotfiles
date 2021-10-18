@@ -3,20 +3,17 @@ local protocol = require("vim.lsp.protocol")
 local lsp_status = require("lsp-status")
 vim.notify = require("notify")
 
-
 -- LSP default override
 lsp_status.register_progress()
 lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = "rounded",
 })
 
-lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(
-  require('lsp_extensions.workspace.diagnostic').handler, {
-    signs = {
-      severity_limit = "Warning",
-    }
-  }
-)
+lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(require("lsp_extensions.workspace.diagnostic").handler, {
+  signs = {
+    severity_limit = "Warning",
+  },
+})
 
 lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
   signs = {
@@ -35,7 +32,6 @@ custom_capabilities = require("cmp_nvim_lsp").update_capabilities(custom_capabil
 
 -- Custom attach
 local custom_attach = function(client, bufnr)
-
   local bmap = function(type, key, value)
     vim.api.nvim_buf_set_keymap(bufnr, type, key, value, { noremap = true, silent = true })
   end
@@ -91,7 +87,7 @@ local custom_attach = function(client, bufnr)
   } ]]
 
   -- LSP Signature
-  require("lsp_signature").on_attach{
+  require("lsp_signature").on_attach({
     bind = true,
     doc_lines = 2,
     floating_window = false,
@@ -107,7 +103,7 @@ local custom_attach = function(client, bufnr)
       border = "none",
     },
     extra_trigger_chars = { "(", ",", "." },
-  }
+  })
 
   -- LSP Outline Symbols
   bmap("n", "<leader>ss", "<cmd>SymbolsOutline<CR>")
@@ -133,11 +129,9 @@ local custom_attach = function(client, bufnr)
   vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
 
   vim.notify("[" .. client.name .. "] " .. "Language Server Protocol started")
-
 end
 
-require('symbols-outline').setup{}
-
+require("symbols-outline").setup({})
 
 local server_list = {
   "clangd",
@@ -157,4 +151,3 @@ local server_list = {
 for _, server in ipairs(server_list) do
   require("modules.lsp." .. server).setup(custom_attach, custom_capabilities)
 end
-

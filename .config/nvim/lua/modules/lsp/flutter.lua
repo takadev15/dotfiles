@@ -1,10 +1,9 @@
-local M ={}
+local M = {}
 
-local opts = {noremap = true, silent = true}
+local opts = { noremap = true, silent = true }
 
-M.setup = function (on_attach, capabilities)
-
-  require("flutter-tools").setup{
+M.setup = function(on_attach, capabilities)
+  require("flutter-tools").setup({
     experimental = {
       lsp_derive_paths = true,
     },
@@ -40,7 +39,7 @@ M.setup = function (on_attach, capabilities)
         completeFunctionCalls = false,
       },
     },
-  }
+  })
 end
 
 return M

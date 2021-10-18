@@ -1,5 +1,4 @@
-
-require("neorg").setup{
+require("neorg").setup({
   load = {
     ["core.defaults"] = {},
     ["core.integrations.telescope"] = {},
@@ -9,7 +8,7 @@ require("neorg").setup{
           default = "~/dir/data",
           personal = "~/dir/data/note/journal",
           uni = "~/dir/data/class",
-          gtd = "~/dir/data/note/todo"
+          gtd = "~/dir/data/note/todo",
         },
         autodetect = true,
         autochdir = true,
@@ -17,18 +16,18 @@ require("neorg").setup{
     },
     ["core.gtd.base"] = {
       config = {
-        workspace = "gtd"
+        workspace = "gtd",
       },
     },
     ["core.norg.completion"] = {
       config = {
-        engine = "nvim-cmp"
+        engine = "nvim-cmp",
       },
     },
     ["core.keybinds"] = { -- Configure core.keybinds
-       config = {
-       default_keybinds = true, -- Generate the default keybinds
-       neorg_leader = "<Leader>o" -- This is the default if unspecified
+      config = {
+        default_keybinds = true, -- Generate the default keybinds
+        neorg_leader = "<Leader>o", -- This is the default if unspecified
       },
     },
     ["core.norg.concealer"] = {
@@ -52,4 +51,4 @@ require("neorg").setup{
       },
     },
   },
-}
+})

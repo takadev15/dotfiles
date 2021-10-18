@@ -1,4 +1,4 @@
-require("gitsigns").setup{
+require("gitsigns").setup({
   signs = {
     add = { hl = "DiffAdd", text = "│" },
     change = { hl = "DiffChange", text = "│" },
@@ -28,4 +28,4 @@ require("gitsigns").setup{
   diff_opts = {
     internal = true,
   },
-}
+})

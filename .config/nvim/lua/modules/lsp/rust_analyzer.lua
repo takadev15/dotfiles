@@ -3,7 +3,7 @@ local M = {}
 local opts = { noremap = true, silent = true }
 
 M.setup = function(on_attach, capabilities)
-  require("rust-tools").setup{
+  require("rust-tools").setup({
     tools = {
       autoSetHints = true,
       hover_with_actions = false,
@@ -30,7 +30,7 @@ M.setup = function(on_attach, capabilities)
         debounce_text_changes = 250,
       },
     },
-  }
+  })
 end
 
 return M

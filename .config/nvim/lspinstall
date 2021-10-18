@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+
+piplist=("pyright")
+npmlist=("tailwindcss-language-server" "tsserver")
+
+

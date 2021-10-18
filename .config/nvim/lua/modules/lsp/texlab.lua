@@ -1,7 +1,7 @@
-local M ={}
+local M = {}
 
-M.setup = function (on_attach, capabilities)
-  require("lspconfig").texlab.setup{
+M.setup = function(on_attach, capabilities)
+  require("lspconfig").texlab.setup({
     settings = {
       texlab = {
         build = {
@@ -20,7 +20,7 @@ M.setup = function (on_attach, capabilities)
     flags = {
       debounce_text_changes = 250,
     },
-  }
+  })
 end
 
 return M
