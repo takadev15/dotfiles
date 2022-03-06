@@ -7,7 +7,6 @@ require("nvim-gps").setup({
 local gl = require("galaxyline")
 local gls = gl.section
 local gps = require("nvim-gps")
-local status = require("lsp-status")
 
 gl.short_line_list = {
   "LuaTree",
@@ -37,45 +36,6 @@ local colors = {
   red = "#FF4151",
 }
 
-local LspError = function()
-  if #vim.lsp.get_active_clients() > 0 then
-    return status.diagnostics()
-  end
-  return ""
-end
-
-local LspMessages = function()
-  local res = {}
-  local config = {
-    spinner_frames = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" },
-  }
-  local buf_messages = status.messages()
-  for _, msg in ipairs(buf_messages) do
-    local contents = ""
-    if msg.progress then
-      contents = msg.title
-      if msg.message then
-        contents = contents
-      end
-
-      if msg.percentage then
-        contents = contents
-      end
-      if msg.spinner then
-        contents = contents .. " " .. config.spinner_frames[(msg.spinner % #config.spinner_frames) + 1] .. " "
-      end
-    end
-    table.insert(res, contents)
-  end
-  return vim.trim(table.concat(res, " "))
-end
-
-local LspStatus = function()
-  if #vim.lsp.get_active_clients() > 0 then
-    return status.status()
-  end
-  return ""
-end
 
 local buffer_not_empty = function()
   if vim.fn.empty(vim.fn.expand("%:t")) ~= 1 then
@@ -236,14 +196,8 @@ gls.right[3] = {
     highlight = { colors.red },
   },
 }
-gls.right[4] = {
-  LspMessages = {
-    provider = LspMessages,
-    highlight = { colors.green },
-  },
-}
 
-gls.right[5] = {
+gls.right[4] = {
   Space = {
     provider = function()
       return " "
@@ -252,7 +206,7 @@ gls.right[5] = {
   },
 }
 
-gls.right[6] = {
+gls.right[5] = {
   DiagnosticError = {
     provider = "DiagnosticError",
     icon = " ",
@@ -260,7 +214,7 @@ gls.right[6] = {
   },
 }
 
-gls.right[7] = {
+gls.right[6] = {
   DiagnosticWarning = {
     provider = "DiagnosticWarn",
     icon = " ",
@@ -268,7 +222,7 @@ gls.right[7] = {
   },
 }
 
-gls.right[8] = {
+gls.right[7] = {
   DiagnosticInfo = {
     provider = "DiagnosticInfo",
     icon = " ",
@@ -276,7 +230,7 @@ gls.right[8] = {
   },
 }
 
-gls.right[9] = {
+gls.right[8] = {
   LineInfo = {
     provider = "LineColumn",
     separator = " | ",

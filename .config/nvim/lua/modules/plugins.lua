@@ -15,6 +15,7 @@ if not packer_exists then
 
   vim.fn.mkdir(directory, "p")
 
+
   local out = vim.fn.system(
     string.format("git clone %s %s", "https://github.com/wbthomason/packer.nvim", directory .. "/packer.nvim")
   )
@@ -26,7 +27,6 @@ if not packer_exists then
 end
 
 -- Plugins list
--- TODO: Refactor the positioning of plugins
 return require("packer").startup({
   function(use)
     -- Plugin Manager
@@ -36,11 +36,37 @@ return require("packer").startup({
     use({ "nvim-lua/plenary.nvim" })
 
     -- LSP things
-    use({ "glepnir/lspsaga.nvim" })
     use({ "ray-x/lsp_signature.nvim" })
-    use({ "nvim-lua/lsp_extensions.nvim" })
-    use({ "simrat39/symbols-outline.nvim" })
-    use({ "nvim-lua/lsp-status.nvim" })
+    use({ "https://git.sr.ht/~whynothugo/lsp_lines.nvim" })
+    use({
+      "ldelossa/litee.nvim",
+      requires = { "ldelossa/litee-calltree.nvim", "ldelossa/litee-symboltree.nvim" },
+      config = function()
+        require("litee.lib").setup({
+          notify = { enabled = false },
+          panel = {
+            orientation = "right",
+            panel_size = 45,
+          },
+          tree = {
+            icons = "nerd",
+          },
+        })
+        require("litee.symboltree").setup({
+          on_open = "panel",
+        })
+      end,
+    })
+    use({ "stevearc/dressing.nvim",
+      config = function ()
+        require("modules.dressing")
+      end,
+    })
+    use({ "j-hui/fidget.nvim",
+      config = function ()
+        require("fidget").setup({})
+      end,
+    })
     use({
       "neovim/nvim-lspconfig",
       config = function()
@@ -49,19 +75,33 @@ return require("packer").startup({
     })
 
     -- Completion
-    use({ "windwp/nvim-autopairs" })
-    use({ "windwp/nvim-ts-autotag" })
-    use({ "hrsh7th/vim-vsnip" })
-    use({ "hrsh7th/vim-vsnip-integ" })
-    use({ "hrsh7th/cmp-nvim-lsp" })
-    use({ "hrsh7th/cmp-path" })
-    use({ "hrsh7th/cmp-vsnip" })
     use({
       "hrsh7th/nvim-cmp",
       config = function()
         require("modules.completion.cmp")
       end,
     })
+    use({ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" })
+    use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
+    use({ "petertriho/cmp-git", after = "nvim-cmp" })
+    use({ "hrsh7th/cmp-buffer", after = "nvim-cmp"})
+    use({ "kdheepak/cmp-latex-symbols", after = "nvim-cmp" })
+    use({
+      "windwp/nvim-autopairs",
+      after = "nvim-cmp",
+      config = function ()
+        require("modules.completion.autopairs")
+      end,
+    })
+    use({
+      "saadparwaiz1/cmp_luasnip",
+      config = function ()
+        require("luasnip.loaders.from_vscode").lazy_load()
+      end,
+      requires = { "L3MON4D3/LuaSnip" },
+      after = "nvim-cmp",
+    })
+    use({ "rafamadriz/friendly-snippets" })
 
     -- Treesitter
     use({
@@ -71,33 +111,47 @@ return require("packer").startup({
         require("modules.treesitter")
       end,
     })
-    use({ "nvim-treesitter/nvim-treesitter-refactor", requires = "nvim-treesitter" })
-    use({ "nvim-treesitter/nvim-treesitter-textobjects", requires = "nvim-treesitter" })
-    use({ "p00f/nvim-ts-rainbow", requires = "nvim-treesitter" })
-    use({ "nvim-treesitter/playground", requires = "nvim-treesitter" })
+    use({ "nvim-treesitter/nvim-treesitter-refactor", after = "nvim-treesitter" })
+    use({ "nvim-treesitter/nvim-treesitter-textobjects", after = "nvim-treesitter" })
+    use({ "p00f/nvim-ts-rainbow", after = "nvim-treesitter" })
+    use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" })
+    use({ "nvim-treesitter/playground", after = "nvim-treesitter" })
     use({ "SmiteshP/nvim-gps" })
     use({
       "danymat/neogen",
       requires = "nvim-treesitter/nvim-treesitter",
       config = function()
-        require("neogen").setup({
-          enabled = true,
-        })
+        require("neogen").setup()
       end,
     })
 
     -- Fuzzy finder
     use({
       "nvim-telescope/telescope.nvim",
+      config = function ()
+        require("modules.telescope")
+      end,
       requires = {
-        "nvim-lua/plenary.nvim",
-        "nvim-telescope/telescope-bibtex.nvim",
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
       },
     })
     use({ "nvim-telescope/telescope-media-files.nvim" })
     use({ "nvim-telescope/telescope-project.nvim" })
     use({ "GustavoKatel/telescope-asynctasks.nvim" })
+    use({ "nvim-telescope/telescope-bibtex.nvim" })
+    use({
+      "nvim-telescope/telescope-arecibo.nvim",
+      rocks = {"openssl", "lua-http-parser"},
+      config = function ()
+        require("telescope").load_extension("arecibo")
+      end
+    })
+    use({
+      "xiyaowong/telescope-emoji.nvim",
+      config = function ()
+        require("telescope").load_extension("emoji")
+      end,
+    })
     use({
       "crispgm/telescope-heading.nvim",
       ft = "markdown",
@@ -158,6 +212,13 @@ return require("packer").startup({
     use({ "rhysd/committia.vim" })
     use({ "ThePrimeagen/git-worktree.nvim" })
     use({
+      "rbong/vim-flog",
+      setup = function()
+        vim.api.nvim_command("let g:flog_default_arguments = { 'max_count': 2000 }")
+      end,
+      requires = { "TamaMcGlinn/flog-forest" },
+    })
+    use({
       "rhysd/git-messenger.vim",
       keys = "<leader>gm",
       config = function()
@@ -189,6 +250,14 @@ return require("packer").startup({
     use({ "mfussenegger/nvim-dap", requires = {
       "rcarriga/nvim-dap-ui",
     } })
+    use({
+      "nvim-telescope/telescope-dap.nvim",
+      config = function ()
+        require("telescope").load_extension("dap")
+      end,
+    })
+    use({ "mfussenegger/nvim-dap-python" })
+    use({ "theHamsta/nvim-dap-virtual-text" })
 
     -- Testing and Running code
     use({
@@ -208,11 +277,16 @@ return require("packer").startup({
     -- Languages specific Plugin
     use({ "akinsho/flutter-tools.nvim" })
     use({ "ray-x/go.nvim" })
+    use({ "p00f/clangd_extensions.nvim" })
     use({ "simrat39/rust-tools.nvim" })
     use({ "folke/lua-dev.nvim" })
-    use({ "jose-elias-alvarez/null-ls.nvim" })
+    use({
+      "jose-elias-alvarez/null-ls.nvim",
+      config = function ()
+        require("modules.lsp.null-ls")
+      end,
+    })
     use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
-    use({ "plasticboy/vim-markdown", ft = "markdown" })
     use({
       "iamcco/markdown-preview.nvim",
       run = "cd app && npm install",
@@ -225,6 +299,14 @@ return require("packer").startup({
       "dccsillag/magma-nvim",
       run = ":UpdateRemotePlugins",
     })
+    use({
+      "vuki656/package-info.nvim",
+      requires = "MunifTanjim/nui.nvim",
+      config = function ()
+        require("package-info").setup()
+      end,
+    })
+    use({ "Saecki/crates.nvim" })
     use({
       "NTBBloodbath/rest.nvim",
       requires = { "nvim-lua/plenary.nvim" },
@@ -244,11 +326,20 @@ return require("packer").startup({
         })
       end,
     })
+    use({ "tpope/vim-dotenv" })
 
     -- Startup Improvement
     -- TODO: Remove impatent after neovim/pull/15436 merged
     use({
       "lewis6991/impatient.nvim",
+    })
+
+    -- Terminal things
+    use({
+      "akinsho/toggleterm.nvim",
+      config = function ()
+        require("modules.term")
+      end,
     })
 
     -- Commenting
@@ -267,18 +358,18 @@ return require("packer").startup({
 
     -- Miscellaneous
     use({ "yuttie/comfortable-motion.vim" })
-    use({ "matze/vim-move" })
-    use({ "jiangmiao/auto-pairs" })
     use({ "godlygeek/tabular" })
-    use({ "Chiel92/vim-autoformat" })
-    use({ "tyru/open-browser.vim" })
-    use({ "mattn/emmet-vim" })
+    use({"fedepujol/move.nvim"})
     use({ "machakann/vim-sandwich" })
-    use({ "oberblastmeister/neuron.nvim" })
-    use({ "elianiva/telescope-npm.nvim" })
     use({ "lukas-reineke/indent-blankline.nvim" })
     use({ "tpope/vim-dadbod", requires = { "kristijanhusak/vim-dadbod-ui" }, ft = "sql" })
-    -- use {'aserowy/tmux.nvim'}
+    use({ "antonk52/gitignore-grabber.nvim" })
+    use({
+      "https://gitlab.com/yorickpeterse/nvim-pqf.git",
+      config = function ()
+        require("pqf").setup()
+      end
+    })
     use({
       "chentau/marks.nvim",
       config = function()
@@ -295,7 +386,6 @@ return require("packer").startup({
     })
     use({
       "vhyrro/neorg",
-      branch = "unstable",
       requires = "vhyrro/neorg-telescope",
       config = function()
         require("modules.misc.neorg")

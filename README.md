@@ -29,6 +29,7 @@ dotfiles config --local status.showUntrackedFiles no
 
 * [ ] Neovim
   * [ ] Refactor (98% done)
+  * [ ] LSP Install script
   * [x] Switch to lua
 * [ ] set neomutt
 * [ ] Refactor zshrc

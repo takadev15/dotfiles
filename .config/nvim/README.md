@@ -15,7 +15,7 @@
 * Plugin Manager
   * wbthomason/packer.nvim
 
-* Stdlib
+* Lua Stdlib
   * nvim-lua/plenary.nvim
 
 * LSP
@@ -30,28 +30,30 @@
   * hrsh7th/nvim-cmp
   * windwp/nvim-autopairs
   * windwp/nvim-ts-autotag
-  * hrsh7th/vim-vsnip
-  * hrsh7th/vim-vsnip-integ
   * hrsh7th/cmp-nvim-lsp
   * hrsh7th/cmp-path
-  * hrsh7th/cmp-vsnip
 
 * Treesitter Related
   * nvim-treesitter/nvim-treesitter
   * nvim-treesitter/nvim-treesitter-refactor
   * nvim-treesitter/nvim-treesitter-textobjects
+  * p00f/nvim-ts-rainbow
+  * windwp/nvim-ts-autotag
+  * nvim-treesitter/playground
+  * SmiteshP/nvim-gps
+  * danymat/neogen
+
+* Telescope
+  * nvim-telescope/telescope.nvim
+  * nvim-telescope/telescope-fzf-native.nvim
 
 ## [TODO](#todo)
 
 * [ ] Refactor config (95%)
-  * [x] Config wide refactor
-  * [x] Refactor LSP languange specific config
   * [ ] Refactor plugins.lua
-  * [x] Refactor module (Plugin) specific config
+  * [ ] Docker settings
 * [ ] switch statusline to feline
-* [ ] snippets
-  * [x] Markdown
-  * [ ] C
-  * [ ] dart
-  * [x] tex
-  * [ ] Golang
+* [ ] Distant.nvim test and config
+  * [ ] find server
+  * [ ] Install lsp on server
+  * [ ] Try to understand how distant works

@@ -8,6 +8,11 @@ telescope.load_extension("project")
 -- telescope.load_extension("dotfiles")
 telescope.load_extension("asynctasks")
 
+local default_ivy = {
+  theme = "ivy",
+  layout_config = { height = 13 },
+}
+
 telescope.setup({
   defaults = {
     extensions = {
@@ -21,6 +26,12 @@ telescope.setup({
         filetypes = { "png", "webp", "jpg", "jpeg" },
         find_cmd = "rg", -- find command (defaults to `fd`)
       },
+      arecibo = {
+        ["selected_engine"]   = 'google',
+        ["url_open_command"]  = 'xdg-open',
+        ["show_http_headers"] = false,
+        ["show_domain_icons"] = false,
+      },
     },
     vimgrep_arguments = {
       "rg",
@@ -31,7 +42,7 @@ telescope.setup({
       "--column",
       "--smart-case",
     },
-    prompt_prefix = " ➤ ",
+    prompt_prefix = " ",
     selection_caret = " • ",
     color_devicons = true,
     layout_strategy = "flex",
@@ -82,17 +93,17 @@ telescope.setup({
         },
       },
     },
-    lsp_definitions = {
-      theme = "ivy",
-      layout_config = { height = 13 },
+    lsp_code_actions = {
+      theme = "cursor",
+      layout_config = { width = 50 },
     },
-    lsp_references = {
-      theme = "ivy",
-      layout_config = { height = 13 },
+    arecibo = {
+      theme = "dropdown",
+      layout_config = { height = 20 },
     },
-    lsp_workspace_diagnostics = {
-      theme = "ivy",
-      layout_config = { height = 13 },
-    },
+    diagnostics = default_ivy,
+    lsp_definitions = default_ivy,
+    lsp_references = default_ivy,
   },
 })
+

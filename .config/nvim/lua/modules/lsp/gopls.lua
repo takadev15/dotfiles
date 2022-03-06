@@ -4,7 +4,11 @@ local opts = { noremap = true, silent = true }
 M.setup = function(on_attach, capabilities)
   require("lspconfig").gopls.setup({
     on_attach = function(client, bufnr)
-      on_attach(client, bufnr)
+      local function map(mode, l, r, opts)
+        opts = opts or {}
+        opts.buffer = bufnr
+        vim.keymap.set(mode, l, r, opts)
+      end
       require("go").setup({
         goimport = "gofumports",
         gofmt = "gofumpt",
@@ -15,11 +19,12 @@ M.setup = function(on_attach, capabilities)
         comment_placeholder = "",
         verbose = false,
       })
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>Gd", "<cmd>GoCmt<CR>", opts)
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>Gl", "<cmd>GoLint<CR>", opts)
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>Gf", '<cmd>lua require"go.format".gofmt()<CR>', opts)
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>Gat", "<cmd>GoAddTag<CR>", opts)
-      vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>Grt", "<cmd>GoRmTag<CR>", opts)
+      on_attach(client, bufnr)
+      map("n", "<leader>Gd", "<cmd>GoCmt<CR>")
+      map("n", "<leader>Gl", "<cmd>GoLint<CR>")
+      map("n", "<leader>Gf", '<cmd>lua require"go.format".gofmt()<CR>')
+      map("n", "<leader>Gat", "<cmd>GoAddTag<CR>")
+      map("n", "<leader>Grt", "<cmd>GoRmTag<CR>")
 
       require("lsp_signature").on_attach()
     end,

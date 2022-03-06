@@ -12,6 +12,14 @@ parser_configs.norg = {
   },
 }
 
+parser_configs.markdown = {
+  install_info = {
+    url = "https://github.com/ikatyang/tree-sitter-markdown",
+    files = { "src/parser.c", "src/scanner.cc" },
+  },
+  filetype = "markdown",
+}
+
 parser_configs.http = {
   install_info = {
     url = "https://github.com/NTBBloodbath/tree-sitter-http",
@@ -82,3 +90,4 @@ require("nvim-treesitter.configs").setup({
     },
   },
 })
+

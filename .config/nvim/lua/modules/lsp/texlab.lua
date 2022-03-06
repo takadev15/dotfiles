@@ -4,11 +4,11 @@ M.setup = function(on_attach, capabilities)
   require("lspconfig").texlab.setup({
     settings = {
       texlab = {
+        auxDirectory = "build",
         build = {
           onSave = true,
-          args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "-outdir=build", "%f" },
+          -- args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "-outdir=build", "%f" },
           executable = "latexmk",
-          outputDirectory = "build",
         },
         lint = {
           onChange = true,

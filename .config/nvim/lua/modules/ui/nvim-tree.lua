@@ -3,13 +3,10 @@ local gmap = function(type, key, value)
   vim.api.nvim_set_keymap(type, key, value, { noremap = true, silent = true })
 end
 
-set.nvim_tree_ignore = { ".git", ".cache", "node_modules", "__pycache__" }
-set.nvim_tree_gitignore = 1
 -- set.nvim_tree_auto_open = 1 --0 by default, opens the tree when typing `vim $DIR` or `vim`
 set.nvim_tree_auto_ignore_ft = { "startify", "dashboard" } --empty by default, don't auto open tree on specific filetypes.
 set.nvim_tree_quit_on_open = 1 --0 by default, closes the tree when you open a file
 set.nvim_tree_indent_markers = 1 --0 by default, this option shows indent markers when folders are open
-set.nvim_tree_hide_dotfiles = 1 --0 by default, this option hides files and folders starting with a dot `.`
 set.nvim_tree_git_hl = 1 --0 by default, will enable file highlight for git attributes (can be used without the icons).
 set.nvim_tree_root_folder_modifier = ":~" --This is the default. See :help filename-modifiers for more options
 set.nvim_tree_add_trailing = 1 --0 by default, append a trailing slash to folder names
@@ -28,6 +25,8 @@ set.nvim_tree_icons = {
   default = "",
   symlink = "",
   git = {
+    enable = true,
+    ignore = true,
     unstaged = "✗",
     staged = "✓",
     unmerged = "",
@@ -80,12 +79,12 @@ local keymaps = {
 gmap("n", "<leader>fd", [[<cmd> NvimTreeToggle<CR>]])
 
 require("nvim-tree").setup({
-  diagnostics = {
-    enable = true,
-    icons = {
-      errors = " ",
-    },
-  },
+  -- diagnostics = {
+  --   enable = true,
+  --   icons = {
+  --     errors = " ",
+  --   },
+  -- },
   auto_close = true,
   auto_open = true,
   open_on_tab = true,
@@ -102,5 +101,9 @@ require("nvim-tree").setup({
     mappings = {
       list = keymaps,
     },
+  },
+  filters = {
+    dotfiles = true,
+	  custom = {".git", ".cache", "node_modules", "__pycache__"}
   },
 })

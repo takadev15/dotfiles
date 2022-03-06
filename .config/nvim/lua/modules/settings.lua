@@ -1,6 +1,23 @@
-local vim = vim
 local opt = vim.opt
 local cmd = vim.api.nvim_command
+local diagnostic = vim.diagnostic
+
+diagnostic.config({
+  float = {
+    border = "single",
+    source = "always",
+  },
+  signs = {
+    severity = { min = vim.diagnostic.severity.WARN },
+  },
+  severity_sort = true,
+  underline = false,
+  update_in_insert = true,
+  virtual_text = false,
+  virtual_lines = {
+    severity = { min = vim.diagnostic.severity.WARN }
+  },
+})
 
 opt.encoding = "utf-8"
 opt.showmode = true
@@ -114,5 +131,11 @@ opt.autowriteall = true
 
 opt.backspace = { "indent", "eol", "start" }
 
+--terminal
+vim.api.nvim_create_autocmd("TermOpen", {pattern = "*", command = "setlocal nonumber norelativenumber"})
+
 opt.emoji = false
 opt.conceallevel = 2
+
+-- texlab
+vim.g.tex_flavor = "latex"

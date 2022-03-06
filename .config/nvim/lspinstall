@@ -1,6 +1,21 @@
 #!/usr/bin/bash
 
-piplist=("pyright")
-npmlist=("tailwindcss-language-server" "tsserver")
+# TODO: Make list of all lsp server based on it's installed platform
+# lsp server list categorized by installation source
+# piplist=("pyright")
+# npmlist=("tailwindcss-language-server" "tsserver")
+# paclist=()
+
+if ! command -v nvim &> /dev/null
+  then
+    echo "nvim not found \n"
+    echo "Downloadin neovim"
+    mkdir ~/build/
+    git clone git@github.com:neovim/neovim.git ~/build/
+    exit
+  else
+    echo "Nvim already downloaded \n"
+    echo "passing"
+fi
 
 

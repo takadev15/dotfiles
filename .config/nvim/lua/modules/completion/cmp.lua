@@ -1,69 +1,81 @@
 local cmp = require("cmp")
 local neogen = require("neogen")
-local npairs = require("nvim-autopairs")
-
--- Snippets location
-vim.g.vsnip_snippet_dir = "~/.config/nvim/snippets"
+local luasnip = require("luasnip")
+pcall(vim.cmd, [[packadd cmp-git]])
 
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
-local check_back_space = function()
-  local col = vim.fn.col(".") - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 local item_kinds = {
-  Text = "",
-  Method = "",
-  Function = "ƒ",
-  Constructor = "",
-  Field = "識",
-  Variable = "",
-  Class = "",
-  Interface = "ﰮ",
-  Module = "",
-  Property = "",
-  Unit = "",
-  Value = "",
-  Enum = "了",
-  Keyword = "",
-  Snippet = "",
-  Color = "",
-  File = "",
-  Reference = "渚",
-  Folder = "",
-  Constant = "",
-  Struct = "",
-  Event = "鬒",
-  Operator = "\u{03a8}",
-  TypeParameter = "",
+  Text = " Text",
+  Method = " Method",
+  Function = "ƒ Function",
+  Constructor = " Constructor",
+  Field = "識Field",
+  Variable = " Variables",
+  Class = " Class",
+  Interface = "ﰮ Interface",
+  Module = " Modules",
+  Property = " Property",
+  Unit = " Unit",
+  Value = " Value",
+  Enum = "了Enum",
+  Keyword = " Keyword",
+  Snippet = " Snips",
+  Color = " Color",
+  File = " Files",
+  Reference = "渚Reference",
+  Folder = " Folder",
+  Constant = " Constant",
+  Struct = " Struct",
+  Event = "鬒Event",
+  Operator = "\u{03a8} Operator",
+  TypeParameter = " TypeParameter",
 }
+
+local item_menu = ({
+  nvim_lsp = "[LSP]",
+  luasnip = "[SNIPS]",
+  neorg = "[NEORG]",
+  path = "[PATH]",
+  latex_symbols = "[TEX]",
+  cmp_git = "[GIT]",
+  buffer = "[BUF]",
+})
 
 -- compe setup
 cmp.setup({
+  documentation = {
+    maxwidth = 60,
+    maxheight = 20,
+  },
   completion = {
     keyword_length = 1,
   },
   formatting = {
-    format = function(_, vim_item)
+    format = function(entry, vim_item)
       vim_item.kind = item_kinds[vim_item.kind]
+      vim_item.menu = item_menu[entry.source.name]
+      vim_item.abbr = string.sub(vim_item.abbr, 1, 30)
       return vim_item
     end,
   },
   mapping = {
-    ["<TAB>"] = cmp.mapping(function(fallback)
-      --[[ if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(t("<C-n>"), "n") ]]
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif neogen.jumpable() then
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if neogen.jumpable() then
         vim.fn.feedkeys(t("<cmd>lua require('neogen').jump_next()<CR>"), "")
-      elseif vim.fn.call("vsnip#available", { 1 }) == 1 then
-        return vim.fn.feedkeys(t("<Plug>(vsnip-expand-or-jump)"), "")
-      elseif check_back_space() then
-        vim.fn.feedkeys(t("<Tab>"), "n")
+      elseif cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif has_words_before() then
+        cmp.complete()
       else
         fallback()
       end
@@ -71,13 +83,13 @@ cmp.setup({
       "i",
       "s",
     }),
-    ["<S-TAB>"] = cmp.mapping(function(fallback)
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
       --[[ if vim.fn.pumvisible() == 1 then
         vim.fn.feedkeys(t("<C-p>"), "n") ]]
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif vim.fn.call("vsnip#jumpable", { -1 }) == 1 then
-        vim.fn.feedkeys(t("<Plug>(vsnip-jump-prev)"), "")
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
       else
         fallback()
       end
@@ -94,29 +106,37 @@ cmp.setup({
   },
   snippet = {
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
   sources = {
-    { name = "vsnip" },
+    { name = "luasnip" },
     { name = "nvim_lsp" },
     { name = "neorg" },
     { name = "path" },
+    { name = "cmp_git" }
+  },
+  experimental = {
+    native_menu = false,
+    ghost_text = true,
   },
 })
 
-npairs.setup({
-  disable_filetype = { "TelescopePrompt" },
-  enable_moveright = true,
-  enable_afterquota = true,
-  enable_check_bracket_line = true,
-  ignored_next_char = "[%w%.]",
-  check_ts = true,
+require("cmp_git").setup({
+  filetypes = { "gitcommit" },
+  github = {
+    issues = {
+      filter = "all",
+      limit = 50,
+      state = "open",
+    },
+    mentions = {
+      limit = 50,
+    },
+  },
 })
 
--- you need setup cmp first put this after cmp.setup()
-require("nvim-autopairs.completion.cmp").setup({
-  map_cr = true, --  map <CR> on insert mode
-  map_complete = true, -- it will auto insert `(` after select function or method item
-  auto_select = true, -- automatically select the first item
-})
+-- customization
+-- Tex Function on curly braces
+-- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "{" } }))
+

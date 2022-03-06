@@ -1,3 +1,4 @@
+local diagnostic = vim.diagnostic
 -- Bufferline
 require("bufferline").setup({
   options = {
@@ -31,7 +32,7 @@ require("bufferline").setup({
     show_close_icon = false,
     show_tab_indicators = true,
     persist_buffer_sort = true,
-    separator_style = "thin",
+    separator_style = "thick",
     enforce_regular_tabs = false,
     always_show_bufferline = true,
     sort_by = "relative_directory",
@@ -40,13 +41,13 @@ require("bufferline").setup({
         local result = {}
 
         -- LSP Diagnostics
-        local lsp_error = require("lsp_extensions.workspace.diagnostic").get_count(0, "Error")
-        local lsp_warning = require("lsp_extensions.workspace.diagnostic").get_count(0, "Warning")
-        if lsp_error ~= 0 then
-          table.insert(result, { text = "  " .. lsp_error .. " ", guifg = "#FF4151", guibg = "#090B10" })
+        local diagnostic_error = vim.tbl_count(diagnostic.get(nil, { severity = vim.diagnostic.severity.ERROR }))
+        local diagnostic_warning = vim.tbl_count(diagnostic.get(nil, { severity = vim.diagnostic.severity.WARN }))
+        if diagnostic_error ~= 0 then
+          table.insert(result, { text = "  " .. diagnostic_error .. " ", guifg = "#FF4151", guibg = "#0F111A" })
         end
-        if lsp_warning ~= 0 then
-          table.insert(result, { text = "  " .. lsp_warning .. " ", guifg = "#F2F27A", guibg = "#090B10" })
+        if diagnostic_warning ~= 0 then
+          table.insert(result, { text = "  " .. diagnostic_warning .. " ", guifg = "#F2F27A", guibg = "#0F111A" })
         end
 
         -- LSP-specific options
@@ -66,7 +67,7 @@ require("bufferline").setup({
         local git_status = vim.fn["fugitive#statusline"]()
         if git_status ~= "" then
           git_status = git_status:match("%((.*)%)")
-          table.insert(result, { text = "  " .. git_status .. " ", guifg = "#f39c12", guibg = "#090B10" })
+          table.insert(result, { text = "  " .. git_status .. " ", guifg = "#f39c12", guibg = "#0F111A" })
         end
 
         return result

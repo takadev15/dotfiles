@@ -13,7 +13,7 @@ alias la="exa -l --all --icons"
 alias lt="exa --tree --icons --level=3"
 
 # Python venv 
-alias activate="source env/bin/activate"
+alias activate="source .env/bin/activate"
 
 
 # change directory
@@ -23,11 +23,8 @@ alias ldir="z ~/dir/data/learn"
 alias note="z ~/dir/data/note/"
 alias zz="z .."
 
-# Try zoxide 
-eval "$(zoxide init zsh)"
-
 # source zshrc
-alias reload="source ~/.zshrc \ zsh"
+alias reload="source ~/.zshrc && zsh"
 
 # clear
 alias cls="clear"
@@ -40,4 +37,7 @@ alias dots="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 # nvim config management
 alias nvcnf="z ~/.config/nvim && nvim"
+
+# Readme
+alias readme="touch README.md && nvim README.md"
 

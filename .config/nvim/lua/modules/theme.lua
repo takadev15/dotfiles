@@ -1,9 +1,9 @@
 local cmd = vim.api.nvim_command
+local highlight = vim.api.nvim_set_hl
 local material = require("material")
-local fox = require("nightfox")
 
-vim.g.material_style = "deep ocean"
 -- Colorscheme
+vim.g.material_style = "deep ocean"
 material.setup({
   italics = {
     functions = true,
@@ -15,8 +15,10 @@ material.setup({
 })
 vim.cmd([[colorscheme material]])
 
-cmd("autocmd ColorScheme * highlight Normal guibg=NONE") -- Make background transparent
+cmd("autocmd ColorScheme * highlight Normal guibg=NONE")
 cmd("autocmd ColorScheme * highlight NonText guibg=NONE")
+-- highlight(0, "Normal", {bg = "NONE"})
+-- highlight(0, "NonText", {bg = "NONE"})
 cmd("autocmd ColorScheme * highlight SignColumn ctermbg=NONE guibg=NONE")
 cmd("autocmd ColorScheme * highlight VertSplit ctermbg=NONE guibg=NONE")
 cmd("autocmd ColorScheme * highlight Pmenu ctermbg=NONE guibg=#292927")

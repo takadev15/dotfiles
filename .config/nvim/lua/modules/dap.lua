@@ -2,7 +2,7 @@ local dap = require("dap")
 local ui = require("dapui")
 local opts = { noremap = true, silent = true }
 
--- keymaps
+-- keymaps shit
 local bmap = function(type, key, value)
   vim.api.nvim_buf_set_keymap(0, type, key, value, opts)
 end
@@ -18,4 +18,22 @@ gmap("n", "<leader>dh", '<cmd>lua require("dap").step_out()<CR>')
 gmap("n", "<leader>do", '<cmd>lua require("dap").step_over()<CR>')
 gmap("n", "<leader>di", '<cmd>lua require("dap.ui.variables").hover()<CR>')
 
+-- Telescope keymaps shit
+gmap("n", "<leader>dlc", "<cmd>Telescope dap commands<CR>")
+
 -- Dap icons
+vim.fn.sign_define("DapBreakpoint", {text = "🟥", texthl = "", linehl = "", numhl = "" })
+vim.fn.sign_define("DapLogpoint", { text = "", texthl = "", linehl = "", numhl = "" })
+vim.fn.sign_define("DapStopped", {text = "⭐", texthl = "", linehl = "", numhl = "" })
+
+-- Language specific shit
+
+
+-- DAP-UI config
+ui.setup({
+  mappings = {
+    expand = "<CR>",
+    open = "o",
+    remove = "d",
+  },
+})

@@ -8,7 +8,6 @@ require("neorg").setup({
           default = "~/dir/data",
           personal = "~/dir/data/note/journal",
           uni = "~/dir/data/class",
-          gtd = "~/dir/data/note/todo",
         },
         autodetect = true,
         autochdir = true,
@@ -16,12 +15,14 @@ require("neorg").setup({
     },
     ["core.gtd.base"] = {
       config = {
-        workspace = "gtd",
+        workspace = "default",
       },
     },
     ["core.norg.completion"] = {
       config = {
         engine = "nvim-cmp",
+        exclude = {
+        },
       },
     },
     ["core.keybinds"] = { -- Configure core.keybinds

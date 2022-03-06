@@ -151,7 +151,7 @@ set $ws10 "10"
 bindsym $mod+s exec --no-startup-id ~/.config/i3/scripts/empty_workspace.sh
 
 # autostart start applications + bind program to workspace:
-#assign [class="kitty"] $ws1
+# assign [class="kitty"] $ws1
 #for_window [class=kity] focus
 #assign [class="chrome"] $ws2
 #for_window [class=chrome] focus
@@ -287,7 +287,7 @@ bindsym $mod+z exec "/usr/bin/zoom"
 
 # screenshot
 #bindsym $mod+p exec --no-startup-id maim "/home/$USER/dir/data/Pictures/screenshot/$(date +%s).png"
-bindsym $mod+p exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/dir/data/Pictures/screenshot/$(date +%s).png"
+bindsym $mod+p exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/dir/data/images/screenshot/$(date +%s).png"
 bindsym $mod+Ctrl+p exec --no-startup-id maim --select "/home/$USER/dir/data/Pictures/screenshot/$(date +%s).png"
 
 #bindsym $mod+p exec --no-startup-id maim | xclip -selection clipboard -t image/png
@@ -327,7 +327,7 @@ bar {
 
 
 # Lock the system
-bindsym $mod+BackSpace exec betterlockscreen -l dim
+bindsym $mod+BackSpace exec betterlockscreen -l blur
 
 set $bg-color            #2f343f
 set $inactive-bg-color   #2f343f
@@ -369,7 +369,6 @@ bindsym XF86MonBrightnessDown exec sh ~/.config/i3/scripts/backlight.sh -dec 20
 
 #  Notification
 bindsym $mod+backslash exec dunstctl set-paused toggle
-
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
