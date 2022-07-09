@@ -116,7 +116,12 @@ return require("packer").startup({
     use({ "p00f/nvim-ts-rainbow", after = "nvim-treesitter" })
     use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" })
     use({ "nvim-treesitter/playground", after = "nvim-treesitter" })
-    use({ "SmiteshP/nvim-gps" })
+    use({ 
+      "SmiteshP/nvim-navic",
+      config = function()
+        require("nvim-navic").setup({ highlight = true, separator = " ❯ " })
+      end,
+    })
     use({
       "danymat/neogen",
       requires = "nvim-treesitter/nvim-treesitter",
@@ -201,9 +206,9 @@ return require("packer").startup({
     })
 
     use({
-      "kyazdani42/nvim-tree.lua",
+      "nvim-neo-tree/neo-tree.nvim",
       config = function()
-        require("modules.ui.nvim-tree")
+        require("modules.ui.neotree")
       end,
     })
 
@@ -214,9 +219,8 @@ return require("packer").startup({
     use({
       "rbong/vim-flog",
       setup = function()
-        vim.api.nvim_command("let g:flog_default_arguments = { 'max_count': 2000 }")
+        vim.g.flog_default_arguments = { max_count = 4000 }
       end,
-      requires = { "TamaMcGlinn/flog-forest" },
     })
     use({
       "rhysd/git-messenger.vim",
@@ -276,7 +280,17 @@ return require("packer").startup({
 
     -- Languages specific Plugin
     use({ "akinsho/flutter-tools.nvim" })
-    use({ "ray-x/go.nvim" })
+    use({ 
+      "ray-x/go.nvim",
+      ft = { "go", "gomod", "gowork", "gohtmltmpl" },
+      config = function()
+        require("go").setup({
+          tag_transform = "snakecase",
+          dap_debug_keymap = false,
+          dap_debug_vt = false,
+        })
+      end,
+    })
     use({ "p00f/clangd_extensions.nvim" })
     use({ "simrat39/rust-tools.nvim" })
     use({ "folke/lua-dev.nvim" })
@@ -335,12 +349,12 @@ return require("packer").startup({
     })
 
     -- Terminal things
-    use({
-      "akinsho/toggleterm.nvim",
-      config = function ()
-        require("modules.term")
-      end,
-    })
+    -- use({
+    --   "akinsho/toggleterm.nvim",
+    --   config = function ()
+    --     require("modules.term")
+    --   end,
+    -- })
 
     -- Commenting
     use({
@@ -371,7 +385,7 @@ return require("packer").startup({
       end
     })
     use({
-      "chentau/marks.nvim",
+      "chentoast/marks.nvim",
       config = function()
         require("marks").setup({
           default_mappings = true,

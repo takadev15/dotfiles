@@ -1,0 +1,2 @@
+#!/bin/sh
+feh --no-fehbg --bg-scale '/home/taka15/dir/data/images/wallpaper/reine.png' 

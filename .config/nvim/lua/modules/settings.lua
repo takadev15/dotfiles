@@ -49,9 +49,9 @@ opt.list = true -- Invisible chars
 opt.listchars = {
   eol = " ",
   tab = "  ",
-  extends = "›",
-  precedes = "‹",
-  trail = "•",
+  -- extends = "›",
+  -- precedes = "‹",
+  -- trail = "•",
 }
 
 opt.autoindent = true

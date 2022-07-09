@@ -3,6 +3,7 @@ local telescope = require("telescope.builtin")
 
 local map = function(mode, l, r, opts)
   opts = opts or {}
+  opts.silent = true
   vim.keymap.set(mode, l, r, opts)
 end
 
@@ -53,6 +54,8 @@ map("n", "<leader>lH", telescope.help_tags)
 map("n", "<leader>la", ":Telescope media_files<CR>")
 map("n", "<leader>lr", "<cmd>lua require('telescope').extensions.asynctasks.all{}<CR>")
 map("n", "<leader>lw", "<cmd>lua require('telescope').extensions.arecibo.websearch()<CR>")
+
+map("n", "<leader>fd", ":Neotree toggle<CR>")
 
 -- Move.nvim
 map("v", "<A-j>", ":MoveBlock(1)<CR>")

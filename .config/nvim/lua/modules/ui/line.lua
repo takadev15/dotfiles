@@ -1,12 +1,9 @@
--- nvim-gps
-require("nvim-gps").setup({
-  separator = " > ",
-})
+pcall(vim.cmd, [[packadd nvim-navic]])
 
 -- Statusline
 local gl = require("galaxyline")
+local navic = require("nvim-navic")
 local gls = gl.section
-local gps = require("nvim-gps")
 
 gl.short_line_list = {
   "LuaTree",
@@ -107,7 +104,7 @@ gls.left[2] = {
       }
       local vim_mode = vim.fn.mode()
       vim.api.nvim_command("hi GalaxyViMode guifg=" .. mode_color[vim_mode])
-      return "   "
+      return " "
     end,
     highlight = { colors.red, colors.bg, "bold" },
   },
@@ -129,22 +126,6 @@ gls.left[4] = {
     highlight = { colors.fg, colors.bg },
   },
 }
-gls.left[5] = {
-  nvimGPS = {
-    provider = function()
-      local text = gps.get_location()
-      if #text ~= 0 then
-        return "> " .. text .. " "
-      else
-        return ""
-      end
-    end,
-    condition = function()
-      return gps.is_available()
-    end,
-    highlight = { colors.fg, colors.bg },
-  },
-}
 
 --[[ gls.left[9] = {
    LeftEnd ={
@@ -154,6 +135,17 @@ gls.left[5] = {
     highlight = {colors.line_bg, colors.bg}
    }
 } ]]
+
+gls.left[5]= {
+    nvimNavic = {
+        provider = function()
+            return navic.get_location()
+        end,
+        condition = function()
+            return navic.is_available()
+        end
+    }
+}
 
 gls.left[6] = {
   Space = {

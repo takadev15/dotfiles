@@ -4,16 +4,16 @@ pcall(vim.cmd, [[packadd cmp-nvim-lsp]])
 vim.notify = require("notify")
 
 -- LSP default override
-lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, {
-  border = "rounded",
-})
-
-lsp.handlers["textDocument/signatureHelp"] = lsp.with(
-  lsp.handlers.signature_help,
-  {
+  lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, {
     border = "rounded",
-  }
-)
+    max_width = 60,
+    max_height = 19,
+  })
+  lsp.handlers["textDocument/implementation"] = telescope.lsp_implementations
+  lsp.handlers["textDocument/references"] = telescope.lsp_references
+  lsp.handlers["textDocument/typeDefinition"] = telescope.lsp_type_definitions
+  lsp.handlers["workspace/symbol"] = telescope.lsp_workspace_symbols
+--
 -- Custom Capabilities
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
@@ -31,17 +31,21 @@ local on_attach = function(client, bufnr)
   map("n", "gD", lsp.buf.declaration)
   map("n", "gR", lsp.buf.rename)
   map("n", "gs", lsp.buf.document_symbol)
+  map("n", "gc", lsp.codelens.run)
   map("n", "gi", telescope.lsp_implementations)
   map("n", "gy", telescope.lsp_type_definitions)
   map("n", "gr", telescope.lsp_references)
   map("n", "gd", telescope.lsp_definitions)
   map("n", "gw", telescope.lsp_workspace_symbols)
   map("n", "<leader>a", lsp.buf.code_action)
-  map("v", "<leader>a", telescope.lsp_range_code_actions)
+  map("v", "<leader>a", lsp.buf.range_code_action)
+  map("n", "<leader>wl", function()
+    print(vim.inspect(lsp.buf.list_workspace_folders()))
+  end)
 
   -- Disable server formatting capabilities
-  client.resolved_capabilities.document_formatting = false
-  client.resolved_capabilities.document_range_formatting = false
+  client.server_capabilities.document_formatting = false
+  client.server_capabilities.document_range_formatting = false
 
   -- LSP Signature
   require("lsp_signature").on_attach({
@@ -65,7 +69,8 @@ local on_attach = function(client, bufnr)
   -- Cmp-lsp init
   require("cmp_nvim_lsp").setup()
 
-  -- require("lsp_lines").register_lsp_virtual_lines()
+  -- nvim-navic
+  require("nvim-navic").attach(client, bufnr)
 
   vim.notify("[" .. client.name .. "] " .. "Language Server Protocol started")
 end
@@ -84,8 +89,6 @@ local server_list = {
   "jees",
   "tailwind",
   "bash",
-  "html",
-  "arduinols",
 }
 
 for _, server in ipairs(server_list) do

@@ -1,7 +1,7 @@
 # Setup fzf
 # ---------
 if [[ ! "$PATH" == */home/taka15/build/.fzf/bin* ]]; then
-  export PATH="${PATH:+${PATH}:}/home/taka15/build/.fzf/bin"
+  PATH="${PATH:+${PATH}:}/home/taka15/build/.fzf/bin"
 fi
 
 # Auto-completion

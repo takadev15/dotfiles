@@ -1,60 +1,12 @@
-format = """
-$username\
-$hostname\
-$shlvl\
-$kubernetes\
-$directory\
-${custom.giturl}\
-$git_branch\
-$git_commit\
-$git_state\
-$git_status\
-$hg_branch\
-$docker_context\
-$package\
-$cmake\
-$dart\
-$dotnet\
-$elixir\
-$elm\
-$erlang\
-$golang\
-$helm\
-$java\
-$julia\
-$kotlin\
-$nim\
-$nodejs\
-$ocaml\
-$perl\
-$php\
-$purescript\
-$python\
-$ruby\
-$rust\
-$scala\
-$swift\
-$lua\
-$terraform\
-$vagrant\
-$zig\
-$nix_shell\
-$conda\
-$memory_usage\
-$aws\
-$gcloud\
-$openstack\
-$env_var\
-$crystal\
-$custom\
-$cmd_duration\
-$line_break\
-$jobs\
-$battery\
-$time\
-$status\
-$shell\
-$character"""
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
 
 [custom.giturl]
 # disable = True
@@ -82,5 +34,5 @@ success_symbol = "🔥"
 error_symbol = "[✗](bold red)"
 
 [git_status]
-enabled = "true"
+disabled = false
 

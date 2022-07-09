@@ -1,4 +1,3 @@
-# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
@@ -6,17 +5,17 @@ setopt beep notify
 # Use vim keybinding
 bindkey -v
 
-
-# Set up the prompt
-autoload -Uz promptinit
-promptinit
-prompt adam1
-
 setopt histignorealldups sharehistory
 
 # Use modern completion system
 autoload -Uz compinit
 compinit
+
+## Generate zcompdump once a day
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
 
 ### Zinit
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -64,6 +63,7 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # Custom Script path
 export PATH="$HOME/.script:$PATH"
 export PATH="$HOME/.config/vifm/scripts:$PATH"
+export PATH="$HOME/dir/data/workstation/fita/scripts:$PATH"
 
 # NNN
 export NNN_BMS='p:/mnt/dir/project/;c:~/.config/'
@@ -134,10 +134,6 @@ eval "$(fnm env)"
 
 export PATH="/home/taka15/.config/vifm/scripts/:$PATH"
 
-# starship
-eval "$(starship init zsh)"
-
-
 # Nix 
 if [ -e /home/taka15/.nix-profile/etc/profile.d/nix.sh ]; then . /home/taka15/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
@@ -163,6 +159,9 @@ fi
 # aliasrc
 source $HOME/.config/aliasrc
 
+# GOenv
+source $HOME/.config/gosecret
+
 # Try zoxide 
 eval "$(zoxide init zsh)"
 
@@ -170,3 +169,15 @@ eval "$(zoxide init zsh)"
 # BEGIN_KITTY_SHELL_INTEGRATION
 if test -e "/usr/lib/kitty/shell-integration/kitty.zsh"; then source "/usr/lib/kitty/shell-integration/kitty.zsh"; fi
 # END_KITTY_SHELL_INTEGRATION
+
+# starship
+eval "$(starship init zsh)"
+
+# Protoc
+export PATH="$HOME/build/protobuf/bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/taka15/build/google-cloud-sdk/path.zsh.inc' ]; then . '/home/taka15/build/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/taka15/build/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/taka15/build/google-cloud-sdk/completion.zsh.inc'; fi

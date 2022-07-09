@@ -50,11 +50,7 @@ local opts = {
   show_guides = true,
 }
 
--- Indentation
-vim.opt.listchars = {}
-
 require("indent_blankline").setup({
-  show_end_of_line = true,
   filetype_exclude = { "help", "terminal", "alpha", "packer", "norg" },
   buftype_exclude = { "terminal", " " },
 })

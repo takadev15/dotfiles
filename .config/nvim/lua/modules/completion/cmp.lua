@@ -51,9 +51,11 @@ local item_menu = ({
 
 -- compe setup
 cmp.setup({
-  documentation = {
-    maxwidth = 60,
-    maxheight = 20,
+  window = {
+    documentation = {
+      max_width = 60,
+      max_height = 20,
+    },
   },
   completion = {
     keyword_length = 1,
