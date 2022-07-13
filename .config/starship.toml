@@ -36,3 +36,6 @@ error_symbol = "[✗](bold red)"
 [git_status]
 disabled = false
 
+[gcloud]
+symbol = "️🇬️ "
+

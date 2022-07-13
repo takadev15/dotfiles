@@ -39,21 +39,11 @@ return require("packer").startup({
     use({ "ray-x/lsp_signature.nvim" })
     use({ "https://git.sr.ht/~whynothugo/lsp_lines.nvim" })
     use({
-      "ldelossa/litee.nvim",
-      requires = { "ldelossa/litee-calltree.nvim", "ldelossa/litee-symboltree.nvim" },
+      "kosayoda/nvim-lightbulb",
       config = function()
-        require("litee.lib").setup({
-          notify = { enabled = false },
-          panel = {
-            orientation = "right",
-            panel_size = 45,
-          },
-          tree = {
-            icons = "nerd",
-          },
-        })
-        require("litee.symboltree").setup({
-          on_open = "panel",
+        require("nvim-lightbulb").setup({
+          sign = { enabled = false },
+          virtual_text = { enabled = true },
         })
       end,
     })
@@ -121,12 +111,13 @@ return require("packer").startup({
       config = function()
         require("nvim-navic").setup({ highlight = true, separator = " ❯ " })
       end,
+      after = "nvim-treesitter",
     })
     use({
       "danymat/neogen",
       requires = "nvim-treesitter/nvim-treesitter",
       config = function()
-        require("neogen").setup()
+        require("neogen").setup({ snippet_engine = "luasnip" })
       end,
     })
 
@@ -297,7 +288,7 @@ return require("packer").startup({
     use({
       "jose-elias-alvarez/null-ls.nvim",
       config = function ()
-        require("modules.lsp.null-ls")
+        require("modules.lsp.servers.null-ls")
       end,
     })
     use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
@@ -349,12 +340,12 @@ return require("packer").startup({
     })
 
     -- Terminal things
-    -- use({
-    --   "akinsho/toggleterm.nvim",
-    --   config = function ()
-    --     require("modules.term")
-    --   end,
-    -- })
+    use({
+      "akinsho/toggleterm.nvim",
+      config = function ()
+        require("modules.term")
+      end,
+    })
 
     -- Commenting
     use({
@@ -377,7 +368,18 @@ return require("packer").startup({
     use({ "machakann/vim-sandwich" })
     use({ "lukas-reineke/indent-blankline.nvim" })
     use({ "tpope/vim-dadbod", requires = { "kristijanhusak/vim-dadbod-ui" }, ft = "sql" })
-    use({ "antonk52/gitignore-grabber.nvim" })
+    use({ "antonk52/gitignore-grabber.nvim" }) 
+    use({
+      "stevearc/aerial.nvim",
+      config = function()
+        require("aerial").setup({
+          highlight_on_hover = true,
+          show_guides = true,
+          placement_editor_edge = true,
+          min_width = 25,
+        })
+      end,
+    })
     use({
       "https://gitlab.com/yorickpeterse/nvim-pqf.git",
       config = function ()

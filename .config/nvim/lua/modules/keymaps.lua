@@ -45,6 +45,9 @@ map("n", "<leader>lq", require("telescope.builtin").diagnostics)
 -- Version control
 -- map("n", "<leader>g", '<cmd>lua require("neogit").status.create("split")<CR>')
 
+-- aerial
+map("n", "<leader>ss", ":AerialToggle<CR>")
+
 -- Telescope
 map("n", "<leader>lf", telescope.find_files)
 map("n", "<leader>lg", telescope.live_grep)
@@ -55,7 +58,7 @@ map("n", "<leader>la", ":Telescope media_files<CR>")
 map("n", "<leader>lr", "<cmd>lua require('telescope').extensions.asynctasks.all{}<CR>")
 map("n", "<leader>lw", "<cmd>lua require('telescope').extensions.arecibo.websearch()<CR>")
 
-map("n", "<leader>fd", ":Neotree toggle<CR>")
+map("n", "<leader>fd", ":NeoTreeShowToggle<CR>")
 
 -- Move.nvim
 map("v", "<A-j>", ":MoveBlock(1)<CR>")

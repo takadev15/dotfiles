@@ -1,0 +1,435 @@
+/* Catppuccin Theme for Joplin | https://github.com/sadmice/Catppuccin-Theme-For-Joplin */
+/* CSS for: Rendered Markdown & Rich Text Editor */
+
+:root {
+	--rosewater: #f5e0dc;
+	--flamingo: #f2cdcd;
+	--pink: #f5c2e7;
+	--mauve: #cba6f7;
+	--red: #f38ba8;
+	--maroon: #eba0ac;
+	--peach: #fab387;
+	--yellow: #f9e2af;
+	--green: #a6e3a1;
+	--teal: #94e2d5;
+	--sky: #89dceb;
+	--sapphire: #74c7ec;
+	--blue: #89b4fa;
+	--lavender: #b4befe;
+	--text: #cdd6f4;
+	--subtext1: #bac2de;
+	--subtext0: #a6adc8;
+	--overlay2: #9399b2;
+	--overlay1: #7f849c;
+	--overlay0: #6c7086;
+	--surface2: #585b70;
+	--surface1: #45475a;
+	--surface0: #313244;
+	--base: #1e1e2e;
+	--mantle: #181825;
+	--crust: #11111b;
+
+	--base-font: "Fira Sans", avenir, arial, sans-serif;
+	--base-font-size: 13px;
+
+	--monospace-font: "Fira Code", monospace;
+	--monospace-font-size: 11px;
+
+	--render-viewer-bg-color: var(--base);
+	--render-viewer-color: var(--text);
+
+	--selection-bg-color: var(--surface2);
+
+	--hr-color: var(--subtext0);
+
+	--headings-font-weight: 600;
+	--headings-text-color: var(--mauve);
+	--h1-border-color: var(--subtext0);
+
+	--strong-text-color: var(--maroon);
+	--italic-text-color: var(--text);
+	--mark-text-bg-color: var(--teal);
+	--mark-text-color: var(--mantle);
+	--search-text-bg-color: var(--yellow);
+	--search-text-color: var(--mantle);
+	--strikethrough-text-color: var(--subtext0);
+	--insert-text-color: var(--green);
+	--abbreviation-text-color: var(--peach);
+	--inline-code-text-color: var(--text);
+	--inline-code-bg-color: var(--mantle);
+	--link-text-color: var(--blue);
+	--link-resource-icon-color: var(--link-text-color);
+	--footnote-text-color: var(--subtext0);
+
+	--table-th-text-color: var(--text);
+	--table-th-bg-color: var(--surface2);
+	--table-th-border-color: var(--overlay0);
+	--table-td-text-color: var(--text);
+	--table-tr-odd-bg-color: var(--surface0);
+	--table-tr-even-bg-color: var(--surface1);
+
+	--blockquote-bg-color: var(--surface0);
+	--blockquote-border-color: var(--mantle);
+
+	--codeblock-bg-color: var(--mantle);
+	--codeblock-text-color: var(--text);
+
+	--mermaid-bg-color: var(--surface0);
+
+	--toc-bg-color: var(--mantle);
+
+	--sb-bg: var(--surface0);
+	--si-bg: var(--surface0);
+
+	--scroll-bar-color: var(--overlay0);
+	--scroll-bar-color-hover: var(--overlay1);
+
+	--print-note-title-display: block; /* show/hide the notebook title from the PDF | show: "block;" | hide: "none;" */
+	--print-markdown-toc-display: block; /* show/hide the markdown toc from the PDF | show: "block;" | hide: "none;" */
+}
+
+/* scrollbar */
+::-webkit-scrollbar-thumb {
+	background-color: var(--scroll-bar-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: var(--scroll-bar-color-hover);
+}
+
+/* base font group */
+#rendered-md,
+#tinymce,
+#joplin-container-body,
+#joplin-container-content,
+#rendered-md table th,
+#rendered-md table td {
+	font-family: var(--base-font) !important;
+	font-size: var(--base-font-size);
+}
+
+/* monospace font group */
+#rendered-md > .joplin-editable > pre:not(.mermaid),
+#rendered-md > .joplin-editable > pre > code,
+#rendered-md .inline-code,
+[id*="fnref"] {
+	font-family: var(--monospace-font) !important;
+	font-size: var(--monospace-font-size);
+}
+
+/* render viewer background */
+#rendered-md,
+#tinymce,
+#joplin-container-body,
+#joplin-container-content,
+.exported-note {
+	background-color: var(--render-viewer-bg-color);
+}
+
+/* paragraph */
+#rendered-md > p,
+body {
+	color: var(--render-viewer-color);
+}
+
+/* selected text */
+::selection {
+	background: var(--selection-bg-color);
+}
+
+/* horizontal line */
+#rendered-md > hr {
+	border: none;
+	border-bottom: 1px solid var(--hr-color);
+}
+
+/* headings group */
+#rendered-md > h1,
+#rendered-md > h2,
+#rendered-md > h3,
+#rendered-md > h4,
+#rendered-md > h5,
+#rendered-md > h6 {
+	font-weight: var(--headings-font-weight);
+	color: var(--headings-text-color);
+	border-bottom: 0;
+}
+
+/* heading: h1 */
+#rendered-md > h1 {
+	border-bottom: 1px solid var(--h1-border-color);
+}
+
+/* strong text */
+#rendered-md strong {
+	color: var(--strong-text-color);
+	font-weight: 700;
+}
+
+/* italic text */
+#rendered-md em {
+	color: var(--italic-text-color);
+}
+
+/* mark text */
+#rendered-md mark {
+	color: var(--mark-text-color);
+	background-color: var(--mark-text-bg-color);
+	padding: 0 2px;
+}
+
+/* search text */
+#rendered-md mark[data-markjs="true"] {
+	color: var(--search-text-color);
+	background-color: var(--search-text-bg-color);
+}
+
+/* strikethrough text */
+#rendered-md s {
+	color: var(--strikethrough-text-color);
+}
+
+/* insert text */
+#rendered-md ins {
+	color: var(--insert-text-color);
+}
+
+/* abbreviation text */
+#rendered-md abbr {
+	text-decoration: underline dotted;
+	color: var(--abbreviation-text-color);
+}
+
+/* inline code text */
+#rendered-md .inline-code,
+.mce-content-body code:not(.joplin-editable > pre > code) {
+	color: var(--inline-code-text-color);
+	background-color: var(--inline-code-bg-color);
+	border: none;
+	padding: 2px 4px;
+}
+
+/* link */
+
+#rendered-md a {
+	color: var(--link-text-color);
+}
+
+/* link: resource icon */
+#rendered-md .resource-icon {
+	font-size: 10px;
+	background-color: var(--link-resource-icon-color);
+}
+
+/* footnote */
+#rendered-md .footnote-item > p {
+	color: var(--footnote-text-color);
+}
+
+#rendered-md .footnote-item {
+	color: var(--footnote-text-color);
+}
+
+/* table: container */
+#rendered-md > table {
+	border: none;
+}
+
+/* table: header */
+#rendered-md > table > thead > tr > th {
+	font-weight: 600;
+	background-color: var(--table-th-bg-color);
+	color: var(--table-th-text-color);
+	border: none;
+	border-bottom: 3px solid var(--table-th-border-color);
+}
+
+/* table: data */
+#rendered-md > table > tbody > tr > td {
+	color: var(--table-td-text-color);
+	border: none;
+}
+
+/* table: row */
+.jop-tinymce table tr:nth-child(even),
+table > tbody > tr:nth-child(even) {
+	background-color: var(--table-tr-even-bg-color);
+}
+
+.jop-tinymce table tr:nth-child(odd),
+table > tbody > tr:nth-child(odd) {
+	background-color: var(--table-tr-odd-bg-color);
+}
+
+/* blockquote */
+#rendered-md > blockquote {
+	background-color: var(--blockquote-bg-color);
+	font-style: italic;
+	border: none;
+	border-left: 5px solid var(--blockquote-border-color);
+}
+
+/* codeblock: container */
+#rendered-md > .joplin-editable > pre:not(.mermaid) {
+	padding: 10px 15px;
+	margin: 0;
+	background-color: var(--codeblock-bg-color);
+}
+
+/* codeblock: text */
+#rendered-md > .joplin-editable > pre:not(.mermaid) > code {
+	color: var(--codeblock-text-color) !important;
+}
+
+/* mermaid: container */
+.mermaid {
+	background-color: var(--mermaid-bg-color) !important;
+}
+
+/* table of contents */
+#rendered-md > .table-of-contents ul {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+#rendered-md > .table-of-contents > ul {
+	position: fixed;
+	top: 5px;
+	right: 0px;
+	z-index: 1;
+	list-style-type: none;
+	padding: 15px;
+	border-radius: 10px 0 0 10px;
+	margin: 0;
+	overflow: hidden;
+	height: 90%;
+	width: 5px;
+	transition: 300ms;
+}
+
+#rendered-md > .table-of-contents > ul:hover {
+	background-color: var(--toc-bg-color);
+	box-shadow: -5px 0px 10px 0px rgba(0, 0, 0, 0.15);
+	width: auto;
+	overflow: scroll;
+}
+
+#rendered-md > .table-of-contents > ul:hover::before {
+	content: "Table Of Contents";
+	font-weight: 700;
+}
+
+#rendered-md > .table-of-contents li {
+	display: none;
+	white-space: nowrap;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
+
+#rendered-md > .table-of-contents > ul:hover li {
+	display: list-item;
+}
+
+#rendered-md > .table-of-contents a {
+	text-decoration: none;
+}
+
+/* spoiler plugin: block container */
+#rendered-md .spoiler-block {
+	background-color: var(--sb-bg);
+	color: var(--render-viewer-color);
+	box-shadow: none;
+	border: none;
+	padding: 3px 5px;
+	border-radius: 3px;
+}
+
+/* spoiler plugin: block title */
+#rendered-md .summary-title {
+	font-family: var(--base-font);
+	font-size: var(--base-font-size);
+	padding: 0;
+	border-radius: 0;
+}
+
+#rendered-md .summary-title::before {
+	font-size: var(--base-font-size);
+}
+
+#rendered-md .summary-title:hover {
+	opacity: 1;
+}
+
+#rendered-md .summary-title:hover::before {
+	color: var(--mauve);
+}
+
+/* spoiler plugin: block body */
+.summary-content {
+	border-radius: 0;
+	padding: 0;
+}
+
+/* spoiler plugin: block horizontal line */
+#rendered-md .spoiler-block > .summary-content > hr {
+	border: none;
+	border-bottom: 1px solid var(--hr-color);
+}
+
+/* spoiler plugin: block list */
+#rendered-md .spoiler-block > .summary-content ul > li,
+#rendered-md .spoiler-block > .summary-content ol > li {
+	color: var(--render-viewer-color);
+}
+
+/* spoiler plugin: block codeblock */
+#rendered-md .spoiler-block > .summary-content pre:not(.mermaid) {
+	padding: 10px 15px;
+	margin: 0;
+	background-color: var(--codeblock-bg-color);
+}
+
+#rendered-md .spoiler-block > .summary-content pre:not(.mermaid) > code {
+	color: var(--codeblock-text-color) !important;
+	font-family: var(--monospace-font) !important;
+	font-size: var(--monospace-font-size) !important;
+}
+
+/* spoiler plugin: inline body */
+#spoiler-block-body > p > label.spoiler-inline,
+#rendered-md > p > label.spoiler-inline {
+	border: none;
+	box-shadow: none;
+	background: var(--si-bg);
+}
+
+/* export to PDF */
+@media print {
+	/* note title */
+	.exported-note-title {
+		display: var(--print-note-title-display);
+	}
+
+	/* markdown toc */
+	#rendered-md > .table-of-contents {
+		display: var(--print-markdown-toc-display);
+	}
+
+	#rendered-md > .table-of-contents > ul::before {
+		content: "Table Of Contents";
+		font-weight: 700;
+	}
+
+	#rendered-md > .table-of-contents > ul {
+		position: static;
+		width: auto;
+		height: auto;
+	}
+
+	#rendered-md > .table-of-contents li {
+		display: list-item;
+		overflow: visible;
+		list-style-type: none;
+	}
+}

@@ -2,7 +2,7 @@ local null_ls = require("null-ls")
 local builtins = null_ls.builtins
 
 local sources = {
-  
+
   -- Formatter
   builtins.formatting.clang_format,
   builtins.formatting.dart_format,

@@ -13,7 +13,7 @@ material.setup({
     "packer", -- Darker packer background
   },
 })
-vim.cmd([[colorscheme material]])
+cmd("colorscheme material")
 
 cmd("autocmd ColorScheme * highlight Normal guibg=NONE")
 cmd("autocmd ColorScheme * highlight NonText guibg=NONE")

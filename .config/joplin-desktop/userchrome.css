@@ -1,0 +1,682 @@
+/* Catppuccin Theme for Joplin | https://github.com/sadmice/Catppuccin-Theme-For-Joplin */
+/* CSS for: Markdown Editor & Joplin UI */
+
+:root {
+	--rosewater: #f5e0dc;
+	--flamingo: #f2cdcd;
+	--pink: #f5c2e7;
+	--mauve: #cba6f7;
+	--red: #f38ba8;
+	--maroon: #eba0ac;
+	--peach: #fab387;
+	--yellow: #f9e2af;
+	--green: #a6e3a1;
+	--teal: #94e2d5;
+	--sky: #89dceb;
+	--sapphire: #74c7ec;
+	--blue: #89b4fa;
+	--lavender: #b4befe;
+	--text: #cdd6f4;
+	--subtext1: #bac2de;
+	--subtext0: #a6adc8;
+	--overlay2: #9399b2;
+	--overlay1: #7f849c;
+	--overlay0: #6c7086;
+	--surface2: #585b70;
+	--surface1: #45475a;
+	--surface0: #313244;
+	--base: #1e1e2e;
+	--mantle: #181825;
+	--crust: #11111b;
+
+	--all-notes-button-display: none; /* show/hide the all notes button | show: "flex;" | hide: "none;" */
+	--rich-text-editor-switch-button-display: none; /* show/hide the editor toggle button | show: "flex;" | hide: "none;" */
+	--new-todo-button-display: none; /* show/hide the new todo button | show: "flex;" | hide: "none;" */
+
+	--base-font: "Fira Sans", avenir, arial, sans-serif;
+	--base-font-size: 13px;
+
+	--monospace-font: "Fira Code", monospace;
+	--monospace-font-size: 11px;
+
+	--markdown-editor-bg-color: var(--base);
+	--markdown-editor-color: var(--text);
+
+	--hr-color: var(--subtext0);
+
+	--headings-font-weight: 600;
+	--headings-text-color: var(--mauve);
+
+	--strong-text-color: var(--maroon);
+	--italic-text-color: var(--peach);
+	--mark-text-bg-color: var(--teal);
+	--mark-text-color: var(--mantle);
+	--search-text-bg-color: var(--yellow);
+	--search-text-color: var(--mantle);
+	--strikethrough-text-color: var(--subtext0);
+	--insert-text-color: var(--green);
+	--inline-code-text-color: var(--text);
+	--inline-code-bg-color: var(--mantle);
+	--link-color: var(--rosewater);
+	--link-text-color: var(--blue);
+
+	--list-text-color: var(--text);
+	--list-token-color: var(--teal);
+
+	--codeblock-bg-color: var(--mantle);
+
+	--syntax-tag-text-color: var(--red);
+	--syntax-string-text-color: var(--green);
+	--syntax-attribute-text-color: var(--peach);
+
+	--general-bg-color: var(--crust);
+
+	--np-bg-color: var(--crust);
+	--np-header-text-color: var(--text);
+	--np-notebook-bg-color-selected: var(--surface2);
+	--np-notebook-text-color: var(--text);
+	--np-note-count-label-color: var(--subtext0);
+	--np-sync-btn-bg-color: var(--surface0);
+	--np-sync-btn-text-color: var(--text);
+	--np-sync-btn-bg-color-hover: var(--surface2);
+
+	--nlp-bg-color: var(--crust);
+	--nlp-search-bar-bg-color: var(--surface0);
+	--nlp-search-bar-text-color: var(--text);
+	--nlp-search-bar-placeholder-color: var(--subtext0);
+	--nlp-search-bar-bg-color-hover: var(--surface2);
+	--nlp-btn-bg-color: var(--surface0);
+	--nlp-btn-bg-color-hover: var(--surface2);
+	--nlp-btn-icon-color: var(--text);
+	--nlp-note-text-color: var(--text);
+	--nlp-note-bg-color-selected: var(--surface2);
+
+	--eh-bg-color: var(--base);
+	--ett-bg-color: var(--base);
+	--ett-btn-icon-color: var(--text);
+	--ett-btn-bg-color-hover: var(--surface2);
+
+	--tags-bg-color: var(--surface0);
+
+	--modal-bg-color: var(--crust);
+	--modal-btn-bg-color: var(--surface0);
+	--modal-btn-bg-color-hover: var(--surface2);
+	--modal-btn-text-color: var(--text);
+
+	--scroll-bar-color: var(--overlay0);
+	--scroll-bar-color-hover: var(--overlay1);
+
+	--editors-splitter-color: var(--overlay0);
+
+	--options-menu-bg-color: var(--crust);
+	--options-menu-bg-color-selected: var(--surface2);
+	--options-menu-text-color: var(--text);
+	--options-content-bg-color: var(--base);
+	--options-btn-bg-color: var(--surface0);
+	--options-btn-bg-color-hover: var(--surface2);
+	--options-btn-text-color: var(--text);
+	--options-table-th-bg-color: var(--surface2);
+	--options-table-th-border-color: var(--overlay0);
+	--options-table-tr-odd-bg-color: var(--surface0);
+	--options-table-tr-even-bg-color: var(--surface1);
+	--options-table-shortcut-bg-color: var(--surface2);
+	--options-plugin-card-bg-color: var(--mantle);
+}
+
+/* scrollbar */
+::-webkit-scrollbar-thumb {
+	background-color: var(--scroll-bar-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: var(--scroll-bar-color-hover);
+}
+
+/* base font group */
+.CodeMirror-lines .CodeMirror-line * {
+	font-family: var(--base-font) !important;
+	font-size: var(--base-font-size);
+}
+
+/* monospace font group */
+.CodeMirror-lines .CodeMirror-line .cm-url.cm-rm-link,
+.CodeMirror-lines .CodeMirror-line .cm-hr,
+.CodeMirror-lines .CodeMirror-line .cm-tag,
+.CodeMirror-lines .CodeMirror-line .cm-string,
+.CodeMirror-lines .CodeMirror-line .cm-attribute,
+.CodeMirror-lines .CodeMirror-line .cm-image,
+.CodeMirror-lines .CodeMirror-line .cm-atom,
+.CodeMirror-lines .CodeMirror-line .cm-number,
+.CodeMirror-lines .CodeMirror-line .cm-bracket,
+.CodeMirror-lines .CodeMirror-line .cm-rm-link.cm-rm-image,
+.CodeMirror-lines .CodeMirror-line .cm-string.cm-rm-link,
+.CodeMirror-lines .CodeMirror-line .cm-link-text,
+.CodeMirror-lines .CodeMirror-line [class|="cm-katex"],
+.CodeMirror-lines .CodeMirror-line [class|="cm-katex"] ~ .cm-variable-2,
+.CodeMirror-lines .CodeMirror-line .cm-bracket ~ .cm-variable-2,
+.CodeMirror-lines .CodeMirror-line .cm-jn-monospace {
+	font-family: var(--monospace-font) !important;
+	font-size: var(--monospace-font-size);
+}
+
+/* markdown editor */
+.resizableLayoutItem.rli-root,
+.codeMirrorEditor {
+	background-color: var(--markdown-editor-bg-color) !important;
+}
+
+/* paragraph */
+.CodeMirror-line span[role="presentation"]:only-child,
+.CodeMirror-line .cm-comment.cm-jn-monospace {
+	color: var(--markdown-editor-color);
+}
+
+/* horizontal line */
+.CodeMirror-lines .CodeMirror-line .cm-hr {
+	color: var(--hr-text-color);
+}
+
+/* headings group  */
+.CodeMirror-line .cm-header {
+	font-weight: var(--headings-font-weight);
+	color: var(--headings-text-color) !important;
+}
+
+/* strong text */
+.CodeMirror-lines .CodeMirror-line .cm-strong {
+	color: var(--strong-text-color) !important;
+}
+
+/* italic & abbreviation */
+.CodeMirror-lines .CodeMirror-line .cm-em:not(.cm-image-alt-text) {
+	color: var(--italic-text-color) !important;
+}
+
+/* mark text */
+.CodeMirror-lines .CodeMirror-line .cm-rm-highlight {
+	color: var(--mark-text-color);
+	background-color: var(--mark-text-bg-color);
+}
+
+/* search text */
+.CodeMirror-lines .CodeMirror-line .cm-search-marker,
+.CodeMirror-lines .CodeMirror-line .cm-search-marker-selected {
+	color: var(--search-text-color) !important;
+	background-color: var(--search-text-bg-color) !important;
+}
+
+/* strikethrough text */
+.CodeMirror-lines .CodeMirror-line .cm-strikethrough {
+	color: var(--strikethrough-text-color) !important;
+}
+
+/* insert text */
+.CodeMirror-lines .CodeMirror-line .cm-rm-ins {
+	color: var(--insert-text-color) !important;
+}
+
+/* inline code text */
+.CodeMirror-lines .CodeMirror-line .cm-comment.cm-jn-inline-code {
+	color: var(--inline-code-text-color) !important;
+	background-color: var(--inline-code-bg-color) !important;
+	border: none !important;
+}
+
+/* syntax tag */
+.CodeMirror-lines .CodeMirror-line .cm-tag:not(.cm-jn-monospace),
+.CodeMirror-lines .CodeMirror-line .cm-number:not(.cm-jn-monospace) {
+	color: var(--syntax-tag-text-color);
+}
+
+/* syntax string */
+.CodeMirror-lines
+	.CodeMirror-line
+	.cm-string:not(.cm-url):not(.cm-jn-monospace),
+.CodeMirror-lines
+	.CodeMirror-line
+	.cm-string.cm-rm-image:not(.cm-rm-link):not(.cm-jn-monospace) {
+	color: var(--syntax-string-text-color);
+}
+
+/* syntax attribute */
+.CodeMirror-lines .CodeMirror-line .cm-attribute:not(.cm-jn-monospace) {
+	color: var(--syntax-attribute-text-color);
+}
+
+/* link */
+.CodeMirror .CodeMirror-line .cm-rm-link,
+.CodeMirror .CodeMirror-line .cm-url {
+	color: var(--link-color);
+}
+
+/* link text */
+.CodeMirror .CodeMirror-line .cm-link-text {
+	color: var(--link-text-color);
+}
+
+/* list text */
+.CodeMirror .CodeMirror-line .cm-variable-2,
+.CodeMirror .CodeMirror-line .cm-variable-3,
+.CodeMirror .CodeMirror-line .cm-keyword {
+	color: var(--list-text-color);
+}
+
+/* list token */
+.cm-variable-2.cm-overlay.cm-rm-list-token,
+.cm-variable-3.cm-overlay.cm-rm-list-token,
+.cm-keyword.cm-overlay.cm-rm-list-token {
+	color: var(--list-token-color);
+}
+
+/* code block */
+.CodeMirror .cm-jn-code-block-background.CodeMirror-linebackground {
+	background-color: var(--codeblock-bg-color);
+}
+
+/* editors splitter */
+.rli-editor > div > div > div > div > div > div > div:last-of-type {
+	border-color: var(--editors-splitter-color) !important;
+}
+
+body {
+	background-color: var(--general-bg-color);
+}
+
+/* notebook panel: container */
+.sidebar {
+	background-color: var(--np-bg-color) !important;
+}
+
+/* notebook panel: all notes button */
+.sidebar .all-notes {
+	display: var(--all-notes-button-display) !important;
+}
+
+/* notebook panel: text & icons */
+.sidebar > div:first-child > div:first-child > div > .icon-notebooks,
+.sidebar > div:first-child > div:first-child > div > .icon-notebooks ~ span,
+.sidebar > div:first-child > div:first-child > button > span,
+.sidebar > div:first-child > div:nth-child(3) > div > .icon-tags,
+.sidebar > div:first-child > div:nth-child(3) > div > .icon-tags ~ span {
+	color: var(--np-header-text-color) !important;
+}
+
+/* notebook panel: notebook */
+.list-item-container .list-item > .title,
+.list-item-container .list-item > .tag-label {
+	color: var(--np-notebook-text-color);
+	font-family: var(--base-font);
+	font-size: var(--base-font-size);
+}
+
+.rli-sideBar .tags .list-item-container,
+.rli-sideBar .list-item-container {
+	transition: 300ms !important;
+}
+
+/* notebook panel: notebook hover & selected */
+.rli-sideBar .tags .list-item-container:hover,
+.rli-sideBar .list-item-container:hover,
+.rli-sideBar .tags .list-item-container.selected,
+.rli-sideBar [class*="list-item-depth"].selected {
+	background-color: var(--np-notebook-bg-color-selected);
+}
+
+/* notebook panel: notebook item indentation */
+.rli-sideBar .list-item-depth-0 {
+	padding-left: 11px;
+}
+
+.rli-sideBar .list-item-depth-1 {
+	padding-left: 22px;
+}
+
+.rli-sideBar .list-item-depth-2 {
+	padding-left: 33px;
+}
+
+.rli-sideBar .list-item-depth-3 {
+	padding-left: 44px;
+}
+
+.rli-sideBar .list-item-depth-4 {
+	padding-left: 55px;
+}
+
+.rli-sideBar .list-item-depth-5 {
+	padding-left: 66px;
+}
+
+.rli-sideBar .list-item-depth-6 {
+	padding-left: 77px;
+}
+
+.rli-sideBar .list-item-depth-7 {
+	padding-left: 88px;
+}
+
+.rli-sideBar .list-item-depth-8 {
+	padding-left: 99px;
+}
+
+.rli-sideBar .list-item-depth-9 {
+	padding-left: 110px;
+}
+
+.rli-sideBar .list-item-depth-10 {
+	padding-left: 121px;
+}
+
+.rli-sideBar .list-item-depth-11 {
+	padding-left: 132px;
+}
+
+.rli-sideBar .list-item-depth-12 {
+	padding-left: 143px;
+}
+
+.rli-sideBar .list-item-depth-13 {
+	padding-left: 154px;
+}
+
+.rli-sideBar .list-item-depth-14 {
+	padding-left: 165px;
+}
+
+.rli-sideBar .list-item-depth-15 {
+	padding-left: 176px;
+}
+
+/* notebook panel: note count label */
+.ihcmBd.note-count-label {
+	color: var(--np-note-count-label-color);
+	font-size: var(--base-font-size);
+}
+
+/* notebook panel: synchronize button */
+.sidebar > div > button {
+	background-color: var(--np-sync-btn-bg-color) !important;
+	border: none;
+	transition: 300ms;
+}
+
+.sidebar button > .icon-sync ~ span,
+.sidebar button > .icon-sync::before {
+	color: var(--np-sync-btn-text-color);
+}
+
+/* notebook panel: synchronize button hover */
+.sidebar > div > button:hover {
+	background-color: var(--np-sync-btn-bg-color-hover) !important;
+}
+
+/* notebook panel: synchronize button icon */
+.icon-sync {
+	transition: transform 800ms, font-size 800ms, text-shadow 800ms;
+}
+
+.sidebar > div > button:hover .icon-sync {
+	transform: rotateZ(11000deg);
+	transition: transform 10s;
+}
+
+/* notelist panel */
+.rli-noteList > div > div > div {
+	background-color: var(--nlp-bg-color);
+	border: none;
+}
+
+/* notelist panel: search bar */
+.rli-noteList .search-bar > div > input {
+	background-color: var(--nlp-search-bar-bg-color);
+	color: var(--nlp-search-bar-text-color);
+	border: none;
+	transition: 300ms;
+}
+
+.rli-noteList .search-bar > div > input::placeholder {
+	color: var(--nlp-search-bar-placeholder-color);
+}
+
+/* notelist panel: search bar hover */
+.rli-noteList .search-bar > div > input:hover,
+.rli-noteList .search-bar > div > input:focus {
+	background-color: var(--nlp-search-bar-bg-color-hover);
+}
+
+.rli-noteList .new-todo-button {
+	display: var(--new-todo-button-display);
+}
+
+/* notelist panel: buttons */
+.rli-noteList button:not(.search-bar > div > input ~ button) {
+	background-color: var(--nlp-btn-bg-color);
+	transition: 300ms;
+	border: none;
+}
+
+/* notelist panel: buttons hover */
+.rli-noteList button:not(.search-bar > div > input ~ button):hover {
+	background-color: var(--nlp-btn-bg-color-hover);
+}
+
+/* notelist panel: buttons icons */
+.icon-search::before,
+.icon-note::before,
+.fa-font::before,
+.fa-long-arrow-alt-down::before,
+.fa-long-arrow-alt-up::before,
+.fa-check-square::before,
+.fa-times::before,
+.fa-calendar-alt::before,
+.fa-calendar-plus::before,
+.fa-wrench::before {
+	color: var(--nlp-btn-icon-color);
+}
+
+/* notelist panel: note */
+.rli-noteList .item-list.note-list ::before {
+	border: none;
+}
+
+.rli-noteList .note-list .note-list-item a > span {
+	color: var(--nlp-note-text-color);
+	font-family: var(--base-font);
+	font-size: var(--base-font-size);
+}
+
+.rli-noteList .note-list .note-list-item {
+	transition: 300ms;
+}
+
+/* notelist panel: note hover & selected */
+.rli-noteList .note-list .note-list-item:hover {
+	background-color: var(--nlp-note-bg-color-selected);
+}
+
+.rli-noteList .note-list .selected.note-list-item {
+	background-color: var(--nlp-note-bg-color-selected);
+}
+
+/* editor header: container */
+.rli-editor > div > div > div > div:first-child,
+.rli-editor input.title-input,
+span.updated-time-label,
+.updated-time-label ~ .editor-toolbar {
+	background-color: var(--eh-bg-color) !important;
+}
+
+/* editor top toolbar: container */
+.rli-editor > div > div > div > div > div > div > .editor-toolbar {
+	background-color: var(--ett-bg-color) !important;
+}
+
+/* editor top toolbar: button */
+.editor-toolbar > div > a {
+	transition: 300ms;
+}
+
+.editor-toolbar > div > a > i,
+.editor-toolbar > div > a > span {
+	color: var(--ett-btn-icon-color);
+}
+
+/* editor top toolbar: button hover */
+.editor-toolbar > div > a:hover {
+	background-color: var(--ett-btn-bg-color-hover);
+}
+
+/* editor top toolbar: rich text editor switch button */
+.editor-toolbar > div > button {
+	display: var(--rich-text-editor-switch-button-display) !important;
+}
+
+/* editor top toolbar: rich text editor toolbar */
+.tox-editor-header > div > div > div {
+	background: none !important;
+}
+
+div.joplin-tinymce > div:nth-child(1),
+div.joplin-tinymce > div:nth-child(2),
+div.joplin-tinymce div.tox div.tox-toolbar__primary {
+	background-color: var(--ett-bg-color) !important;
+}
+
+div.joplin-tinymce div.tox button.tox-tbtn svg,
+div.joplin-tinymce div.tox :not(svg):not(rect),
+div.joplin-tinymce > div:first-child a span {
+	color: var(--ett-btn-icon-color);
+	fill: var(--ett-btn-icon-color);
+}
+
+div.joplin-tinymce div.tox button.tox-tbtn,
+div.joplin-tinymce > div:first-child a {
+	transition: 300ms;
+}
+
+div.joplin-tinymce div.tox button.tox-tbtn:hover,
+div.joplin-tinymce > div:first-child a:hover {
+	background-color: var(--ett-btn-bg-color-hover);
+}
+
+/* tags */
+.tag-bar > div > .tag-list > button {
+	background-color: var(--tags-bg-color) !important;
+}
+
+/* general modal dialogs */
+.modal-dialog,
+.dialog-root,
+.dialog-content {
+	background-color: var(--modal-bg-color) !important;
+	border-radius: 10px;
+}
+
+.modal-dialog button,
+.dialog-root button,
+.modal-dialog input,
+.dialog-root input {
+	background-color: var(--modal-btn-bg-color) !important;
+	color: var(--modal-btn-text-color) !important;
+	border: none !important;
+	border-radius: 3px !important;
+	transition: 300ms;
+}
+
+.modal-dialog button:hover,
+.dialog-root button:hover {
+	background-color: var(--modal-btn-bg-color-hover) !important;
+}
+
+/* edit notebook modal dialog */
+.master-password-dialog > div {
+	background-color: var(--modal-bg-color) !important;
+}
+
+/* tag manager modal dialog: tag selector */
+.modal-dialog div:nth-child(2) > div > div {
+	background-color: var(--modal-btn-bg-color) !important;
+}
+
+/* tag manager modal dialog: tags */
+.modal-dialog div:nth-child(2) > div > div > div:first-child div {
+	background-color: var(--tags-bg-color) !important;
+	border-radius: 100px 100px;
+	margin-right: 3px;
+}
+
+.modal-dialog div:nth-child(2) > div > div > div:first-child div:last-child {
+	background: none !important;
+}
+
+/* options page: menu */
+.config-screen > div:first-child,
+.config-screen > div:first-child > div {
+	background-color: var(--options-menu-bg-color) !important;
+}
+
+.config-screen > div:first-child > a > span {
+	color: var(--options-menu-text-color) !important;
+}
+
+.config-screen > div:first-child > a:hover,
+.kpFtJJ {
+	background-color: var(--options-menu-bg-color-selected) !important;
+}
+
+/* options page: content */
+.config-screen > div:last-child > div,
+.config-screen-content-wrapper > div > div {
+	background-color: var(--options-content-bg-color) !important;
+}
+
+.config-screen > div:last-child > div:last-child {
+	border-top: 1px solid var(--hr-color);
+}
+
+/* options page: inputs, buttons, dropdown list */
+.config-screen button,
+.config-screen input,
+.config-screen select {
+	border-radius: 3px !important;
+	background-color: var(--options-btn-bg-color) !important;
+	color: var(--options-btn-text-color) !important;
+}
+
+.config-screen button:hover {
+	background-color: var(--options-btn-bg-color-hover) !important;
+}
+
+.config-screen button span {
+	color: var(--options-btn-text-color) !important;
+}
+
+/* options page: table */
+.config-screen table,
+.config-screen table > thead > tr > th,
+.config-screen table > tbody > tr > td {
+	border: none !important;
+}
+
+.config-screen table > thead > tr > th {
+	background-color: var(--options-table-th-bg-color) !important;
+	border: none !important;
+	border-bottom: 3px solid var(--options-table-th-border-color) !important;
+}
+
+.config-screen table > tbody > tr:nth-child(even) {
+	background-color: var(--options-table-tr-even-bg-color) !important;
+}
+
+.config-screen table > tbody > tr:nth-child(odd) {
+	background-color: var(--options-table-tr-odd-bg-color) !important;
+}
+
+.config-screen table kbd {
+	background-color: var(--options-table-shortcut-bg-color) !important;
+}
+
+/* options page: plugin cards */
+.gNDenk {
+	background-color: var(--options-plugin-card-bg-color) !important;
+}
