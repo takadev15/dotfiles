@@ -13,8 +13,12 @@ material.setup({
     "packer", -- Darker packer background
   },
 })
-cmd("colorscheme material")
 
+local hl = function(name, opts)
+  vim.api.nvim_set_hl(0, name, opts)
+end
+
+cmd("colorscheme material")
 cmd("autocmd ColorScheme * highlight Normal guibg=NONE")
 cmd("autocmd ColorScheme * highlight NonText guibg=NONE")
 -- highlight(0, "Normal", {bg = "NONE"})
@@ -38,6 +42,31 @@ cmd("autocmd ColorScheme * highlight LineNr guifg=#3F3F3F")
 -- disable vertical split
 cmd("autocmd ColorScheme * highlight VertSplit ctermbg=NONE guibg=NONE")
 
+-- nvim-navic
+hl("NavicText", { fg = "#AAAAAA" })
+hl("NavicIconsNamespace", { link = "CmpItemKindNamespace" })
+hl("NavicIconsType", { link = "CmpItemKindType" })
+hl("NavicIconsClass", { link = "CmpItemKindClass" })
+hl("NavicIconsEnum", { link = "CmpItemKindEnum" })
+hl("NavicIconsInterface", { link = "CmpItemKindInterface" })
+hl("NavicIconsStruct", { link = "Structure" })
+hl("NavicIconsTypeParameter", { link = "CmpItemKindParameter" })
+hl("NavicIconsParameter", { link = "CmpItemKindParameter" })
+hl("NavicIconsVariable", { link = "CmpItemKindVariable" })
+hl("NavicIconsProperty", { link = "CmpItemKindProperty" })
+hl("NavicIconsEnumMember", { link = "Constant" })
+hl("NavicIconsEvent", { link = "Keyword" })
+hl("NavicIconsFunction", { link = "CmpItemKindFunction" })
+hl("NavicIconsMethod", { link = "CmpItemKindMethod" })
+hl("NavicIconsMacro", { link = "CmpItemKindFuncMacro" })
+hl("NavicIconsKeyword", { link = "CmpItemKindKeyword" })
+hl("NavicIconsModifier", { link = "StorageClass" })
+hl("NavicIconsComment", { link = "CmpItemKindComment" })
+hl("NavicIconsString", { link = "CmpItemKindString" })
+hl("NavicIconsNumber", { link = "CmpItemKindNumber" })
+hl("NavicIconsRegexp", { link = "CmpItemKindStringRegex" })
+hl("NavicIconsOperator", { link = "CmpItemKindOperator" })
+
 local opts = {
   -- whether to highlight the currently hovered symbol
   -- disable if your cpu usage is higher than you want it
@@ -51,7 +80,7 @@ local opts = {
 }
 
 require("indent_blankline").setup({
-  filetype_exclude = { "help", "terminal", "alpha", "packer", "norg" },
+  filetype_exclude = { "help", "terminal", "alpha", "packer", "norg", "neo-tree" },
   buftype_exclude = { "terminal", " " },
 })
 
