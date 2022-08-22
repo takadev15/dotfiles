@@ -109,7 +109,7 @@ return require("packer").startup({
     use({ 
       "SmiteshP/nvim-navic",
       config = function()
-        require("nvim-navic").setup({ highlight = true, separator = " ❯ " })
+        require("nvim-navic").setup({ highlight = false, separator = " ❯ " })
       end,
       after = "nvim-treesitter",
     })
@@ -209,7 +209,7 @@ return require("packer").startup({
     use({ "ThePrimeagen/git-worktree.nvim" })
     use({
       "rbong/vim-flog",
-      setup = function()
+      config = function()
         vim.g.flog_default_arguments = { max_count = 4000 }
       end,
     })
@@ -217,22 +217,13 @@ return require("packer").startup({
       "rhysd/git-messenger.vim",
       keys = "<leader>gm",
       config = function()
-        vim.g.git_messenger_close_on_cursor_moved = true
         vim.g.git_messenger_include_diff = "current"
         vim.g.git_messenger_close_on_cursor_moved = false
-        vim.g.git_messenger_into_popup_after_show = true
         vim.g.git_messenger_always_into_popup = true
         vim.g.git_messenger_max_popup_height = 20
         vim.g.git_messenger_max_popup_width = 50
-        vim.g.git_messenger_floating_win_opts = {
-          border = "single",
-        }
-        vim.g.git_messenger_popup_content_margins = true
+        vim.g.git_messenger_floating_win_opts = { border = "solid" }
       end,
-    })
-    use({
-      "TimUntersberger/neogit",
-      requires = { "sindrets/diffview.nvim" },
     })
     use({
       "lewis6991/gitsigns.nvim",
@@ -240,6 +231,7 @@ return require("packer").startup({
         require("modules.git.gitsigns")
       end,
     })
+    use({ "rhysd/conflict-marker.vim" })
 
     -- Debugger
     use({ "mfussenegger/nvim-dap", requires = {
@@ -363,11 +355,15 @@ return require("packer").startup({
 
     -- Miscellaneous
     use({ "yuttie/comfortable-motion.vim" })
-    use({ "godlygeek/tabular" })
     use({"fedepujol/move.nvim"})
     use({ "machakann/vim-sandwich" })
     use({ "lukas-reineke/indent-blankline.nvim" })
     use({ "tpope/vim-dadbod", requires = { "kristijanhusak/vim-dadbod-ui" }, ft = "sql" })
+    use({
+      "kristijanhusak/vim-dadbod-completion",
+      after = "vim-dadbod",
+      ft = { "sql", "msql", "plsql" },
+    })
     use({ "antonk52/gitignore-grabber.nvim" }) 
     use({
       "stevearc/aerial.nvim",
@@ -395,7 +391,7 @@ return require("packer").startup({
       end,
     })
     use({
-      "norcalli/nvim-colorizer.lua",
+      "NvChad/nvim-colorizer.lua",
       config = function()
         require("colorizer").setup()
       end,

@@ -145,7 +145,7 @@ components.right.active[1] = {
   hl = {
     fg = colors.green,
   },
-  icon = "+",
+  icon = "  ",
 }
 
 components.right.active[2] = {
@@ -153,7 +153,7 @@ components.right.active[2] = {
   hl = {
     fg = colors.orange,
   },
-  icon = "~",
+  icon = "  ",
 }
 
 components.right.active[3] = {
@@ -161,7 +161,7 @@ components.right.active[3] = {
   hl = {
     fg = colors.red,
   },
-  icon = "-",
+  icon = "  ",
 }
 
 components.right.active[4] = {

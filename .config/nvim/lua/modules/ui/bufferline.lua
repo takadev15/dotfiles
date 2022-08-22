@@ -50,19 +50,6 @@ require("bufferline").setup({
           table.insert(result, { text = "  " .. diagnostic_warning , guifg = "#F2F27A", guibg = "#0F111A" })
         end
 
-        -- LSP-specific options
-        -- for _, client in pairs(vim.lsp.get_active_clients()) do
-        --   if client.name == "dartls" then
-        --     if vim.g.flutter_tools_decorations.app_version ~= nil then
-        --       table.insert(result, {
-        --         text = " " .. vim.g.flutter_tools_decorations.app_version .. " ",
-        --         guifg = "#87D3F8",
-        --         guibg = "#090B10",
-        --       })
-        --     end
-        --   end
-        -- end
-
         -- Git branch
         local git_status = vim.fn["fugitive#statusline"]()
         if git_status ~= "" then

@@ -42,9 +42,6 @@ map("n", "<leader>lq", require("telescope.builtin").diagnostics)
 -- #####      Plugins keymap     #####
 -- ###################################
 
--- Version control
--- map("n", "<leader>g", '<cmd>lua require("neogit").status.create("split")<CR>')
-
 -- aerial
 map("n", "<leader>ss", ":AerialToggle<CR>")
 

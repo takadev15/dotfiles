@@ -1,5 +1,4 @@
 local vim = vim
-local neogit = require("neogit")
 
 local map = function(mode, l, r, opts)
   opts = opts or {}
@@ -15,9 +14,3 @@ map("n", "<leader>gcl", "<cmd>:diffget //3<CR>")
 map("n", "<leader>gC", require("telescope.builtin").git_commits)
 map("n", "<leader>gb", require("telescope.builtin").git_branches)
 
--- Neogit
-neogit.setup({
-  integrations = {
-    diffview = true,
-  },
-})

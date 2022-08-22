@@ -52,64 +52,6 @@ gls.left[1] = {
   },
 }
 gls.left[2] = {
-  ViMode = {
-    provider = function()
-      -- auto change color according the vim mode
-      local alias = {
-        n = "NORMAL",
-        i = "INSERT",
-        c = "COMMAND",
-        V = "VISUAL",
-        [""] = "VISUAL",
-        v = "VISUAL",
-        c = "COMMAND-LINE",
-        ["r?"] = ":CONFIRM",
-        rm = "--MORE",
-        R = "REPLACE",
-        Rv = "VIRTUAL",
-        s = "SELECT",
-        S = "SELECT",
-        ["r"] = "HIT-ENTER",
-        [""] = "SELECT",
-        t = "TERMINAL",
-        ["!"] = "SHELL",
-      }
-      local mode_color = {
-        n = colors.green,
-        i = colors.blue,
-        v = colors.magenta,
-        [""] = colors.blue,
-        V = colors.blue,
-        c = colors.red,
-        no = colors.magenta,
-        s = colors.orange,
-        S = colors.orange,
-        [""] = colors.orange,
-        ic = colors.yellow,
-        R = colors.purple,
-        Rv = colors.purple,
-        cv = colors.red,
-        ce = colors.red,
-        r = colors.cyan,
-        rm = colors.cyan,
-        ["r?"] = colors.cyan,
-        ["!"] = colors.green,
-        t = colors.green,
-        c = colors.purple,
-        ["r?"] = colors.red,
-        ["r"] = colors.red,
-        rm = colors.red,
-        R = colors.yellow,
-        Rv = colors.magenta,
-      }
-      local vim_mode = vim.fn.mode()
-      vim.api.nvim_command("hi GalaxyViMode guifg=" .. mode_color[vim_mode])
-      return " "
-    end,
-    highlight = { colors.red, colors.bg, "bold" },
-  },
-}
-gls.left[3] = {
   FileIcon = {
     provider = "FileIcon",
     condition = condition.buffer_not_empty,
@@ -119,7 +61,7 @@ gls.left[3] = {
     },
   },
 }
-gls.left[4] = {
+gls.left[3] = {
   FileName = {
     provider = "FileName",
     condition = condition.buffer_not_empty,
@@ -127,16 +69,7 @@ gls.left[4] = {
   },
 }
 
---[[ gls.left[9] = {
-   LeftEnd ={
-    provider = '',
-    separator = "",
-    separator_highlight = {colors.line_bg, colors.bg},
-    highlight = {colors.line_bg, colors.bg}
-   }
-} ]]
-
-gls.left[5]= {
+gls.left[4]= {
     nvimNavic = {
         provider = function()
             return navic.get_location()
@@ -147,7 +80,7 @@ gls.left[5]= {
     }
 }
 
-gls.left[6] = {
+gls.left[5] = {
   Space = {
     provider = function()
       return " "
@@ -167,7 +100,7 @@ end
 gls.right[1] = {
   DiffAdd = {
     provider = "DiffAdd",
-    icon = "+",
+    icon = "  ",
     condition = checkwidth,
     highlight = { colors.green },
   },
@@ -175,7 +108,7 @@ gls.right[1] = {
 gls.right[2] = {
   DiffModified = {
     provider = "DiffModified",
-    icon = "~",
+    icon = "  ",
     condition = checkwidth,
     highlight = { colors.orange },
   },
@@ -183,7 +116,7 @@ gls.right[2] = {
 gls.right[3] = {
   DiffRemove = {
     provider = "DiffRemove",
-    icon = "-",
+    icon = "  ",
     condition = checkwidth,
     highlight = { colors.red },
   },
@@ -230,22 +163,6 @@ gls.right[8] = {
     highlight = { colors.fg },
   },
 }
-
--- gls.right[4] = {
---   ScrollBar = {
---     provider = 'ScrollBar',
---     highlight = {colors.blue,colors.purple},
---   }
--- }
---
--- gls.right[3] = {
---   Vista = {
---     provider = VistaPlugin,
---     separator = ' ',
---     separator_highlight = {colors.bg,colors.line_bg},
---     highlight = {colors.fg,colors.line_bg,'bold'},
---   }
--- }
 
 gls.short_line_left[1] = {
   BufferType = {
