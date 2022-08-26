@@ -1,6 +1,6 @@
 require("tabline_framework").setup({
-  hl = { fg = "#888888", bg = "#0F111A" },
-  hl_fill = { fg = "#888888", bg = "NONE" },
+  hl = { fg = "#ffffff", bg = "#11111b" },
+  hl_sel = { fg = "#11111b", bg = "#89dceb" },
   render = function(f)
     f.make_tabs(function(info)
       f.add(" Tab " .. info.index .. " ")
@@ -15,19 +15,19 @@ require("tabline_framework").setup({
     local hints = vim.tbl_count(vim.diagnostic.get(nil, { severity = vim.diagnostic.severity.HINT }))
 
     if errors ~= 0 then
-      f.add({ "  " .. errors .. " ", fg = "#0F111A", bg = "#EC5F67" })
+      f.add({ "  " .. errors .. " ", fg = "#0F111A", bg = "#d20f39" })
     end
     if warnings ~= 0 then
-      f.add({ "  " .. warnings .. " ", fg = "#0F111A", bg = "#FABD2F" })
+      f.add({ "  " .. warnings .. " ", fg = "#0F111A", bg = "#e5c890" })
     end
     if hints ~= 0 then
-      f.add({ "  " .. hints .. " ", fg = "#0F111A", bg = "#A0B9D8" })
+      f.add({ "  " .. hints .. " ", fg = "#0F111A", bg = "#94e2d5" })
     end
 
     -- Git Branch
     local git_branch = vim.g.gitsigns_head
     if git_branch and git_branch ~= "" then
-      f.add({ "  " .. git_branch .. " ", fg = "#0F111A", bg = "#FF8800", bold = true })
+      f.add({ "  " .. git_branch .. " ", fg = "#0F111A", bg = "#fe640b", bold = true })
     end
   end,
 })

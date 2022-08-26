@@ -1,11 +1,17 @@
-configuration {
-  display-run: " ";
-  display-drun: "  ";
-  display-window: "  ";
-  drun-display-format: "{icon} {name}";
-  font: "JetBrainsMono Nerd Font Medium 10";
-  modi: "window,run,drun";
-  show-icons: true;
+configuration{
+    modi: "run,drun,window";
+    icon-theme: "Oranchelo";
+    show-icons: true;
+    terminal: "kitty";
+    drun-display-format: "{icon} {name}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+    display-drun: "   Apps ";
+    display-run: "   Run ";
+    display-window: " 﩯  Window";
+    display-Network: " 󰤨  Network";
+    sidebar-mode: true;
 }
 
-@theme "/home/taka15/.config/rofi/themes/rounded-red.rasi"
+@theme "/home/taka15/.config/rofi/themes/catppuccin-mocha.rasi"

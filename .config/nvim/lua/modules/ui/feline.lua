@@ -1,247 +1,298 @@
 local feline = require("feline")
 local lsp = require("feline.providers.lsp")
-local status = require("lsp-status")
-local vi_mode_utils = require("feline.providers.vi_mode")
+local dap = require("dap")
+local clrs = require("catppuccin.palettes").get_palette()
 
-require("nvim-gps").setup({
-  separator = " > ",
-})
+local M = {}
 
 local colors = {
-  bg = "#0F111A",
-  line_bg = "#1B1E2B",
-  fg = "#FFFFFF",
-  fg_green = "#14B37D",
-  yellow = "#F2F27A",
-  cyan = "#87D3F8",
-  darkblue = "#0B0D14",
-  green = "#14B37D",
-  orange = "#f39c12",
-  purple = "#c74de",
-  magenta = "#703FAF",
-  blue = "#3A75C4",
-  red = "#FF4151",
+  bg = "#181825",
+  line_bg = "#45475a",
+  fg = "#cdd6f4",
+  sapphire = "#74c7ec",
+  yellow = "#f9e2af",
+  cyan = "#94e2d5",
+  darkblue = "#1e66f5",
+  green = "#a6e3a1",
+  orange = "#fab387",
+  pink = "#f5c2e7",
+  magenta = "#cba6f7",
+  blue = "#89b4fa",
+  red = "#d20f39",
 }
 
-local properties = {
-  force_inactive = {
-    filetypes = {
-      "NvimTree",
-      "dbui",
-      "startify",
-      "fugitive",
-      "fugitiveblame",
-      "packer",
+local mode_colors_list = {
+    NORMAL = colors.green,
+    INSERT = colors.blue,
+    VISUAL = colors.magenta,
+    OP = colors.green,
+    BLOCK = colors.blue,
+    REPLACE = colors.red,
+    ['V-REPLACE'] = colors.red,
+    ENTER = colors.cyan,
+    MORE = colors.cyan,
+    SELECT = colors.orange,
+    COMMAND = colors.sapphire,
+    SHELL = colors.green,
+    TERM = colors.blue,
+    NONE = colors.yellow
+}
+
+local separator = {
+  hl = {
+    fg = colors.bg,
+    bg = colors.bg
+  },
+  str = " ",
+}
+
+local winbar_components = {
+  active = { {}, {}, {} },
+  inactive = { {}, {} },
+}
+
+local statusline_components = {
+  active = { {}, {}, {} },
+  inactive = { {}, {} },
+}
+
+table.insert(winbar_components.active[1], {
+  provider = {
+    name = "file_info",
+    opts = {
+      type = "relative-short", 
     },
-    buftypes = {
-      "terminal",
-    },
-    bufnames = {},
   },
-}
-
-local components = {
-  left = { active = {}, inactive = {} },
-  mid = { active = {}, inactive = {} },
-  right = { active = {}, inactive = {} },
-}
-
-components.left.active[1] = {
-  provider = "█ ",
-  hl = {
-    fg = vi_mode_utils.get_mode_color(),
-  },
-}
-
---[[ components.left.active[2] = {
-  provider = function ()
-    local result = {}
-    local git_status = vim.fn["fugitive#statusline"]()
-     if git_status ~= "" then
-     git_status = git_status:match("%((.*)%)")
-        table.insert(result, { text = "  " .. git_status .. " ", guifg = "#f39c12", guibg = "#0F111A" })
-      end
-    return result
-  end,
-  hl = {
-    bg = colors.bg,
-    fg = colors.fg,
-  }
-} ]]
-
-components.left.active[2] = {
-  provider = "file_info",
-  type = "relative_short",
-  hl = {
-    fg = colors.fg,
-    bg = colors.line_bg,
-  },
-  sep = {
-    str = " ",
-  },
-}
-
-components.left.active[3] = {
-  provider = function()
-    return require("nvim-gps").get_location()
-  end,
   enabled = function()
-    return require("nvim-gps").is_available()
+    return vim.api.nvim_buf_get_name(0) ~= ""
   end,
   hl = {
-    fg = colors.white,
-    bg = colors.line_bg,
+    bg = "NONE",
+    style = "bold",
   },
   right_sep = {
-    hl = {
-      fg = colors.fg,
-      bg = colors.line_bg,
-    },
-    str = ">",
+    hl = { bg = "NONE" },
+    str = " ",
   },
-}
+  left_sep = {
+    hl = { bg = "NONE" },
+    str = " ",
+  },
+})
 
-components.mid.active[1] = {
+table.insert(winbar_components.active[1], {
   provider = function()
-    -- TODO: Improve handling
-    local res = {}
-    local config = {
-      spinner_frames = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" },
-    }
-
-    local buf_message = status.messages()
-    for _, msg in ipairs(buf_message) do
-      local contents = ""
-      if msg.progress then
-        contents = msg.title
-        if msg.message then
-          contents = contents
-        end
-
-        if msg.percentage then
-          contents = contents
-        end
-
-        if msg.spinner then
-          contents = contents .. " " .. config.spinner_frames[(msg.spinner % #config.spinner_frames) + 1]
-        end
-      end
-
-      table.insert(res, contents)
-    end
-
-    return vim.trim(table.concat(res, " "))
+    return require("nvim-navic").get_location()
   end,
   enabled = function()
-    return lsp.is_lsp_attached
+    return require("nvim-navic").is_available()
   end,
   hl = {
-    fg = colors.grey,
+    bg = "NONE",
   },
-}
+})
 
-components.right.active[1] = {
-  provider = "git_diff_added",
+table.insert(winbar_components.inactive[1], {
+  provider = {
+    name = "file_info",
+    opts = {
+      type = "relative-short",
+    },
+  },
+  enabled = function()
+    return vim.api.nvim_buf_get_name(0) ~= ""
+  end,
   hl = {
-    fg = colors.green,
+    bg = "NONE",
+    style = "bold",
   },
-  icon = "  ",
-}
+  right_sep = {
+    hl = { bg = "NONE" },
+    str = " ",
+  },
+  left_sep = {
+    hl = { bg = "NONE" },
+    str = " ",
+  },
+})
 
-components.right.active[2] = {
-  provider = "git_diff_changed",
+table.insert(winbar_components.inactive[1], {
+  provider = function()
+    return require("nvim-navic").get_location()
+  end,
+  enabled = function()
+    return require("nvim-navic").is_available()
+  end,
+  hl = {
+    bg = "NONE",
+  },
+})
+
+-- Statusline Components
+table.insert(statusline_components.active[1], {
+  provider = function()
+    local mode = require("feline.providers.vi_mode").get_vim_mode()
+    return " " .. mode:sub(1, 1) .. " "
+  end,
+  hl = {
+    bg = colors.green,
+    fg = colors.bg,
+    -- fg = require("feline.providers.vi_mode").get_mode_color(),
+    style = "bold",
+  },
+  right_sep = "slant_right_2",
+})
+
+table.insert(statusline_components.active[1], {
+  provider = function()
+    return " "
+  end,
+  hl = {
+    bg = colors.bg
+  }
+})
+
+table.insert(statusline_components.active[1], {
+  provider = function()
+    return require("gitblame").get_current_blame_text()
+  end,
+  enabled = function()
+    return require("gitblame").is_blame_text_available()
+  end,
+  hl = {
+    fg = colors.fg,
+    bg = colors.bg
+  },
+  left_sep = separator,
+})
+
+table.insert(statusline_components.active[1], {
+  provider = function()
+    return "[DEBUG] " .. dap.status()
+  end,
+  enabled = function()
+    return dap.status() ~= ""
+  end,
   hl = {
     fg = colors.orange,
+    bg = colors.bg,
   },
-  icon = "  ",
-}
+  left_sep = separator,
+})
 
-components.right.active[3] = {
-  provider = "git_diff_removed",
+table.insert(statusline_components.active[3], {
+  provider = "file_encoding",
   hl = {
-    fg = colors.red,
+    style = "bold,italic",
+    bg = colors.bg
   },
-  icon = "  ",
-}
+  right_sep = separator,
+})
 
-components.right.active[4] = {
+table.insert(statusline_components.active[3], {
   provider = "diagnostic_errors",
   enabled = function()
     return lsp.diagnostics_exist("Error")
   end,
   hl = {
     fg = colors.red,
+    bg = colors.bg
   },
-  icon = " ",
-}
+  icon = "  ",
+})
 
-components.right.active[5] = {
+table.insert(statusline_components.active[3], {
   provider = "diagnostic_warnings",
   enabled = function()
-    return lsp.diagnostics_exist("Warning")
+    return lsp.diagnostics_exist("Warn")
   end,
   hl = {
     fg = colors.yellow,
+    bg = colors.bg
   },
-  icon = " ",
-}
+  icon = "  ",
+})
 
-components.right.active[6] = {
+table.insert(statusline_components.active[3], {
   provider = "diagnostic_hints",
   enabled = function()
     return lsp.diagnostics_exist("Hint")
   end,
   hl = {
+    fg = colors.blue,
+    bg = colors.bg
+  },
+  icon = "  ",
+})
+
+table.insert(statusline_components.active[3], {
+  provider = "git_diff_added",
+  hl = {
+    fg = "green",
+    bg = colors.bg
+  },
+  icon = "  ",
+})
+
+table.insert(statusline_components.active[3], {
+  provider = "git_diff_changed",
+  hl = {
+    fg = colors.orange,
+    bg = colors.bg
+  },
+  icon = "  ",
+})
+
+table.insert(statusline_components.active[3], {
+  provider = "git_diff_removed",
+  hl = {
+    fg = "red",
+    bg = colors.bg,
+  },
+  icon = "  ",
+})
+
+table.insert(statusline_components.active[3], {
+  provider = function()
+    return " | "
+  end,
+  hl = {
+    bg = colors.bg,
     fg = colors.cyan,
   },
-  icon = " ",
-}
-
-components.right.active[7] = {
-  provider = "position",
-  hl = {
-    fg = colors.fg,
-    bg = colors.bg,
-  },
-  left_sep = {
-    hl = {
-      fg = colors.blue,
-    },
-    str = "|",
-  },
-  right_sep = {
-    str = " ",
-  },
-}
-
--- Inactive components
-components.mid.inactive[1] = {
-  provider = "file_info",
-  type = "relative_short",
-  colored_icon = "false",
-  hl = {
-    fg = colors.fg,
-  },
-  left_sep = {
-    str = " ",
-  },
-}
-
-components.right.inactive[1] = {
-  provider = "position",
-  hl = {
-    fg = colors.fg,
-    bg = colors.bg,
-  },
-  sep = {
-    str = " ",
-  },
-}
-
-feline.setup({
-  default_bg = colors.bg,
-  default_fg = colors.fg,
-  colors = colors,
-  components = components,
-  properties = properties,
 })
+
+table.insert(statusline_components.active[3], {
+  provider = "position",
+  hl = {
+    bg = colors.bg
+  },
+  right_sep = separator,
+})
+
+M.setup = function ()
+  feline.setup({
+    colors = {
+      fg = colors.fg,
+      bg = colors.bg,
+    },
+    vi_mode_colors = colors,
+    components = statusline_components,
+    force_inactive = {
+      filetypes = {},
+      buftypes = {},
+    }
+  })
+  feline.winbar.setup({
+    colors = {
+      bg = "NONE",
+    },
+    components = winbar_components,
+    force_inactive = {
+      filetypes = { "neo-tree" },
+      buftypes = {}
+    }
+  })
+end
+
+return M

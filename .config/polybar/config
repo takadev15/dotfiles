@@ -18,11 +18,20 @@
 
 [colors]
 ; foreground = ${xrdb:foreground}
-background = ${xrdb:background:#0F111A}
-;background = ${xrdb:background:#000}
-;background = #fff
-foreground = #8F93A2
-
+background = ${xrdb:background:#11111b}
+foreground = #D9E0EE
+white = #FFFFFF
+fg-alt =  #6E6C7E
+blue-s =  #B5E8E0
+; blue = #2C6B95
+blue = #96CDFB
+blue-alt = #62B4F9
+red =  #F28FAD
+green = #ABE9B3
+yellow = #FAE3B0
+cyan = #89DCEB
+magenta = #F5C2E7
+peach = #fab387
 
 
 ;  _                    
@@ -46,8 +55,7 @@ radius-bottom = 0
 ;bottom = true
 
 background = ${colors.background}
-;background = ${colors.primary}
-foreground = ${colors.foreground}
+;foreground = ${colors.foreground}
 ;border-size = 10
 border-top-size = 0
 border-bottom-size = 0
@@ -55,10 +63,10 @@ border-color = #0000
 
 line-size = 2
 underline-size = 2
-module-margin-left = 3
-module-margin-right = 3
+module-margin-left = 2
+module-margin-right = 2
 
-font-0 = fixed:pixelsize=12;1
+font-0 = JetBrainsMono Nerd Font:style=Medium:size=10.5;2
 font-1 = SF Mono:style=Regular:size=13;0
 font-2 = siji:pixelsize=13;1
 font-3 = JetBrainsMono Nerd Font:style=Extra Bold,Regular:size=12;3 
@@ -66,18 +74,16 @@ font-4 = Source Han Sans JP,源ノ角ゴシック JP,Source Han Sans JP Medium,�
 font-5 = FontAwesome:style=Regular;5
 
 modules-left = Logo i3 spotify
-modules-right = pulseaudio wlan github updates battery date
+modules-right = pulseaudio wlan github updates battery
+modules-center = date
 
 tray-position = center
 tray-padding = 2
 ;tray-background = #0063ff
 
-;wm-restack = bspwm
 wm-restack = i3
 override-redirect = true
 
-;scroll-up = bspwm-desknext
-;scroll-down = bspwm-deskprev
 
 ;scroll-up = i3wm-wsnext
 ;scroll-down = i3wm-wsprev
@@ -91,37 +97,44 @@ format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
 
+ws-icon-0 = 10;X
+ws-icon-1 = 1;I
+ws-icon-2 = 2;II
+ws-icon-3 = 3;III
+ws-icon-4 = 4;IV
+ws-icon-5 = 5;V
+ws-icon-6 = 6;VI
+ws-icon-7 = 7;VII
+ws-icon-8 = 8;VIII
+ws-icon-9 = 9;IX
+
 ; Only show workspaces on the same output as the bar
 pin-workspaces = true
 
 label-mode-padding = 2
-label-mode-foreground =#bdae93 
-; label-mode-underline= #be5046
-label-mode-background = #4e4e4e
+label-mode-foreground = ${colors.background}
+label-mode-background = ${colors.yellow}
 
 ; focused = Active workspace on focused monitor
-label-focused = %index%
-label-focused-background = #1B1E2B
-; label-focused-underline= 
-label-focused-foreground = #8F93A2
-label-focused-underline = #fff
+label-focused = %icon%
+label-focused-background = ${colors.blue-alt}
+label-focused-foreground = ${colors.white}
 label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%
+label-unfocused = %icon%
 label-unfocused-padding = 2
-label-unfocused-foreground = #8F93A2
+label-unfocused-foreground = ${colors.white}
 
 ; visible = Active workspace on unfocused monitor
-label-visible = %index%
+label-visible = %icon%
 label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint se#D08770
-label-urgent-background = #4e4e4e
-;label-urgent-underline = #ff0f0f
-label-urgernt-foreground = #ff0f0f
+label-urgent = %icon%
+label-urgent-background = ${colors.background}
+label-urgernt-foreground = ${colors.red}
 label-urgent-padding = 2
 
 ; Separator in between workspaces
@@ -138,8 +151,9 @@ label-urgent-padding = 2
 [module/Logo]
 type=custom/text
 content = 
+content-foreground = ${colors.cyan}
 content-font = 5
-content-margin = 2
+content-margin = 1
 
 [module/xwindow]
 type = internal/xwindow
@@ -246,9 +260,11 @@ interface = wlan0
 interval = 3.0
 
 format-connected = <ramp-signal>  <label-connected>
+format-connected-foreground = ${colors.peach}
 label-connected = %essid%
 
 format-disconnected = 睊
+format-disconnected-foreground = ${colors.red}
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
@@ -284,20 +300,20 @@ interval = 5
 date = "%d %b"
 date-alt = 
 
-time = %H:%M
+time = %H:%M %p
 time-alt = 
 
-format-underline = #61afef
 format-prefix-foreground = ${colors.foreground-alt}
 
-label =   %time% | %date%
+label = %date% | %time%
 
 ;hidden = true
 
 [module/pulseaudio]
 type = internal/pulseaudio
-format-volume =<ramp-volume>  <label-volume>
-label-volume = %percentage%
+format-volume = <ramp-volume>  <label-volume>
+format-volume-foreground = ${colors.green}
+label-volume = %percentage%%
 use-ui-max = false
 interval = 5
 
@@ -305,13 +321,11 @@ ramp-volume-font = 3
 ramp-volume-0 = "奔"
 ramp-volume-1 = "墳"
 ramp-volume-2 = " "
-ramp-volume-foreground = #8F93A2
 
-label-volume-foreground = #8F93A2
 
 label-muted =   muted
 label-muted-font = 3
-label-muted-foreground = #fff
+label-muted-foreground = ${colors.green}
 
 [module/alsa]
 type = internal/alsa
@@ -348,23 +362,21 @@ adapter = ADP0
 full-at = 100
 
 format-charging = <label-charging>
-format-charging-underline = #EBCB8B 
+format-charging-foreground = ${colors.yellow}
 format-charging-prefix = "  "
 format-charging-prefix-font = 3
 
 format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-underline = #98c379
+format-discharging-foreground = ${colors.cyan}
 
 format-full-prefix = "   "
 format-full-prefix-font = 3
 format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = #98c379
 
 ramp-capacity-0 = "  "
 ramp-capacity-1 = "  "
 ramp-capacity-2 = "  "
 ramp-capacity-font = 3
-ramp-capacity-foreground = ${colors.foreground-alt}
 
 animation-charging-0 = 
 animation-charging-1 = 
@@ -403,24 +415,24 @@ interval = 1
 format-prefix-font = 5
 format-prefix = "阮  "
 format = <label>
+format-foreground = ${colors.green}
 exec = python /home/taka15/.config/polybar/script/spotify_status.py -f '{song} - {artist}' -t 30
-format-underline = #1db954
 
 [module/updates]
 type = custom/script
 format-prefix-font = 3 
-format-prefix = "ﮮ "
+format-prefix = "ﮮ  "
 format = <label>
+format-foreground = ${colors.magenta}
 exec = /home/taka15/.config/polybar/script/updates-polybar.sh
-format-underline = #56b6c2
 interval = 600
 
 [module/github]
 type = custom/script
 format-prefix = "  "
 format = <label>
+format-foreground = ${colors.blue-alt}
 exec = /home/taka15/.config/polybar/script/github.sh
-format-underline = #fff
 
 [module/powermenu]
 type = custom/menu

@@ -69,6 +69,7 @@ opt.tabstop = 2
 opt.smarttab = true
 opt.expandtab = true
 opt.signcolumn = "auto:1"
+opt.showtabline = 2
 
 opt.laststatus = 3 -- Always show statusline
 opt.number = true -- Enable number column

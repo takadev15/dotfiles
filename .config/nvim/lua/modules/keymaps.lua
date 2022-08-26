@@ -17,11 +17,11 @@ map("", "sk", "<C-w>k")
 map("", "sj", "<C-w>j")
 map("", "sl", "<C-w>l")
 
--- Bufferline
-map("n", "<leader>t", [[<cmd>enew<CR>]])
-map("n", "<S-Tab>", [[<cmd>BufferLineCyclePrev<CR>]])
-map("n", "<Tab>", [[<cmd>BufferLineCycleNext<CR>]])
-map("n", "<leader>q", "<cmd>bdelete! %<CR>")
+-- Tab
+map("n", "<leader>t", ":tabnew<CR>")
+map("n", "<Tab>", ":tabn<CR>")
+map("n", "<S-Tab>", ":tabp<CR>")
+map("n", "<leader>q", ":tabclose<CR>")
 
 -- resizing vim windows
 map("n", "<A-k>", [[<cmd>resize +2<CR>]])

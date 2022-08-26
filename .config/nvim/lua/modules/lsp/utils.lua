@@ -59,7 +59,7 @@ M.on_attach = function (client, bufnr)
     use_lspsaga = false,
     hi_parameter = "Search",
     max_height = 12,
-    max_width = 60,
+    max_width = 60,  
     handler_opts = {
       border = "none",
     },

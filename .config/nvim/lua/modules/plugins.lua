@@ -109,7 +109,7 @@ return require("packer").startup({
     use({ 
       "SmiteshP/nvim-navic",
       config = function()
-        require("nvim-navic").setup({ highlight = false, separator = " ❯ " })
+        require("nvim-navic").setup({ highlight = true, separator = " ❯ " })
       end,
       after = "nvim-treesitter",
     })
@@ -157,9 +157,7 @@ return require("packer").startup({
     })
 
     -- User Interface
-    -- TODO: Complete feline config and switch
-    use({ "marko-cerovac/material.nvim" })
-    use({ "EdenEast/nightfox.nvim" })
+    use({ "catppuccin/nvim" })
     use({ "kyazdani42/nvim-web-devicons" })
     --[[ use {
       'GustavoKatel/sidebar.nvim',
@@ -173,28 +171,21 @@ return require("packer").startup({
         require("modules.ui.dashboard")
       end,
     })
+
     use({
-      "akinsho/nvim-bufferline.lua",
+      "rafcamlet/tabline-framework.nvim",
       config = function()
-        require("modules.ui.bufferline")
+        require("modules.ui.tabline")
       end,
     })
-    --[[ use{
+
+    use{
       "famiu/feline.nvim",
       requires = { "SmiteshP/nvim-gps" },
       config = function()
-        vim.cmd("PackerLoad lsp-status.nvim")
-        require("modules.ui.line")
-        -- require("feline").setup()
+        require("modules.ui.feline").setup()
       end,
-    } ]]
-
-    use({
-      "NTBBloodbath/galaxyline.nvim",
-      config = function()
-        require("modules.ui.line")
-      end,
-    })
+    } 
 
     use({
       "nvim-neo-tree/neo-tree.nvim",
@@ -209,14 +200,14 @@ return require("packer").startup({
     use({ "ThePrimeagen/git-worktree.nvim" })
     use({
       "rbong/vim-flog",
-      config = function()
-        vim.g.flog_default_arguments = { max_count = 4000 }
-      end,
+      -- setup = function()
+      --   vim.g.flog_default_arguments = { max_count = 4000 }
+      -- end,
     })
     use({
       "rhysd/git-messenger.vim",
       keys = "<leader>gm",
-      config = function()
+      setup = function()
         vim.g.git_messenger_include_diff = "current"
         vim.g.git_messenger_close_on_cursor_moved = false
         vim.g.git_messenger_always_into_popup = true
@@ -224,6 +215,13 @@ return require("packer").startup({
         vim.g.git_messenger_max_popup_width = 50
         vim.g.git_messenger_floating_win_opts = { border = "solid" }
       end,
+    })
+    use({
+      "f-person/git-blame.nvim",
+      -- setup = function()
+      --   vim.g.gitblame_display_virtual_text = 0
+      --   vim.g.gitblame_message_template = "<author> • <summary>"
+      -- end,
     })
     use({
       "lewis6991/gitsigns.nvim",
@@ -323,6 +321,7 @@ return require("packer").startup({
         })
       end,
     })
+    use({ "frabjous/knap" })
     use({ "tpope/vim-dotenv" })
 
     -- Startup Improvement

@@ -1,19 +1,27 @@
 local cmd = vim.api.nvim_command
 local highlight = vim.api.nvim_set_hl
-local material = require("material")
+local catppuccin = require("catppuccin")
 
 -- Colorscheme
-vim.g.material_style = "deep ocean"
-material.setup({
-  italics = {
-    functions = true,
-    comments = true,
+vim.g.catppuccin_flavour = "mocha"
+catppuccin.setup({
+	styles = {
+		comments = { "italic" },
+		conditionals = { "italic" },
+		functions = { "italic" },
+	},
+  color_overrides = {
+    mocha = {
+      base = "#11111b",
+      mantle = "#11111b", 
+      crust = "#11111b",
+    }
   },
-  contrast_windows = {
-    "packer",
+  integrations = {
+  	navic = true
   },
 })
-cmd("colorscheme material")
+cmd("colorscheme catppuccin")
 
 local hl = function(name, opts)
   vim.api.nvim_set_hl(0, name, opts)
@@ -28,74 +36,19 @@ hl("WinSeparator", { fg = "#1B1E2B", bg = nil, bold = true })
 hl("DiffAdd", { fg = nil, bg = nil })
 hl("DiffChange", { fg = nil, bg = nil})
 hl("DiffDelete", { fg = nil, bg = nil})
-hl("diffAdded", { fg = "#C3E88D", bg = "#0F111A" })
-hl("diffRemoved", { fg = "#F07178", bg = "#0F111A" })
+hl("diffAdded", { fg = "#40a02b", bg = "#0F111A" })
+hl("diffRemoved", { fg = "#e64553", bg = "#0F111A" })
 -- hl("diffChanged", { fg = nil, bg = "#281F0B" })
 -- hl("DiffText", { bg = "#3C2E10", bold = true })
 
-hl("Pmenu", { bg = "#0F111A" })
-hl("PmenuSel", { fg = nil, bg = "#1B1E2B" })
-hl("CmpItemAbbrMatch", { fg = "#A0B9D8" })
-hl("CmpItemAbbrMatchFuzzy", { fg = "#CF8164" })
-hl("CmpItemAbbr", { fg = "#777777" })
-hl("CmpItemKindText", { italic = true, bg = nil, fg = "#FFFFFF" })
-hl("CmpItemKindMethod", { italic = true, bg = nil, fg = "#3A75C4" })
-hl("CmpItemKindFunction", { italic = true, bg = nil, fg = "#FAB863" })
-hl("CmpItemKindConstructor", { italic = true, bg = nil, fg = "#FF4151" })
-hl("CmpItemKindField", { italic = true, bg = nil, fg = "#3A75C4" })
-hl("CmpItemKindVariable", { italic = true, bg = nil, fg = "#62B3B2" })
-hl("CmpItemKindClass", { italic = true, bg = nil, fg = "#7DC030" })
-hl("CmpItemKindInterface", { italic = true, bg = nil, fg = "#F99157" })
-hl("CmpItemKindModule", { italic = true, bg = nil, fg = "#F99157" })
-hl("CmpItemKindProperty", { italic = true, bg = nil, fg = "#3A75C4" })
-hl("CmpItemKindUnit", { italic = true, bg = nil, fg = "#3A75C4" })
-hl("CmpItemKindValue", { italic = true, bg = nil, fg = "#C3D2DF" })
-hl("CmpItemKindEnum", { italic = true, bg = nil, fg = "#F99157" })
-hl("CmpItemKindKeyword", { italic = true, bg = nil, fg = "#99C794" })
-hl("CmpItemKindSnippet", { italic = true, bg = nil, fg = "#F2F27A" })
-hl("CmpItemKindColor", { italic = true, bg = nil, fg = "#C3D2DF" })
-hl("CmpItemKindFile", { italic = true, bg = nil, fg = "#C584C5" })
-hl("CmpItemKindReference", { italic = true, bg = nil, fg = "#87D3F8" })
-hl("CmpItemKindFolder", { italic = true, bg = nil, fg = "#C574C5" })
-hl("CmpItemKindEnumMember", { italic = true, bg = nil, fg = "#6699CC" })
-hl("CmpItemKindConstant", { italic = true, bg = nil, fg = "#C3D2DF" })
-hl("CmpItemKindStruct", { italic = true, bg = nil, fg = "#FF4151" })
-hl("CmpItemKindEvent", { italic = true, bg = nil, fg = "#87D3F8" })
-hl("CmpItemKindOperator", { italic = true, bg = nil, fg = "#65737E" })
-hl("CmpItemKindTypeParameter", { italic = true, bg = nil, fg = "#6699CC" })
-
 -- nvim-navic
-hl("NavicText", { fg = "#1B1E2B" })
-hl("NavicIconsNamespace", { link = "CmpItemKindNamespace" })
-hl("NavicIconsType", { link = "CmpItemKindType" })
-hl("NavicIconsClass", { link = "CmpItemKindClass" })
-hl("NavicIconsEnum", { link = "CmpItemKindEnum" })
-hl("NavicIconsInterface", { link = "CmpItemKindInterface" })
-hl("NavicIconsStruct", { link = "Structure" })
-hl("NavicIconsTypeParameter", { link = "CmpItemKindParameter" })
-hl("NavicIconsParameter", { link = "CmpItemKindParameter" })
-hl("NavicIconsVariable", { link = "CmpItemKindVariable" })
-hl("NavicIconsProperty", { link = "CmpItemKindProperty" })
-hl("NavicIconsEnumMember", { link = "Constant" })
-hl("NavicIconsEvent", { link = "Keyword" })
-hl("NavicIconsFunction", { link = "CmpItemKindFunction" })
-hl("NavicIconsMethod", { link = "CmpItemKindMethod" })
-hl("NavicIconsMacro", { link = "CmpItemKindFuncMacro" })
-hl("NavicIconsKeyword", { link = "CmpItemKindKeyword" })
-hl("NavicIconsModifier", { link = "StorageClass" })
-hl("NavicIconsComment", { link = "CmpItemKindComment" })
-hl("NavicIconsString", { link = "CmpItemKindString" })
-hl("NavicIconsNumber", { link = "CmpItemKindNumber" })
-hl("NavicIconsRegexp", { link = "CmpItemKindStringRegex" })
-hl("NavicIconsOperator", { link = "CmpItemKindOperator" })
+hl("NavicText", { fg = "#cdd6f4" })
+
+hl("LspSignatureActiveParameter", { bg = "#F5A97F", bold = true, italic = true })
 
 -- fidget.nvim
-hl("FidgetTitle", { fg = "#3A75C4", bg = "#0F111A" })
-hl("FidgetTask", { fg = "white" , bg = "#0F111A" })
-
--- cmd("autocmd ColorScheme * highlight NonText guibg=NONE")
--- cmd("autocmd ColorScheme * highlight SignColumn ctermbg=NONE guibg=NONE")
--- cmd("autocmd ColorScheme * highlight VertSplit ctermbg=NONE guibg=NONE")
+hl("FidgetTitle", { fg = "#04a5e5", bg = "NONE" })
+hl("FidgetTask", { fg = "#cdd6f4" , bg = "NONE" })
 
 -- disable vertical split
 cmd("autocmd ColorScheme * highlight VertSplit ctermbg=NONE guibg=NONE")
