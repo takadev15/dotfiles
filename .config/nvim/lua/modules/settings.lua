@@ -140,3 +140,10 @@ opt.conceallevel = 2
 
 -- texlab
 vim.g.tex_flavor = "latex"
+
+vim.g.knap_settings = {
+  delay = 500,
+  textopdfviewerlaunch = "zathura --synctex-editor-command 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%{input}'\"'\"',%{line},0)\"' %outputfile%",
+  textopdfviewerrefresh = "none",
+  textopdfforwardjump = "zathura --synctex-forward=%line%:%column%:%srcfile% %outputfile%"
+}

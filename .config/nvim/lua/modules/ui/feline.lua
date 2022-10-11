@@ -128,6 +128,11 @@ table.insert(winbar_components.inactive[1], {
   },
 })
 
+local color_mode = function ()
+    local mode = require("feline.providers.vi_mode").get_vim_mode()
+    return mode
+end
+
 -- Statusline Components
 table.insert(statusline_components.active[1], {
   provider = function()
@@ -136,8 +141,7 @@ table.insert(statusline_components.active[1], {
   end,
   hl = {
     bg = colors.green,
-    fg = colors.bg,
-    -- fg = require("feline.providers.vi_mode").get_mode_color(),
+    fg = colors.bg,     
     style = "bold",
   },
   right_sep = "slant_right_2",
@@ -154,7 +158,11 @@ table.insert(statusline_components.active[1], {
 
 table.insert(statusline_components.active[1], {
   provider = function()
-    return require("gitblame").get_current_blame_text()
+    local text = require("gitblame").get_current_blame_text()
+    if text:len() > 135 then
+      return text:sub(1, 100) .. "..."
+    end
+    return text
   end,
   enabled = function()
     return require("gitblame").is_blame_text_available()

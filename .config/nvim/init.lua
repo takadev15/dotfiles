@@ -4,7 +4,7 @@ vim.g.mapleader = " "
 require("modules.settings")
 require("modules.plugins")
 require("modules.keymaps")
-require("modules.ultest")
 require("modules.git")
 require("modules.theme")
 -- require('impatient')
+

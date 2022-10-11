@@ -11,15 +11,16 @@ local server_list = {
   "dockerls",
   "flutter",
   "gopls",
-  "pyright",
   "rust_analyzer",
   "sumneko",
   "texlab",
   "jees",
   "tailwind",
   "bash",
+  "pylance",
 }
 
 for _, server in ipairs(server_list) do
   require("modules.lsp.servers." .. server).setup(utils.on_attach, capabilities)
 end
+

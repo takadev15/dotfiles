@@ -60,6 +60,8 @@ map("n", "<leader>fd", ":NeoTreeShowToggle<CR>")
 -- Move.nvim
 map("v", "<A-j>", ":MoveBlock(1)<CR>")
 map("v", "<A-k>", ":MoveBlock(-1)<CR>")
+-- map("v", "J", ":m '>+1<CR>gv=gv")
+-- map("v", "K", ":m '>-2<CR>gv=gv")
 
 -- Rest-Nvim
 cmd("nmap <leader>rr <Plug>RestNvim")
@@ -67,6 +69,36 @@ cmd("nmap <leader>rp <Plug>RestNvimPreview")
 
 -- Neogen
 map("n", "<leader>dg", require("neogen").generate)
+
+-- neotest
+map("n", "ta", function()
+  require("neotest").run.attach()
+end)
+map("n", "tn", function()
+  require("neotest").run.run()
+end)
+map("n", "tf", function()
+  require("neotest").run.run(vim.fn.expand("%"))
+end)
+map("n", "tl", function()
+  require("neotest").run.run_last()
+end)
+map("n", "td", function()
+  require("neotest").run.run({ strategy = "dap" })
+end)
+map("n", "to", function()
+  require("neotest").output.open({ enter = true })
+end)
+map("n", "ts", function()
+  require("neotest").run.stop()
+end)
+map("n", "tt", function()
+  require("neotest").summary.toggle()
+end)
+
+map('n','<leader>da', function() 
+  require("knap").toggle_autopreviewing() 
+end)
 
 -- Package Info
 map("n", "<leader>ns", "<cmd>lua require('package-info').show({ force = true })<CR>")

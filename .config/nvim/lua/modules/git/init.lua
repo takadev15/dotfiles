@@ -8,6 +8,13 @@ end
 vim.g.gitblame_display_virtual_text = 0
 vim.g.gitblame_message_template = "<author> • <summary>"
 
+vim.g.git_messenger_include_diff = "current"
+vim.g.git_messenger_close_on_cursor_moved = false
+vim.g.git_messenger_always_into_popup = true
+vim.g.git_messenger_max_popup_height = 20
+vim.g.git_messenger_max_popup_width = 50
+vim.g.git_messenger_floating_win_opts = { border = "single" }
+
 vim.g.flog_default_arguments = { max_count = 4000 }
 
 -- Fugitives!!

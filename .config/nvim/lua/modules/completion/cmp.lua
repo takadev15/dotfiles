@@ -42,7 +42,7 @@ local item_kinds = {
 local item_menu = ({
   nvim_lsp = "[LSP]",
   luasnip = "[SNIPS]",
-  neorg = "[NEORG]",
+  -- neorg = "[NEORG]",
   path = "[PATH]",
   latex_symbols = "[TEX]",
   cmp_git = "[GIT]",
@@ -114,7 +114,7 @@ cmp.setup({
   sources = {
     { name = "luasnip" },
     { name = "nvim_lsp" },
-    { name = "neorg" },
+    -- { name = "neorg" },
     { name = "path" },
     { name = "cmp_git" }
   },

@@ -3,7 +3,7 @@ require("dressing").setup({
     get_config = function(opts)
       if opts.kind == "codeaction" then
         return {
-          backend = "builtin",
+          backend = {"telescope", "builtin", "nui"},
           builtin = {
             relative = "cursor",
           },
@@ -13,3 +13,5 @@ require("dressing").setup({
     winblend = 80,
   },
 })
+
+

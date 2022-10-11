@@ -44,7 +44,7 @@ hl("diffRemoved", { fg = "#e64553", bg = "#0F111A" })
 -- nvim-navic
 hl("NavicText", { fg = "#cdd6f4" })
 
-hl("LspSignatureActiveParameter", { bg = "#F5A97F", bold = true, italic = true })
+hl("LspSignatureActiveParameter", { bg = "#0F111A", fg = white, bold = true, italic = true })
 
 -- fidget.nvim
 hl("FidgetTitle", { fg = "#04a5e5", bg = "NONE" })
@@ -54,7 +54,7 @@ hl("FidgetTask", { fg = "#cdd6f4" , bg = "NONE" })
 cmd("autocmd ColorScheme * highlight VertSplit ctermbg=NONE guibg=NONE")
 
 require("indent_blankline").setup({
-  filetype_exclude = { "help", "terminal", "alpha", "packer", "norg", "neo-tree" },
+  filetype_exclude = { "help", "terminal", "alpha", "packer", "norg", "neo-tree", "git-messenger" },
   buftype_exclude = { "terminal", " " },
 })
 

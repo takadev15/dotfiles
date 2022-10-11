@@ -4,7 +4,7 @@ local builtins = null_ls.builtins
 local sources = {
 
   -- Formatter
-  builtins.formatting.clang_format,
+  -- builtins.formatting.clang_format,
   builtins.formatting.dart_format,
   builtins.formatting.eslint_d,
   builtins.formatting.rustfmt,

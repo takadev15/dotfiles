@@ -54,7 +54,11 @@ return require("packer").startup({
     })
     use({ "j-hui/fidget.nvim",
       config = function ()
-        require("fidget").setup({})
+        require("fidget").setup({
+          fmt = { max_width = 65 },
+          sources = { ["null-ls"] = { ignore = true } },
+          text = { spinner = "dots" },
+        })
       end,
     })
     use({
@@ -206,15 +210,15 @@ return require("packer").startup({
     })
     use({
       "rhysd/git-messenger.vim",
-      keys = "<leader>gm",
-      setup = function()
-        vim.g.git_messenger_include_diff = "current"
-        vim.g.git_messenger_close_on_cursor_moved = false
-        vim.g.git_messenger_always_into_popup = true
-        vim.g.git_messenger_max_popup_height = 20
-        vim.g.git_messenger_max_popup_width = 50
-        vim.g.git_messenger_floating_win_opts = { border = "solid" }
-      end,
+      -- keys = "<leader>gm",
+      -- setup = function()
+      --   vim.g.git_messenger_include_diff = "current"
+      --   vim.g.git_messenger_close_on_cursor_moved = false
+      --   vim.g.git_messenger_always_into_popup = true
+      --   vim.g.git_messenger_max_popup_height = 20
+      --   vim.g.git_messenger_max_popup_width = 50
+      --   vim.g.git_messenger_floating_win_opts = { border = "solid" }
+      -- end,
     })
     use({
       "f-person/git-blame.nvim",
@@ -229,7 +233,16 @@ return require("packer").startup({
         require("modules.git.gitsigns")
       end,
     })
-    use({ "rhysd/conflict-marker.vim" })
+    -- use({ "rhysd/conflict-marker.vim" })
+    use({
+      "akinsho/git-conflict.nvim",
+      config = function()
+        require("git-conflict").setup({
+          default_mappings = false,
+          disable_diagnostics = true,
+        })
+      end,
+    })
 
     -- Debugger
     use({ "mfussenegger/nvim-dap", requires = {
@@ -246,19 +259,23 @@ return require("packer").startup({
 
     -- Testing and Running code
     use({
-      "rcarriga/vim-ultest",
-      requires = "vim-test/vim-test",
-      run = ":UpdateRemotePlugins",
-      cmd = { "Ultest", "UltestNearest", "UltestDebug", "UltestDebugNearest" },
-    })
-    use({
-      "skywind3000/asyncrun.vim",
-      requires = { "skywind3000/asynctasks.vim" },
+      "stevearc/overseer.nvim",
       config = function()
-        require("modules.misc.async_conf")
+        require("overseer").setup()
       end,
     })
-
+   use({
+      "nvim-neotest/neotest",
+      requires = {
+        "vim-test/vim-test",
+        "nvim-neotest/neotest-vim-test",
+        "nvim-neotest/neotest-go",
+        "rouge8/neotest-rust",
+      },
+      config = function()
+        require("modules.misc.neotest")
+      end,
+    })
     -- Languages specific Plugin
     use({ "akinsho/flutter-tools.nvim" })
     use({ 
@@ -281,7 +298,7 @@ return require("packer").startup({
         require("modules.lsp.servers.null-ls")
       end,
     })
-    use({ "jose-elias-alvarez/nvim-lsp-ts-utils" })
+    use({ "jose-elias-alvarez/typescript.nvim" })
     use({
       "iamcco/markdown-preview.nvim",
       run = "cd app && npm install",
@@ -290,10 +307,10 @@ return require("packer").startup({
       end,
       ft = { "markdown" },
     })
-    use({
-      "dccsillag/magma-nvim",
-      run = ":UpdateRemotePlugins",
-    })
+    -- use({
+    --   "dccsillag/magma-nvim",
+    --   run = ":UpdateRemotePlugins",
+    -- })
     use({
       "vuki656/package-info.nvim",
       requires = "MunifTanjim/nui.nvim",
@@ -321,7 +338,9 @@ return require("packer").startup({
         })
       end,
     })
-    use({ "frabjous/knap" })
+    use({ 
+      "frabjous/knap"
+    })
     use({ "tpope/vim-dotenv" })
 
     -- Startup Improvement
@@ -355,7 +374,13 @@ return require("packer").startup({
     -- Miscellaneous
     use({ "yuttie/comfortable-motion.vim" })
     use({"fedepujol/move.nvim"})
-    use({ "machakann/vim-sandwich" })
+    use({
+      "kylechui/nvim-surround",
+      tag = "*",
+      config = function()
+        require("nvim-surround").setup({ highlights = { duration = 0 } })
+      end,
+    })
     use({ "lukas-reineke/indent-blankline.nvim" })
     use({ "tpope/vim-dadbod", requires = { "kristijanhusak/vim-dadbod-ui" }, ft = "sql" })
     use({
@@ -395,14 +420,14 @@ return require("packer").startup({
         require("colorizer").setup()
       end,
     })
-    use({
-      "vhyrro/neorg",
-      requires = "vhyrro/neorg-telescope",
-      config = function()
-        require("modules.misc.neorg")
-      end,
-      after = "nvim-treesitter",
-    })
+    -- use({
+    --   "vhyrro/neorg",
+    --   requires = "vhyrro/neorg-telescope",
+    --   config = function()
+    --     require("modules.misc.neorg")
+    --   end,
+    --   after = "nvim-treesitter",
+    -- })
     use({
       "andweeb/presence.nvim",
       config = function()
@@ -427,10 +452,6 @@ return require("packer").startup({
         })
       end,
     })
+  use({ "antoinemadec/FixCursorHold.nvim" })
   end,
-
-  --[[ config = {
-    -- Move to lua dir so impatient.nvim can cache it
-    compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
-  }, ]]
 })
