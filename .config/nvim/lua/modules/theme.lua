@@ -29,13 +29,15 @@ end
 
 hl("Normal", { bg = nil })
 hl("CursorLineNr", { fg = "White", bg = nil })
-hl("LineNr", { fg = "#3F3F3F" })
+hl("LineNr", { fg = "#45475a" })
+
 
 hl("WinSeparator", { fg = "#1B1E2B", bg = nil, bold = true })
 
-hl("DiffAdd", { fg = nil, bg = nil })
-hl("DiffChange", { fg = nil, bg = nil})
-hl("DiffDelete", { fg = nil, bg = nil})
+hl("DiffAdd", { fg = nil, bg = "#23384C" })
+hl("DiffChange", { fg = nil, bg = "#232C4C" })
+hl("DiffDelete", { fg = nil, bg = "#341C28" })
+hl("DiffText", { bg = "#33406B", bold = true })
 hl("diffAdded", { fg = "#40a02b", bg = "#0F111A" })
 hl("diffRemoved", { fg = "#e64553", bg = "#0F111A" })
 -- hl("diffChanged", { fg = nil, bg = "#281F0B" })
@@ -44,7 +46,7 @@ hl("diffRemoved", { fg = "#e64553", bg = "#0F111A" })
 -- nvim-navic
 hl("NavicText", { fg = "#cdd6f4" })
 
-hl("LspSignatureActiveParameter", { bg = "#0F111A", fg = white, bold = true, italic = true })
+hl("LspSignatureActiveParameter", { bg = nil, fg = "white", bold = true, italic = true })
 
 -- fidget.nvim
 hl("FidgetTitle", { fg = "#04a5e5", bg = "NONE" })

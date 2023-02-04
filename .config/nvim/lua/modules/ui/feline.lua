@@ -129,8 +129,8 @@ table.insert(winbar_components.inactive[1], {
 })
 
 local color_mode = function ()
-    local mode = require("feline.providers.vi_mode").get_vim_mode()
-    return mode
+  local mode = require("feline.providers.vi_mode").get_vim_mode()
+  return mode_colors_list[mode]
 end
 
 -- Statusline Components
@@ -140,8 +140,8 @@ table.insert(statusline_components.active[1], {
     return " " .. mode:sub(1, 1) .. " "
   end,
   hl = {
-    bg = colors.green,
-    fg = colors.bg,     
+    bg = color_mode(),
+    fg = colors.bg,    
     style = "bold",
   },
   right_sep = "slant_right_2",

@@ -14,4 +14,4 @@ configuration{
     sidebar-mode: true;
 }
 
-@theme "/home/taka15/.config/rofi/themes/catppuccin-mocha.rasi"
+@theme "/home/takadev/.config/rofi/themes/catppuccin-mocha.rasi"

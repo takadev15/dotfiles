@@ -21,7 +21,7 @@ alias pdir="z ~/dir/data/project"
 alias csdir="z ~/dir/data/class"
 alias ldir="z ~/dir/data/learn"
 alias note="z ~/dir/data/note/"
-alias wdir="z ~/dir/data/workstation/fita"
+alias wdir="z ~/dir/data/workstation/clapping-ape"
 alias zz="z .."
 
 # source zshrc
@@ -42,3 +42,6 @@ alias nvcnf="z ~/.config/nvim && nvim"
 # Readme
 alias readme="touch README.md && nvim README.md"
 
+# Git
+alias gcm="git checkout master"
+alias gct="git commit"

@@ -5,10 +5,14 @@ M.setup = function(on_attach, capabilities)
     settings = {
       texlab = {
         auxDirectory = "build",
+        chktex = {
+          onEdit = true,
+        },
         build = {
           onSave = true,
           -- args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "-outdir=build", "%f" },
-          executable = "latexmk",
+          executable = "tectonic",
+          args = { "-X", "compile", "%f", "--synctex", "--keep-logs", "--keep-intermediates", "--outdir", "build" },
         },
         lint = {
           onChange = true,

@@ -1,4 +1,4 @@
-local cmd = vim.api.nvim_command
+local cmd = vim.api.nvim_commandkeyma
 local telescope = require("telescope.builtin")
 
 local map = function(mode, l, r, opts)
@@ -45,6 +45,11 @@ map("n", "<leader>lq", require("telescope.builtin").diagnostics)
 -- aerial
 map("n", "<leader>ss", ":AerialToggle<CR>")
 
+-- Tasks runner
+map("n", "<leader>lr", ":OverseerRun<CR>")
+map("n", "<leader>st", ":OverseerToggle<CR>")
+
+
 -- Telescope
 map("n", "<leader>lf", telescope.find_files)
 map("n", "<leader>lg", telescope.live_grep)
@@ -52,7 +57,6 @@ map("n", "<leader>lb", telescope.buffers)
 map("n", "<leader>lo", telescope.oldfiles)
 map("n", "<leader>lH", telescope.help_tags)
 map("n", "<leader>la", ":Telescope media_files<CR>")
-map("n", "<leader>lr", "<cmd>lua require('telescope').extensions.asynctasks.all{}<CR>")
 map("n", "<leader>lw", "<cmd>lua require('telescope').extensions.arecibo.websearch()<CR>")
 
 map("n", "<leader>fd", ":NeoTreeShowToggle<CR>")
@@ -64,8 +68,8 @@ map("v", "<A-k>", ":MoveBlock(-1)<CR>")
 -- map("v", "K", ":m '>-2<CR>gv=gv")
 
 -- Rest-Nvim
-cmd("nmap <leader>rr <Plug>RestNvim")
-cmd("nmap <leader>rp <Plug>RestNvimPreview")
+map("n", "<leader>rr", "<Plug>RestNvim")
+map("n", "<leader>rp", "<Plug>RestNvimPreview")
 
 -- Neogen
 map("n", "<leader>dg", require("neogen").generate)

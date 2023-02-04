@@ -1,5 +1,5 @@
 -- #############################################
--- ########## load all the plugins ##############
+-- ########## load all the plugins #############
 -- #############################################
 
 local vim = vim
@@ -36,14 +36,45 @@ return require("packer").startup({
     use({ "nvim-lua/plenary.nvim" })
 
     -- LSP things
-    use({ "ray-x/lsp_signature.nvim" })
-    use({ "https://git.sr.ht/~whynothugo/lsp_lines.nvim" })
+    use({
+      "neovim/nvim-lspconfig",
+      config = function()
+        require("modules.lsp")
+      end,
+    })
+    use({ 
+      "ray-x/lsp_signature.nvim",
+      config = function ()
+        require("lsp_signature").setup({
+          floating_window = false,
+          hint_prefix = "ﰠ ",
+          always_trigger = true,
+        })
+      end
+    })
     use({
       "kosayoda/nvim-lightbulb",
       config = function()
         require("nvim-lightbulb").setup({
           sign = { enabled = false },
           virtual_text = { enabled = true },
+        })
+      end,
+    })
+    use({
+      "simrat39/inlay-hints.nvim",
+      config = function()
+        require("inlay-hints").setup({
+          inlay_hints = {
+            virt_text_formatter = function(label, hint, opts, _)
+              local virt_text = {}
+              virt_text[#virt_text + 1] = hint.paddingLeft and { " ", "Normal" } or nil
+              virt_text[#virt_text + 1] = { " " .. label .. " ", opts.highlight }
+              virt_text[#virt_text + 1] = hint.paddingRight and { " ", "Normal" } or nil
+
+              return virt_text
+            end,
+          },
         })
       end,
     })
@@ -55,16 +86,24 @@ return require("packer").startup({
     use({ "j-hui/fidget.nvim",
       config = function ()
         require("fidget").setup({
+          align = { bottom = true },
           fmt = { max_width = 65 },
           sources = { ["null-ls"] = { ignore = true } },
           text = { spinner = "dots" },
+          window = { relative = "editor", blend = 0 },
         })
       end,
     })
     use({
-      "neovim/nvim-lspconfig",
+      "zbirenbaum/neodim",
+      disable = true,
+      event = "LspAttach",
       config = function()
-        require("modules.lsp")
+        require("neodim").setup({
+          update_in_insert = {
+            delay = 1000,
+          },
+        })
       end,
     })
 
@@ -105,6 +144,13 @@ return require("packer").startup({
         require("modules.treesitter")
       end,
     })
+    use({ 
+      "cshuaimin/ssr.nvim",
+      module = "ssr",
+      config = function()
+        require("ssr").setup({})
+      end,
+    })
     use({ "nvim-treesitter/nvim-treesitter-refactor", after = "nvim-treesitter" })
     use({ "nvim-treesitter/nvim-treesitter-textobjects", after = "nvim-treesitter" })
     use({ "p00f/nvim-ts-rainbow", after = "nvim-treesitter" })
@@ -136,22 +182,7 @@ return require("packer").startup({
       },
     })
     use({ "nvim-telescope/telescope-media-files.nvim" })
-    use({ "nvim-telescope/telescope-project.nvim" })
-    use({ "GustavoKatel/telescope-asynctasks.nvim" })
     use({ "nvim-telescope/telescope-bibtex.nvim" })
-    use({
-      "nvim-telescope/telescope-arecibo.nvim",
-      rocks = {"openssl", "lua-http-parser"},
-      config = function ()
-        require("telescope").load_extension("arecibo")
-      end
-    })
-    use({
-      "xiyaowong/telescope-emoji.nvim",
-      config = function ()
-        require("telescope").load_extension("emoji")
-      end,
-    })
     use({
       "crispgm/telescope-heading.nvim",
       ft = "markdown",
@@ -163,26 +194,18 @@ return require("packer").startup({
     -- User Interface
     use({ "catppuccin/nvim" })
     use({ "kyazdani42/nvim-web-devicons" })
-    --[[ use {
-      'GustavoKatel/sidebar.nvim',
-      config = function ()
-        require("ui.sidebar")
-      end,
-    } ]]
     use({
       "goolord/alpha-nvim",
       config = function()
         require("modules.ui.dashboard")
       end,
     })
-
     use({
       "rafcamlet/tabline-framework.nvim",
       config = function()
         require("modules.ui.tabline")
       end,
     })
-
     use{
       "famiu/feline.nvim",
       requires = { "SmiteshP/nvim-gps" },
@@ -190,7 +213,6 @@ return require("packer").startup({
         require("modules.ui.feline").setup()
       end,
     } 
-
     use({
       "nvim-neo-tree/neo-tree.nvim",
       config = function()
@@ -204,28 +226,12 @@ return require("packer").startup({
     use({ "ThePrimeagen/git-worktree.nvim" })
     use({
       "rbong/vim-flog",
-      -- setup = function()
-      --   vim.g.flog_default_arguments = { max_count = 4000 }
-      -- end,
     })
     use({
       "rhysd/git-messenger.vim",
-      -- keys = "<leader>gm",
-      -- setup = function()
-      --   vim.g.git_messenger_include_diff = "current"
-      --   vim.g.git_messenger_close_on_cursor_moved = false
-      --   vim.g.git_messenger_always_into_popup = true
-      --   vim.g.git_messenger_max_popup_height = 20
-      --   vim.g.git_messenger_max_popup_width = 50
-      --   vim.g.git_messenger_floating_win_opts = { border = "solid" }
-      -- end,
     })
     use({
       "f-person/git-blame.nvim",
-      -- setup = function()
-      --   vim.g.gitblame_display_virtual_text = 0
-      --   vim.g.gitblame_message_template = "<author> • <summary>"
-      -- end,
     })
     use({
       "lewis6991/gitsigns.nvim",
@@ -245,12 +251,17 @@ return require("packer").startup({
     })
 
     -- Debugger
-    use({ "mfussenegger/nvim-dap", requires = {
+    use({
       "rcarriga/nvim-dap-ui",
-    } })
+      requires = { "mfussenegger/nvim-dap" },
+      config = function()
+        require("modules.dap")
+      end,
+    })
     use({
       "nvim-telescope/telescope-dap.nvim",
-      config = function ()
+      after = "telescope.nvim",
+      config = function()
         require("telescope").load_extension("dap")
       end,
     })
@@ -268,9 +279,10 @@ return require("packer").startup({
       "nvim-neotest/neotest",
       requires = {
         "vim-test/vim-test",
-        "nvim-neotest/neotest-vim-test",
         "nvim-neotest/neotest-go",
         "rouge8/neotest-rust",
+        -- "haydenmeade/neotest-jest",
+        -- "marilari88/neotest-vitest",
       },
       config = function()
         require("modules.misc.neotest")
@@ -283,6 +295,7 @@ return require("packer").startup({
       ft = { "go", "gomod", "gowork", "gohtmltmpl" },
       config = function()
         require("go").setup({
+          lsp_inlay_hints = { enable = false },
           tag_transform = "snakecase",
           dap_debug_keymap = false,
           dap_debug_vt = false,
@@ -291,7 +304,12 @@ return require("packer").startup({
     })
     use({ "p00f/clangd_extensions.nvim" })
     use({ "simrat39/rust-tools.nvim" })
-    use({ "folke/lua-dev.nvim" })
+    use({ 
+      "folke/neodev.nvim",
+      config = function ()
+        require("neodev").setup{}
+      end
+    })
     use({
       "jose-elias-alvarez/null-ls.nvim",
       config = function ()
@@ -299,18 +317,6 @@ return require("packer").startup({
       end,
     })
     use({ "jose-elias-alvarez/typescript.nvim" })
-    use({
-      "iamcco/markdown-preview.nvim",
-      run = "cd app && npm install",
-      config = function()
-        -- vim.g.mkdp_browser = 'brave'
-      end,
-      ft = { "markdown" },
-    })
-    -- use({
-    --   "dccsillag/magma-nvim",
-    --   run = ":UpdateRemotePlugins",
-    -- })
     use({
       "vuki656/package-info.nvim",
       requires = "MunifTanjim/nui.nvim",
@@ -393,18 +399,33 @@ return require("packer").startup({
       "stevearc/aerial.nvim",
       config = function()
         require("aerial").setup({
-          highlight_on_hover = true,
+          layout = {
+            highlight_on_hover = true,
+            placement_editor_edge = true,
+            min_width = 25,
+          },
           show_guides = true,
-          placement_editor_edge = true,
-          min_width = 25,
         })
       end,
     })
-    use({
-      "https://gitlab.com/yorickpeterse/nvim-pqf.git",
-      config = function ()
-        require("pqf").setup()
-      end
+    use ({
+      "levouh/tint.nvim",
+      config = function()
+        require("tint").setup({
+          tint = -20,
+          highlight_ignore_patterns = { "WinSeparator", "Status.*" },
+          -- window_ignore_function = function(winid)
+          --   local buf = vim.api.nvim_win_get_buf(winid)
+          --   local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+          --
+          --   if ft == "neo-tree" then
+          --     return true
+          --   end
+          --
+          --   return false
+          -- end,
+        })
+      end,
     })
     use({
       "chentoast/marks.nvim",
@@ -418,20 +439,6 @@ return require("packer").startup({
       "NvChad/nvim-colorizer.lua",
       config = function()
         require("colorizer").setup()
-      end,
-    })
-    -- use({
-    --   "vhyrro/neorg",
-    --   requires = "vhyrro/neorg-telescope",
-    --   config = function()
-    --     require("modules.misc.neorg")
-    --   end,
-    --   after = "nvim-treesitter",
-    -- })
-    use({
-      "andweeb/presence.nvim",
-      config = function()
-        require("modules.misc.discordo")
       end,
     })
     use({

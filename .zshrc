@@ -84,7 +84,7 @@ export EDITOR="/usr/local/bin/nvim"
 export VISUAL="/usr/local/bin/nvim"
 
 # Set spicetify path
-export SPICETIFY_INSTALL="/home/taka15/spicetify-cli"
+export SPICETIFY_INSTALL="/home/takadev/spicetify-cli"
 export PATH="$SPICETIFY_INSTALL:$PATH"
 
 # Pyenv
@@ -98,12 +98,13 @@ export PATH="$GOPATH/bin:$PATH"
 
 # Rust
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/build/ra-multiplex/target/release:$PATH"
 
 # Fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # fnm
-export PATH=/home/taka15/.fnm:$PATH
+export PATH=/home/takadev/.fnm:$PATH
 eval "`fnm env`"
 
 # Flutter SDK
@@ -119,7 +120,7 @@ export PATH=$PATH:$ANDROID_HOME/build-tools/
 export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 
 # yarn command
-export PATH="/home/taka15/.yarn/bin:$PATH"
+export PATH="/home/takadev/.yarn/bin:$PATH"
 export PATH="~/.npm-global/bin:$PATH"
 
 # fix screen
@@ -129,13 +130,13 @@ export GDK_DPI_SCALE=0.5
 # fnm
 export YARN_GLOBAL_FOLDER="$FNM_MULTISHELL_PATH/yarn-global"
 export YARN_PREFIX="$FNM_MULTISHELL_PATH"
-export PATH="/home/taka15/.fnm:$PATH"
+export PATH="/home/takadev/.fnm:$PATH"
 eval "$(fnm env)"
 
-export PATH="/home/taka15/.config/vifm/scripts/:$PATH"
+export PATH="/home/takadev/.config/vifm/scripts/:$PATH"
 
 # Nix 
-if [ -e /home/taka15/.nix-profile/etc/profile.d/nix.sh ]; then . /home/taka15/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+if [ -e /home/takadev/.nix-profile/etc/profile.d/nix.sh ]; then . /home/takadev/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 # JenV path
 export JENV_ROOT="${JENV_ROOT:=${HOME}/.jenv}"
@@ -177,7 +178,7 @@ eval "$(starship init zsh)"
 export PATH="$HOME/build/protobuf/bin:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/taka15/build/google-cloud-sdk/path.zsh.inc' ]; then . '/home/taka15/build/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/home/takadev/build/google-cloud-sdk/path.zsh.inc' ]; then . '/home/takadev/build/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/taka15/build/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/taka15/build/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/home/takadev/build/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/takadev/build/google-cloud-sdk/completion.zsh.inc'; fi

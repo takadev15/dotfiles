@@ -73,11 +73,11 @@ font-3 = JetBrainsMono Nerd Font:style=Extra Bold,Regular:size=12;3
 font-4 = Source Han Sans JP,源ノ角ゴシック JP,Source Han Sans JP Medium,源ノ角ゴシック JP Medium:style=Medium,Regular;4
 font-5 = FontAwesome:style=Regular;5
 
-modules-left = Logo i3 spotify
-modules-right = pulseaudio wlan github updates battery
+modules-left = Logo i3 spotify 
+modules-right = pulseaudio scratchpad wlan github updates battery
 modules-center = date
 
-tray-position = center
+; tray-position = center
 tray-padding = 2
 ;tray-background = #0063ff
 
@@ -155,6 +155,14 @@ content-foreground = ${colors.cyan}
 content-font = 5
 content-margin = 1
 
+[module/scratchpad]
+type=custom/script
+interval = 1
+format = <label>
+format-prefix = "  "
+format-foreground = ${colors.blue}
+exec = python /home/takadev/.script/polybar-scratchpad.py
+
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:30:...%
@@ -181,8 +189,8 @@ label-indicator-underline = ${colors.secondary}
 type = internal/fs
 interval = 25
 
-mount-0 = /home/taka15
-mount-1 = /home/taka15/dir
+mount-0 = /home/takadev
+mount-1 = /home/takadev/dir
 
 label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
@@ -416,7 +424,7 @@ format-prefix-font = 5
 format-prefix = "阮  "
 format = <label>
 format-foreground = ${colors.green}
-exec = python /home/taka15/.config/polybar/script/spotify_status.py -f '{song} - {artist}' -t 30
+exec = python /home/takadev/.config/polybar/script/spotify_status.py -f '{song} - {artist}' -t 30
 
 [module/updates]
 type = custom/script
@@ -424,7 +432,7 @@ format-prefix-font = 3
 format-prefix = "ﮮ  "
 format = <label>
 format-foreground = ${colors.magenta}
-exec = /home/taka15/.config/polybar/script/updates-polybar.sh
+exec = /home/takadev/.config/polybar/script/updates-polybar.sh
 interval = 600
 
 [module/github]
@@ -432,7 +440,7 @@ type = custom/script
 format-prefix = "  "
 format = <label>
 format-foreground = ${colors.blue-alt}
-exec = /home/taka15/.config/polybar/script/github.sh
+exec = /home/takadev/.config/polybar/script/github.sh
 
 [module/powermenu]
 type = custom/menu

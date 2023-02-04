@@ -71,7 +71,6 @@ hide_edge_borders both
 floating_modifier $mod
 
 # start a terminal:
-bindsym $mod+Return exec kitty
 
 # kill focused window:
 bindsym $mod+q kill
@@ -103,6 +102,14 @@ bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+bindsym $mod+Return [class="kitty"] scratchpad show
+# Show the sup-mail scratchpad window, if any.
+# bindsym mod4+s [title="^Sup ::"] scratchpad show
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -348,19 +355,16 @@ client.urgent           $urgent-bg-color   $urgent-bg-color   $text-color       
 # finds out, if available):
 
 # rofi bindings fancy application menu
-bindsym $mod+i exec rofi -show drun -config "/home/taka15/.config/rofi/config.rasi"
+bindsym $mod+i exec rofi -show drun -config "/home/takadev/.config/rofi/config.rasi"
                 
 bindsym F9 exec rofi -modi drun -show drun -line-padding 4 \
-                -columns 2 -padding 50 -hide-scrollbar \
-                -show-icons -drun-icon-theme "Arc-X-D" -font "Droid Sans Regular 10"
+                -columns 2 -padding 50 -hide-scrollbar -show-icons -drun-icon-theme "Arc-X-D" -font "Droid Sans Regular 10"
 
 bindsym $mod+o exec rofi -show window -line-padding 4 \
-                -lines 6 -padding 50 -hide-scrollbar \
-                -show-icons -drun-icon-theme "Arc-X-D" -font "Droid Sans Regular 10"
+                -lines 6 -padding 50 -hide-scrollbar -show-icons -drun-icon-theme "Arc-X-D" -font "Droid Sans Regular 10"
 
 bindsym F10 exec rofi -show window -line-padding 4 \
-                -lines 6 -padding 50 -hide-scrollbar \
-                -show-icons -drun-icon-theme "Arc-X-D" -font "Droid Sans Regular 10"                
+                -lines 6 -padding 50 -hide-scrollbar -show-icons -drun-icon-theme "Arc-X-D" -font "Droid Sans Regular 10"
                 
 
 # Sreen brightness controls
@@ -374,5 +378,5 @@ bindsym $mod+backslash exec dunstctl set-paused toggle
 bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
 
 # Japanese imput
-exec --no-startup-id fcitx -d
+exec --no-startup-id fcitx5 -d
 

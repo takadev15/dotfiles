@@ -6,26 +6,67 @@ require("gitsigns").setup({
     topdelete = { text = "x" },
     changedelete = { hl = "DiffChange", text = "│" },
   },
-  keymaps = {
-    noremap = true,
-    buffer = true,
-    ["n <leader>hs"] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-    ["n <leader>hu"] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-    ["n <leader>hr"] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-    ["n <leader>hR"] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-    ["n <leader>hp"] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+  on_attach = function(bufnr)
+    local gsigns = package.loaded.gitsigns
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
 
-    -- Text objects
-    ["o ih"] = ':<C-U>lua require"gitsigns".select_hunk()<CR>',
-    ["x ih"] = ':<C-U>lua require"gitsigns".select_hunk()<CR>',
+    -- Navigation
+    map("n", "]h", function()
+      if vim.wo.diff then
+        return "]h"
+      end
+      vim.schedule(function()
+        gsigns.next_hunk()
+      end)
+      return "<Ignore>"
+    end, { expr = true })
+
+    map("n", "[h", function()
+      if vim.wo.diff then
+        return "[h"
+      end
+      vim.schedule(function()
+        gsigns.prev_hunk()
+      end)
+      return "<Ignore>"
+    end, { expr = true })
+
+    -- Actions
+    map({ "n", "v" }, "<leader>hs", gsigns.stage_hunk)
+    map({ "n", "v" }, "<leader>hr", gsigns.reset_hunk)
+    map("n", "<leader>hS", gsigns.stage_buffer)
+    map("n", "<leader>hu", gsigns.undo_stage_hunk)
+    map("n", "<leader>hU", gsigns.reset_buffer_index)
+    map("n", "<leader>hR", gsigns.reset_buffer)
+    map("n", "<leader>hb", function()
+      gsigns.blame_line({ full = true })
+    end)
+    map("n", "<leader>hp", gsigns.preview_hunk)
+    map("n", "<leader>hd", gsigns.diffthis)
+    map("n", "<leader>hD", function()
+      gsigns.diffthis("~")
+    end)
+
+    --Text objects
+    map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+
+  end,
+  preview_config = {
+    width = 40,
+    height = 12,
+    border = "single",
   },
-  watch_gitdir = {
-    interval = 1000,
+  current_line_blame_opts = {
+    virt_text_pos = "right_align",
+    delay = 2000,
+    ignore_whitespace = true,
   },
-  sign_priority = 6,
-  update_debounce = 250,
-  status_formatter = nil,
-  diff_opts = {
-    internal = true,
-  },
+  sign_priority = 1,
+  update_debounce = 500,
+  _threaded_diff = true,
+  _extmark_signs = true,
 })

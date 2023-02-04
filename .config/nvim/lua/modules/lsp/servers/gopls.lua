@@ -13,6 +13,15 @@ M.setup = function(on_attach, capabilities)
           test = true,
           tidy = true,
         },
+        hints = {
+          assignVariableTypes = true,
+          compositeLiteralFields = true,
+          compositeLiteralTypes = true,
+          constantValues = true,
+          functionTypeParameters = true,
+          parameterNames = true,
+          rangeVariableTypes = true,
+        },
         usePlaceholders = true,
         semanticTokens = true,
         completeUnimported = true,
@@ -27,6 +36,8 @@ M.setup = function(on_attach, capabilities)
     },
     on_attach = function(client, bufnr)
       on_attach(client, bufnr)
+      vim.keymap.del({ "n", "v" }, "<leader>a", { buffer = bufnr })
+      vim.keymap.set({ "n", "v" }, "<leader>a", ":GoCodeAction<CR>", { buffer = bufnr })
     end,
     capabilities = capabilities,
   })

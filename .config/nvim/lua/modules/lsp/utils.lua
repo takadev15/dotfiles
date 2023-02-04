@@ -2,6 +2,7 @@ local M = {}
 
 local lsp = vim.lsp
 local telescope = require("telescope.builtin")
+
 vim.notify = require("notify")
 
 M.override_handler = function ()
@@ -47,25 +48,6 @@ M.on_attach = function (client, bufnr)
   client.server_capabilities.document_formatting = false
   client.server_capabilities.document_range_formatting = false
 
-  -- LSP Signature
-  require("lsp_signature").on_attach({
-    bind = true,
-    doc_lines = 2,
-    floating_window = false,
-    fix_pos = false,
-    hint_enable = true,
-    hint_prefix = "ﰠ ",
-    hint_scheme = "Todo",
-    use_lspsaga = false,
-    hi_parameter = "Search",
-    max_height = 12,
-    max_width = 60,  
-    handler_opts = {
-      border = "none",
-    },
-    extra_trigger_chars = { "(", ",", "." },
-  })
-
   -- Code Action (lightbulb)
   if client.supports_method("textDocument/codeAction") then
     vim.api.nvim_create_autocmd(
@@ -78,7 +60,7 @@ M.on_attach = function (client, bufnr)
   require("nvim-navic").attach(client, bufnr)
 
   -- aerial.nvim
-  require("aerial").on_attach(client, bufnr)
+  -- require("aerial").on_attach(client, bufnr)
 
   -- vim-notify
   vim.notify("[" .. client.name .. "] " .. "Language Server Protocol started")
