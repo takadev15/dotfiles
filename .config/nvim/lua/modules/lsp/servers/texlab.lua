@@ -9,10 +9,15 @@ M.setup = function(on_attach, capabilities)
           onEdit = true,
         },
         build = {
-          onSave = true,
           -- args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "-outdir=build", "%f" },
           executable = "tectonic",
           args = { "-X", "compile", "%f", "--synctex", "--keep-logs", "--keep-intermediates", "--outdir", "build" },
+          forwardSearchAfter = false,
+          onSave = false,
+        },
+        forwardSearch = {
+          executable = "zathura",
+          args = { "--synctex-forward", "%l:1:%f", "%p" },
         },
         lint = {
           onChange = true,

@@ -29,6 +29,7 @@ parser_configs.http = {
 }
 
 require("nvim-treesitter.configs").setup({
+  context_commentstring = { enable = true },
   ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ignore_install = {"markdown"},
   highlight = {

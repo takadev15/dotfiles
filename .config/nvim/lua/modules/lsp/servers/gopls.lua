@@ -27,11 +27,9 @@ M.setup = function(on_attach, capabilities)
         completeUnimported = true,
         staticcheck = true,
         diagnosticsDelay = "500ms",
-        experimentalWatchedFileDelay = "100ms",
         gofumpt = false,
         buildFlags = { "-tags", "integration" },
         experimentalPostfixCompletions = true,
-        experimentalUseInvalidMetadata = true,
       },
     },
     on_attach = function(client, bufnr)

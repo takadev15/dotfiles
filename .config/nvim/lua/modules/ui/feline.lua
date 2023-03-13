@@ -22,20 +22,20 @@ local colors = {
 }
 
 local mode_colors_list = {
-    NORMAL = colors.green,
-    INSERT = colors.blue,
-    VISUAL = colors.magenta,
-    OP = colors.green,
-    BLOCK = colors.blue,
-    REPLACE = colors.red,
-    ['V-REPLACE'] = colors.red,
-    ENTER = colors.cyan,
-    MORE = colors.cyan,
-    SELECT = colors.orange,
-    COMMAND = colors.sapphire,
-    SHELL = colors.green,
-    TERM = colors.blue,
-    NONE = colors.yellow
+  NORMAL = colors.green,
+  INSERT = colors.blue,
+  VISUAL = colors.magenta,
+  OP = colors.green,
+  BLOCK = colors.blue,
+  REPLACE = colors.red,
+  ['V-REPLACE'] = colors.red,
+  ENTER = colors.cyan,
+  MORE = colors.cyan,
+  SELECT = colors.orange,
+  COMMAND = colors.sapphire,
+  SHELL = colors.green,
+  TERM = colors.blue,
+  NONE = colors.yellow
 }
 
 local separator = {
@@ -60,7 +60,7 @@ table.insert(winbar_components.active[1], {
   provider = {
     name = "file_info",
     opts = {
-      type = "relative-short", 
+      type = "relative-short",
     },
   },
   enabled = function()
@@ -128,8 +128,10 @@ table.insert(winbar_components.inactive[1], {
   },
 })
 
-local color_mode = function ()
-  local mode = require("feline.providers.vi_mode").get_vim_mode()
+local color_mode = function()
+  local mode = function ()
+    return vim.api.nvim_get_mode().mode:upper()
+  end
   return mode_colors_list[mode]
 end
 
@@ -139,11 +141,7 @@ table.insert(statusline_components.active[1], {
     local mode = require("feline.providers.vi_mode").get_vim_mode()
     return " " .. mode:sub(1, 1) .. " "
   end,
-  hl = {
-    bg = color_mode(),
-    fg = colors.bg,    
-    style = "bold",
-  },
+  hl = function() return { fg = colors.bg, bg = require("feline.providers.vi_mode").get_mode_color() } end,
   right_sep = "slant_right_2",
 })
 
@@ -278,13 +276,13 @@ table.insert(statusline_components.active[3], {
   right_sep = separator,
 })
 
-M.setup = function ()
+M.setup = function()
   feline.setup({
     colors = {
       fg = colors.fg,
       bg = colors.bg,
     },
-    vi_mode_colors = colors,
+    vi_mode_colors = mode_colors_list,
     components = statusline_components,
     force_inactive = {
       filetypes = {},

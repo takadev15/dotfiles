@@ -18,7 +18,7 @@ local server_list = {
   "vts",
   -- "tailwind",
   "bash",
-  "pylance",
+  -- "pylance",
 }
 
 for _, server in ipairs(server_list) do

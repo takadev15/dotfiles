@@ -56,7 +56,7 @@ hl("FidgetTask", { fg = "#cdd6f4" , bg = "NONE" })
 cmd("autocmd ColorScheme * highlight VertSplit ctermbg=NONE guibg=NONE")
 
 require("indent_blankline").setup({
-  filetype_exclude = { "help", "terminal", "alpha", "packer", "norg", "neo-tree", "git-messenger" },
+  filetype_exclude = { "help", "terminal", "alpha", "lazy", "norg", "neo-tree", "git-messenger" },
   buftype_exclude = { "terminal", " " },
 })
 
