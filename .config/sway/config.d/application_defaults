@@ -1,0 +1,65 @@
+## Windowing rule
+for_window {
+# set floating (nontiling)for apps needing it:
+  [class="Yad" instance="yad"] floating enable
+  [app_id="yad"] floating enable
+  [app_id="blueberry"] floating enable,  resize set width 40 ppt height 30 ppt
+
+# set floating (nontiling) for special apps:
+  [class="Xsane" instance="xsane"] floating enable
+  [class="qt5ct" instance="qt5ct"] floating enable, resize set width 60 ppt height 50 ppt
+  [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
+  [app_id="pamac-manager"] floating enable, resize set width 80 ppt height 70 ppt
+  [class="Lxappearance"] floating enable, resize set width 60 ppt height 50 ppt
+
+### Steam/WINE related
+  [class="gamescope"] inhibit_idle fullscreen; floating enable; border none
+  [class="steam_app.*"] inhibit_idle fullscreen; floating enable; border none
+  [class=".*.exe"] inhibit_idle fullscreen; floating enable; border none
+  [class="^Steam$" title="^Friends *"] floating enable
+  [class="^Steam$" title="Steam - News"] floating enable
+  [class="^Steam$" title=".* - Chat"] floating enable
+  [class="^Steam$" title="^Settings$"] floating enable
+  [class="^Steam$" title=".* - event started"] floating enable
+  [class="^Steam$" title=".* CD key"] floating enable
+  [class="^Steam$" title="^Steam - Self Updater$"] floating enable
+  [class="^Steam$" title="^Screenshot Uploader$"] floating enable
+  [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
+  [class="^Steam$" title="^Create or select new Steam library folder:$"] floating enable
+  [title="^Steam Keyboard$"] floating enable
+
+  ### Desktop apps
+  [app_id="zoom"] inhibit_idle fullscreen; floating enable
+  [app_id="ksysguard"] floating enable; sticky enable
+  [app_id="image-roll"] floating enable; border pixel 1
+  [app_id="pavucontrol"] sticky enable; floating enable; resize set 720px 480px
+  [app_id="wdisplays"] floating enable
+  [app_id="mpv"] inhibit_idle visible; border none
+  [app_id="keepassxc"] floating enable; border pixel 1; resize set 960px 870px
+  [app_id="org.kde.kdeconnect.daemon"] floating enable
+  [class="NoiseTorch"] floating enable; resize set 720px 580px
+  [class="(\s|^)Spotify(\s|$)"] floating disable
+  [class="(\s|^)WhatsApp(\s|$)"] floating disable
+
+# set floating for window roles
+  [window_role="pop-up"] floating enable
+  [window_role="bubble"] floating enable
+  [window_role="task_dialog"] floating enable
+  [window_role="Preferences"] floating enable
+  [window_type="dialog"] floating enable
+  [window_type="menu"] floating enable
+  [window_role="About"] floating enable
+  [title="File Operation Progress"] floating enable, border pixel 1, sticky enable, resize set width 40 ppt height 30 ppt
+  [app_id="firefox" title="^Library$"] floating enable, border pixel 1, sticky enable, resize set width 40 ppt height 30 ppt
+  [app_id="floating_shell_portrait"] floating enable, border pixel 1, sticky enable, resize set width 30 ppt height 40 ppt
+  [title="Picture in picture"] floating enable, sticky enable
+  [title="nmtui"] floating enable,  resize set width 50 ppt height 70 ppt
+  [title="htop"] floating enable, resize set width 50 ppt height 70 ppt
+  [app_id="xsensors"] floating enable
+  [title="Save File"] floating enable
+  [app_id="firefox" title="Firefox — Sharing Indicator"] kill
+
+# Inhibit idle
+  [app_id="firefox"] inhibit_idle fullscreen
+  [app_id="Chromium"] inhibit_idle fullscreen
+}

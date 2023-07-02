@@ -1,48 +1,90 @@
-local alpha = require("alpha")
-local dashboard = require("alpha.themes.dashboard")
+local dashboard = require("dashboard")
 
 local time = os.date("%H:%M")
 local v = vim.version()
 local version = " v" .. v.major .. "." .. v.minor .. "." .. v.patch
 
-
-dashboard.section.header.val = {
-    "                                   ",
-    "                                   ",
-    "                                   ",
-    "                                   ",
-    " ⢸⣿⣿⣿⣿⠃⠄⢀⣴⡾⠃⠄⠄⠄⠄⠄⠈⠺⠟⠛⠛⠛⠛⠻⢿⣿⣿⣿⣿⣶⣤⡀⠄ ",
-    " ⢸⣿⣿⣿⡟⢀⣴⣿⡿⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣸⣿⣿⣿⣿⣿⣿⣿⣷ ",
-    " ⢸⣿⣿⠟⣴⣿⡿⡟⡼⢹⣷⢲⡶⣖⣾⣶⢄⠄⠄⠄⠄⠄⢀⣼⣿⢿⣿⣿⣿⣿⣿⣿⣿ ",
-    " ⢸⣿⢫⣾⣿⡟⣾⡸⢠⡿⢳⡿⠍⣼⣿⢏⣿⣷⢄⡀⠄⢠⣾⢻⣿⣸⣿⣿⣿⣿⣿⣿⣿ ",
-    " ⡿⣡⣿⣿⡟⡼⡁⠁⣰⠂⡾⠉⢨⣿⠃⣿⡿⠍⣾⣟⢤⣿⢇⣿⢇⣿⣿⢿⣿⣿⣿⣿⣿ ",
-    " ⣱⣿⣿⡟⡐⣰⣧⡷⣿⣴⣧⣤⣼⣯⢸⡿⠁⣰⠟⢀⣼⠏⣲⠏⢸⣿⡟⣿⣿⣿⣿⣿⣿ ",
-    " ⣿⣿⡟⠁⠄⠟⣁⠄⢡⣿⣿⣿⣿⣿⣿⣦⣼⢟⢀⡼⠃⡹⠃⡀⢸⡿⢸⣿⣿⣿⣿⣿⡟ ",
-    " ⣿⣿⠃⠄⢀⣾⠋⠓⢰⣿⣿⣿⣿⣿⣿⠿⣿⣿⣾⣅⢔⣕⡇⡇⡼⢁⣿⣿⣿⣿⣿⣿⢣ ",
-    " ⣿⡟⠄⠄⣾⣇⠷⣢⣿⣿⣿⣿⣿⣿⣿⣭⣀⡈⠙⢿⣿⣿⡇⡧⢁⣾⣿⣿⣿⣿⣿⢏⣾ ",
-    " ⣿⡇⠄⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⢻⠇⠄⠄⢿⣿⡇⢡⣾⣿⣿⣿⣿⣿⣏⣼⣿ ",
-    " ⣿⣷⢰⣿⣿⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⢰⣧⣀⡄⢀⠘⡿⣰⣿⣿⣿⣿⣿⣿⠟⣼⣿⣿ ",
-    " ⢹⣿⢸⣿⣿⠟⠻⢿⣿⣿⣿⣿⣿⣿⣿⣶⣭⣉⣤⣿⢈⣼⣿⣿⣿⣿⣿⣿⠏⣾⣹⣿⣿ ",
-    " ⢸⠇⡜⣿⡟⠄⠄⠄⠈⠙⣿⣿⣿⣿⣿⣿⣿⣿⠟⣱⣻⣿⣿⣿⣿⣿⠟⠁⢳⠃⣿⣿⣿ ",
-    " ⠄⣰⡗⠹⣿⣄⠄⠄⠄⢀⣿⣿⣿⣿⣿⣿⠟⣅⣥⣿⣿⣿⣿⠿⠋⠄⠄⣾⡌⢠⣿⡿⠃ ",
-    " ⠜⠋⢠⣷⢻⣿⣿⣶⣾⣿⣿⣿⣿⠿⣛⣥⣾⣿⠿⠟⠛⠉            ",
-    "                                   ",
-    "                                   ",
-    "    ~ brain.exist() == null; ~    ",
-    "                                   ",
-}
-
-dashboard.section.buttons.val = {
-  dashboard.button("e", "  New File    ", ":enew<CR>"),
-  dashboard.button("f", "  Find File   ", ":Telescope find_files<CR>"),
-  dashboard.button("t", "  Find Text   ", ":Telescope live_grep<CR>"),
-  dashboard.button("c", "  NVIM Config ", ":Telescope dotfiles<CR>"),
-  dashboard.button("q", "  Quit        ", ":qa<CR>"),
-}
-
-dashboard.section.footer.val = {
-  " " .. time .. " ",
-  version,
-}
-
-alpha.setup(dashboard.opts)
+dashboard.setup({
+    theme = "doom",
+    hide = {
+      statusline = true,
+      tabline = true,
+      winbar = true,
+    },
+    config = {
+      header = {
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "         //                 /*          ",
+        "      ,(/(//,               *###        ",
+        "    ((((((////.             /####%*     ",
+        " ,/(((((((/////*            /########   ",
+        "/*///((((((//////.          *#########/ ",
+        "//////((((((((((((/         *#########/.",
+        "////////((((((((((((*       *#########/.",
+        "/////////(/(((((((((((      *#########(.",
+        "//////////.,((((((((((/(    *#########(.",
+        "//////////.  /(((((((((((,  *#########(.",
+        "(////////(.    (((((((((((( *#########(.",
+        "(////////(.     ,#((((((((((##########(.",
+        "((//////((.       /#((((((((##%%######(.",
+        "((((((((((.         #(((((((####%%##%#(.",
+        "((((((((((.          ,((((((#####%%%%%(.",
+        " .#(((((((.            (((((#######%%   ",
+        "    /(((((.             .(((#%##%%/*    ",
+        "      ,(((.               /(#%%#        ",
+        "        ./.                 #*          ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+        "                                        ",
+      },
+      center = {
+        {
+          icon = " ",
+          icon_hl = "GitSignsAdd",
+          desc = "New File",
+          desc_hl = "Text",
+          key = "e",
+          key_hl = "GitSignsAdd",
+          action = "enew",
+        },
+        {
+          icon = "󰮗 ",
+          icon_hl = "GitSignsAdd",
+          desc = "Find File",
+          desc_hl = "Text",
+          key = "f",
+          key_hl = "GitSignsAdd",
+          action = "Telescope find_files",
+        },
+        {
+          icon = " ",
+          icon_hl = "GitSignsAdd",
+          desc = "Find Text",
+          desc_hl = "Text",
+          key = "t",
+          key_hl = "GitSignsAdd",
+          action = "Telescope live_grep",
+        },
+        {
+          icon = "󰗼 ",
+          icon_hl = "GitSignsAdd",
+          desc = "Quit",
+          desc_hl = "Text",
+          key = "q",
+          key_hl = "GitSignsAdd",
+          action = "qa",
+        },
+      },
+      footer = {
+        " " .. time .. " ",
+        version,
+    },
+    },
+})

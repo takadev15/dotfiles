@@ -10,5 +10,10 @@ require("toggleterm").setup({
     end
   end,
   start_in_insert = false,
+  highlights = {
+    Normal = {
+      guibg = "#11111b",
+    },
+  },
   terminal_mappings = false,
 })

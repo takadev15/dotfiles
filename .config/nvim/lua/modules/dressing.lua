@@ -10,7 +10,13 @@ require("dressing").setup({
         }
       end
     end,
-    winblend = 80,
+    winblend = 0,
+  },
+  input = {
+    win_options = {
+      winblend = 0,
+      winhighlight = "NormalFloat:NeoTreeFloatBorder,FloatBorder:NeoTreeFloatBorder",
+    },
   },
 })
 

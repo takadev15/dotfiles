@@ -2,7 +2,6 @@
 -- ########## load all the plugins #############
 -- #############################################
 
-local vim = vim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
@@ -21,7 +20,7 @@ require("lazy").setup({
   -- stdlib
   { "nvim-lua/plenary.nvim", lazy = false },
 
-  -- LSP Settings
+  -- lsp settings
   {
     "neovim/nvim-lspconfig",
     config = function()
@@ -71,18 +70,6 @@ require("lazy").setup({
     end,
   },
   {
-    "j-hui/fidget.nvim",
-    config = function()
-      require("fidget").setup({
-        align = { bottom = true },
-        fmt = { max_width = 65 },
-        sources = { ["null-ls"] = { ignore = true } },
-        text = { spinner = "dots" },
-        window = { relative = "editor", blend = 0 },
-      })
-    end,
-  },
-  {
     "zbirenbaum/neodim",
     disable = true,
     event = "LspAttach",
@@ -96,50 +83,47 @@ require("lazy").setup({
   },
 
   -- Completion
-  {
+ {
     "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
     config = function()
-      require("modules.completion.cmp")
+      require "modules.completion"
     end,
     dependencies = {
-      { "hrsh7th/cmp-nvim-lsp", dependencies = { "nvim-lspconfig" } },
+      "hrsh7th/cmp-nvim-lsp",
+      {
+        "saadparwaiz1/cmp_luasnip",
+        dependencies = { "L3MON4D3/LuaSnip", "rafamadriz/friendly-snippets" },
+      },
+      {
+        "petertriho/cmp-git",
+        config = true,
+      },
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-emoji",
-      "petertriho/cmp-git",
       "hrsh7th/cmp-buffer",
+      "davidsierradz/cmp-conventionalcommits",
       "kdheepak/cmp-latex-symbols",
       "lukas-reineke/cmp-under-comparator",
+      "windwp/nvim-autopairs",
+      "rcarriga/cmp-dap",
     },
-  },
-  {
-    "windwp/nvim-autopairs",
-    config = function()
-      require("modules.completion.autopairs")
-    end,
-  },
-  {
-    "saadparwaiz1/cmp_luasnip",
-    config = function()
-      require("luasnip.loaders.from_vscode").lazy_load()
-    end,
-    dependencies = { "L3MON4D3/LuaSnip", "rafamadriz/friendly-snippets" },
-  },
-
+    },
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
+    version = nil,
+    build = function()
+        require("nvim-treesitter.install").update({ with_sync = true })
+    end,
     config = function()
-      vim.schedule(function()
-        require "modules.treesitter"
-      end)
+      require "modules.treesitter"
     end,
   },
   "nvim-treesitter/nvim-treesitter-refactor",
   "nvim-treesitter/nvim-treesitter-textobjects",
-  "p00f/nvim-ts-rainbow",
-  "windwp/nvim-ts-autotag",
-  "nvim-treesitter/playground",
+  "HiPhish/nvim-ts-rainbow2",
+  -- "windwp/nvim-ts-autotag",
   {
     "nvim-treesitter/nvim-treesitter-context",
     config = function()
@@ -164,7 +148,7 @@ require("lazy").setup({
   {
     "SmiteshP/nvim-navic",
     config = function()
-      require("nvim-navic").setup({ highlight = true, separator = " ❯ " })
+      require("nvim-navic").setup({ highlight = true, separator = "  " })
     end,
   },
   {
@@ -183,13 +167,10 @@ require("lazy").setup({
     dependencies = {
       {
         "nvim-telescope/telescope-fzf-native.nvim",
-        build =
-        "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+        build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
       },
     },
   },
-  { "nvim-telescope/telescope-media-files.nvim" },
-  { "nvim-telescope/telescope-bibtex.nvim" },
   {
     "crispgm/telescope-heading.nvim",
     ft = "markdown",
@@ -197,16 +178,27 @@ require("lazy").setup({
       require("telescope").load_extension("heading")
     end,
   },
+  -- { "nvim-telescope/telescope-ui-select.nvim" },
+  { "nvim-telescope/telescope-bibtex.nvim" },
+  -- { "nvim-telescope/telescope-media-files.nvim" },
 
   -- User Interface
+  { "MunifTanjim/nui.nvim" },
   { "catppuccin/nvim", lazy = false },
   { "kyazdani42/nvim-web-devicons" },
   {
-    "goolord/alpha-nvim",
-    lazy = false,
-    config = function()
-      require("modules.ui.dashboard")
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    config = function ()
+      require("modules.ui.noice")
     end,
+  },
+  {
+  'glepnir/dashboard-nvim',
+  event = 'VimEnter',
+  config = function()
+      require("modules.ui.dashboard")
+  end,
   },
   {
     "rafcamlet/tabline-framework.nvim",
@@ -231,17 +223,18 @@ require("lazy").setup({
 
   -- Git
   { "tpope/vim-fugitive" },
+  {
+    "TimUntersberger/neogit",
+    cmd = "Neogit",
+    config = function()
+      require("neogit").setup()
+    end,
+  },
   { "rhysd/committia.vim" },
   { "ThePrimeagen/git-worktree.nvim" },
-  {
-    "rbong/vim-flog",
-  },
-  {
-    "rhysd/git-messenger.vim",
-  },
-  {
-    "f-person/git-blame.nvim",
-  },
+  { "rbong/vim-flog" },
+  { "rhysd/git-messenger.vim" },
+  { "f-person/git-blame.nvim" },
   {
     "lewis6991/gitsigns.nvim",
     config = function()
@@ -295,22 +288,28 @@ require("lazy").setup({
       require("modules.misc.neotest")
     end,
   },
+
   -- Languages specific Plugin
-  { "akinsho/flutter-tools.nvim" },
   {
-    "ray-x/go.nvim",
-    ft = { "go", "gomod", "gowork", "gohtmltmpl" },
-    config = function()
-      require("go").setup({
-        lsp_inlay_hints = { enable = false },
-        tag_transform = "snakecase",
-        dap_debug_keymap = false,
-        dap_debug_vt = false,
-      })
-    end,
+    "mfussenegger/nvim-jdtls",
   },
+  {
+    "crispgm/nvim-go",
+   ft = { "go", "gomod", "gowork", "gohtmltmpl" },
+    build = ":GoInstallBinaries",
+    opts = {
+      auto_lint = false,
+      auto_format = false,
+      maintain_cursor_pos = true,
+      lint_prompt_style = "vt",
+    },
+  },
+  { "akinsho/flutter-tools.nvim" },
+
   { "p00f/clangd_extensions.nvim" },
+
   { "simrat39/rust-tools.nvim" },
+
   {
     "folke/neodev.nvim",
     config = function()
@@ -326,7 +325,6 @@ require("lazy").setup({
   { "jose-elias-alvarez/typescript.nvim" },
   {
     "vuki656/package-info.nvim",
-    dependencies = "MunifTanjim/nui.nvim",
     config = function()
       require("package-info").setup()
     end,
@@ -338,16 +336,12 @@ require("lazy").setup({
       require("rest-nvim").setup()
     end,
   },
-  {
-    "frabjous/knap"
-  },
+  { "frabjous/knap" },
   { "tpope/vim-dotenv" },
 
   -- Startup Improvement
   -- TODO: Remove impatent after neovim/pull/15436 merged
-  {
-    "lewis6991/impatient.nvim",
-  },
+  { "lewis6991/impatient.nvim", },
 
   -- Terminal things
   {
@@ -381,7 +375,7 @@ require("lazy").setup({
     end,
   },
   { "lukas-reineke/indent-blankline.nvim" },
-  { "tpope/vim-dadbod",                   dependencies = { "kristijanhusak/vim-dadbod-ui" }, ft = "sql" },
+  { "tpope/vim-dadbod", dependencies = { "kristijanhusak/vim-dadbod-ui" }, ft = "sql" },
   {
     "kristijanhusak/vim-dadbod-completion",
     ft = { "sql", "msql", "plsql" },
@@ -412,16 +406,16 @@ require("lazy").setup({
       require("tint").setup({
         tint = -20,
         highlight_ignore_patterns = { "WinSeparator", "Status.*" },
-        -- window_ignore_function = function(winid)
-        --   local buf = vim.api.nvim_win_get_buf(winid)
-        --   local ft = vim.api.nvim_buf_get_option(buf, "filetype")
-        --
-        --   if ft == "neo-tree" then
-        --     return true
-        --   end
-        --
-        --   return false
-        -- end,
+        window_ignore_function = function(winid)
+          local buf = vim.api.nvim_win_get_buf(winid)
+          local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+        
+          if ft == "neo-tree" then
+            return true
+          end
+        
+          return false
+        end,
       })
     end,
   },

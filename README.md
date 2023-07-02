@@ -1,7 +1,6 @@
 # Arch setup
 
 ## How to Download
-jssjjsj
 
 ```sh  
 alias dotfiles="/usr/bin/git --git-dir $HOME/.dotfiles/ --work-tree=$HOME"  
@@ -12,14 +11,14 @@ dotfiles config --local status.showUntrackedFiles no
 
 ## My Setup
 
-* **Distro** : Archlinux
-* **WM** : i3wm with i3gaps
-* **status bar** : Polybar
-* **Theme** : Material
+* **Distro** : EndevourOs
+* **WM** : Sway
+* **status bar** : Waybar
+* **Theme** : Catpuccin
 * **Shell** : zsh with starship prompt
 * **File Manager** : vifm
 * **Terminal** : kitty + tmux
-* **Editor** : neovim v0.6.0dev
+* **Editor** : neovim nightly
 
 ## Screenshot
 
@@ -28,14 +27,11 @@ dotfiles config --local status.showUntrackedFiles no
 
 ## TODO List
 
-* [ ] Neovim
-  * [ ] Refactor (98% done)
-  * [ ] LSP Install script
-  * [x] Switch to lua
-* [ ] set neomutt
-* [ ] Refactor zshrc
-  * [x] aliasrc
-  * [ ] env and else
+* [ ] Sway
+  * [ ] Switch greeter to tui greeter from sddm
+* [ ] Switch from dual boot to only linux system
+  * [ ] Switch to Archlinux
+  * [ ] Create Game focused partition
 
 ## ATTENTION
 

@@ -1,10 +1,6 @@
 local telescope = require("telescope")
 local action = require("telescope.actions")
-
-telescope.load_extension("media_files")
-telescope.load_extension("bibtex")
-telescope.load_extension("fzf")
--- telescope.load_extension("dotfiles")
+local themes = require("telescope.themes")
 
 local default_ivy = {
   theme = "ivy",
@@ -26,18 +22,8 @@ telescope.setup({
         mirror = false,
       },
     },
-    extensions = {
-      fzf = {
-        fuzzy = true, -- false will only do exact matching
-        override_generic_sorter = false, -- override the generic sorter
-        override_file_sorter = true, -- override the file sorter
-        case_mode = "smart_case",
-      },
-      media_files = {
-        filetypes = { "png", "webp", "jpg", "jpeg" },
-        find_cmd = "rg", -- find command (defaults to `fd`)
-      },
-    },
+    path_display = { "truncate" },
+    wrap_results = true,
     vimgrep_arguments = {
       "rg",
       "--color=never",
@@ -50,7 +36,6 @@ telescope.setup({
     prompt_prefix = " ",
     selection_caret = " ",
     color_devicons = true,
-    path_display = { "absolute" },
     file_ignore_patterns = {
       "__pycache__/*",
       "__init__.py",
@@ -60,11 +45,28 @@ telescope.setup({
       "%.dll",
       "go/pkg/*",
     },
+    extensions = {
+      ["fzf"] = {
+        fuzzy = true, -- false will only do exact matching
+        override_generic_sorter = false, -- override the generic sorter
+        override_file_sorter = true, -- override the file sorter
+        case_mode = "smart_case",
+      },
+      -- ["ui-select"] = themes.get_dropdown({
+      --   initial_mode = "normal",
+      --   layout_config = {
+      --     height = 12,
+      --     width = 60,
+      --   },
+      -- }),
+    },
     use_less = false,
     mappings = {
       i = {
-        ["<C-j>"] = action.move_selection_next,
         ["<C-k>"] = action.move_selection_previous,
+        ["<C-j>"] = action.move_selection_next,
+        ["<C-o>"] = action.toggle_selection,
+        ["<C-O>"] = action.toggle_all,
         ["<esc>"] = action.close,
       },
     },
@@ -82,6 +84,7 @@ telescope.setup({
         },
         vertical = {
           mirror = false,
+          preview_height = 0.65,
         },
       },
     },
@@ -98,4 +101,10 @@ telescope.setup({
     lsp_references = default_ivy,
   },
 })
+
+-- Load extensions
+-- telescope.load_extension("ui-select")
+telescope.load_extension("bibtex")
+telescope.load_extension("fzf")
+-- telescope.load_extension("dotfiles")
 

@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(on_attach, capabilities)
+M.setup = function(capabilities)
   require("lspconfig").gopls.setup({
     cmd = { "gopls", "-remote=auto" },
     settings = {
@@ -32,11 +32,6 @@ M.setup = function(on_attach, capabilities)
         experimentalPostfixCompletions = true,
       },
     },
-    on_attach = function(client, bufnr)
-      on_attach(client, bufnr)
-      vim.keymap.del({ "n", "v" }, "<leader>a", { buffer = bufnr })
-      vim.keymap.set({ "n", "v" }, "<leader>a", ":GoCodeAction<CR>", { buffer = bufnr })
-    end,
     capabilities = capabilities,
   })
 end

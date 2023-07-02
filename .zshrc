@@ -31,46 +31,37 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
 # Zinit Plugin
-zinit light-mode for \
-    zdharma-continuum/zinit-annex-rust \
-    zdharma-continuum/zinit-annex-readurl \
-    zdharma-continuum/zinit-annex-patch-dl \
-    zdharma-continuum/zinit-annex-bin-gem-node \
-    zdharma-continuum/fast-syntax-highlighting \
-    zsh-users/zsh-autosuggestions \
-    zsh-users/zsh-completions 
+zinit wait lucid light-mode for \
+  zdharma-continuum/fast-syntax-highlighting \
+  zsh-users/zsh-autosuggestions \
+  zsh-users/zsh-completions 
 
 
 ## zinit plugin config
-zstyle ':completion:*' auto-description 'specify: %d'
-zstyle ':completion:*' completer _expand _complete _correct _approximate
-zstyle ':completion:*' format 'Completing %d'
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' menu select=2
-eval "$(dircolors -b)"
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
-zstyle ':completion:*' menu select=long
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle ':completion:*' use-compctl false
-zstyle ':completion:*' verbose true
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+zstyle ':completion:*' matcher-list 'r:|?=** m:{a-z\-}={A-Z\_}'
+zstyle ':completion:*' menu select
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+zstyle ':completion:*' verbose no
+zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#666666,bold,italic"
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+export ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *"
+export ZSH_AUTOSUGGEST_COMPLETION_IGNORE="git *"
 
 
 # Custom Script path
 export PATH="$HOME/.script:$PATH"
 export PATH="$HOME/.config/vifm/scripts:$PATH"
 export PATH="$HOME/dir/data/workstation/fita/scripts:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # NNN
 export NNN_BMS='p:/mnt/dir/project/;c:~/.config/'
 export LC_COLLATE="C"
-
-# Cscope
-export CSCOPE_EDITOR=`which nvim`
 
 # Preserve MANPATH if you already defined it somewhere in your config.
 # Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
@@ -80,17 +71,13 @@ export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 export PF_ASCII="arch linux"
 
 # Set Nvim as default text editor
-export EDITOR="/usr/local/bin/nvim"
-export VISUAL="/usr/local/bin/nvim"
-
-# Set spicetify path
-export SPICETIFY_INSTALL="/home/takadev/spicetify-cli"
-export PATH="$SPICETIFY_INSTALL:$PATH"
+export EDITOR=nvim
+export VISUAL=nvim
 
 # Pyenv
-# export PATH="$HOME/.pyenv/bin:$PATH"
-# eval "$(pyenv init --path)"
-# eval "$(pyenv virtualenv-init -)"
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv virtualenv-init -)"
 
 # Golang
 export GOPATH=$HOME/go
@@ -98,14 +85,12 @@ export PATH="$GOPATH/bin:$PATH"
 
 # Rust
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/build/ra-multiplex/target/release:$PATH"
+export PATH="$HOME/Repo/ra-multiplex/target/release:$PATH"
+export PATH="$HOME/.config/nvim/scripts:$PATH"
 
 # Fzf
+export FZF_DEFAULT_OPTS="--ansi --height 40% --layout=reverse --border=none"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# fnm
-export PATH=/home/takadev/.fnm:$PATH
-eval "`fnm env`"
 
 # Flutter SDK
 export PATH=$PATH:$HOME/.sdk_dir/flutter/bin
@@ -123,20 +108,14 @@ export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 export PATH="/home/takadev/.yarn/bin:$PATH"
 export PATH="~/.npm-global/bin:$PATH"
 
-# fix screen
-export GDK_SCALE=2
-export GDK_DPI_SCALE=0.5
-
 # fnm
 export YARN_GLOBAL_FOLDER="$FNM_MULTISHELL_PATH/yarn-global"
 export YARN_PREFIX="$FNM_MULTISHELL_PATH"
-export PATH="/home/takadev/.fnm:$PATH"
+export PATH="/home/takadev/.local/share/fnm:$PATH"
 eval "$(fnm env)"
 
-export PATH="/home/takadev/.config/vifm/scripts/:$PATH"
-
-# Nix 
-if [ -e /home/takadev/.nix-profile/etc/profile.d/nix.sh ]; then . /home/takadev/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+# temp
+export UV_USE_IO_URING=0
 
 # JenV path
 export JENV_ROOT="${JENV_ROOT:=${HOME}/.jenv}"
@@ -160,10 +139,10 @@ fi
 # aliasrc
 source $HOME/.config/aliasrc
 
-# GOenv
-source $HOME/.config/gosecret
+# env
+source $HOME/.config/javasecret
 
-# Try zoxide 
+# zoxide 
 eval "$(zoxide init zsh)"
 
 
@@ -175,10 +154,11 @@ if test -e "/usr/lib/kitty/shell-integration/kitty.zsh"; then source "/usr/lib/k
 eval "$(starship init zsh)"
 
 # Protoc
-export PATH="$HOME/build/protobuf/bin:$PATH"
+export PATH="$HOME/Repo/protobuf/bin:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/takadev/build/google-cloud-sdk/path.zsh.inc' ]; then . '/home/takadev/build/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/home/takadev/Repo/google-cloud-sdk/path.zsh.inc' ]; then . '/home/takadev/Repo/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/takadev/build/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/takadev/build/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/home/takadev/Repo/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/takadev/Repo/google-cloud-sdk/completion.zsh.inc'; fi
+

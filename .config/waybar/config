@@ -1,0 +1,186 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "modules-left": [
+        "clock",
+        "sway/workspaces",
+        "sway/scratchpad",
+        "sway/mode",
+    ],
+    "modules-center": [
+        "sway/window",
+    ],
+    "modules-right": [
+        "custom/github",
+        "custom/update",
+        "custom/media",
+        "tray",
+        "memory",
+        "cpu",
+        "pulseaudio",
+        "bluetooth",
+        "network",
+        "battery",
+    ],
+
+    // Modules
+    "sway/mode": {
+        "format": "<span style='italic'>{}</span>",
+        "tooltip": false
+    },
+
+    "sway/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": " ",
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}",
+    },
+
+    "sway/window": {
+        "format": "{}",
+        "all-outputs": false,
+        "max-length": 20
+    },
+
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "disable-markup" : false,
+        "format": " {icon} ",
+        "format-icons": {
+          "1": "一",
+          "2": "二",
+          "3": "三",
+          "4": "四",
+          "5": "五",
+          "6": "六",
+          "7": "七",
+          "8": "八",
+          "9": "九",
+          "10": "十"
+          }
+    },
+
+    "battery": {
+        "states": {
+            // "full": 100,
+            // "good": 90,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+    "clock": {
+        "format": "{:%a | %H:%M}",
+        "format-alt": "  {:%a | %d-%m-%Y} ", // Icon: calendar-alt
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
+    "cpu": {
+        "interval": 5,
+        "format": " {usage}%", // Icon: microchip
+        "states": {
+            "warning": 70,
+            "critical": 90,
+        },
+        "on-click": "kitty -e 'htop'",
+    },
+
+    "memory": {
+        "interval": 5,
+        "format": " {}%", // Icon: memory
+        "on-click": "kitty -e 'htop'", 
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
+    },
+
+    "network": {
+        "interval": 5,
+        "format-wifi": "說 {essid}",
+        "format-ethernet": " {ifname}",
+        "format-disconnected": "ﲁ Disconnected",
+        "tooltip-format-disconnected": "",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+        "tooltip-format-ethernet": "{ifname} ({ipaddr})",
+        "on-click": "kitty -e 'nmtui'",
+    },
+    "network#vpn": {
+        "interface": "tun0",
+        "format": "  {essid}",
+        "format-disconnected": "ﲁ Disconnected",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+    },
+
+    "bluetooth": {
+        "format": "<span color='#29B6F6'></span>",
+        "format-off": "",
+        "format-on": "",
+        "tooltip-format-connected": "{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias} {device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}: {device_battery_percentage}%"
+    },
+
+    "pulseaudio": {
+        "scroll-step": 1, // %, can be a float
+        "format": "{icon}{volume}% ",
+        "format-bluetooth": "{icon}{volume}%",
+        "format-bluetooth-muted": " {icon}",
+        "format-muted": "婢{format_source}",
+        "format-source": "",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": " ",
+            "hands-free": "וֹ",
+            "headset": " ",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": [""]
+        },
+        "on-click": "pavucontrol",
+        "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +2%",
+        "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -2%",
+    },
+
+    "tray": {
+        "spacing":1
+     },
+
+    "custom/github": {
+        "exec": "~/.config/waybar/modules/github.sh",
+        "exec-if": "wget -q --spider http://google.com",
+        "format": " {} ",
+        "interval": 300,
+        "on-click": "xdg-open https://github.com/notifications",
+        "return-type": "json",
+        "tooltip": true
+    },
+
+    "custom/update": {
+        "exec": "~/.config/waybar/modules/update_check.sh",
+        "exec-if": "pgrep paru || pgrep pacman || exit 0",
+        "format": " {} ",
+        "interval": 7200,
+        "return-type": "json",
+        "signal": 8,
+        "tooltip": true
+    },
+
+    "custom/media": {
+        "escape": true,
+        "exec": "python /home/takadev/.config/waybar/modules/mediaplayer.py -f '{song} - {artist}' -t 30",
+        "interval": 1,
+        "format": "{icon}{}",
+        "format-icons": {
+            "default": "<span color='#11111b'></span> "
+        },
+        "max-length": 20,
+    },
+}

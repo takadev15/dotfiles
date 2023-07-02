@@ -2,42 +2,14 @@
 -- #####        Treesitter         #####
 -- #####################################
 
-local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
-
-parser_configs.norg = {
-  install_info = {
-    url = "https://github.com/vhyrro/tree-sitter-norg",
-    files = { "src/parser.c", "src/scanner.cc" },
-    branch = "main",
-  },
-}
-
-parser_configs.markdown = {
-  install_info = {
-    url = "https://github.com/ikatyang/tree-sitter-markdown",
-    files = { "src/parser.c", "src/scanner.cc" },
-  },
-  filetype = "markdown",
-}
-
-parser_configs.http = {
-  install_info = {
-    url = "https://github.com/NTBBloodbath/tree-sitter-http",
-    files = { "src/parser.c" },
-    branch = "main",
-  },
-}
-
 require("nvim-treesitter.configs").setup({
   context_commentstring = { enable = true },
   ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  ignore_install = {"markdown"},
+  ignore_install = { "comment", "c" },
   highlight = {
+    disable = { "c", "cpp", "thrift", "comment" },
     enable = true, -- false will disable the whole extension
     use_languagetree = true,
-  },
-  autotag = {
-    enable = true,
   },
   indent = {
     enable = true,
@@ -53,8 +25,9 @@ require("nvim-treesitter.configs").setup({
   },
   rainbow = {
     enable = true,
-    extended_mode = true,
-    max_file_lines = 1000,
+    disable = { 'jsx', 'cpp' },
+    query = 'rainbow-parens',
+    -- strategy = require('ts-rainbow').strategy.global,
   },
   textobjects = {
     select = {
@@ -70,25 +43,6 @@ require("nvim-treesitter.configs").setup({
         ["as"] = "@statement.outer",
       },
     },
-    move = {
-      enable = true,
-      goto_next_start = {
-        ["]m"] = "@function.outer",
-        ["]]"] = "@class.outer",
-      },
-      goto_next_end = {
-        ["]M"] = "@function.outer",
-        ["]["] = "@class.outer",
-      },
-      goto_previous_start = {
-        ["[m"] = "@function.outer",
-        ["[["] = "@class.outer",
-      },
-      goto_previous_end = {
-        ["[M"] = "@function.outer",
-        ["[]"] = "@class.outer",
-      },
-    },
+    move = { enable = false },
   },
 })
-

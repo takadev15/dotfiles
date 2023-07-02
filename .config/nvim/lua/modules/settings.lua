@@ -23,9 +23,10 @@ opt.encoding = "utf-8"
 opt.showmode = true
 opt.termguicolors = true -- Use GUI colors in terminal
 cmd("syntax on")
+opt.cmdheight = 0
 
 opt.hidden = true -- Hide unloaded buffer
-opt.lazyredraw = true -- Don't redraw easily
+-- opt.lazyredraw = true
 opt.ttyfast = true -- Performance related
 opt.clipboard = { "unnamedplus" } -- Enable system-wide clipboard
 opt.mouse = "n" -- Mouse only on normal mode
@@ -77,8 +78,8 @@ opt.relativenumber = true -- Make number column relative
 
 opt.wildmenu = true -- Use wildmenu
 opt.wildoptions = "pum" -- Use popup style for wildmenu
-opt.pumheight = 3 -- Set popup height to 3 entry
-opt.pumblend = 3 -- Make popup menu translucent
+opt.pumheight = 4
+-- opt.pumblend = 3
 
 opt.wildignorecase = true
 opt.wildignore = {

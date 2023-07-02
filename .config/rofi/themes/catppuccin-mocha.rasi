@@ -1,7 +1,8 @@
 * {
     bg-col:  #1e1e2e;
     bg-col-light: #1e1e2e;
-    border-col: #1e1e2e;
+    border-col: #04a5e5;
+    border-radius: 10px;
     selected-col: #1e1e2e;
     blue: #89b4fa;
     fg-col: #cdd6f4;

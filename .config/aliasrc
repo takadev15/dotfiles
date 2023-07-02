@@ -21,7 +21,7 @@ alias pdir="z ~/dir/data/project"
 alias csdir="z ~/dir/data/class"
 alias ldir="z ~/dir/data/learn"
 alias note="z ~/dir/data/note/"
-alias wdir="z ~/dir/data/workstation/clapping-ape"
+alias wdir="z ~/dir/data/workstation/oyindonesia"
 alias zz="z .."
 
 # source zshrc

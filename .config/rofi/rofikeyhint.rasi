@@ -15,7 +15,7 @@ configuration {
 	sidebar-mode: 					false;
 }
 
-@import "~/.config/rofi/arc_dark_transparent_colors.rasi"
+@import "~/.config/rofi/themes/catppuccin-mocha.rasi"
 
 window {
     background-color: @background;

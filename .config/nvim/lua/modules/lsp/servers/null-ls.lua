@@ -65,7 +65,9 @@ local sources = {
   -- linter.hadolint,
   -- linter.markdownlint,
   linter.shellcheck,
-  linter.sqlfluff,
+  linter.sqlfluff.with({
+    extra_args = {"--dialect", "postgres"},
+  }),
   -- linter.pylint,
 
 }

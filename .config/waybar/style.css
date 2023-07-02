@@ -1,0 +1,252 @@
+/* -----------------------------------------------------------------------------
+ * HWHW Config
+ * -------------------------------------------------------------------------- */
+
+* {
+  border: none;
+  font-family: "JetBrainsMonoNL Nerd Font", "Font Awesome 6 Free";
+  font-size: 13px;
+  font-weight: bolder;
+  padding-left: 2px;
+  padding-right: 2px;
+  margin-top: 2px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+@keyframes blink {
+  to {
+    color: #cdd6f4; 
+  }
+}
+
+window#waybar {
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 1;
+  color: #cdd6f4;
+}
+
+tooltip {
+  background: #1e1e2e;
+  border-radius: 10px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #11111b;
+}
+
+#clock,
+#battery,
+#network,
+#pulseaudio,
+#bluetooth,
+#memory,
+#cpu,
+#tray {
+  background-color: #11111b;
+  border-top: 1px solid #209fb5;
+  border-bottom: 1px solid #209fb5;
+}
+
+/* clock style */
+#clock {
+  color: #cdd6f4;
+  background-color: #11111b;
+  padding-left: 6px;
+  padding-right: 6px;
+  font-weight: bold;
+  margin-right: 8px;
+  margin-left: 10px;
+  border-radius: 100px;
+  border: 1px solid #209fb5;
+}
+
+/* Workspace style */
+#workspaces {
+	margin-left: 1px;
+	border-radius: 15px;
+	background-color: #11111b;
+	transition: none;
+  border: 1px solid #209fb5;
+  padding-right: 2px;
+}
+
+#workspaces button {
+	transition: none;
+	color: #cdd6f4;
+	background: transparent;
+	font-size: 13px;
+  padding-bottom: 3.5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#workspaces button.focused {
+  background-color: #cdd6f4;
+  color: #11111b;
+	border-radius: 15px;
+}
+
+#workspaces button.urgent {
+  background-color: #c9545d;
+  color: #11111b;
+	border-radius: 15px;
+}
+
+/* Scratchpad style */
+#scratchpad {
+	color: #cdd6f4;
+  border-bottom: 2px solid #eff1f5;
+  margin-left: 6px;
+}
+
+/* Mode style */
+#mode {
+	color: #cdd6f4;
+  border-bottom: 2px solid #eff1f5;
+  margin-left: 6px;
+}
+
+/* Window style */
+#window {
+  background-color: #11111b;
+	color: #cdd6f4;
+	border-radius: 100px;
+  border: 1px solid #209fb5;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 3.5px;
+}
+
+window#waybar.empty #window {
+  background-color: transparent;
+  border: transparent;
+}
+
+/* Battery style */
+#battery {
+  color: #cdd6f4;
+  font-weight: bold;
+  margin-right: 6;
+  padding-left: 6px;
+  padding-right: 12;
+  border-radius: 0px 100px 100px 0px;
+  border-right: 1px solid #209fb5;
+}
+
+/* #battery.good { */
+/*   color: #a6d189; */
+/* } */
+
+#battery.charging {
+  color: #fab387;
+}
+
+#battery.warning {
+  color: #fab387;
+}
+
+#battery.full.charging {
+  color: #a6d189;
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#battery.critical:not(.charging) {
+  color: #d20f39;
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* Network style */
+#network {
+  font-weight: bold;
+  padding: 0px 6px;
+}
+
+#network.disconnected {
+  color: #fab387;	
+}
+
+/* Pulse audio */
+#pulseaudio {
+  color: #cdd6f4;
+  font-weight: bold;
+  margin-left: 6px;
+  padding-left: 6;
+  padding-right: 6px;
+  border-radius: 100px 0px 0px 100px;
+  border-left: 1px solid #209fb5;
+}
+
+/* System monitoring */
+#memory {
+  color: #cdd6f4;
+  font-weight: bold;
+  padding-left: 6px;
+  margin-left: 6px;
+  border-radius: 100px 0px 0px 100px;
+  border-left: 1px solid #209fb5;
+}
+
+#memory.warning {
+  color: #df8e1d;
+}
+
+#memory.critical {
+  color: #d20f39;
+  animation-name: blink;
+}
+
+#cpu {
+  color: #cdd6f4;
+  font-weight: bold;
+  padding-right: 6px;
+  border-radius: 0px 100px 100px 0px;
+  border-right: 1px solid #209fb5;
+}
+
+#cpu.warning {
+  color: #df8e1d;
+}
+
+#cpu.critical {
+  color: #d20f39;
+  animation-name: blink;
+}
+
+/* Tray style */
+#tray {
+  color: #cdd6f4;
+  font-weight: bold;
+  margin-left: 6px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 100px;
+  border: 1px solid #209fb5;
+}
+
+/* Custom modules */
+#custom-github {
+  border-bottom: 2px solid #04a5e5;
+  color: #eff1f5;
+}
+
+#custom-update {
+  border-bottom: 2px solid #dc8a78;
+  color: #eff1f5;
+}
+
+#custom-media {
+  background-color: #40a02b;
+  color: #11111b;
+  border-radius: 100px;
+  padding-left: 6px;
+  padding-right:6px;
+  margin-left: 6px; 
+}

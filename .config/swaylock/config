@@ -1,0 +1,30 @@
+# indicator
+# no-unlock-indicator
+# daemonize
+# datestr=%A
+image=$HOME/dir/data/images/wallpaper/catpuccino/ina.jpg
+scaling=fill
+font=UbuntuMono
+font-size=20
+
+indicator-caps-lock
+indicator-radius=120
+indicator-idle-visible
+ring-color=FFFFFF30
+ring-clear-color=9CCC6580
+ring-wrong-color=E5393580
+ring-ver-color=43A04780
+key-hl-color=FFFFFF99
+text-color=00000000
+text-wrong-color=00000000
+text-ver-color=00000000
+text-clear-color=00000000
+inside-color=00000000
+inside-wrong-color=00000000
+inside-ver-color=00000000
+inside-clear-color=00000000
+separator-color=00000000
+line-color=00000000
+line-wrong-color=00000000
+line-ver-color=00000000
+line-clear-color=00000000

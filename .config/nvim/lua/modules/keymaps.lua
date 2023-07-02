@@ -1,4 +1,3 @@
-local cmd = vim.api.nvim_commandkeyma
 local telescope = require("telescope.builtin")
 
 local map = function(mode, l, r, opts)
@@ -36,18 +35,21 @@ map("i", "<A-h>", [[<esc>li]])
 map("n", "<leader>e", vim.diagnostic.open_float)
 map("n", "[d", vim.diagnostic.goto_prev)
 map("n", "]d", vim.diagnostic.goto_prev)
-map("n", "<leader>lq", require("telescope.builtin").diagnostics)
+map("n", "<leader>lq", telescope.diagnostics)
 
 -- ###################################
 -- #####      Plugins keymap     #####
 -- ###################################
+
+-- File tree
+map("n", "<leader>fd", ":NeoTreeShowToggle<CR>")
 
 -- aerial
 map("n", "<leader>ss", ":AerialToggle<CR>")
 
 -- Tasks runner
 map("n", "<leader>lr", ":OverseerRun<CR>")
-map("n", "<leader>st", ":OverseerToggle<CR>")
+map("n", "<leader>st", ":OverseerToggle!<CR>")
 
 
 -- Telescope
@@ -59,13 +61,12 @@ map("n", "<leader>lH", telescope.help_tags)
 map("n", "<leader>la", ":Telescope media_files<CR>")
 map("n", "<leader>lw", "<cmd>lua require('telescope').extensions.arecibo.websearch()<CR>")
 
-map("n", "<leader>fd", ":NeoTreeShowToggle<CR>")
+-- Terminal
+map("t", "<esc>", "<C-\\><C-n>")
 
 -- Move.nvim
 map("v", "<A-j>", ":MoveBlock(1)<CR>")
 map("v", "<A-k>", ":MoveBlock(-1)<CR>")
--- map("v", "J", ":m '>+1<CR>gv=gv")
--- map("v", "K", ":m '>-2<CR>gv=gv")
 
 -- Rest-Nvim
 map("n", "<leader>rr", "<Plug>RestNvim")
@@ -100,8 +101,9 @@ map("n", "tt", function()
   require("neotest").summary.toggle()
 end)
 
-map('n','<leader>da', function() 
-  require("knap").toggle_autopreviewing() 
+-- Latex preview
+map('n', '<leader>da', function()
+  require("knap").toggle_autopreviewing()
 end)
 
 -- Package Info

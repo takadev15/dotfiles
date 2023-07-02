@@ -11,6 +11,7 @@ M.setup = function(on_attach, capabilities)
         use_telescope = true,
       },
       inlay_hints = {
+        auto = false,
         show_parameter_hints = false,
         parameter_hints_prefix = " » ",
         other_hints_prefix = "❱ ",

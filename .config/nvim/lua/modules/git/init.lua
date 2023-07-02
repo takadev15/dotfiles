@@ -19,6 +19,7 @@ vim.g.flog_default_arguments = { max_count = 4000 }
 
 -- Fugitives!!
 map("n", "<leader>gs", "<cmd>:Git<CR>")
+map("n", "<leader>gL", ":Flogsplit<CR>")
 map("n", "<leader>gl", "<cmd>:Git log<CR>")
 map("n", "<leader>gd", ":tabedit % | Gvdiffsplit!<CR>")
 map("n", "<leader>gch", "<cmd>:diffget //2<CR>")

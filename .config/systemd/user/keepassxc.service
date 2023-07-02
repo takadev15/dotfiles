@@ -1,0 +1,10 @@
+[Unit]
+Description=KeepassXC - Password Manager
+Documentation=man:keepassxc
+
+[Service]
+ExecStart=/usr/bin/keepassxc
+Environment="DISPLAY=:0"
+
+[Install]
+WantedBy=autostart.target

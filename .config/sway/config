@@ -1,0 +1,17 @@
+# Initial Setup 
+# exec ~/set_once.sh
+
+
+# Startup
+## Start session target
+exec fcitx5
+
+exec "systemctl --user import-environment DISPLAY; systemctl --user start sway-session.target"
+# Trigger kanshi
+exec "systemctl --user restart kanshi.service"
+
+# user config directory
+include $HOME/.config/sway/config.d/*
+
+# only enable this if every app you use is compatible with wayland
+# xwayland disable
