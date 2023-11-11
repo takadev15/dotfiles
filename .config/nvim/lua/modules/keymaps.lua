@@ -42,7 +42,7 @@ map("n", "<leader>lq", telescope.diagnostics)
 -- ###################################
 
 -- File tree
-map("n", "<leader>fd", ":NeoTreeShowToggle<CR>")
+map("n", "<leader>fd", ":Neotree toggle<CR>")
 
 -- aerial
 map("n", "<leader>ss", ":AerialToggle<CR>")
@@ -75,6 +75,8 @@ map("n", "<leader>rp", "<Plug>RestNvimPreview")
 -- Neogen
 map("n", "<leader>dg", require("neogen").generate)
 
+map("n", "<leader>cl", ":TexlabBuild<CR>")
+
 -- neotest
 map("n", "ta", function()
   require("neotest").run.attach()
@@ -102,9 +104,9 @@ map("n", "tt", function()
 end)
 
 -- Latex preview
-map('n', '<leader>da', function()
-  require("knap").toggle_autopreviewing()
-end)
+-- map('n', '<leader>da', function()
+--   require("knap").toggle_autopreviewing()
+-- end)
 
 -- Package Info
 map("n", "<leader>ns", "<cmd>lua require('package-info').show({ force = true })<CR>")

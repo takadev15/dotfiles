@@ -97,16 +97,18 @@ hl("NotifyTRACEBorder", { bg = "#181825", fg = "#a6e3a1" })
 -- noice
 hl("NoiceMini", { bg = nil })
 hl("NoiceLspProgressTitle", { bg = nil, fg = "#cdd6f4" })
-hl("NotificationInfo", { fg = "#A5B4FC", bg = nil })
-hl("NotificationError", { fg = "#FCA5A5", bg = nil })
-hl("NotificationWarning", { fg = "#FBC19D", bg = nil })
+hl("NotificationInfo", { fg = "#89dceb", bg = nil })
+hl("NotificationError", { fg = "#e64553", bg = nil })
+hl("NotificationWarning", { fg = "#f9e2af", bg = nil })
 
 -- disable vertical split
 -- cmd("autocmd ColorScheme * highlight VertSplit ctermbg=NONE guibg=NONE")
 
-require("indent_blankline").setup({
-  filetype_exclude = { "help", "terminal", "dashboard", "lazy", "norg", "neo-tree", "git-messenger" },
-  buftype_exclude = { "terminal", " " },
+require("ibl").setup({
+    exclude = {
+      filetypes = { "help", "terminal", "dashboard", "lazy", "norg", "neo-tree", "git-messenger" },
+      buftypes = { "terminal", " " },
+    }
 })
 
 vim.g.markdown_folding_disabled = 1

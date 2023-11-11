@@ -1,5 +1,5 @@
-local M = {}
 
+local M ={}
 local lsp = vim.lsp
 local telescope = require("telescope.builtin")
 local utils = require("modules.utils")
@@ -16,8 +16,10 @@ M.servers = {
   "texlab",
   "vts",
   "bash",
-  "pyright",
+  "pylsp",
   "zls",
+  "valals",
+  "serve_d",
 }
 
 M.override_handler = function()
@@ -155,6 +157,17 @@ M.setup_attach_autocmd = function()
           { "CursorHold", "CursorHoldI" },
           { buffer = bufnr, callback = require("nvim-lightbulb").update_lightbulb }
         )
+      end
+
+      -- TODO Workaround for gopls semantic tokens
+      -- Remove when dyanmicRegistration support semanticTokens
+      if client.name == "gopls" and not client.server_capabilities.semanticTokensProvider then
+        local semantic = client.config.capabilities.textDocument.semanticTokens
+        client.server_capabilities.semanticTokensProvider = {
+          full = true,
+          legend = { tokenModifiers = semantic.tokenModifiers, tokenTypes = semantic.tokenTypes },
+          range = true,
+        }
       end
 
       -- Inlay hints

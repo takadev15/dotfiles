@@ -142,7 +142,7 @@ table.insert(statusline_components.active[1], {
     return " " .. mode:sub(1, 1) .. " "
   end,
   hl = function() return { fg = colors.bg, bg = require("feline.providers.vi_mode").get_mode_color() } end,
-  right_sep = "slant_right_2",
+  right_sep = "block",
 })
 
 table.insert(statusline_components.active[1], {

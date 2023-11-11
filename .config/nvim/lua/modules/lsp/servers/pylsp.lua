@@ -1,20 +1,24 @@
 local M = {}
 
-M.setup = function(on_attach, capabilities)
-  require("lspconfig").pylsp.setup({
+M.setup = function(capabilities)
+  require("lspconfig").pylsp.setup {
+    capabilities = capabilities,
     settings = {
       pylsp = {
         plugins = {
-          flake8 = { enabled = false },
-          pycodestyle = { enabled = false },
-          pylsp_mypy = { enabled = true },
-          rope = { enabled = true },
+          ruff = {
+            enabled = true,
+            extendSelect = { "I" },
+          },
+          mypy = {
+            enabled = true,
+            dmypy = true,
+            report_progress = true,
+          },
         },
       },
     },
-    on_attach = on_attach,
-    capabilities = capabilities,
-  })
+  }
 end
 
 return M

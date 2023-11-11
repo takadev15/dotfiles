@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(on_attach, capabilities)
+M.setup = function(capabilities)
   require("clangd_extensions").setup({
     extensions = { autoSetHints = false },
     server = {
@@ -9,7 +9,6 @@ M.setup = function(on_attach, capabilities)
       clangdFileStatus = true,
     },
     filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
-    on_attach = on_attach,
     capabilities = capabilities,
     },
   })

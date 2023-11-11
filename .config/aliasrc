@@ -1,3 +1,6 @@
+# User's systemd
+alias sysuser='systemctl --user'
+
 # LazyDOck
 alias lzd='lazydocker'
 
@@ -5,7 +8,7 @@ alias lzd='lazydocker'
 # alias nv ="nvim"
 
 # fd 
-alias fd='fdfind'
+# alias fd='fdfind'
 
 # exa
 alias ls="exa -l --icons"
@@ -21,7 +24,7 @@ alias pdir="z ~/dir/data/project"
 alias csdir="z ~/dir/data/class"
 alias ldir="z ~/dir/data/learn"
 alias note="z ~/dir/data/note/"
-alias wdir="z ~/dir/data/workstation/oyindonesia"
+alias wdir="z ~/dir/data/workstation/ayoconnect"
 alias zz="z .."
 
 # source zshrc

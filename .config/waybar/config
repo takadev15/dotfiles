@@ -173,14 +173,14 @@
         "tooltip": true
     },
 
-    "custom/media": {
-        "escape": true,
-        "exec": "python /home/takadev/.config/waybar/modules/mediaplayer.py -f '{song} - {artist}' -t 30",
-        "interval": 1,
-        "format": "{icon}{}",
-        "format-icons": {
-            "default": "<span color='#11111b'></span> "
-        },
-        "max-length": 20,
-    },
+    // "custom/media": {
+    //     "escape": true,
+    //     "exec": "python /home/takadevs/.config/waybar/modules/mediaplayer.py -f '{song} - {artist}' -t 30",
+    //     "interval": 1,
+    //     "format": "{icon}{}",
+    //     "format-icons": {
+    //         "default": "<span color='#11111b'></span> "
+    //     },
+    //     "max-length": 20,
+    // },
 }

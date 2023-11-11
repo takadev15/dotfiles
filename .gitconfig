@@ -35,5 +35,5 @@
   commit-decoration-style = bold yellow box ul
   file-style = bold yellow ul
   file-decoration-style = none
-[url "git@gitlab.com:"]
-	insteadOf = https://gitlab.com/
+[url "git@bitbucket.org:"]
+	insteadOf = https://bitbucket.org/

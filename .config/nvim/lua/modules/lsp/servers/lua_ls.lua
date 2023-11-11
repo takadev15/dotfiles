@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(on_attach, capabilities)
+M.setup = function(capabilities)
   require("lspconfig").lua_ls.setup({
     settings = {
       single_file_support = true,
@@ -62,9 +62,9 @@ M.setup = function(on_attach, capabilities)
         },
       },
     },
-    on_attach = function(client, bufnr)
-      on_attach(client, bufnr)
-    end,
+    -- on_attach = function(client, bufnr)
+    --   on_attach(client, bufnr)
+    -- end,
     capabilities = capabilities,
   })
 end

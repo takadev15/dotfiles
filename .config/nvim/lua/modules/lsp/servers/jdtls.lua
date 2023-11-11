@@ -1,23 +1,16 @@
 local M = {}
 
-local home = os.getenv("HOME")
 local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle", "settings.gradle" }
 local root_dir = require('jdtls.setup').find_root(root_markers)
 if root_dir == "" then
   return
 end
 
-local workspace_folder = "/home/takadev/.local/share/eclipse/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
-
 local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
 local config = {
-  cmd = {
-    '/home/takadev/Repo/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/bin/jdtls',
-    '-configuration', '/home/takadev/.cache/jdtls',
-    '-data', workspace_folder,
-  },
+  cmd = { "jdtls" },
   root_dir = root_dir,
   settings = {
     java = {
@@ -67,6 +60,10 @@ local config = {
           {
             name = "JavaSE-1.8",
             path = "/usr/lib/jvm/java-8-openjdk/",
+          },
+          {
+            name = "JavaSE-11",
+            path = "/usr/lib/jvm/java-11-openjdk/",
           },
           {
             name = "JavaSE-17",

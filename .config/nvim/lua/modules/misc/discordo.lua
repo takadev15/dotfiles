@@ -5,7 +5,7 @@ require("presence").setup({
     main_image          = "file",                   -- Main image display (either "neovim" or "file")
     debounce_timeout    = 10,                         -- Number of seconds to debounce events (or calls to `:lua package.loaded.presence:update(<filename>, true)`)
     blacklist           = {},                         -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
-    buttons             = {{label = "Who Am I 🤨", url = "https://github.com/takadev15"}},                       -- Configure Rich Presence button(s), either a boolean to enable/disable, a static table (`{{ label = "<label>", url = "<url>" }, ...}`
+    buttons             = false,                       -- Configure Rich Presence button(s), either a boolean to enable/disable, a static table (`{{ label = "<label>", url = "<url>" }, ...}`
     show_time           = false,                       -- Show the timer
 
     -- Rich Presence text options

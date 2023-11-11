@@ -19,12 +19,15 @@ vim.g.flog_default_arguments = { max_count = 4000 }
 
 -- Fugitives!!
 map("n", "<leader>gs", "<cmd>:Git<CR>")
+map("n", "<leader>gg", "<cmd>:Neogit kind=split<CR>")
 map("n", "<leader>gL", ":Flogsplit<CR>")
 map("n", "<leader>gl", "<cmd>:Git log<CR>")
 map("n", "<leader>gd", ":tabedit % | Gvdiffsplit!<CR>")
 map("n", "<leader>gch", "<cmd>:diffget //2<CR>")
 map("n", "<leader>gcl", "<cmd>:diffget //3<CR>")
--- map("n", "<leader>gP", require("modules.git.command").async_gpull)
+map("n", "<leader>gP", require("modules.git.command").async_gpull)
+map("n", "<leader>gp", ":Git! push<CR>")
+map("n", "<leader>gf", ":Git! fetch<CR>")
 map("n", "<leader>gC", require("telescope.builtin").git_commits)
 map("n", "<leader>gb", require("telescope.builtin").git_branches)
 

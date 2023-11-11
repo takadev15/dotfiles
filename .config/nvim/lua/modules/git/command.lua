@@ -2,23 +2,6 @@ local M = {}
 
 local Job = require("plenary.job")
 
-M.async_gpull = function()
-  Job
-    :new({
-      command = "git",
-      args = { "pull" },
-      cwd = vim.fn.getcwd(),
-      on_start = function()
-        -- TODO: Add branch name
-        vim.notify("[git] pulling branch [" .. "]")
-      end,
-      on_exit = function(j, _)
-        vim.notify(vim.inspect(j:result()), vim.log.levels.INFO)
-      end,
-    })
-    :start()
-end
-
 M.async_gpush = function()
   Job
     :new({
@@ -30,6 +13,23 @@ M.async_gpush = function()
       end,
       on_exit = function(j, _)
         -- print(return_val)
+        vim.notify(vim.inspect(j:result()), vim.log.levels.INFO)
+      end,
+    })
+    :start()
+end
+
+M.async_gpull = function()
+  Job
+    :new({
+      command = "git",
+      args = { "pull" },
+      cwd = vim.fn.getcwd(),
+      on_start = function()
+        -- TODO: Add branch name
+        vim.notify("[git] pulling branch [" .. "]")
+      end,
+      on_exit = function(j, _)
         vim.notify(vim.inspect(j:result()), vim.log.levels.INFO)
       end,
     })

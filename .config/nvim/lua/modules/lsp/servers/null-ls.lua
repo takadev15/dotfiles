@@ -56,19 +56,18 @@ local sources = {
       return utils.root_has_file("setup.cfg") or utils.root_has_file(".codespellrc")
     end,
   }),
-  linter.flake8.with({
-    condition = function(utils)
-      return utils.root_has_file(".flake8") or utils.root_has_file("setup.cfg") or utils.root_has_file("tox.ini")
-    end,
-  }),
-  linter.golangci_lint,
+  -- linter.flake8.with({
+  --   condition = function(utils)
+  --     return utils.root_has_file(".flake8") or utils.root_has_file("setup.cfg") or utils.root_has_file("tox.ini")
+  --   end,
+  -- }),
+  -- linter.golangci_lint,
   -- linter.hadolint,
   -- linter.markdownlint,
   linter.shellcheck,
   linter.sqlfluff.with({
     extra_args = {"--dialect", "postgres"},
   }),
-  -- linter.pylint,
 
 }
 

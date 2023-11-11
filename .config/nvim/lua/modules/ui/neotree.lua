@@ -44,17 +44,16 @@ require("neo-tree").setup({
   use_libuv_file_watcher = true,
   window = {
     mappings = {
-      ["o"] = {
-        "toggle_node",
-        nowait = true,
-      },
-      ["s"] = "",
-      ["S"] = "",
-      ["f"] = "",
+      -- ["<cr>"] = "open_with_window_picker",
+      ["<cr>"] = "open",
+      ["s"] = "none",
+      ["S"] = "none",
+      ["f"] = "none",
+      [","] = "navigate_up",
       ["<c-t>"] = "open_tabnew",
-      -- o = function(state)
-      --   vim.cmd("silent !xdg-open " .. state.tree:get_node():get_id())
-      -- end,
+      o = function(state)
+        vim.cmd("silent !xdg-open " .. state.tree:get_node():get_id())
+      end,
       ["<C-z>"] = "clear_filter",
     },
     width = 35,

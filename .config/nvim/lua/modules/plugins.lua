@@ -120,10 +120,34 @@ require("lazy").setup({
       require "modules.treesitter"
     end,
   },
-  "nvim-treesitter/nvim-treesitter-refactor",
-  "nvim-treesitter/nvim-treesitter-textobjects",
-  "HiPhish/nvim-ts-rainbow2",
-  -- "windwp/nvim-ts-autotag",
+  { 
+    "hiphish/rainbow-delimiters.nvim",
+    init = function ()
+      local tsr_delimiter = require("rainbow-delimiters")
+      vim.g.rainbow_delimiters = {
+        strategy = {
+          [''] = tsr_delimiter.strategy['global'],
+          vim = tsr_delimiter.strategy['local'],
+        },
+        query = {
+          [''] = 'rainbow-delimiters',
+          lua = 'rainbow-blocks',
+        },
+        highlight = {
+          'RainbowDelimiterRed',
+          'RainbowDelimiterYellow',
+          'RainbowDelimiterBlue',
+          'RainbowDelimiterOrange',
+          'RainbowDelimiterGreen',
+          'RainbowDelimiterViolet',
+          'RainbowDelimiterCyan',
+        },
+      }
+    end,
+    lazy = true
+  },
+  { "nvim-treesitter/nvim-treesitter-refactor" },
+  { "nvim-treesitter/nvim-treesitter-textobjects" },
   {
     "nvim-treesitter/nvim-treesitter-context",
     config = function()
@@ -216,6 +240,17 @@ require("lazy").setup({
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
+    dependencies = {
+      {
+        "s1n7ax/nvim-window-picker",
+        config = function ()
+          require('window-picker').setup({
+            current_win_hl_color = "#6699CC",
+            other_win_hl_color = "#2F628E",
+          })
+        end
+      },
+    },
     config = function()
       require("modules.ui.neotree")
     end,
@@ -224,7 +259,7 @@ require("lazy").setup({
   -- Git
   { "tpope/vim-fugitive" },
   {
-    "TimUntersberger/neogit",
+    "NeogitOrg/neogit",
     cmd = "Neogit",
     config = function()
       require("neogit").setup()
@@ -339,9 +374,6 @@ require("lazy").setup({
   { "frabjous/knap" },
   { "tpope/vim-dotenv" },
 
-  -- Startup Improvement
-  -- TODO: Remove impatent after neovim/pull/15436 merged
-  { "lewis6991/impatient.nvim", },
 
   -- Terminal things
   {
@@ -374,7 +406,7 @@ require("lazy").setup({
       require("nvim-surround").setup({ highlights = { duration = 0 } })
     end,
   },
-  { "lukas-reineke/indent-blankline.nvim" },
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl" },
   { "tpope/vim-dadbod", dependencies = { "kristijanhusak/vim-dadbod-ui" }, ft = "sql" },
   {
     "kristijanhusak/vim-dadbod-completion",
@@ -419,6 +451,10 @@ require("lazy").setup({
       })
     end,
   },
+  { 
+    "paretje/nvim-man", 
+    cmd = { "Man", "VMan" } 
+  },
   {
     "chentoast/marks.nvim",
     config = function()
@@ -451,5 +487,5 @@ require("lazy").setup({
       })
     end,
   },
-  { "antoinemadec/FixCursorHold.nvim" },
+  { "wakatime/vim-wakatime" },
 })
