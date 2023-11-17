@@ -16,7 +16,3 @@
 * [ ] Switch from deprecated's feline to lualine
 * [ ] LSP
     * [ ] Try [Pylyzer](https://github.com/mtshiba/pylyzer) for python's lsp
-    * [ ] Refactor lsp config to include new feature
-    * [ ] Fix JDTLS problem with work's project
-* [ ] Treesitter
-    * [ ] Fix Treesitter always compiling all parser problem

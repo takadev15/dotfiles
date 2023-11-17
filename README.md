@@ -11,12 +11,12 @@ dotfiles config --local status.showUntrackedFiles no
 
 ## My Setup
 
-* **Distro** : EndevourOs
+* **Distro** : Arch Linux
 * **WM** : Sway
 * **status bar** : Waybar
 * **Theme** : Catpuccin
 * **Shell** : zsh with starship prompt
-* **File Manager** : vifm
+* **File Manager** : xplr, ranger
 * **Terminal** : kitty + tmux
 * **Editor** : neovim nightly
 
@@ -28,10 +28,10 @@ dotfiles config --local status.showUntrackedFiles no
 ## TODO List
 
 * [ ] Sway
-  * [ ] Switch greeter to tui greeter from sddm
-* [ ] Switch from dual boot to only linux system
-  * [ ] Switch to Archlinux
-  * [ ] Create Game focused partition
+  * [x] Switch greeter to tui greeter from sddm
+  * [ ] Fix swayidle
+* [ ] Xplr
+  * [ ] Xplr image, pdf, code preview
 
 ## ATTENTION
 

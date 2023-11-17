@@ -172,7 +172,7 @@ M.setup_attach_autocmd = function()
 
       -- Inlay hints
       if client.supports_method("textDocument/inlayHint") then
-        lsp.inlay_hint(bufnr, true)
+        lsp.inlay_hint.enable(bufnr, true)
       end
 
       -- nvim-navic
