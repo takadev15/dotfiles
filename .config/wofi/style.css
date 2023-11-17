@@ -1,14 +1,14 @@
 /*
-Arc-Dark Color Scheme
+Open Window Selection
 */
 
-@define-color highlight #5294e2;
-@define-color base1  #404552;
-@define-color base2 #40455;
-@define-color base3  #4b5160;
+@define-color highlight #89b4fa;
+@define-color txt #cad3f5;
+@define-color base1  #494d64;
+@define-color base2  #40455;
 
 *{
-    font-family: UbuntuMono;
+    font-family: 'JetBrainsMono Nerd Font';
 }
 
 window {
@@ -24,7 +24,7 @@ window {
 }
 
 #inner-box {
-    background-color: @base3;
+    background-color: @base2;
 }
 
 #outer-box {
@@ -38,10 +38,10 @@ window {
     color: white;
 }
 
-#entry:nth-child(even) {
-    background-color: @base1;
-}
-
 #entry:selected {
     background-color: @highlight;
+}
+
+#entry:selected #text{
+    color: @base2
 }
