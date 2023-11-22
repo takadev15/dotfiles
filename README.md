@@ -1,24 +1,29 @@
 # Arch setup
 
-## How to Download
+## Installations
 
-```sh  
-alias dotfiles="/usr/bin/git --git-dir $HOME/.dotfiles/ --work-tree=$HOME"  
-git clone --bare https://www.github.com/Takachii15/dotfiles.git $HOME/.dotfiles
-dotfiles checkout  
-dotfiles config --local status.showUntrackedFiles no
+<details>
+    <summary> Installations </summary>
+
+```bash  
+alias dots="/usr/bin/git --git-dir $HOME/.dotfiles/ --work-tree=$HOME"  
+git clone --bare https://www.github.com/takadev15/dotfiles.git $HOME/.dotfiles
+dots checkout  
+dots config --local status.showUntrackedFiles no
 ```
+
+</details>
 
 ## My Setup
 
 * **Distro** : Arch Linux
 * **WM** : Sway
-* **status bar** : Waybar
-* **Theme** : Catpuccin
-* **Shell** : zsh with starship prompt
-* **File Manager** : xplr, ranger
-* **Terminal** : kitty + tmux
-* **Editor** : neovim nightly
+* **Status Bar** : Waybar
+* **Theme** : Catpuccin Mocha with Papirus Dark Icon
+* **Shell** : Zsh with Starship Prompt
+* **File Manager** : Xplr, Ranger (TUI) Thunar (GUI)
+* **Terminal** : Kitty, Foot + Tmux
+* **Editor** : Neovim Nightly
 
 ## Screenshot
 
@@ -27,11 +32,14 @@ dotfiles config --local status.showUntrackedFiles no
 
 ## TODO List
 
-* [ ] Sway
+* [x] Sway
   * [x] Switch greeter to tui greeter from sddm
-  * [ ] Fix swayidle
+  * [x] Fix swayidle
 * [ ] Xplr
   * [ ] Xplr image, pdf, code preview
+* [ ] Scripts
+  * [ ] Bluetooth Menu scripts
+  * [ ] Fix screenshot Menu scripts
 
 ## ATTENTION
 
