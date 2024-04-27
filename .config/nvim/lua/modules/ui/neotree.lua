@@ -12,7 +12,7 @@ require("neo-tree").setup({
       symbol = "⏺",
     },
   },
-  enable_diagnostics = true,
+  enable_diagnostics = false,
   enable_git_status = false,
   event_handlers = {
     {

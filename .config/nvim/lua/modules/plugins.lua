@@ -19,6 +19,13 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   -- stdlib
   { "nvim-lua/plenary.nvim", lazy = false },
+  { "nvim-neotest/nvim-nio", lazy = false },
+  {
+    "vhyrro/luarocks.nvim",
+    config = function()
+      require("luarocks-nvim").setup({})
+    end,
+  },
 
   -- lsp settings
   {
@@ -69,18 +76,18 @@ require("lazy").setup({
       require("modules.dressing")
     end,
   },
-  {
-    "zbirenbaum/neodim",
-    disable = true,
-    event = "LspAttach",
-    config = function()
-      require("neodim").setup({
-        update_in_insert = {
-          delay = 1000,
-        },
-      })
-    end,
-  },
+  -- {
+  --   "zbirenbaum/neodim",
+  --   disable = true,
+  --   event = "LspAttach",
+  --   config = function()
+  --     require("neodim").setup({
+  --       update_in_insert = {
+  --         delay = 1000,
+  --       },
+  --     })
+  --   end,
+  -- },
 
   -- Completion
  {
@@ -209,7 +216,21 @@ require("lazy").setup({
   -- User Interface
   { "MunifTanjim/nui.nvim" },
   { "catppuccin/nvim", lazy = false },
-  { "kyazdani42/nvim-web-devicons" },
+  { 
+    "nvim-tree/nvim-web-devicons",
+    lazy = true,
+    config = function ()
+      require("nvim-web-devicons").setup{
+        override = {
+          toml = {
+            icon = " ",
+            color = "#428850",
+            cterm_color = "65",
+          },
+        }
+      }
+    end
+  },
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -230,13 +251,20 @@ require("lazy").setup({
       require("modules.ui.tabline")
     end,
   },
+  -- {
+  --   "freddiehaddad/feline.nvim",
+  --   lazy = false,
+  --   branch = "main",
+  --   config = function()
+  --     require("modules.ui.feline").setup()
+  --   end,
+  -- },
   {
-    "freddiehaddad/feline.nvim",
-    lazy = false,
-    branch = "main",
-    config = function()
-      require("modules.ui.feline").setup()
-    end,
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
+    config = function ()
+      require("modules.ui.lualine")
+    end
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -269,13 +297,19 @@ require("lazy").setup({
   { "ThePrimeagen/git-worktree.nvim" },
   { "rbong/vim-flog" },
   { "rhysd/git-messenger.vim" },
-  { "f-person/git-blame.nvim" },
+  { 
+    "f-person/git-blame.nvim",
+    config = function ()
+      require("gitblame").setup{}
+    end
+  },
   {
     "lewis6991/gitsigns.nvim",
     config = function()
       require("modules.git.gitsigns")
     end,
   },
+
   -- { "rhysd/conflict-marker.vim" })
   {
     "akinsho/git-conflict.nvim",
@@ -343,7 +377,33 @@ require("lazy").setup({
 
   { "p00f/clangd_extensions.nvim" },
 
-  { "simrat39/rust-tools.nvim" },
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^4',
+    ft = { 'rust' },
+    init = function ()
+      vim.g.rustaceanvim = {
+      -- Plugin configuration
+      tools = {
+      },
+
+      -- LSP configuration
+      server = {
+        on_attach = function(client, bufnr)
+          -- you can also put keymaps in here
+        end,
+        default_settings = {
+          -- rust-analyzer language server configuration
+          ['rust-analyzer'] = {
+          },
+        },
+      },
+      -- DAP configuration
+      dap = {
+      },
+    }
+    end
+  },
 
   {
     "folke/neodev.nvim",
@@ -352,7 +412,7 @@ require("lazy").setup({
     end
   },
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     config = function()
       require("modules.lsp.servers.null-ls")
     end,
@@ -367,6 +427,10 @@ require("lazy").setup({
   { "Saecki/crates.nvim" },
   {
     "rest-nvim/rest.nvim",
+    dependencies = {
+      "luarocks.nvim",
+    },
+    ft = "http",
     config = function()
       require("rest-nvim").setup()
     end,
@@ -399,7 +463,12 @@ require("lazy").setup({
 
   -- Miscellaneous
   { "yuttie/comfortable-motion.vim" },
-  { "fedepujol/move.nvim" },
+  { 
+    "fedepujol/move.nvim",
+    config = function ()
+      require("move").setup()
+    end
+  },
   {
     "kylechui/nvim-surround",
     config = function()
@@ -414,20 +483,18 @@ require("lazy").setup({
   },
   { "antonk52/gitignore-grabber.nvim" },
   {
-    "stevearc/aerial.nvim",
+    "hedyhli/outline.nvim",
     config = function()
-      require("aerial").setup({
-        layout = {
-          highlight_on_hover = true,
-          placement_editor_edge = true,
-          min_width = 25,
-        },
-        show_guides = true,
-      })
+      -- Example mapping to toggle outline
+      vim.keymap.set("n", "<leader>ss", "<cmd>Outline<CR>",
+        { desc = "Toggle Outline" })
+
+      require("outline").setup {
+      }
     end,
   },
   {
-    "andweeb/presence.nvim",
+    "Maxb0tbeep/presence.nvim",
     config = function()
       require("modules.misc.discordo")
     end,

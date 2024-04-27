@@ -76,9 +76,20 @@
     },
 
     "clock": {
-        "format": "{:%a | %H:%M}",
-        "format-alt": "  {:%a | %d-%m-%Y} ", // Icon: calendar-alt
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+        "format": " {:%a | %H:%M}",
+        "format-alt": "  {:%a | %d日%B %Y} ", // Icon: calendar-alt
+        "tooltip-format": "<big>{:%Y %B}</big>\n<small><span size='9pt' font='Noto Sans Mono CJK JP'>{calendar}</span></small>",
+        "calendar": {
+                    "on-scroll": 1,
+                    "format": {
+                              "months":     "<span color='#ffead3'><b>{}</b></span>",
+                              "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                              "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                              "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                              "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+                              }
+        },
+        "locale": "ja_JP.utf8"
     },
 
     "cpu": {
@@ -88,13 +99,13 @@
             "warning": 70,
             "critical": 90,
         },
-        "on-click": "kitty -e 'htop'",
+        "on-click": "foot -e 'htop'",
     },
 
     "memory": {
         "interval": 5,
         "format": " {}%", // Icon: memory
-        "on-click": "kitty -e 'htop'", 
+        "on-click": "foot -e 'htop'", 
         "states": {
             "warning": 70,
             "critical": 90
@@ -103,13 +114,13 @@
 
     "network": {
         "interval": 5,
-        "format-wifi": "說 {essid}",
-        "format-ethernet": " {ifname}",
-        "format-disconnected": "ﲁ Disconnected",
+        "format-wifi": "  {essid}",
+        "format-ethernet": "󰈀 {ifname}",
+        "format-disconnected": "󰣼 Disconnected",
         "tooltip-format-disconnected": "",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
         "tooltip-format-ethernet": "{ifname} ({ipaddr})",
-        "on-click": "kitty -e 'nmtui'",
+        "on-click": "foot -e 'nmtui'",
     },
     "network#vpn": {
         "interface": "tun0",
@@ -120,7 +131,7 @@
 
     "bluetooth": {
         "format": "<span color='#29B6F6'></span>",
-        "format-off": "",
+        "format-off": "󰂲",
         "format-on": "",
         "tooltip-format-connected": "{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias} {device_address}",
@@ -131,14 +142,14 @@
         "scroll-step": 1, // %, can be a float
         "format": "{icon}{volume}% ",
         "format-bluetooth": "{icon}{volume}%",
-        "format-bluetooth-muted": " {icon}",
-        "format-muted": "婢{format_source}",
+        "format-bluetooth-muted": "󰝟 {icon}",
+        "format-muted": "󰝟 {format_source}",
         "format-source": "",
         "format-source-muted": "",
         "format-icons": {
-            "headphone": " ",
-            "hands-free": "וֹ",
-            "headset": " ",
+            "headphone": "󰋋 ",
+            "hands-free": " ",
+            "headset": "󰋎 ",
             "phone": "",
             "portable": "",
             "car": "",
@@ -173,14 +184,14 @@
         "tooltip": true
     },
 
-    // "custom/media": {
-    //     "escape": true,
-    //     "exec": "python /home/takadevs/.config/waybar/modules/mediaplayer.py -f '{song} - {artist}' -t 30",
-    //     "interval": 1,
-    //     "format": "{icon}{}",
-    //     "format-icons": {
-    //         "default": "<span color='#11111b'></span> "
-    //     },
-    //     "max-length": 20,
-    // },
+    "custom/media": {
+        "escape": true,
+        "exec": "python /home/takadev/.config/waybar/modules/mediaplayer.py -f '{song} - {artist}' -t 30",
+        "interval": 1,
+        "format": "{icon}{}",
+        "format-icons": {
+            "default": "<span color='#11111b'></span> "
+        },
+        "max-length": 20,
+    },
 }

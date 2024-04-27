@@ -60,13 +60,11 @@ require("gitsigns").setup({
     height = 12,
     border = "single",
   },
+  current_line_blame = true,
+  current_line_blame_formatter = "<author> • <author_time:%Y-%m-%d> - <summary>",
   current_line_blame_opts = {
-    virt_text_pos = "right_align",
-    delay = 2000,
-    ignore_whitespace = true,
+    virt_text = false,
   },
   sign_priority = 1,
   update_debounce = 500,
-  _threaded_diff = true,
-  _extmark_signs = true,
 })

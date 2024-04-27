@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function(on_attach, capabilities)
+M.setup = function(capabilities)
   require("lspconfig").zls.setup({
     capabilities = capabilities,
   })

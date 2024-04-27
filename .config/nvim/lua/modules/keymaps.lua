@@ -34,7 +34,7 @@ map("i", "<A-h>", [[<esc>li]])
 -- diagnostic
 map("n", "<leader>e", vim.diagnostic.open_float)
 map("n", "[d", vim.diagnostic.goto_prev)
-map("n", "]d", vim.diagnostic.goto_prev)
+map("n", "]d", vim.diagnostic.goto_next)
 map("n", "<leader>lq", telescope.diagnostics)
 
 -- ###################################
@@ -43,9 +43,6 @@ map("n", "<leader>lq", telescope.diagnostics)
 
 -- File tree
 map("n", "<leader>fd", ":Neotree toggle<CR>")
-
--- aerial
-map("n", "<leader>ss", ":AerialToggle<CR>")
 
 -- Tasks runner
 map("n", "<leader>lr", ":OverseerRun<CR>")
@@ -58,8 +55,8 @@ map("n", "<leader>lg", telescope.live_grep)
 map("n", "<leader>lb", telescope.buffers)
 map("n", "<leader>lo", telescope.oldfiles)
 map("n", "<leader>lH", telescope.help_tags)
-map("n", "<leader>la", ":Telescope media_files<CR>")
-map("n", "<leader>lw", "<cmd>lua require('telescope').extensions.arecibo.websearch()<CR>")
+-- map("n", "<leader>la", ":Telescope media_files<CR>")
+-- map("n", "<leader>lw", "<cmd>lua require('telescope').extensions.arecibo.websearch()<CR>")
 
 -- Terminal
 map("t", "<esc>", "<C-\\><C-n>")
@@ -69,8 +66,8 @@ map("v", "<A-j>", ":MoveBlock(1)<CR>")
 map("v", "<A-k>", ":MoveBlock(-1)<CR>")
 
 -- Rest-Nvim
-map("n", "<leader>rr", "<Plug>RestNvim")
-map("n", "<leader>rp", "<Plug>RestNvimPreview")
+map("n", "<leader>rr", "<cmd>Rest run<cr>")
+map("n", "<leader>rl", "<cmd>Rest run last<cr>")
 
 -- Neogen
 map("n", "<leader>dg", require("neogen").generate)
@@ -102,11 +99,6 @@ end)
 map("n", "tt", function()
   require("neotest").summary.toggle()
 end)
-
--- Latex preview
--- map('n', '<leader>da', function()
---   require("knap").toggle_autopreviewing()
--- end)
 
 -- Package Info
 map("n", "<leader>ns", "<cmd>lua require('package-info').show({ force = true })<CR>")

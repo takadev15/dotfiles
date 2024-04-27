@@ -1,5 +1,4 @@
-
-local M ={}
+local M = {}
 local lsp = vim.lsp
 local telescope = require("telescope.builtin")
 local utils = require("modules.utils")
@@ -11,15 +10,16 @@ M.servers = {
   "dockerls",
   "flutter",
   "gopls",
-  "rust_analyzer",
   "lua_ls",
   "texlab",
   "vts",
   "bash",
   "pylsp",
+  "robotframework",
   "zls",
   "valals",
   "serve_d",
+  "ocamllsp",
 }
 
 M.override_handler = function()
@@ -115,6 +115,7 @@ M.setup_attach_autocmd = function()
       map(bufnr, "n", "gw", telescope.lsp_workspace_symbols)
       map(bufnr, "n", "<leader>a", lsp.buf.code_action)
       map(bufnr, "v", "<leader>a", lsp.buf.code_action)
+      map(bufnr, "n", "<leader>sf", lsp.buf.format)
       map(bufnr, "n", "<leader>wl", function()
         vim.notify(vim.inspect(lsp.buf.list_workspace_folders()))
       end)
@@ -129,10 +130,10 @@ M.setup_attach_autocmd = function()
 
       -- Code Lens
       if
-        client.supports_method("textDocument/codeLens")
-        -- TODO Remove once codelens support virtual lines
-        and client.name ~= "rust_analyzer"
-        and client.name ~= "jdtls"
+          client.supports_method("textDocument/codeLens")
+          -- TODO Remove once codelens support virtual lines
+          and client.name ~= "rust_analyzer"
+          and client.name ~= "jdtls"
       then
         vim.api.nvim_create_autocmd(
           { "BufEnter", "CursorHold", "InsertLeave" },
@@ -172,7 +173,9 @@ M.setup_attach_autocmd = function()
 
       -- Inlay hints
       if client.supports_method("textDocument/inlayHint") then
-        lsp.inlay_hint.enable(bufnr, true)
+        lsp.inlay_hint.enable(true, {
+          bufnr = bufnr,
+        })
       end
 
       -- nvim-navic
@@ -185,10 +188,8 @@ M.setup_attach_autocmd = function()
 
       -- vim-notify
       vim.notify("[" .. client.name .. "] " .. "Language Server Protocol started")
-
     end,
-    })
-
+  })
 end
 
 return M

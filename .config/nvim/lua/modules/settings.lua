@@ -9,6 +9,14 @@ diagnostic.config({
   },
   signs = {
     severity = { min = vim.diagnostic.severity.WARN },
+    text = {
+        [vim.diagnostic.severity.ERROR] = '',
+        [vim.diagnostic.severity.WARN] = '',
+    },
+    numhl = {
+        [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+        [vim.diagnostic.severity.WARN] = 'WarningMsg',
+    },
   },
   severity_sort = true,
   underline = false,
@@ -50,17 +58,21 @@ opt.list = true -- Invisible chars
 opt.listchars = {
   eol = " ",
   tab = "  ",
-  -- extends = "›",
-  -- precedes = "‹",
-  -- trail = "•",
+  extends = "›",
+  precedes = "‹",
+  trail = "•",
 }
 
 opt.autoindent = true
 opt.smartindent = true
 opt.breakindent = true
-opt.joinspaces = true
+opt.breakindentopt = {
+  shift = 0,
+  min = 40,
+  sbr = true,
+}
 
-opt.breakindentopt = "shift:2,min:40,sbr"
+opt.joinspaces = true
 opt.lbr = true -- Enable line break
 opt.wrap = true
 
@@ -135,6 +147,10 @@ opt.backspace = { "indent", "eol", "start" }
 
 --terminal
 vim.api.nvim_create_autocmd("TermOpen", {pattern = "*", command = "setlocal nonumber norelativenumber"})
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "go",
+	command = "setlocal shiftwidth=4 tabstop=4"
+})
 
 opt.emoji = false
 opt.conceallevel = 2

@@ -1,6 +1,7 @@
 local overseer = require("overseer")
 
 overseer.setup({
+  templates = {"builtin", "user.robot_task"},
   task_list = {
     direction = "left",
     bindings = {

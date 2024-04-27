@@ -62,9 +62,6 @@ M.setup = function(capabilities)
         },
       },
     },
-    -- on_attach = function(client, bufnr)
-    --   on_attach(client, bufnr)
-    -- end,
     capabilities = capabilities,
   })
 end

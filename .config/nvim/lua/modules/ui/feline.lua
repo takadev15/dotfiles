@@ -154,23 +154,25 @@ table.insert(statusline_components.active[1], {
   }
 })
 
-table.insert(statusline_components.active[1], {
-  provider = function()
-    local text = require("gitblame").get_current_blame_text()
-    if text:len() > 135 then
-      return text:sub(1, 100) .. "..."
-    end
-    return text
-  end,
-  enabled = function()
-    return require("gitblame").is_blame_text_available()
-  end,
-  hl = {
-    fg = colors.fg,
-    bg = colors.bg
-  },
-  left_sep = separator,
-})
+-- local blame_text = function()
+--   local text = require("gitblame").get_current_blame_text()
+--   if text:len() > 135 then
+--     return text:sub(1, 100) .. "..."
+--   end
+--   return text
+-- end
+
+-- table.insert(statusline_components.active[1], {
+--   provider = blame_text();
+--   enabled = function()
+--     return require("gitblame").is_blame_text_available()
+--   end,
+--   hl = {
+--     fg = colors.fg,
+--     bg = colors.bg
+--   },
+--   left_sep = separator,
+-- })
 
 table.insert(statusline_components.active[1], {
   provider = function()
@@ -228,7 +230,7 @@ table.insert(statusline_components.active[3], {
     fg = colors.blue,
     bg = colors.bg
   },
-  icon = "  ",
+  icon = "  ",
 })
 
 table.insert(statusline_components.active[3], {

@@ -1,17 +1,17 @@
 local M = {}
 
 M.setup = function(capabilities)
-  require("clangd_extensions").setup({
+  require("lspconfig").clangd.setup {
     extensions = { autoSetHints = false },
     server = {
-    cmd = { "clangd", "--completion-style=bundled", "--limit-results=50", "--pch-storage=memory" },
-    init_options = {
-      clangdFileStatus = true,
+      -- cmd = { "clangd", "--offset-encoding=utf-16", "--clang-tidy", "--completion-style=bundled", "--malloc-trim" },
+      cmd = { "clangd", "--clang-tidy", "--completion-style=bundled", "--malloc-trim" },
+      init_options = {
+        clangdFileStatus = true,
+      },
+      capabilities = capabilities,
     },
-    filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
-    capabilities = capabilities,
-    },
-  })
+  }
 end
 
 return M

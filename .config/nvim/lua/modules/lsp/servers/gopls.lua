@@ -27,7 +27,7 @@ M.setup = function(capabilities)
         completeUnimported = true,
         staticcheck = true,
         diagnosticsDelay = "500ms",
-        gofumpt = false,
+        gofumpt = true,
         buildFlags = { "-tags", "integration" },
         experimentalPostfixCompletions = true,
       },
