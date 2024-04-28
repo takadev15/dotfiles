@@ -1,5 +1,5 @@
 configuration{
-    modi: "run,drun";
+    modi: "drun";
     icon-theme: "Oranchelo";
     show-icons: true;
     terminal: "kitty";
@@ -7,11 +7,8 @@ configuration{
     location: 0;
     disable-history: false;
     hide-scrollbar: true;
-    display-drun: "   Apps ";
-    display-run: "   Run ";
-    display-window: " 﩯  Window";
-    display-Network: " 󰤨  Network";
+    display-drun: "  Apps ";
     sidebar-mode: true;
 }
 
-@theme "/home/takadevs/.config/rofi/themes/catppuccin-mocha.rasi"
+@theme "/home/takadev/.config/rofi/themes/catppuccin-mocha.rasi"

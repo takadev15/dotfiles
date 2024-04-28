@@ -1,6 +1,6 @@
 [user]
 	email = daffa.hp.dh@gmail.com
-	name = Taka
+	name = takadev15
 
 [core]
   editor = nvim
@@ -15,11 +15,12 @@
 [mergetool "fugitive"]
   cmd = nvim -f -c "Gvdiffsplit!" "$MERGED"
 
-[difftool]
-  prompt = false
-
 [diff]
   tool = vimdiff
+[difftool]
+  prompt = true
+[difftool "nvimdiff"]
+    cmd = nvim -d "$LOCAL" "$REMOTE"
 
 [push]
   default = current
@@ -35,5 +36,12 @@
   commit-decoration-style = bold yellow box ul
   file-style = bold yellow ul
   file-decoration-style = none
+
+[alias]
+  p = pull
+	mg = merge
+  co = checkout
+  cob = checkout -b
+
 [url "git@bitbucket.org:"]
 	insteadOf = https://bitbucket.org/

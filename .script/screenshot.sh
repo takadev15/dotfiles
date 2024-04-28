@@ -10,6 +10,10 @@ area_clipboard () {
   canberra-gtk-play -i screen-capture -d "screenShot"
 }
 
+area_save() {
+  IMG=~/Pictures/$(date +%Y-%m-%d_%H-%m-%s).png && grim -g "$(slurp)" $IMG && wl-copy < $IMG
+}
+
 case $selected in
   "Active")
     /usr/share/sway/scripts/grimshot --notify save active
@@ -24,7 +28,7 @@ case $selected in
     canberra-gtk-play -i screen-capture -d "screenShot"
     ;;
   "Area Save")
-    /usr/share/sway/scripts/grimshot --notify save area
+    area_save
     canberra-gtk-play -i screen-capture -d "screenShot"
     ;;
   "Area Clipboard")

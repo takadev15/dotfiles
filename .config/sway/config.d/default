@@ -10,30 +10,17 @@ set $right l
 # audio control
 set $sink_volume pactl get-sink-volume @DEFAULT_SINK@ | grep '^Volume:' | cut -d / -f 2 | tr -d ' ' | sed 's/%//'
 set $source_volume pactl get-source-volume @DEFAULT_SOURCE@ | grep '^Volume:' | cut -d / -f 2 | tr -d ' ' | sed 's/%//'
-set $volume_down $(pactl set-sink-volume @DEFAULT_SINK@ -5% && $sink_volume)
-set $volume_up $(pactl set-sink-volume @DEFAULT_SINK@ +5% && $sink_volume)
-set $volume_mute $(pactl set-sink-mute @DEFAULT_SINK@ toggle && pactl get-sink-mute @DEFAULT_SINK@ | sed -En "/no/ s/.*/$($sink_volume)/p; /yes/ s/.*/0/p")
-set $mic_mute $(pactl set-source-mute @DEFAULT_SOURCE@ toggle && pactl get-source-mute @DEFAULT_SOURCE@ | sed -En "/no/ s/.*/$($source_volume)/p; /yes/ s/.*/0/p")
+set $volume_down ~/.script/volume.sh down
+set $volume_up ~/.script/volume.sh up
+set $volume_mute ~/.script/volume.sh mute
+# set $mic_mute $(pactl set-source-mute @DEFAULT_SOURCE@ toggle && pactl get-source-mute @DEFAULT_SOURCE@ | sed -En "/no/ s/.*/$($source_volume)/p; /yes/ s/.*/0/p")
 
-# Your preferred terminal emulators
-set $term-float kitty -e
+set $term-float foot -e
 
-# Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
+set $powermenu ~/.script/dmenu/powermenu.sh
+set $glob-dmenu ~/.script/dmenu/glob_menu.sh
+set $screenshot_menu ~/.script/screenshot.sh
 set $menu rofi -show drun
-
-set $powermenu ~/.script/powermenu.sh
-
-### Idle configuration
-exec swayidle -w\
-    timeout 1070 'swaylock -f -C ~/.config/swaylock/config'\
-    timeout 770 'swaymsg "output * power off"' \
-    resume 'swaymsg "output * power on"' \
-    before-sleep 'swaylock -C ~/.config/swaylock/config'
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
 
 ## Lock Screen
     bindsym $mod+BackSpace exec ~/.config/sway/scripts/lockman.sh
@@ -54,6 +41,8 @@ exec swayidle -w\
     # Start your launcher
     bindsym $mod+i exec $menu
 
+    bindsym $mod+u exec $glob-dmenu
+
     # Activities
     bindsym $mod+o exec ~/.config/wofi/windows.py
 
@@ -67,9 +56,8 @@ exec swayidle -w\
     # Reload the configuration file
     bindsym $mod+Shift+c reload
 
-#
+
 # Moving around:
-#
     # Move your focus around
     bindsym $mod+$left focus left
     bindsym $mod+$down focus down
@@ -91,9 +79,8 @@ exec swayidle -w\
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
-#
+
 # Workspaces:
-#
     # Switch to workspace
     bindsym $mod+1 workspace number 1
     bindsym $mod+2 workspace number 2
@@ -105,6 +92,7 @@ exec swayidle -w\
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
+
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
@@ -116,11 +104,9 @@ exec swayidle -w\
     bindsym $mod+Shift+8 move container to workspace number 8
     bindsym $mod+Shift+9 move container to workspace number 9
     bindsym $mod+Shift+0 move container to workspace number 10
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
-#
+
+
 # Layout stuff:
-#
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
@@ -143,21 +129,17 @@ exec swayidle -w\
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
-#
+
 # Scratchpad:
-#
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
     bindsym $mod+Shift+minus move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
-#
+
+
 # Resizing containers:
-#
 mode "resize" {
     # left will shrink the containers width
     # right will grow the containers width
@@ -190,11 +172,6 @@ bindsym $mod+r mode "resize"
 #
 # Volume
 #
-    # Control volume trough pamixer
-    # bindsym --locked XF86AudioRaiseVolume exec pamixer -ui 2
-    # bindsym --locked XF86AudioLowerVolume exec pamixer -ud 2
-    # bindsym --locked XF86AudioMute exec pamixer -t
-    
     # Control volume directly trough pactl
     bindsym --locked XF86AudioRaiseVolume exec $volume_up
     bindsym --locked XF86AudioLowerVolume exec $volume_down
@@ -217,9 +194,18 @@ bindsym $mod+r mode "resize"
 # Screenshots
 #
     bindsym $mod+p exec /usr/share/sway/scripts/grimshot --notify save output
-    bindsym $mod+Shift+p exec grim -g "$(slurp)" - | wl-copy
-    bindsym $mod+Mod1+p exec ~/.config/sway/scripts/screenshot.sh
+    bindsym $mod+Shift+p exec $screenshot_menu
 #
 # Keybindings List
 #
     bindsym $mod+t exec xed ~/.config/sway/cheatsheet
+
+### Idle configuration
+exec swayidle -w\
+         timeout 900 'swaylock -f -F -e' \
+         timeout 1200 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+         timeout 1800 'systemctl suspend' \
+         before-sleep 'swaylock -f -F -e && playerctl pause'
+
+### Xwayland
+xwayland enable
