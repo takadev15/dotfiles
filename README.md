@@ -28,15 +28,13 @@ dots config --local status.showUntrackedFiles no
 ## Screenshot
 
 * ricing
-![Screenshot](./assets/ricing.png)
+![Screenshot](./assets/ricing/ricing.png)
 
 ## TODO List
 
 * [x] Sway
   * [x] Switch greeter to tui greeter from sddm
   * [x] Fix swayidle
-* [ ] Xplr
-  * [ ] Xplr image, pdf, code preview
 * [ ] Scripts
   * [ ] Bluetooth Menu scripts
   * [ ] Fix screenshot Menu scripts
