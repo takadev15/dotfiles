@@ -5,22 +5,21 @@ end
 -- Colorscheme
 require("catppuccin").setup({
   flavour = "mocha",
-	styles = {
-		functions = { "italic" },
-	},
+  styles = {
+    functions = { "italic" },
+  },
   color_overrides = {
     mocha = {
       base = "#11111b",
       mantle = "#11111b",
       crust = "#11111b",
-    }
+    },
   },
   integrations = {
-  	navic = true
+    navic = true,
   },
 })
-vim.cmd.colorscheme "catppuccin"
-
+vim.cmd.colorscheme("catppuccin")
 
 -- Custom Highlight Group
 hl("Normal", { bg = nil })
@@ -33,9 +32,8 @@ hl("CursorLine", { bg = "#313244", bold = true })
 hl("CursorLineNr", { fg = "White", bg = nil })
 hl("WinSeparator", { fg = "#313244", bg = nil, bold = true })
 
-
 hl("GitSignsAdd", { fg = "#a6e3a1" })
-hl("GitSignsChange", { fg = "#f9e2af" })
+hl("GitSignsChange", { fg = "#f9e2af", link = "DiffChange" })
 hl("GitSignsDelete", { fg = "#e64553" })
 hl("DiffAdd", { fg = nil, bg = "#23384C" })
 hl("DiffChange", { fg = nil, bg = "#232C4C" })
@@ -65,8 +63,8 @@ hl("TelescopePromptCounter", { fg = "#89b4fa", bg = "#313244" })
 hl("TelescopePromptPrefix", { fg = "#89b4fa", bg = "#313244" })
 
 -- Neotree
-hl("NeoTreeFloatBorder", {fg = "White", bg = "#181825"})
-hl("NeoTreeFloatTitle", {fg = "White", bg = "#181825"})
+hl("NeoTreeFloatBorder", { fg = "White", bg = "#181825" })
+hl("NeoTreeFloatTitle", { fg = "White", bg = "#181825" })
 -- hl("NeoTreeNormal", {bg = "#181825"})
 
 -- git-messenger
@@ -80,7 +78,7 @@ hl("LspSignatureActiveParameter", { bg = nil, fg = "white", bold = true, italic 
 
 -- fidget.nvim
 hl("FidgetTitle", { fg = "#04a5e5", bg = "NONE" })
-hl("FidgetTask", { fg = "#cdd6f4" , bg = "NONE" })
+hl("FidgetTask", { fg = "#cdd6f4", bg = "NONE" })
 
 -- nvim-notify
 hl("NotifyERRORBody", { bg = "#181825" })
@@ -105,10 +103,12 @@ hl("NotificationWarning", { fg = "#f9e2af", bg = nil })
 -- cmd("autocmd ColorScheme * highlight VertSplit ctermbg=NONE guibg=NONE")
 
 require("ibl").setup({
-    exclude = {
-      filetypes = { "help", "terminal", "dashboard", "lazy", "norg", "neo-tree", "git-messenger" },
-      buftypes = { "terminal", " " },
-    }
+  exclude = {
+    filetypes = { "help", "terminal", "dashboard", "lazy", "norg", "neo-tree", "git-messenger" },
+  },
+  indent = {
+    tab_char = { "▎", "▎", "▎" },
+  },
 })
 
 vim.g.markdown_folding_disabled = 1

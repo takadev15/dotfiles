@@ -13,13 +13,16 @@ M.servers = {
   "lua_ls",
   "texlab",
   "vts",
-  "bash",
+  -- "bash",
   "pylsp",
-  "robotframework",
+  -- "pylyzer",
+  -- "ruff",
+  -- "robotframework",
   "zls",
-  "valals",
-  "serve_d",
+  -- "valals",
+  -- "serve_d",
   "ocamllsp",
+  "haskell",
 }
 
 M.override_handler = function()
@@ -92,12 +95,9 @@ M.setup_attach_autocmd = function()
 
       local bufnr = args.buf
       local client = vim.lsp.get_client_by_id(args.data.client_id)
-
-      if client.name == "null-ls" then
+      if not client then
         return
       end
-
-      require('jdtls.setup').add_commands()
 
       local map = utils.keymap
 
@@ -124,32 +124,31 @@ M.setup_attach_autocmd = function()
       map(bufnr, "n", "<leader>ci", lsp.buf.incoming_calls)
       map(bufnr, "n", "<leader>co", lsp.buf.outgoing_calls)
 
+      -- Formatting (Autoformat on save)
+      -- if client.supports_method("textDocument/formatting") then
+      --   vim.api.nvim_create_autocmd("BufWritePre", {
+      --     buffer = bufnr,
+      --     callback = function()
+      --       lsp.buf.format({ bufnr = bufnr })
+      --     end,
+      --   })
+      -- end
+
       -- Disable server formatting capabilities
-      client.server_capabilities.document_formatting = false
-      client.server_capabilities.document_range_formatting = false
+      -- client.server_capabilities.document_formatting = false
+      -- client.server_capabilities.document_range_formatting = false
 
       -- Code Lens
       if
-          client.supports_method("textDocument/codeLens")
-          -- TODO Remove once codelens support virtual lines
-          and client.name ~= "rust_analyzer"
-          and client.name ~= "jdtls"
+        client.supports_method("textDocument/codeLens")
+        -- TODO Remove once codelens support virtual lines
+        and client.name ~= "rust_analyzer"
+        and client.name ~= "jdtls"
       then
         vim.api.nvim_create_autocmd(
           { "BufEnter", "CursorHold", "InsertLeave" },
           { buffer = bufnr, callback = lsp.codelens.refresh }
         )
-      end
-
-      -- TODO Workaround for gopls semantic tokens
-      -- Remove when dyanmicRegistration support semanticTokens
-      if client.name == "gopls" and not client.server_capabilities.semanticTokensProvider then
-        local semantic = client.config.capabilities.textDocument.semanticTokens
-        client.server_capabilities.semanticTokensProvider = {
-          full = true,
-          legend = { tokenModifiers = semantic.tokenModifiers, tokenTypes = semantic.tokenTypes },
-          range = true,
-        }
       end
 
       -- Code Action (lightbulb)
@@ -158,17 +157,6 @@ M.setup_attach_autocmd = function()
           { "CursorHold", "CursorHoldI" },
           { buffer = bufnr, callback = require("nvim-lightbulb").update_lightbulb }
         )
-      end
-
-      -- TODO Workaround for gopls semantic tokens
-      -- Remove when dyanmicRegistration support semanticTokens
-      if client.name == "gopls" and not client.server_capabilities.semanticTokensProvider then
-        local semantic = client.config.capabilities.textDocument.semanticTokens
-        client.server_capabilities.semanticTokensProvider = {
-          full = true,
-          legend = { tokenModifiers = semantic.tokenModifiers, tokenTypes = semantic.tokenTypes },
-          range = true,
-        }
       end
 
       -- Inlay hints

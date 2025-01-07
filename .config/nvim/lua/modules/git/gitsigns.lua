@@ -7,7 +7,7 @@ require("gitsigns").setup({
     changedelete = { hl = "DiffChange", text = "│" },
   },
   on_attach = function(bufnr)
-    local gsigns = package.loaded.gitsigns
+    local gitsigns = require('gitsigns')
     local function map(mode, l, r, opts)
       opts = opts or {}
       opts.buffer = bufnr
@@ -20,7 +20,7 @@ require("gitsigns").setup({
         return "]h"
       end
       vim.schedule(function()
-        gsigns.next_hunk()
+        gitsigns.next_hunk()
       end)
       return "<Ignore>"
     end, { expr = true })
@@ -30,26 +30,25 @@ require("gitsigns").setup({
         return "[h"
       end
       vim.schedule(function()
-        gsigns.prev_hunk()
+        gitsigns.prev_hunk()
       end)
       return "<Ignore>"
     end, { expr = true })
 
     -- Actions
-    map({ "n", "v" }, "<leader>hs", gsigns.stage_hunk)
-    map({ "n", "v" }, "<leader>hr", gsigns.reset_hunk)
-    map("n", "<leader>hS", gsigns.stage_buffer)
-    map("n", "<leader>hu", gsigns.undo_stage_hunk)
-    map("n", "<leader>hU", gsigns.reset_buffer_index)
-    map("n", "<leader>hR", gsigns.reset_buffer)
-    map("n", "<leader>hb", function()
-      gsigns.blame_line({ full = true })
-    end)
-    map("n", "<leader>hp", gsigns.preview_hunk)
-    map("n", "<leader>hd", gsigns.diffthis)
-    map("n", "<leader>hD", function()
-      gsigns.diffthis("~")
-    end)
+    map('n', '<leader>hs', gitsigns.stage_hunk)
+    map('n', '<leader>hr', gitsigns.reset_hunk)
+    map('v', '<leader>hs', function() gitsigns.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+    map('v', '<leader>hr', function() gitsigns.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+    map('n', '<leader>hS', gitsigns.stage_buffer)
+    map('n', '<leader>hu', gitsigns.undo_stage_hunk)
+    map('n', '<leader>hR', gitsigns.reset_buffer)
+    map('n', '<leader>hp', gitsigns.preview_hunk)
+    map('n', '<leader>hb', function() gitsigns.blame_line{full=true} end)
+    map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
+    map('n', '<leader>hd', gitsigns.diffthis)
+    map('n', '<leader>hD', function() gitsigns.diffthis('~') end)
+    map('n', '<leader>td', gitsigns.toggle_deleted)
 
     --Text objects
     map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")

@@ -13,7 +13,7 @@ M.setup = function(capabilities)
           executable = "tectonic",
           args = { "-X", "compile", "%f", "--synctex", "--keep-logs", "--keep-intermediates", "--outdir", "build" },
           forwardSearchAfter = false,
-          onSave = false,
+          oSave = false,
         },
         forwardSearch = {
           executable = "zathura",

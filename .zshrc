@@ -78,6 +78,7 @@ export VISUAL=nvim
 # Pyenv
 export PATH="$HOME/repo/pyenv/bin:$PATH"
 eval "$(pyenv init --path)"
+export PYTHONPATH="$HOME/.local/share/virtualenvs/zeus-KKZRBGh-/lib/python3.10/site-packages"
 # eval "$(pyenv virtualenv-init -)"
 
 # Golang
@@ -160,3 +161,5 @@ if [ -f '/home/takadev/repo/google-cloud-sdk/completion.zsh.inc' ]; then . '/hom
 # fnm
 export PATH="/home/takadev/.local/share/fnm:$PATH"
 eval "`fnm env`"
+
+[ -f "/home/takadev/.ghcup/env" ] && . "/home/takadev/.ghcup/env" # ghcup-env

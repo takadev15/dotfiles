@@ -10,12 +10,12 @@ diagnostic.config({
   signs = {
     severity = { min = vim.diagnostic.severity.WARN },
     text = {
-        [vim.diagnostic.severity.ERROR] = '',
-        [vim.diagnostic.severity.WARN] = '',
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN] = "",
     },
     numhl = {
-        [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
-        [vim.diagnostic.severity.WARN] = 'WarningMsg',
+      [vim.diagnostic.severity.ERROR] = "ErrorMsg",
+      [vim.diagnostic.severity.WARN] = "WarningMsg",
     },
   },
   severity_sort = true,
@@ -23,7 +23,7 @@ diagnostic.config({
   update_in_insert = true,
   virtual_text = false,
   virtual_lines = {
-    severity = { min = vim.diagnostic.severity.WARN }
+    severity = { min = vim.diagnostic.severity.WARN },
   },
 })
 
@@ -34,7 +34,7 @@ cmd("syntax on")
 opt.cmdheight = 0
 
 opt.hidden = true -- Hide unloaded buffer
--- opt.lazyredraw = true
+opt.lazyredraw = true
 opt.ttyfast = true -- Performance related
 opt.clipboard = { "unnamedplus" } -- Enable system-wide clipboard
 opt.mouse = "n" -- Mouse only on normal mode
@@ -81,7 +81,7 @@ opt.softtabstop = 2
 opt.tabstop = 2
 opt.smarttab = true
 opt.expandtab = true
-opt.signcolumn = "auto:1"
+opt.signcolumn = "auto:1-2"
 opt.showtabline = 2
 
 opt.laststatus = 3 -- Always show statusline
@@ -146,10 +146,11 @@ opt.autowriteall = true
 opt.backspace = { "indent", "eol", "start" }
 
 --terminal
-vim.api.nvim_create_autocmd("TermOpen", {pattern = "*", command = "setlocal nonumber norelativenumber"})
+vim.api.nvim_create_autocmd("TermOpen", { pattern = "*", command = "setlocal nonumber norelativenumber" })
+
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "go",
-	command = "setlocal shiftwidth=4 tabstop=4"
+  pattern = "go",
+  command = "setlocal shiftwidth=4 tabstop=4",
 })
 
 opt.emoji = false
@@ -162,5 +163,5 @@ vim.g.knap_settings = {
   delay = 500,
   textopdfviewerlaunch = "zathura --synctex-editor-command 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%{input}'\"'\"',%{line},0)\"' %outputfile%",
   textopdfviewerrefresh = "none",
-  textopdfforwardjump = "zathura --synctex-forward=%line%:%column%:%srcfile% %outputfile%"
+  textopdfforwardjump = "zathura --synctex-forward=%line%:%column%:%srcfile% %outputfile%",
 }

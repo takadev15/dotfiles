@@ -5,7 +5,7 @@
 <details>
     <summary> Installations </summary>
 
-```bash  
+```bash
 alias dots="/usr/bin/git --git-dir $HOME/.dotfiles/ --work-tree=$HOME"  
 git clone --bare https://www.github.com/takadev15/dotfiles.git $HOME/.dotfiles
 dots checkout  
@@ -35,10 +35,11 @@ dots config --local status.showUntrackedFiles no
 * [x] Sway
   * [x] Switch greeter to tui greeter from sddm
   * [x] Fix swayidle
+* [ ] Want to use nix or nixos
 * [ ] Scripts
   * [ ] Bluetooth Menu scripts
   * [ ] Fix screenshot Menu scripts
 
-## ATTENTION
+## 注意！！
 
 **if you want to copy my dotfiles please consider the software i use and plugis so the config can run smoothly**

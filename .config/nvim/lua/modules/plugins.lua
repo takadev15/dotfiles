@@ -39,10 +39,10 @@ require("lazy").setup({
     config = function()
       require("lsp_signature").setup({
         floating_window = false,
-        hint_prefix = "ﰠ ",
+        -- hint_prefix = "ﰠ ",
         always_trigger = true,
       })
-    end
+    end,
   },
   {
     "kosayoda/nvim-lightbulb",
@@ -76,25 +76,68 @@ require("lazy").setup({
       require("modules.dressing")
     end,
   },
-  -- {
-  --   "zbirenbaum/neodim",
-  --   disable = true,
-  --   event = "LspAttach",
-  --   config = function()
-  --     require("neodim").setup({
-  --       update_in_insert = {
-  --         delay = 1000,
-  --       },
-  --     })
-  --   end,
-  -- },
+  {
+    "zbirenbaum/neodim",
+    event = "LspAttach",
+    opts = {
+      refresh_delay = 250,
+      alpha = 0.45,
+      blend_color = "#000000",
+      hide = {
+        underline = true,
+        virtual_text = true,
+        signs = true,
+      },
+      regex = {
+        "[uU]nused",
+        "[nN]ever [rR]ead",
+        "[nN]ot [rR]ead",
+      },
+      priority = 128,
+      disable = {},
+    },
+  },
+  {
+    "Wansmer/symbol-usage.nvim",
+    event = "LspAttach",
+    config = function()
+      local function text_format(symbol)
+        local fragments = {}
+
+        -- Indicator that shows if there are any other symbols in the same line
+        local stacked_functions = symbol.stacked_count > 0 and (" | +%s"):format(symbol.stacked_count) or ""
+
+        if symbol.references then
+          local usage = symbol.references <= 1 and "usage" or "usages"
+          local num = symbol.references == 0 and "no" or symbol.references
+          table.insert(fragments, ("%s %s"):format(num, usage))
+        end
+
+        if symbol.definition then
+          table.insert(fragments, symbol.definition .. " defs")
+        end
+
+        if symbol.implementation then
+          table.insert(fragments, symbol.implementation .. " impls")
+        end
+
+        return table.concat(fragments, ", ") .. stacked_functions
+      end
+
+      require("symbol-usage").setup({
+        text_format = text_format,
+        definition = { enabled = true },
+        implementation = { enabled = true },
+      })
+    end,
+  },
 
   -- Completion
- {
+  {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     config = function()
-      require "modules.completion"
+      require("modules.completion")
     end,
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
@@ -106,6 +149,7 @@ require("lazy").setup({
         "petertriho/cmp-git",
         config = true,
       },
+      "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-emoji",
       "hrsh7th/cmp-buffer",
@@ -115,43 +159,31 @@ require("lazy").setup({
       "windwp/nvim-autopairs",
       "rcarriga/cmp-dap",
     },
-    },
+  },
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
     version = nil,
     build = function()
-        require("nvim-treesitter.install").update({ with_sync = true })
+      require("nvim-treesitter.install").update({ with_sync = true })
     end,
     config = function()
-      require "modules.treesitter"
+      require("modules.treesitter")
     end,
   },
-  { 
-    "hiphish/rainbow-delimiters.nvim",
-    init = function ()
-      local tsr_delimiter = require("rainbow-delimiters")
+  {
+    "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
+    init = function()
+      local rainbow_delimiters = require("rainbow-delimiters")
+
       vim.g.rainbow_delimiters = {
-        strategy = {
-          [''] = tsr_delimiter.strategy['global'],
-          vim = tsr_delimiter.strategy['local'],
-        },
+        strategy = { [""] = rainbow_delimiters.strategy["global"] },
         query = {
-          [''] = 'rainbow-delimiters',
-          lua = 'rainbow-blocks',
-        },
-        highlight = {
-          'RainbowDelimiterRed',
-          'RainbowDelimiterYellow',
-          'RainbowDelimiterBlue',
-          'RainbowDelimiterOrange',
-          'RainbowDelimiterGreen',
-          'RainbowDelimiterViolet',
-          'RainbowDelimiterCyan',
+          [""] = "rainbow-delimiters",
+          lua = "rainbow-blocks",
         },
       }
     end,
-    lazy = true
   },
   { "nvim-treesitter/nvim-treesitter-refactor" },
   { "nvim-treesitter/nvim-treesitter-textobjects" },
@@ -216,34 +248,34 @@ require("lazy").setup({
   -- User Interface
   { "MunifTanjim/nui.nvim" },
   { "catppuccin/nvim", lazy = false },
-  { 
+  {
     "nvim-tree/nvim-web-devicons",
     lazy = true,
-    config = function ()
-      require("nvim-web-devicons").setup{
+    config = function()
+      require("nvim-web-devicons").setup({
         override = {
           toml = {
             icon = " ",
             color = "#428850",
             cterm_color = "65",
           },
-        }
-      }
-    end
+        },
+      })
+    end,
   },
   {
     "folke/noice.nvim",
     event = "VeryLazy",
-    config = function ()
+    config = function()
       require("modules.ui.noice")
     end,
   },
   {
-  'glepnir/dashboard-nvim',
-  event = 'VimEnter',
-  config = function()
+    "glepnir/dashboard-nvim",
+    event = "VimEnter",
+    config = function()
       require("modules.ui.dashboard")
-  end,
+    end,
   },
   {
     "rafcamlet/tabline-framework.nvim",
@@ -262,21 +294,21 @@ require("lazy").setup({
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    config = function ()
+    config = function()
       require("modules.ui.lualine")
-    end
+    end,
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
     dependencies = {
       {
         "s1n7ax/nvim-window-picker",
-        config = function ()
-          require('window-picker').setup({
+        config = function()
+          require("window-picker").setup({
             current_win_hl_color = "#6699CC",
             other_win_hl_color = "#2F628E",
           })
-        end
+        end,
       },
     },
     config = function()
@@ -297,11 +329,11 @@ require("lazy").setup({
   { "ThePrimeagen/git-worktree.nvim" },
   { "rbong/vim-flog" },
   { "rhysd/git-messenger.vim" },
-  { 
+  {
     "f-person/git-blame.nvim",
-    config = function ()
-      require("gitblame").setup{}
-    end
+    config = function()
+      require("gitblame").setup({})
+    end,
   },
   {
     "lewis6991/gitsigns.nvim",
@@ -350,7 +382,7 @@ require("lazy").setup({
     dependencies = {
       "nvim-neotest/neotest-go",
       "rouge8/neotest-rust",
-      -- "haydenmeade/neotest-jest",
+      "haydenmeade/neotest-jest",
       -- "marilari88/neotest-vitest",
     },
     config = function()
@@ -364,7 +396,7 @@ require("lazy").setup({
   },
   {
     "crispgm/nvim-go",
-   ft = { "go", "gomod", "gowork", "gohtmltmpl" },
+    ft = { "go", "gomod", "gowork", "gohtmltmpl" },
     build = ":GoInstallBinaries",
     opts = {
       auto_lint = false,
@@ -378,38 +410,33 @@ require("lazy").setup({
   { "p00f/clangd_extensions.nvim" },
 
   {
-    'mrcjkb/rustaceanvim',
-    version = '^4',
-    ft = { 'rust' },
-    init = function ()
+    "mrcjkb/rustaceanvim",
+    version = "^4",
+    ft = { "rust" },
+    init = function()
       vim.g.rustaceanvim = {
-      -- Plugin configuration
-      tools = {
-      },
+        -- Plugin configuration
+        tools = {},
 
-      -- LSP configuration
-      server = {
-        on_attach = function(client, bufnr)
-          -- you can also put keymaps in here
-        end,
-        default_settings = {
-          -- rust-analyzer language server configuration
-          ['rust-analyzer'] = {
+        -- LSP configuration
+        server = {
+          on_attach = function(client, bufnr)
+            -- you can also put keymaps in here
+          end,
+          default_settings = {
+            -- rust-analyzer language server configuration
+            ["rust-analyzer"] = {},
           },
         },
-      },
-      -- DAP configuration
-      dap = {
-      },
-    }
-    end
+        -- DAP configuration
+        dap = {},
+      }
+    end,
   },
 
   {
-    "folke/neodev.nvim",
-    config = function()
-      require("neodev").setup {}
-    end
+    "folke/lazydev.nvim",
+    ft = "lua",
   },
   {
     "nvimtools/none-ls.nvim",
@@ -424,7 +451,17 @@ require("lazy").setup({
       require("package-info").setup()
     end,
   },
-  { "Saecki/crates.nvim" },
+  {
+    "saecki/crates.nvim",
+    config = function()
+      require("crates").setup({
+        null_ls = {
+          enabled = true,
+          name = "crates.nvim",
+        },
+      })
+    end,
+  },
   {
     "rest-nvim/rest.nvim",
     dependencies = {
@@ -437,7 +474,6 @@ require("lazy").setup({
   },
   { "frabjous/knap" },
   { "tpope/vim-dotenv" },
-
 
   -- Terminal things
   {
@@ -463,11 +499,11 @@ require("lazy").setup({
 
   -- Miscellaneous
   { "yuttie/comfortable-motion.vim" },
-  { 
+  {
     "fedepujol/move.nvim",
-    config = function ()
+    config = function()
       require("move").setup()
-    end
+    end,
   },
   {
     "kylechui/nvim-surround",
@@ -486,15 +522,14 @@ require("lazy").setup({
     "hedyhli/outline.nvim",
     config = function()
       -- Example mapping to toggle outline
-      vim.keymap.set("n", "<leader>ss", "<cmd>Outline<CR>",
-        { desc = "Toggle Outline" })
+      vim.keymap.set("n", "<leader>ss", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
 
-      require("outline").setup {
-      }
+      require("outline").setup({})
     end,
   },
   {
-    "Maxb0tbeep/presence.nvim",
+    'IogaMaster/neocord',
+    event = "VeryLazy",
     config = function()
       require("modules.misc.discordo")
     end,
@@ -508,19 +543,19 @@ require("lazy").setup({
         window_ignore_function = function(winid)
           local buf = vim.api.nvim_win_get_buf(winid)
           local ft = vim.api.nvim_buf_get_option(buf, "filetype")
-        
+
           if ft == "neo-tree" then
             return true
           end
-        
+
           return false
         end,
       })
     end,
   },
-  { 
-    "paretje/nvim-man", 
-    cmd = { "Man", "VMan" } 
+  {
+    "paretje/nvim-man",
+    cmd = { "Man", "VMan" },
   },
   {
     "chentoast/marks.nvim",
@@ -555,4 +590,12 @@ require("lazy").setup({
     end,
   },
   { "wakatime/vim-wakatime" },
+
+  -- Experimental
+  -- {
+  --   "supermaven-inc/supermaven-nvim",
+  --   config = function()
+  --     require("supermaven-nvim").setup({})
+  --   end,
+  -- },
 })

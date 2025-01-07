@@ -1,13 +1,19 @@
 require("nvim-treesitter.configs").setup({
   context_commentstring = { enable = true },
-  ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ignore_install = { "comment" },
   highlight = {
-    enable = true, -- false will disable the whole extension
+    enable = true,
     use_languagetree = true,
     disable = function(_, buf)
+      fName = vim.api.nvim_buf_get_name(buf)
+      -- Check filetype
+      if vim.filetype.match { filename = fName } == "csv" then
+        return true
+      end
+
+      -- Check size
       local max_filesize = 4000 * 1024 -- 4 MB
-      local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
+      local ok, stats = pcall(vim.uv.fs_stat, fName)
       if ok and stats and stats.size > max_filesize then
         return true
       end
@@ -16,21 +22,15 @@ require("nvim-treesitter.configs").setup({
   indent = {
     enable = true,
   },
-  refactor = {
-    highlight_definitions = { enable = true },
-    smart_rename = {
-      enable = true,
-      keymaps = {
-        smart_rename = "grr",
-      },
-    },
+  matchup = {
+    enable = true,
+    disable_virtual_text = true,
+    include_match_words = true,
+    enable_quotes = true,
   },
-  -- rainbow = {
-  --   enable = true,
-  --   disable = { 'jsx', 'cpp' },
-  --   query = 'rainbow-parens',
-  --   -- strategy = require('ts-rainbow').strategy.global,
-  -- },
+  refactor = {
+    highlight_definitions = { enable = false },
+  },
   textobjects = {
     select = {
       enable = true,

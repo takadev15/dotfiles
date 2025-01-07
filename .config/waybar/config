@@ -12,9 +12,9 @@
         "sway/window",
     ],
     "modules-right": [
-        "custom/github",
-        "custom/update",
-        "custom/media",
+        // "custom/github",
+        // "custom/update",
+        // "custom/media",
         "tray",
         "memory",
         "cpu",
@@ -58,7 +58,7 @@
           "7": "七",
           "8": "八",
           "9": "九",
-          "10": "十"
+          "10": "零"
           }
     },
 
@@ -99,13 +99,13 @@
             "warning": 70,
             "critical": 90,
         },
-        "on-click": "foot -e 'htop'",
+        "on-click": "foot -e 'btop'",
     },
 
     "memory": {
         "interval": 5,
         "format": " {}%", // Icon: memory
-        "on-click": "foot -e 'htop'", 
+        "on-click": "foot -e 'btop'", 
         "states": {
             "warning": 70,
             "critical": 90

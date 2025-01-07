@@ -1,11 +1,9 @@
-require("presence").setup({
-    -- General options
-    auto_update         = true,                       -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
-    neovim_image_text   = "今、働いている", -- Text displayed when hovered over the Neovim image
-    main_image          = "file",                   -- Main image display (either "neovim" or "file")
+require("neocord").setup({
+    logo                = "https://github.com/takadev15/dotfiles/blob/master/.config/nvim/assets/onigiri.png?raw=true",
+    logo_tooltip        = "今、働いています", -- Text displayed when hovered over the Neovim image
+    main_image          = "language",                   -- Main image display (either "neovim" or "file")
     debounce_timeout    = 10,                         -- Number of seconds to debounce events (or calls to `:lua package.loaded.presence:update(<filename>, true)`)
     blacklist           = {},                         -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
-    buttons             = false,                       -- Configure Rich Presence button(s), either a boolean to enable/disable, a static table (`{{ label = "<label>", url = "<url>" }, ...}`
     show_time           = false,                       -- Show the timer
 
     -- Rich Presence text options

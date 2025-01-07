@@ -1,8 +1,13 @@
 # User's systemd
 alias sysuser='systemctl --user'
 
+# 日本
+alias nihonggo='z ~/dir/data/japan/nihonggo/'
+alias shukatsu='z ~/dir/data/japan/shuukatsu/'
+alias jobsearch='z ~/dir/data/japan/shuukatsu/'
+
 # LazyDOck
-alias lzd='lazydocker'
+# alias lzd='lazydocker'
 
 # neovim alias
 # alias nv ="nvim"

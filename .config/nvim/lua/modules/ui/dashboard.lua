@@ -85,7 +85,7 @@ dashboard.setup({
       footer = {
         " " .. time .. " ",
         version,
-        " " .. "理解する" .. " ",
+        " " .. "理解できる" .. " ",
     },
     },
 })

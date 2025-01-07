@@ -14,7 +14,6 @@ local sources = {
   formatter.dart_format,
   -- formatter.eslint_d,
   -- formatter.gofumpt,
-  formatter.yapf,
   -- formatter.rustfmt.with({
   --   extra_args = function(params)
   --     local Path = require("plenary.path")
@@ -46,7 +45,7 @@ local sources = {
     end,
   }),
   formatter.sqlfluff,
-  formatter.yapf,
+  formatter.prettierd,
 
   -- Linter
   -- linter.chktex,
@@ -66,9 +65,8 @@ local sources = {
   -- linter.markdownlint,
   -- linter.shellcheck,
   linter.sqlfluff.with({
-    extra_args = {"--dialect", "postgres"},
+    extra_args = { "--dialect", "postgres" },
   }),
-
 }
 
 null_ls.setup({

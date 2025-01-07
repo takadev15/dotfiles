@@ -1,5 +1,18 @@
+### Cursor
+set $my_cursor_size 30
+set $my_cursor Vimix-white-cursors
+seat seat0 xcursor_theme $my_cursor $my_cursor_size
+
 # Apply gtk theming
 exec_always ~/.config/sway/scripts/import-gsettings
+# set $gnome_schema org.gnome.desktop.interface
+# exec_always {
+#   gsettings set $gnome_schema gtk-theme 'Colloid-Dark'
+#   gsettings set $gnome_schema icon-theme 'Papirus-Dark'
+#   gsettings set $gnome_schema cursor-theme 'Vimix-white-cursors'
+#   gsettings set $gnome_schema cursor-size '24'
+#   gsettings set $gnome_schema font-name 'JetBrainsMono Nerd Font Mono 10'
+# }
 
 # Window Border
 default_border pixel 2
