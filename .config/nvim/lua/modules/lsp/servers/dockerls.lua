@@ -1,7 +1,8 @@
+local lsp = vim.lsp
 local M = {}
 
-M.setup = function(on_attach, capabilities)
-  require("lspconfig").dockerls.setup({
+M.setup = function(capabilities)
+  lsp.config('dockerls', {
     capabilities = capabilities,
     flags = {
       debounce_text_changes = 250,

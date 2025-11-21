@@ -16,10 +16,12 @@ map("", "sk", "<C-w>k")
 map("", "sj", "<C-w>j")
 map("", "sl", "<C-w>l")
 
+map("n", "<C-I>", "<C-I>", { noremap = true })
+
 -- Tab
 map("n", "<leader>t", ":tabnew<CR>")
-map("n", "<Tab>", ":tabn<CR>")
-map("n", "<S-Tab>", ":tabp<CR>")
+map("n", "<A-]>", ":tabn<CR>")
+map("n", "<A-[>", ":tabp<CR>")
 map("n", "<leader>q", ":tabclose<CR>")
 
 -- resizing vim windows
@@ -101,4 +103,5 @@ map("n", "tt", function()
 end)
 
 -- Package Info
-map("n", "<leader>ns", "<cmd>lua require('package-info').show({ force = true })<CR>")
+map("n", "<leader>ns", require('package-info').show, { silent = true, noremap = true })
+map("n", "<leader>nu", require('package-info').update, { silent = true, noremap = true })

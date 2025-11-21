@@ -24,6 +24,7 @@ diagnostic.config({
   virtual_text = false,
   virtual_lines = {
     severity = { min = vim.diagnostic.severity.WARN },
+    current_line = true,
   },
 })
 
@@ -34,7 +35,7 @@ cmd("syntax on")
 opt.cmdheight = 0
 
 opt.hidden = true -- Hide unloaded buffer
-opt.lazyredraw = true
+-- opt.lazyredraw = true
 opt.ttyfast = true -- Performance related
 opt.clipboard = { "unnamedplus" } -- Enable system-wide clipboard
 opt.mouse = "n" -- Mouse only on normal mode

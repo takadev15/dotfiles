@@ -13,16 +13,14 @@ M.servers = {
   "lua_ls",
   "texlab",
   "vts",
+  "pyright",
+  "zls",
   -- "bash",
-  "pylsp",
+  -- "pylsp",
   -- "pylyzer",
   -- "ruff",
-  -- "robotframework",
-  "zls",
-  -- "valals",
-  -- "serve_d",
-  "ocamllsp",
-  "haskell",
+  -- "ocamllsp",
+  -- "haskell",
 }
 
 M.override_handler = function()
@@ -141,7 +139,7 @@ M.setup_attach_autocmd = function()
       -- Code Lens
       if
         client.supports_method("textDocument/codeLens")
-        -- TODO Remove once codelens support virtual lines
+        -- TODO: Remove once codelens support virtual lines
         and client.name ~= "rust_analyzer"
         and client.name ~= "jdtls"
       then

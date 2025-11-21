@@ -1,7 +1,8 @@
+local lspconf = vim.lsp.config
 local M = {}
 
 M.setup = function(capabilities)
-  require("lspconfig").bashls.setup({
+  lspconf('bashls', {
     cmd = { "bash-language-server", "start" },
     capabilities = capabilities,
   })

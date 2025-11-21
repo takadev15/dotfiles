@@ -1,7 +1,8 @@
+local lsp = vim.lsp
 local M = {}
 
 M.setup = function(capabilities)
-  require("lspconfig").texlab.setup({
+  lsp.config('texlab', {
     settings = {
       texlab = {
         auxDirectory = "build",

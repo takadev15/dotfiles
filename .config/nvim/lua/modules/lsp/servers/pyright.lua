@@ -1,19 +1,21 @@
+local lsp = vim.lsp
 local M = {}
 
-M.setup = function (capabilities)
-  require("lspconfig").pyright.setup({
+M.setup = function(capabilities)
+  lsp.config('basedpyright', {
     capabilities = capabilities,
     settings = {
-      python = {
+      basedpyright = {
         analysis = {
           autoSearchPaths = true,
           diagnosticMode = "openFilesOnly",
-          typeCheckingMode = "off",
-          useLibraryCodeForTypes = true,
+          useLibraryCodeForTypes = true
         }
       }
     }
   })
+
+  lsp.enable('basedpyright')
 end
 
 return M

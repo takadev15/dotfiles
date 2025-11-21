@@ -31,3 +31,7 @@ map("n", "<leader>gf", ":Git! fetch<CR>")
 map("n", "<leader>gC", require("telescope.builtin").git_commits)
 map("n", "<leader>gb", require("telescope.builtin").git_branches)
 
+map("n", "<leader>sj", ":GitConflictChooseOurs<CR>")
+map("n", "<leader>sl", ":GitConflictChooseTheirs<CR>")
+map("n", "<leader>sk", ":GitConflictChooseBoth<CR>")
+

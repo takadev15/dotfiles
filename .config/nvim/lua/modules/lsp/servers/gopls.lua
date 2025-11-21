@@ -1,7 +1,8 @@
+local lsp = vim.lsp
 local M = {}
 
 M.setup = function(capabilities)
-  require("lspconfig").gopls.setup({
+  lsp.config('gopls', {
     cmd = { "gopls", "-remote=auto" },
     settings = {
       gopls = {
@@ -34,6 +35,8 @@ M.setup = function(capabilities)
     },
     capabilities = capabilities,
   })
+
+  lsp.enable('gopls')
 end
 
 return M

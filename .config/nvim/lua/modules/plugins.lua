@@ -230,7 +230,8 @@ require("lazy").setup({
     dependencies = {
       {
         "nvim-telescope/telescope-fzf-native.nvim",
-        build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+        build =
+        "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
       },
     },
   },
@@ -241,13 +242,10 @@ require("lazy").setup({
       require("telescope").load_extension("heading")
     end,
   },
-  -- { "nvim-telescope/telescope-ui-select.nvim" },
-  { "nvim-telescope/telescope-bibtex.nvim" },
-  -- { "nvim-telescope/telescope-media-files.nvim" },
 
   -- User Interface
   { "MunifTanjim/nui.nvim" },
-  { "catppuccin/nvim", lazy = false },
+  { "catppuccin/nvim",     lazy = false },
   {
     "nvim-tree/nvim-web-devicons",
     lazy = true,
@@ -283,14 +281,6 @@ require("lazy").setup({
       require("modules.ui.tabline")
     end,
   },
-  -- {
-  --   "freddiehaddad/feline.nvim",
-  --   lazy = false,
-  --   branch = "main",
-  --   config = function()
-  --     require("modules.ui.feline").setup()
-  --   end,
-  -- },
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
@@ -353,6 +343,10 @@ require("lazy").setup({
     end,
   },
 
+  {
+    "sindrets/diffview.nvim", 
+  },
+
   -- Debugger
   {
     "rcarriga/nvim-dap-ui",
@@ -367,7 +361,7 @@ require("lazy").setup({
       require("telescope").load_extension("dap")
     end,
   },
-  { "mfussenegger/nvim-dap-python" },
+  -- { "mfussenegger/nvim-dap-python" },
   { "theHamsta/nvim-dap-virtual-text" },
 
   -- Testing and Running code
@@ -422,6 +416,14 @@ require("lazy").setup({
         server = {
           on_attach = function(client, bufnr)
             -- you can also put keymaps in here
+            -- vim.keymap.set(
+            --   "n",
+            --   "K", -- Override Neovim's built-in hover keymap with rustaceanvim's hover actions
+            --   function()
+            --     vim.cmd.RustLsp({ 'hover', 'actions' })
+            --   end,
+            --   { silent = true, buffer = bufnr }
+            -- )
           end,
           default_settings = {
             -- rust-analyzer language server configuration
@@ -455,10 +457,6 @@ require("lazy").setup({
     "saecki/crates.nvim",
     config = function()
       require("crates").setup({
-        null_ls = {
-          enabled = true,
-          name = "crates.nvim",
-        },
       })
     end,
   },
@@ -512,7 +510,7 @@ require("lazy").setup({
     end,
   },
   { "lukas-reineke/indent-blankline.nvim", main = "ibl" },
-  { "tpope/vim-dadbod", dependencies = { "kristijanhusak/vim-dadbod-ui" }, ft = "sql" },
+  { "tpope/vim-dadbod",                    dependencies = { "kristijanhusak/vim-dadbod-ui" }, ft = "sql" },
   {
     "kristijanhusak/vim-dadbod-completion",
     ft = { "sql", "msql", "plsql" },
@@ -589,7 +587,7 @@ require("lazy").setup({
       })
     end,
   },
-  { "wakatime/vim-wakatime" },
+  -- { "wakatime/vim-wakatime" },
 
   -- Experimental
   -- {

@@ -1,9 +1,9 @@
-# Arch setup
+# OSセットアップ
 
-## Installations
+## インストール方法
 
 <details>
-    <summary> Installations </summary>
+    <summary> 手順 </summary>
 
 ```bash
 alias dots="/usr/bin/git --git-dir $HOME/.dotfiles/ --work-tree=$HOME"  
@@ -14,32 +14,34 @@ dots config --local status.showUntrackedFiles no
 
 </details>
 
-## My Setup
+## 使ったソフトウェア
 
-* **Distro** : Arch Linux
+* **OS** : Arch Linux
 * **WM** : Sway
-* **Status Bar** : Waybar
-* **Theme** : Catpuccin Mocha with Papirus Dark Icon
-* **Shell** : Zsh with Starship Prompt
-* **File Manager** : Xplr, Ranger (TUI) Thunar (GUI)
-* **Terminal** : Kitty, Foot + Tmux
-* **Editor** : Neovim Nightly
+* **ステータスバー** : Waybar
+* **テーマ** : Catpuccin Mocha with Papirus Dark Icon
+* **シェル** : Zsh with Starship Prompt
+* **ファイルマネージャー** : Xplr, Ranger (TUI) Thunar (GUI)
+* **ターミナル** : Kitty, Foot + Tmux
+* **エディター** : Neovim Nightly
 
-## Screenshot
+## スクショ
 
 * ricing
-![Screenshot](./assets/ricing/ricing.png)
+![スクショ](./assets/ricing/ricing.png)
 
-## TODO List
+## 今からやってること
 
-* [x] Sway
-  * [x] Switch greeter to tui greeter from sddm
-  * [x] Fix swayidle
-* [ ] Want to use nix or nixos
-* [ ] Scripts
-  * [ ] Bluetooth Menu scripts
-  * [ ] Fix screenshot Menu scripts
+* [x] Swayをインストールする
+  * [x] sddmからtuiにgreeterを変わってる
+  * [x] swayidleのバッグを直す
+* [ ] できればnixみたいにpersistence
+* [ ] スクリプトについて
+  * [ ] Bluetoothメニューのスクリプトを作る
+  * [ ] スクショメニューを直す
 
 ## 注意！！
 
 **if you want to copy my dotfiles please consider the software i use and plugis so the config can run smoothly**
+
+**このドットファイルをコピーしたかったら使用ソフトウェアやプラグインなどを思考してください**
