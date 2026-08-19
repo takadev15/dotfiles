@@ -2,16 +2,26 @@
 
 entries="Active\nScreen\nOutput\nArea Save\nWindow\nArea Clipboard"
  
-selected=$(echo -e "$entries" | wofi --style=$HOME/.config/wofi/style.widgets.css --conf=$HOME/.config/wofi/config.widget)
+selected=$(echo -e "$entries" | rofi -dmenu)
 
-area_clipboard () {
-  grim -g "$(slurp)" - | wl-copy --type image/png
-  notify-send.sh "Screenshot" "Screenshot saved at clipboard"
-  canberra-gtk-play -i screen-capture -d "screenShot"
+area_clipboard() {
+  slurp_output=$(slurp)
+  if [ -n "$slurp_output" ]; then
+    grim -g "$slurp_output" - | wl-copy --type image/png
+    notify-send "Screenshot" "Screenshot saved at clipboard"
+    canberra-gtk-play -i screen-capture -d "screenShot"
+  fi
 }
 
 area_save() {
-  IMG=~/Pictures/$(date +%Y-%m-%d_%H-%m-%s).png && grim -g "$(slurp)" $IMG && wl-copy < $IMG
+  slurp_output=$(slurp)
+  if [ -n "$slurp_output" ]; then
+    IMG=~/Pictures/$(date +%Y-%m-%d_%H-%M-%S).png
+    if grim -g "$slurp_output" "$IMG" && wl-copy < "$IMG"; then
+      notify-send "Screenshot" "Screenshot saved at file: $IMG"
+      canberra-gtk-play -i screen-capture -d "screenShot"
+    fi
+  fi
 }
 
 case $selected in
@@ -29,12 +39,9 @@ case $selected in
     ;;
   "Area Save")
     area_save
-    canberra-gtk-play -i screen-capture -d "screenShot"
     ;;
   "Area Clipboard")
     area_clipboard
-    # /usr/share/sway/scripts/grimshot --notify copy area
-    # canberra-gtk-play -i screen-capture -d "screenShot"
     ;;
   "Window")
     /usr/share/sway/scripts/grimshot --notify save window

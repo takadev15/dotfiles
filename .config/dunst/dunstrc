@@ -4,9 +4,9 @@
     follow = keyboard
     # Dimension
     width = 320
-    height = 150
+    height = (0, 150)
     origin = top-right
-    offset = 20x20
+    offset = (20, 20)
     # Progress Bar
     progress_bar = true
     progress_bar_height = 10
@@ -44,7 +44,7 @@
     ### Icons ###
     icon_position = left
     enable_recursive_icon_lookup = true
-    icon_theme = "Papirus, Adwaita, breeze"
+    icon_theme = "Colloid-Catppuccin-Dark, Adwaita, breeze"
     min_icon_size = 48
     max_icon_size = 64
 

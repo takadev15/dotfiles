@@ -1,50 +1,48 @@
-require("nvim-treesitter.configs").setup({
-  context_commentstring = { enable = true },
-  ignore_install = { "comment" },
-  highlight = {
-    enable = true,
-    use_languagetree = true,
-    disable = function(_, buf)
-      fName = vim.api.nvim_buf_get_name(buf)
-      -- Check filetype
-      if vim.filetype.match { filename = fName } == "csv" then
-        return true
-      end
+-- nvim-treesitter `main` branch has no module system:
+--   * highlighting is provided by Neovim core, started per-buffer with
+--     vim.treesitter.start()
+--   * indentation is opt-in via the `indentexpr` helper
+-- Parsers are managed with :TSInstall / :TSUpdate (see plugins.lua build).
 
-      -- Check size
-      local max_filesize = 4000 * 1024 -- 4 MB
-      local ok, stats = pcall(vim.uv.fs_stat, fName)
-      if ok and stats and stats.size > max_filesize then
-        return true
-      end
-    end,
-  },
-  indent = {
-    enable = true,
-  },
-  matchup = {
-    enable = true,
-    disable_virtual_text = true,
-    include_match_words = true,
-    enable_quotes = true,
-  },
-  refactor = {
-    highlight_definitions = { enable = false },
-  },
-  textobjects = {
-    select = {
-      enable = true,
-      keymaps = {
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@conditional.outer",
-        ["ic"] = "@conditional.inner",
-        ["al"] = "@loop.outer",
-        ["il"] = "@loop.inner",
-        ["is"] = "@statement.inner",
-        ["as"] = "@statement.outer",
-      },
-    },
-    move = { enable = false },
-  },
+require("nvim-treesitter").setup({})
+
+-- Conditions under which treesitter highlighting should be skipped.
+local function ts_disable(buf)
+  local fname = vim.api.nvim_buf_get_name(buf)
+
+  -- CSV is better left to the default syntax
+  if vim.filetype.match({ filename = fname }) == "csv" then
+    return true
+  end
+
+  -- Skip very large files (~4 MB)
+  local max_filesize = 4000 * 1024
+  local ok, stats = pcall(vim.uv.fs_stat, fname)
+  if ok and stats and stats.size > max_filesize then
+    return true
+  end
+
+  return false
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("nvim_treesitter", { clear = true }),
+  callback = function(args)
+    local buf = args.buf
+
+    if ts_disable(buf) then
+      return
+    end
+
+    local lang = vim.treesitter.language.get_lang(vim.bo[buf].filetype)
+    if not lang then
+      return
+    end
+
+    -- start() errors if no parser is installed for `lang`; guard it so the
+    -- indentexpr is only set when highlighting actually came up.
+    if pcall(vim.treesitter.start, buf, lang) then
+      vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
+  end,
 })

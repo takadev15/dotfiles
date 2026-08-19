@@ -1,16 +1,16 @@
 #!/bin/bash
 
 entries=$(cat ~/.script/dmenu/powermenu)
-selected=$(echo -e "$entries" | wofi --style=$HOME/.config/wofi/style.widgets.css --conf=$HOME/.config/wofi/config.widget)
+selected=$(echo -e "$entries" | rofi -dmenu)
 
 case $selected in
   "Reboot")
     exec systemctl reboot
     ;;
-  "Suspend")
+  "Sleep")
     exec systemctl suspend
     ;;
-  "Power Off")
+  "Shutdown")
     exec systemctl poweroff
     ;;
 esac

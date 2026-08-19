@@ -67,11 +67,7 @@ opt.listchars = {
 opt.autoindent = true
 opt.smartindent = true
 opt.breakindent = true
-opt.breakindentopt = {
-  shift = 0,
-  min = 40,
-  sbr = true,
-}
+opt.breakindentopt = "shift:0,sbr,min:40"
 
 opt.joinspaces = true
 opt.lbr = true -- Enable line break

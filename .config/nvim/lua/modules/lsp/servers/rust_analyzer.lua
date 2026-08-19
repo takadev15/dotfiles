@@ -17,7 +17,7 @@ M.setup = function(capabilities)
       on_initialized = function()
         vim.api.nvim_create_autocmd(
           { "BufEnter", "CursorHold", "InsertLeave" },
-          { pattern = "*.rs", callback = vim.lsp.codelens.refresh }
+          { pattern = "*.rs", callback = vim.lsp.codelens.enable(true, { bufnr = bufnr }) }
         )
       end,
     },

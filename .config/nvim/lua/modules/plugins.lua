@@ -164,9 +164,8 @@ require("lazy").setup({
   {
     "nvim-treesitter/nvim-treesitter",
     version = nil,
-    build = function()
-      require("nvim-treesitter.install").update({ with_sync = true })
-    end,
+    branch = "main",
+    build = ":TSUpdate",
     config = function()
       require("modules.treesitter")
     end,
@@ -185,8 +184,36 @@ require("lazy").setup({
       }
     end,
   },
-  { "nvim-treesitter/nvim-treesitter-refactor" },
-  { "nvim-treesitter/nvim-treesitter-textobjects" },
+  -- nvim-treesitter-refactor is archived and only works with the old `master`
+  -- module system; it errors on startup against the `main` core. Removed.
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
+    config = function()
+      require("nvim-treesitter-textobjects").setup({
+        select = {
+          lookahead = true,
+        },
+      })
+
+      local select = require("nvim-treesitter-textobjects.select")
+      local keymaps = {
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@conditional.outer",
+        ["ic"] = "@conditional.inner",
+        ["al"] = "@loop.outer",
+        ["il"] = "@loop.inner",
+        ["is"] = "@statement.inner",
+        ["as"] = "@statement.outer",
+      }
+      for key, query in pairs(keymaps) do
+        vim.keymap.set({ "x", "o" }, key, function()
+          select.select_textobject(query, "textobjects")
+        end, { desc = "TS select " .. query })
+      end
+    end,
+  },
   {
     "nvim-treesitter/nvim-treesitter-context",
     config = function()
@@ -245,7 +272,7 @@ require("lazy").setup({
 
   -- User Interface
   { "MunifTanjim/nui.nvim" },
-  { "catppuccin/nvim",     lazy = false },
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000, lazy = false },
   {
     "nvim-tree/nvim-web-devicons",
     lazy = true,
@@ -344,7 +371,7 @@ require("lazy").setup({
   },
 
   {
-    "sindrets/diffview.nvim", 
+    "sindrets/diffview.nvim",
   },
 
   -- Debugger
@@ -590,6 +617,36 @@ require("lazy").setup({
   -- { "wakatime/vim-wakatime" },
 
   -- Experimental
+  {
+    "sudo-tee/opencode.nvim",
+    config = function()
+      require("opencode").setup({
+        ui = {
+          enable_treesitter_markdown = false
+        }
+      })
+    end,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      {
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = {
+          anti_conceal = { enabled = false },
+          file_types = { 'markdown', 'opencode_output' },
+        },
+        ft = { 'markdown', 'Avante', 'copilot-chat', 'opencode_output' },
+      },
+      -- Optional, for file mentions and commands completion, pick only one
+      -- 'saghen/blink.cmp',
+      'hrsh7th/nvim-cmp',
+
+      -- Optional, for file mentions picker, pick only one
+      -- 'folke/snacks.nvim',
+      'nvim-telescope/telescope.nvim',
+      -- 'ibhagwan/fzf-lua',
+      -- 'nvim_mini/mini.nvim',
+    },
+  }
   -- {
   --   "supermaven-inc/supermaven-nvim",
   --   config = function()

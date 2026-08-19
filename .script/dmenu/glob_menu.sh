@@ -2,7 +2,7 @@
 
 entries=$(cat ~/.script/dmenu/commandlist)
 script=~/.script
-selected=$(echo -e "$entries" | wofi --style=$HOME/.config/wofi/style.widgets.css --conf=$HOME/.config/wofi/config.widget)
+selected=$(echo -e "$entries" | rofi -dmenu)
 
 case $selected in
   "Restart Kanshi")

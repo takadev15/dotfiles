@@ -37,5 +37,5 @@ error_symbol = "[✗](bold red)"
 disabled = false
 
 [gcloud]
-symbol = "️☁️ "
+symbol = "🔐 "
 

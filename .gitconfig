@@ -29,6 +29,7 @@
   diffFilter = delta --color-only
 
 [delta]
+  navigate = true
   features = side-by-side line-numbers decoration
   whitespace-error-style = 22 reverse
 

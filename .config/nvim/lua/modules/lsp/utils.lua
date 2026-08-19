@@ -13,8 +13,10 @@ M.servers = {
   "lua_ls",
   "texlab",
   "vts",
-  "pyright",
   "zls",
+  "ty",
+  "roslyn",
+  -- "pyright",
   -- "bash",
   -- "pylsp",
   -- "pylyzer",
@@ -28,11 +30,11 @@ M.override_handler = function()
   lsp.handlers["callHierarchy/outgoingCalls"] = telescope.lsp_outgoing_calls
   lsp.handlers["textDocument/definition"] = telescope.lsp_definitions
   lsp.handlers["textDocument/documentSymbol"] = telescope.lsp_document_symbols
-  lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, {
-    border = "solid",
-    max_width = 60,
-    max_height = 19,
-  })
+  -- lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, {
+  --   border = "solid",
+  --   max_width = 60,
+  --   max_height = 19,
+  -- })
   lsp.handlers["textDocument/implementation"] = telescope.lsp_implementations
   lsp.handlers["textDocument/references"] = telescope.lsp_references
   lsp.handlers["textDocument/typeDefinition"] = telescope.lsp_type_definitions

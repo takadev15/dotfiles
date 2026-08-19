@@ -2,9 +2,9 @@
 alias sysuser='systemctl --user'
 
 # 日本
-alias nihonggo='z ~/dir/data/japan/nihonggo/'
-alias shukatsu='z ~/dir/data/japan/shuukatsu/'
-alias jobsearch='z ~/dir/data/japan/shuukatsu/'
+alias nihonggo='z ~/data/japan/nihonggo/'
+alias shukatsu='z ~/data/japan/shuukatsu/'
+alias jobsearch='z ~/data/japan/shuukatsu/'
 
 # LazyDOck
 # alias lzd='lazydocker'
@@ -25,11 +25,11 @@ alias activate="source .env/bin/activate"
 
 
 # change directory
-alias pdir="z ~/dir/data/project"
-alias csdir="z ~/dir/data/class"
-alias ldir="z ~/dir/data/learn"
-alias note="z ~/dir/data/note/"
-alias wdir="z ~/dir/data/workstation/ayoconnect"
+alias pdir="z ~/data/project"
+alias csdir="z ~/data/class"
+alias ldir="z ~/data/learn"
+alias note="z ~/data/note/"
+alias wdir="z ~/data/workstation/glory"
 alias zz="z .."
 
 # source zshrc

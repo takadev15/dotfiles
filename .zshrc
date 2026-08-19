@@ -77,13 +77,14 @@ export VISUAL=nvim
 
 # Pyenv
 export PATH="$HOME/repo/pyenv/bin:$PATH"
-eval "$(pyenv init --path)"
+# eval "$(pyenv init --path)"
 export PYTHONPATH="$HOME/.local/share/virtualenvs/zeus-KKZRBGh-/lib/python3.10/site-packages"
 # eval "$(pyenv virtualenv-init -)"
 
 # Golang
 export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
+export PATH="/usr/local/go/bin:$PATH"
 
 # Rust
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -94,22 +95,22 @@ export FZF_DEFAULT_OPTS="--ansi --height 40% --layout=reverse --border=none"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Flutter SDK
-export PATH=$PATH:$HOME/.sdk_dir/flutter/bin
-export CHROME_EXECUTABLE=/usr/bin/brave
+# export PATH=$PATH:$HOME/.sdk_dir/flutter/bin
+# export CHROME_EXECUTABLE=/usr/bin/brave
 
 # Android SDK
-export ANDROID_HOME=$HOME/Android/Sdk
-export ANDROID_SDK_ROOT=$HOME/Android/Sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools/
-export PATH=$PATH:$ANDROID_HOME/build-tools/
-export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+# export ANDROID_HOME=$HOME/Android/Sdk
+# export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+# export PATH=$PATH:$ANDROID_HOME/emulator
+# export PATH=$PATH:$ANDROID_HOME/platform-tools/
+# export PATH=$PATH:$ANDROID_HOME/build-tools/
+# export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 
 # fnm
-export YARN_GLOBAL_FOLDER="$FNM_MULTISHELL_PATH/yarn-global"
-export YARN_PREFIX="$FNM_MULTISHELL_PATH"
-export PATH="/home/takadev/.local/share/fnm:$PATH"
-eval "$(fnm env)"
+# export YARN_GLOBAL_FOLDER="$FNM_MULTISHELL_PATH/yarn-global"
+# export YARN_PREFIX="$FNM_MULTISHELL_PATH"
+# export PATH="/home/takadev/.local/share/fnm:$PATH"
+# eval "$(fnm env)"
 
 # temp
 export UV_USE_IO_URING=0
@@ -130,7 +131,7 @@ if test -e "/usr/lib/kitty/shell-integration/kitty.zsh"; then source "/usr/lib/k
 eval "$(starship init zsh)"
 
 # Protoc
-export PATH="$HOME/Repo/protobuf/bin:$PATH"
+# export PATH="$HOME/Repo/protobuf/bin:$PATH"
 
 # Decorations
 BBlack='\033[1;30m'       # Black
@@ -159,7 +160,7 @@ if [ -f '/home/takadev/repo/google-cloud-sdk/path.zsh.inc' ]; then . '/home/taka
 if [ -f '/home/takadev/repo/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/takadev/repo/google-cloud-sdk/completion.zsh.inc'; fi
 
 # fnm
-export PATH="/home/takadev/.local/share/fnm:$PATH"
-eval "`fnm env`"
+# export PATH="/home/takadev/.local/share/fnm:$PATH"
+# eval "`fnm env`"
 
-[ -f "/home/takadev/.ghcup/env" ] && . "/home/takadev/.ghcup/env" # ghcup-env
+# [ -f "/home/takadev/.ghcup/env" ] && . "/home/takadev/.ghcup/env" # ghcup-env

@@ -30,7 +30,7 @@ set $menu rofi -show drun
 # Basics:
 #
     # Start a floating terminal
-    bindsym $mod+Return exec $term-float
+    bindsym $mod+Return exec kitty
 
     # Open the power menu
     bindsym $mod+Shift+q exec $powermenu

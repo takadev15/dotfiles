@@ -58,7 +58,7 @@
           "7": "七",
           "8": "八",
           "9": "九",
-          "10": "零"
+          "10": "十"
           }
     },
 
@@ -76,9 +76,9 @@
     },
 
     "clock": {
-        "format": " {:%a | %H:%M}",
-        "format-alt": "  {:%a | %d日%B %Y} ", // Icon: calendar-alt
-        "tooltip-format": "<big>{:%Y %B}</big>\n<small><span size='9pt' font='Noto Sans Mono CJK JP'>{calendar}</span></small>",
+        "format": " {:L%a | %H:%M}",
+        "format-alt": " {:L%a | %d日%B %Y} ", // Icon: calendar-alt
+        "tooltip-format": "<big>{:L%Y %B}</big>\n<small><span size='9pt' font='Noto Sans Mono CJK JP'>{calendar}</span></small>",
         "calendar": {
                     "on-scroll": 1,
                     "format": {
@@ -140,7 +140,7 @@
 
     "pulseaudio": {
         "scroll-step": 1, // %, can be a float
-        "format": "{icon}{volume}% ",
+        "format": "{icon} {volume}% ",
         "format-bluetooth": "{icon}{volume}%",
         "format-bluetooth-muted": "󰝟 {icon}",
         "format-muted": "󰝟 {format_source}",
